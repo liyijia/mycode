@@ -22,8 +22,9 @@
     <script src="/Scripts/respond.min.js"></script>
     <![endif]-->
     <!-- Placed js at the end of the document so the pages load faster -->
+    <link rel="stylesheet" href="/Content/css/jquery-ui-1.10.3.css">
     <script src="/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="/Scripts/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="/Scripts/jquery-ui-1.10.3.min.js"></script>
     <script src="/Scripts/jquery-migrate-1.2.1.min.js"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
     <script src="/Scripts/modernizr.min.js"></script>
@@ -32,17 +33,13 @@
     <script type="text/javascript" language="javascript" src="/Scripts/advanced-datatable/js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="/Scripts/data-tables/DT_bootstrap.js"></script>
     <!--dynamic table initialization -->
-    <script src="/Scripts/dynamic_table_init.js"></script>
     <script src="/Scripts/jquery.validate.min.js"></script>
     <script src="/Scripts/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="/Scripts/bootstrap-datepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script src="/Scripts/emis.framewok.js"></script>
     <!--common scripts for all pages-->
-    <script src="/Scripts/scripts.js"></script>
     <script type="text/javascript">
         $(function () {
             $('.default-date-picker').datepicker({
-                language: 'zh-CN',
                 format: 'yyyy-dd-mm'
             });
             $('.form-horizontal').validate()
@@ -56,10 +53,10 @@
         <div class="left-side sticky-left-side">
             <!--logo and iconic logo start-->
             <div class="logo">
-                <a href="index.html"><img src="images/logo.png" alt=""></a>
+                <a href="index.html"><img src="/Content/images/logo.png" alt=""></a>
             </div>
             <div class="logo-icon text-center">
-                <a href="index.html"><img src="images/logo_icon.png" alt=""></a>
+                <a href="index.html"><img src="/Content/images/logo_icon.png" alt=""></a>
             </div>
             <!--logo and iconic logo end-->
 
@@ -220,7 +217,7 @@
                                         <a href="">
                                             <span class="thumb"><img src="images/photos/user3.png" alt="" /></span>
                                             <span class="desc">
-                                                <span class="name">Jane Doe</span>
+                                                <span class="name">@ManagerImp.Current.Name</span>
                                                 <span class="msg">Lorem ipsum dolor sit amet...</span>
                                             </span>
                                         </a>
@@ -289,14 +286,14 @@
                         </li>
                         <li>
                             <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <img src="images/photos/user-avatar.png" alt="" />
-                                John Doe
+                                <img src="/Content/images/photos/user-avatar.png" alt="" />
+                                @ManagerImp.Current.Name
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                                <li><a href="#"><i class="fa fa-user"></i>  Profile</a></li>
-                                <li><a href="#"><i class="fa fa-cog"></i>  Settings</a></li>
-                                <li><a href="#"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                                @*<li><a href="#"><i class="fa fa-user"></i>  Profile</a></li>*@
+                                <li><a href="/Manager/EditPassword"><i class="fa fa-cog"></i>修改密码</a></li>
+                                <li><a href="/Home/Logout"><i class="fa fa-sign-out"></i>退出</a></li>
                             </ul>
                         </li>
                     </ul>

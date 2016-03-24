@@ -82,23 +82,6 @@
             }
         });
     }
-    if ($.datepicker) {
-        $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
-        $("input.datepicker").datepicker({ dateFormat: "yy-mm-dd" });
-    }
-    if ($.ui && $.ui.autocomplete) {
-        $.ui.autocomplete.filter = function (array, term, max) {
-            var matcher = new RegExp($.ui.autocomplete.escapeRegex(term), "i");
-            var match = 0;
-            return $.grep(array, function (value) {
-                return matcher.test(value.filter || value.value || value.label || value) && match++ < max;
-            });
-        };
-    }
 })(jQuery);
 
-$(function () {
-    $("input.datepicker").datepicker({ dateFormat: "yy-mm-dd" });
-    $("form.validate").validate();
-});
 

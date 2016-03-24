@@ -1,4 +1,6 @@
-﻿
+﻿@{
+    Layout = null;
+}
 <script type="text/javascript">
     $(function(){
         $('#managers').select2().on("select2-selecting", function (e) { alert($('#managers option[value="'+e.val+'"]').text()); }).on("select2-removed", function (e) { alert(e.val); });

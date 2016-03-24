@@ -49,6 +49,11 @@ namespace LY.EMIS5.Entities.Core.Memberships
         public virtual string Source { get; set; }
 
         /// <summary>
+        /// 代打金额
+        /// </summary>
+        public virtual Decimal ReplaceMoney { get; set; }
+
+        /// <summary>
         /// 保证金金额
         /// </summary>
         public virtual Decimal Money { get; set; }
@@ -94,49 +99,14 @@ namespace LY.EMIS5.Entities.Core.Memberships
         public virtual string SalesOpinion { get; set; }
 
         /// <summary>
-        /// 资料员
+        /// 审批意见
         /// </summary>
-        public virtual Manager Documenter { get; set; }
-
+        public virtual List<Opinion> Opinions{get;set;}
+       
         /// <summary>
-        /// 资料员意见
-        /// </summary>
-        public virtual string DocumenterOpinion { get; set; }
-
-        /// <summary>
-        /// 财务
-        /// </summary>
-        public virtual Manager Finance { get; set; }
-
-        /// <summary>
-        /// 财务意见
-        /// </summary>
-        public virtual string FinanceOpinion { get; set; }
-
-        /// <summary>
-        /// 总经理意见
-        /// </summary>
-        public virtual Manager CEO { get; set; }
-
-        /// <summary>
-        /// 总经理意见
-        /// </summary>
-        public virtual string CEOOpinion { get; set; }
-
-        /// <summary>
-        /// 项目进度  1、未上网2、已上网3、做资料4、打保证金5、开标结束、6、保证金已退，7、不能投标
+        /// 项目进度  1、未上网2、已上网3、做资料4、打保证金，同意开标5、开标结束、6、保证金已退，项目结束,已撤销7、不能投标
         /// </summary>
         public virtual string ProjectProgress { get; set; }
-
-        /// <summary>
-        /// 项目开标情况
-        /// </summary>
-        public virtual string Situation { get; set; }
-
-        /// <summary>
-        /// 开标人
-        /// </summary>
-        public virtual Manager OpenPeople { get; set; }
 
         /// <summary>
         /// 创建时间
@@ -157,6 +127,18 @@ namespace LY.EMIS5.Entities.Core.Memberships
         /// 审核状态
         /// </summary>
         public virtual int State { get; set; }
+
+        public virtual int Sort { get; set; }
+
+        /// <summary>
+        /// 资质要求
+        /// </summary>
+        public virtual string Aptitude { get; set; }
+
+        /// <summary>
+        /// 费用收取情况
+        /// </summary>
+        public virtual string MoneySituation { get; set; }
 
     }
 }

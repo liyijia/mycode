@@ -81,7 +81,7 @@
     <Compile Include="ScoreKinds.cs" />
     <Compile Include="SubscriptionKinds.cs" />
     <Compile Include="TimePoints.cs" />
-    <Compile Include="AcceptingProgress.cs" />
+    <Compile Include="ProjectProgress.cs" />
     <Compile Include="ReceiveMode.cs" />
     <Compile Include="SchoolAudit.cs" />
     <Compile Include="PublicTypes.cs" />

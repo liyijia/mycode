@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Memberships\Opinion.cs" />
     <Compile Include="Core\Memberships\Project.cs" />
     <Compile Include="Core\Memberships\Manager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,6 +103,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Core\Memberships\Project.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Memberships\Opinion.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

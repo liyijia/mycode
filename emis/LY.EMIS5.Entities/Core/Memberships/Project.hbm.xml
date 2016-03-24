@@ -12,6 +12,7 @@
     <property name="Scale" />
     <property name="Owner" />
     <property name="Source" />
+    <property name="ReplaceMoney" precision="20" scale="2" />
     <property name="Money" precision="20" scale="2" />
     <property name="EndDate" />
     <property name="Type" />
@@ -21,18 +22,17 @@
     <property name="OpenDate" />
     <many-to-one name="Sale" class="Manager" lazy="false" column="Sale_Id"/>
     <property name="SalesOpinion" />
-    <many-to-one name="Documenter" class="Manager" lazy="false" column="Documenter_Id"/>
-    <property name="DocumenterOpinion" />
-    <many-to-one name="CEO" class="Manager" lazy="false" column="CEO_Id"/>
-    <property name="CEOOpinion" />
-    <many-to-one name="Finance" class="Manager" lazy="false" column="Finance_Id"/>
-    <property name="FinanceOpinion" />
+    <bag name="Opinions" lazy="extra">
+      <key column="Project_Id" />
+      <one-to-many class="Opinion" />
+    </bag>
     <property name="ProjectProgress" />
-    <property name="Situation" />
-    <many-to-one name="OpenPeople" class="Manager" lazy="false" column="OpenPeople_Id"/>
     <property name="CreateDate" />
     <property name="MaterialFee" precision="20" scale="2" />
     <property name="CompanyName" />
     <property name="State" />
+    <property name="Sort" />
+    <property name="Aptitude" />
+    <property name="MoneySituation" />
   </class>
 </hibernate-mapping>
