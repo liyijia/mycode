@@ -4,112 +4,39 @@
 @{
     ViewBag.Title = "添加项目";
 }
-
-<div class="weizhi">
-    <h1 class="font14 fontw lvse">添加项目</h1>
-    <div class="right2">
-    </div>
-</div>
-<div class="kong"></div>
-<form id="from-createProduct" action="/Project/Create" method="post">
-    <table class="table1" border="0" cellspacing="1" cellpadding="0">
-        <tr>
-            <td width="100px">项目名称：</td>
-            <td>
-                @Html.HiddenFor(c => c.Id)
-                @Html.TextBoxFor(c => c.ProjectName, new { @class = "form-control required" })
-            </td>
-            <td width="100px">：</td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td width="100px">：</td>
-            <td>
-               
-            </td>
-            <td width="100px">：</td>
-            <td>
-               
-            </td>
-        </tr>
-        <tr>
-            <td>：</td>
-            <td>
-                
-            </td>
-            <td>：</td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>：</td>
-            <td>
-               
-            </td>
-            <td>：</td>
-            <td>
-               
-            </td>
-        </tr>
-        <tr>
-            <td>：</td>
-            <td>
-                
-            </td>
-            <td>：</td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>：</td>
-            <td>
-                
-            </td>
-            <td>：</td>
-            <td>
-               
-            </td>
-        </tr>
-        <tr>
-            <td>：</td>
-            <td>
-               
-            </td>
-            <td>：</td>
-            <td>
-               
-            </td>
-        </tr>
-        <tr>
-            <td>：</td>
-            <td>
-                
-            </td>
-            <td></td>
-            <td>
-               
-            </td>
-        </tr>
-        <tr class="bkong">
-            <td></td>
-            <td colspan="3">
-               
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input type="button" id="btnSbmit" class="button" value="提交" /><input type="button" class="button returns" value="返回" style="margin-left: 10px;" />
-            </td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-</form>
+@section Script{
+   <script>
+    $(function () {
+        var availableTags = [
+          "ActionScript",
+          "AppleScript",
+          "Asp",
+          "BASIC",
+          "C",
+          "C++",
+          "Clojure",
+          "COBOL",
+          "ColdFusion",
+          "Erlang",
+          "Fortran",
+          "Groovy",
+          "Haskell",
+          "Java",
+          "JavaScript",
+          "Lisp",
+          "Perl",
+          "PHP",
+          "Python",
+          "Ruby",
+          "Scala",
+          "Scheme"
+        ];
+        $("#ProjectName").autocomplete({
+            source: availableTags
+        });
+    });
+</script>
+    }
 <div class="row">
     <div class="col-lg-12">
         <section class="panel">
@@ -117,112 +44,117 @@
                 项目资料
             </header>
             <div class="panel-body">
-                <form class="form-horizontal adminex-form" method="get">
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">项目名称</label>
-                        <div class="col-sm-10">
-                            @Html.HiddenFor(c => c.Id)
-                            @Html.TextBoxFor(c => c.ProjectName, new { @class = "form-control required" })
+                <form class="form-horizontal adminex-form" action="/Project/Create" method="post">
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">项目名称</label>
+                            <div class="col-sm-10">
+                                @Html.HiddenFor(c => c.Id)
+                                @Html.TextBoxFor(c => c.ProjectName, new { @class = "form-control required" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">下载链接</label>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(c => c.Link, new { @class = "form-control required" })
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">下载链接</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.Link, new { @class = "form-control required" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">规模</label>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(c => c.Scale, new { @class = "form-control required" })
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">规模</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.Scale, new { @class = "form-control required" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">业主</label>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(c => c.Owner, new { @class = "form-control required" })
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">业主</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.Owner, new { @class = "form-control required" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">保证金来源</label>
-                        <div class="col-sm-10">
-                            <select name="Source" class = "form-control required">
-                                <option>自打</option>
-                                <option>代打</option>
-                            </select>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">保证金来源</label>
+                            <div class="col-sm-10">
+                                <select name="Source" class="form-control required">
+                                    <option>自打</option>
+                                    <option>代打</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">保证金金额</label>
-                        <div class="col-sm-10 input-group">
-                            @Html.TextBoxFor(c => c.Money, new { @class = "form-control required number" })<span class="input-group-addon">元</span>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">保证金金额</label>
+                            <div class="col-sm-10 input-group">
+                                @Html.TextBoxFor(c => c.Money, new { @class = "form-control required number form-control-addon" })<span class="input-group-addon">元</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">保证金截至时间</label>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(c => c.EndDate, new { @class = "form-control default-date-picker required" })
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">保证金截至时间</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.EndDate, new { @class = "form-control default-date-picker required" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">保证金打款方式</label>
-                        <div class="col-sm-10">
-                            <select name="Type" class = "form-control required">
-                                <option>网银支付</option>
-                                <option>转账</option>
-                            </select>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">保证金打款方式</label>
+                            <div class="col-sm-10">
+                                <select name="Type" class="form-control required">
+                                    <option>网银支付</option>
+                                    <option>转账</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">保证金账户名</label>
-                        <div class="col-sm-10">
-                           @Html.TextBoxFor(c => c.UserName, new { @class = "form-control required" })
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">保证金账户名</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.UserName, new { @class = "form-control required" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">保证金账号</label>
-                        <div class="col-sm-10">
-                           @Html.TextBoxFor(c => c.Account, new { @class = "form-control required" })
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">保证金账号</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.Account, new { @class = "form-control required" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">保证金开户行</label>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(c => c.Bank, new { @class = "form-control required" })
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">保证金开户行</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.Bank, new { @class = "form-control required" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">开标时间</label>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(c => c.OpenDate, new { @class = "form-control required default-date-picker" })
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">开标时间</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.OpenDate, new { @class = "form-control required default-date-picker" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">资料费</label>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(c => c.MaterialFee, new { @class = "form-control required number" })<span class="input-group-addon">元</span>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">资料费</label>
+                            <div class="col-sm-10 input-group">
+                                @Html.TextBoxFor(c => c.MaterialFee, new { @class = "form-control required number form-control-addon" })<span class="input-group-addon">元</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">公司名称</label>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(c => c.CompanyName, new { @class = "form-control required" })
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">公司名称</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.CompanyName, new { @class = "form-control required" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">资料员</label>
-                        <div class="col-sm-10">
-                            @Html.DropDownList("documenterId", ViewBag.List as IList<SelectListItem>,new {@class = "form-control required" })
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">资料员</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownList("documenterId", ViewBag.List as IList<SelectListItem>, new { @class = "form-control required" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">意见</label>
-                        <div class="col-sm-10">
-                            @Html.TextAreaFor(c => c.SalesOpinion, new { @class = "form-control required" })
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">意见</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(c => c.SalesOpinion, new { @class = "form-control required" })
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button class="btn btn-primary" type="submit">提交</button>
+                            </div>
+                        </div>
+                    </form>
+</div>
         </section>
     </div>
 </div>
