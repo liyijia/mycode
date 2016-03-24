@@ -1,0 +1,10 @@
+﻿
+input[type=text]{border: 1px solid #e2e2e2; background: #fff;color: #333; margin: 5px 0 6px 0;padding: 5px;width: 300px;}
+input[type="checkbox"] {background: transparent;border: inherit;width: auto;}
+input:focus, textarea:focus {border: 1px solid #7ac0da;}
+button{ width: 60px;height: 28px;line-height: 22px;float: left;}
+
+#dt{ width: 1024px;}
+#dt tr{ height: 30px;}
+#dt tr td.name{ width: 320px;text-align: right;}
+#dt tr td.content{ width: 466px;}

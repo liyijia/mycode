@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "项目列表";
+}
+@using LY.EMIS5.BLL;
+
+@section Script
+{
+    <script type="text/javascript">
+        var oTable;
+        var options = {
+            beforeSubmit: function () {
+            },
+            success: function () {
+                oTable.fnAdjustColumnSizing();
+            }
+        };
+       
+        $(function () {
+            
+            $('.create').click(function () {
+                location.href = "/Project/Create";
+            });
+
+            oTable = $('#table-form-list').dataTable({
+                "bServerSide": true,
+                "bLengthChange": false,
+                "sAjaxSource": "/Project",
+                "fnServerParams": function (aoData) {
+                    aoData.push({ "name": "name", "value": $("[name=\"name\"]").val() });
+                    aoData.push({ "name": "state", "value": $("[name=\"state\"]").val() });
+                },
+                "aoColumns": [
+                      { "mData": "ProjectName" },
+                      { "mData": "Name" }, { "mData": "CreateDate" }, { "mData": "ProjectProgress" }, { "mData": "OpenDate" }, { "mData": "EndDate" },
+                      { "mData": "Id" }
+                ], "bSort": false, "bFilter": false,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    if (aData.Prompt) {
+                        $(nRow).css('color', 'red');
+                    }
+                    $('td:eq(6)', nRow).html('<a href="/Project/View/' + aData.Id +'">查看</a>');
+                    if (aData.Edit) { 
+                        $('td:eq(6)', nRow).append(' <a href="/Project/Create/' + aData.Id + '">编辑</a>');
+                    }
+                    if (aData.Audit) {
+                        $('td:eq(6)', nRow).append(' <a href="/Project/Audit/' + aData.Id + '">审核</a>');
+                    }
+
+                }
+            });
+
+            $('.search').click(function () {
+                oTable.fnAdjustColumnSizing();
+            });
+        });
+
+
+    </script>
+}
+
+
+<div class="weizhi">
+    <h1 class="font14 fontw lvse">项目列表</h1>
+    <div class="right2">
+        <input type="text" name="name" placeholder="请输入项目名称" />
+        <select name="state">
+            <option value="">项目进度</option>
+            <option>未上网</option>
+            <option>已上网</option>
+            <option>做资料</option>
+            <option>打保证金</option>
+            <option>开标结束</option>
+            <option>保证金已退</option>
+            <option>不能投标</option>
+        </select>
+        <input type="button" class="button search" value="搜索" />
+        <input type="button" class="button create" value="添加" />
+    </div>
+</div>
+<div class="kong"></div>
+<form method="post" id="form-datalist" action="/Form/Delete">
+    <table class="table" id="table-form-list" cellpadding="0" cellspacing="1">
+        <thead>
+            <tr class="tab_top table-top">
+                <td>项目名称</td>
+                <td>业务员</td>
+                <td>创建时间</td>
+                <td>项目进度</td>
+                <td>开标时间</td>
+                <td>截至时间</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+    </table>
+</form>
+<div class="none" id="edit">
+    <form id="form-create" method="post" action="/Form/Edit">
+        <table class="table1" cellpadding="0" cellspacing="1" border="0">
+            <tr class="bkong">
+                <td class="textr wenben-right" style="width: 80px">表单名称</td>
+                <td>
+                    <input type="text" name="Name" class="required" />
+                    <input type="hidden" name="Id" value="0" class="required" />
+                    <input type="reset" style="display: none" />
+                </td>
+            </tr>
+            <tr class="bkong">
+                <td class="textr wenben-right">表单类型</td>
+                <td>
+                    <input type="text" name="Kind" class="required" />
+                </td>
+            </tr>
+            <tr class="bkong">
+                <td class="textr wenben-right">表单内容</td>
+                <td>
+                    <textarea name="Text" class="required" style="width: 80%; height: 150px;"></textarea></td>
+            </tr>
+        </table>
+    </form>
+</div>

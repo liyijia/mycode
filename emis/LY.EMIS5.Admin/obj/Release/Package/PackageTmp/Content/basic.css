@@ -1,0 +1,29 @@
+﻿
+/*全局的一些样式*/
+body { margin:0; padding:0; font-size:12px; font-family:Microsoft YaHei, Sans-Serif;}
+html{overflow: -moz-scrollbars-vertical;/*在Firefox浏览器下始终显示滚动条*/}
+
+p{margin:0;}
+a{text-decoration:none; color:#333333; cursor:pointer;}
+h1{font-size:2em; font-weight:bold; margin:0;}
+h2{font-size:1.5em; font-weight:bold; margin:0;}
+h3{font-size:1.125em; font-weight:bold; margin:0;}
+h4{font-size:1em; font-weight:bold; margin:0;}
+h5{font-size:0.75em; font-weight:bold; margin:0;}
+h6{font-size:0.5625em; font-weight:bold; margin:0;}
+hr{height:2px; border:1px; margin:0.5em auto 0.5em auto;}
+ul{margin:0; padding:0; list-style:none;}
+ul ul,ul ol,ul dl,ol ul,ol ol,ol dl,dl ul,dl ol,dl dl{margin-top:0; margin-bottom:0;}
+
+table{ margin-top:0; margin-bottom:0; text-indent:0;}
+strong{font-weight:bold;}
+img{border:0;}
+
+.textright{text-align:right;}
+
+.left{float:left;}
+.right{float:right;}
+.clear{clear:both;}
+
+
+

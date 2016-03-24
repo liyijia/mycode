@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>CouchbaseNHibernateCache</id>
+    <version>1.0</version>
+    <title>CouchbaseNHibernateCache</title>
+    <authors>Couchbase,  Inc.</authors>
+    <owners>Couchbase,  Inc.</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/couchbaselabs/nhibernate-caches-couchbase</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>2nd level caching provider for NHibernate using Couchbase</description>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <tags>Couchbase NHibernate</tags>
+  </metadata>
+</package>

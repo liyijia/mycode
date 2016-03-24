@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+  namespace="LY.EMIS5.Entities.Core.Memberships" assembly="LY.EMIS5.Entities">
+  <class name="Project" table="Project" >
+    <cache usage="read-write" />
+    <id name="Id">
+      <column name="Id" sql-type="int" not-null="true"/>
+      <generator class="native"/>
+    </id>
+    <property name="ProjectName" />
+    <property name="Link" />
+    <property name="Scale" />
+    <property name="Owner" />
+    <property name="Source" />
+    <property name="Money" precision="20" scale="2" />
+    <property name="EndDate" />
+    <property name="Type" />
+    <property name="UserName" />
+    <property name="Account" />
+    <property name="Bank" />
+    <property name="OpenDate" />
+    <many-to-one name="Sale" class="Manager" lazy="false" column="Sale_Id"/>
+    <property name="SalesOpinion" />
+    <many-to-one name="Documenter" class="Manager" lazy="false" column="Documenter_Id"/>
+    <property name="DocumenterOpinion" />
+    <many-to-one name="CEO" class="Manager" lazy="false" column="CEO_Id"/>
+    <property name="CEOOpinion" />
+    <many-to-one name="Finance" class="Manager" lazy="false" column="Finance_Id"/>
+    <property name="FinanceOpinion" />
+    <property name="ProjectProgress" />
+    <property name="Situation" />
+    <many-to-one name="OpenPeople" class="Manager" lazy="false" column="OpenPeople_Id"/>
+    <property name="CreateDate" />
+    <property name="MaterialFee" precision="20" scale="2" />
+    <property name="CompanyName" />
+    <property name="State" />
+  </class>
+</hibernate-mapping>

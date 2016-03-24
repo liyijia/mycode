@@ -1,0 +1,194 @@
+﻿@using LY.EMIS5.Common;
+@using LY.EMIS5.Const;
+@model LY.EMIS5.Entities.Core.Memberships.Project
+@{
+    ViewBag.Title = "项目详情";
+}
+@section Script
+{
+   <script>
+        $(function () {
+
+            
+            $("#btnSbmit").click(function () {
+                if (!$("#from-createProduct").validate().form())
+                    return;
+                //self.sync();
+                ajaxSubmit($("#from-createProduct"), null, function (result) {
+                    callback(result, null)
+                });
+            });
+            $(".returns").click(function () {
+                location.href = '/Project';
+            });
+        });
+
+
+</script>
+}
+<div class="weizhi">
+    <h1 class="font14 fontw lvse">项目详情</h1>
+    <div class="right2">
+    </div>
+</div>
+<div class="kong"></div>
+<form id="from-createProduct" action="/Project/Audit/@(Model.Id)" method="post">
+    <table class="table1" border="0" cellspacing="1" cellpadding="0">
+        <tr>
+            <td width="100px">项目名称：</td>
+            <td>
+                @Model.ProjectName
+              
+            </td>
+            <td width="100px">下载链接：</td>
+            <td>
+                <a href="@Model.Link">@Model.Link</a>
+            </td>
+        </tr>
+        <tr>
+            <td width="100px">规模：</td>
+            <td>
+                @Model.Scale
+            </td>
+            <td width="100px">业主：</td>
+            <td>
+                @Model.Owner
+            </td>
+        </tr>
+        <tr>
+            <td>保证金来源：</td>
+            <td>
+                @Model.Source
+            </td>
+            <td>保证金金额：</td>
+            <td>
+                @(Model.Owner)元
+            </td>
+        </tr>
+        <tr>
+            <td>保证金截至时间：</td>
+            <td>
+                @Model.EndDate.ToShortDateString()
+            </td>
+            <td>保证金打款方式：</td>
+            <td>
+                @Model.Type
+            </td>
+        </tr>
+        <tr>
+            <td>保证金账户名：</td>
+            <td>
+                @Model.UserName
+            </td>
+            <td>保证金账号：</td>
+            <td>
+                @Model.Account
+            </td>
+        </tr>
+        <tr>
+            <td>保证金开户行：</td>
+            <td>
+                @Model.Bank
+            </td>
+            <td>开标时间：</td>
+            <td>
+                @Model.OpenDate.ToShortDateString()
+            </td>
+        </tr>
+        <tr>
+            <td>资料费：</td>
+            <td>
+                @(Model.MaterialFee)元
+            </td>
+            <td>公司名称：</td>
+            <td>
+                @Model.CompanyName
+            </td>
+        </tr>
+        <tr>
+            <td>当前进度：</td>
+            <td>
+                @Model.ProjectProgress
+            </td>
+            <td>上传时间：</td>
+            <td>
+                @Model.CreateDate.ToChineseDateString()
+            </td>
+        </tr>
+        <tr>
+            <td>业务员：</td>
+            <td>
+                @Model.Sale.Name
+            </td>
+            <td>业务员意见：</td>
+            <td>
+                @Model.SalesOpinion
+            </td>
+        </tr>
+        @{
+            if (Model.Documenter != null && !string.IsNullOrWhiteSpace(Model.DocumenterOpinion))
+            {
+                <tr>
+                    <td>资料员：</td>
+                    <td>
+                        @Model.Documenter.Name
+                    </td>
+                    <td>资料员意见：</td>
+                    <td>
+                        @Model.DocumenterOpinion
+                    </td>
+                </tr>
+            }
+            if (Model.Finance != null && !string.IsNullOrWhiteSpace(Model.FinanceOpinion))
+            {
+                <tr>
+                    <td>财务：</td>
+                    <td>
+                        @Model.Finance.Name
+                    </td>
+                    <td>财务意见：</td>
+                    <td>
+                        @Model.FinanceOpinion
+                    </td>
+                </tr>
+            }
+            if (Model.CEO != null && !string.IsNullOrWhiteSpace(Model.CEOOpinion))
+            {
+                <tr>
+                    <td>总经理：</td>
+                    <td>
+                        @Model.CEO.Name
+                    </td>
+                    <td>总经理意见：</td>
+                    <td>
+                        @Model.CEOOpinion
+                    </td>
+                </tr>
+            }
+            if (Model.ProjectProgress != "开标结束") { 
+            <tr>
+                <td>@(ViewBag.Next)：</td>
+                <td>
+                    @Html.DropDownList("managerId", ViewBag.List as IList<SelectListItem>)
+                </td>
+                <td>审核</td>
+                <td><input type="radio" name="agree" value="true" checked="checked" />通过 <input type="radio" name="agree" value="false" />不通过</td>
+            </tr>}
+        }
+        
+        <tr class="bkong">
+            <td>意见</td>
+            <td colspan="3">
+                <textarea name="opinion" class="required" style="width: 80%; height: 150px;"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="button" id="btnSbmit" class="button" value="提交" /><input type="button" class="button returns" value="返回" style="margin-left: 10px;" />
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</form>

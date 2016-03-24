@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-configuration  xmlns="urn:nhibernate-configuration-2.2" >
+  <session-factory name="NHibernate.EMIS">
+    <property name="connection.provider">NHibernate.Extensions.Connection.CachedDriverConnectionProvider, NHibernate.Extensions</property>
+    <property name="connection.driver_class">NHibernate.Driver.SQLiteDriver</property>
+    <property name="connection.connection_string">
+      Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\EMIS_5\LY.EMIS5.Admin\App_Data\db.db
+    </property>
+    <property name="dialect">NHibernate.Dialect.MsSql2008Dialect</property>
+    <property name="show_sql">true</property>
+    <!--<property name="cache.use_second_level_cache">true</property>
+    <property name="cache.use_query_cache">true</property>
+    <property name="cache.provider_class">NHibernate.Caches.Redis.RedisCacheProvider, NHibernate.Caches.Redis</property>-->
+    <property name="query.substitutions">true 1, false 0, yes 'Y', no 'N'</property>
+    <property name="hbm2ddl.auto">update</property>
+    <property name="dialect">NHibernate.Dialect.SQLiteDialect</property>
+    <property name="default_batch_fetch_size">1</property>
+    <property name="adonet.batch_size">100</property>
+    <mapping assembly="LY.EMIS5.Entities"/>
+  </session-factory>
+</hibernate-configuration>

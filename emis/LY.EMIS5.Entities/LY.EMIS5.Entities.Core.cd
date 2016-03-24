@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LY.EMIS5.Entities.Core.Users.ClazzTeacher">
+    <Position X="5.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAGAEAAAA=</HashCode>
+      <FileName>Core\Users\ClazzTeacher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Users.Customer">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAhAACAAAAABAAAQQAAAAAAAQAAAEQAACAA=</HashCode>
+      <FileName>Core\Users\Customer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Users.GradeTeacher">
+    <Position X="3.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAEAEAAAA=</HashCode>
+      <FileName>Core\Users\GradeTeacher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Users.Namecard">
+    <Position X="15.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAABAAAAAAAAAQgAAAAAQACAQAkIAAAAAA=</HashCode>
+      <FileName>Core\Users\Namecard.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Users.Parent">
+    <Position X="5.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAJAAAAAAAQCAAAAAAAAAAAAAAAAGAEAAAA=</HashCode>
+      <FileName>Core\Users\Parent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Users.SchoolMaster">
+    <Position X="0.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Core\Users\SchoolMaster.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Users.Student">
+    <Position X="8.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAABAABAAAgAAAAQAAAIIAAAAACABGAEIAAA=</HashCode>
+      <FileName>Core\Users\Student.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Users.StudentGroup">
+    <Position X="17.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAACAAAAAAAAAAAAAAAQAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Core\Users\StudentGroup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Users.SubjectTeacher">
+    <Position X="7.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAIAAAAAAAAAAAAAAAAAAGAEAAAA=</HashCode>
+      <FileName>Core\Users\SubjectTeacher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Users.Teacher">
+    <Position X="2.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAACAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Core\Users\Teacher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Users.TeacherGroup">
+    <Position X="19.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAACAAAAAAAAAAAAAAAQAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Core\Users\TeacherGroup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Subject">
+    <Position X="15" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAEAAAAAAAAAAAAAAAQAAAAAIAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Core\Subject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Organizations.Clazz">
+    <Position X="20" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAICBEAAAAAAAJCAAAAAAAQAAAAAAAAAAAAAAwAAAAA=</HashCode>
+      <FileName>Core\Organizations\Clazz.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Organizations.Department">
+    <Position X="13.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACBAAAAAAAAIAAAAAkQEQAAAIAAAAAAAAEAQAAAAA=</HashCode>
+      <FileName>Core\Organizations\Department.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Organizations.Grade">
+    <Position X="17.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAqCAABAAAAAAJCAAAAAAAQAAAAAAAAAAAAAAwAAAAA=</HashCode>
+      <FileName>Core\Organizations\Grade.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Organizations.School">
+    <Position X="15" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAICBEAAAAAAABCAAAAAAAQAAAAABAAAAAAAAwEAAAA=</HashCode>
+      <FileName>Core\Organizations\School.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Memberships.DepartmentManager">
+    <Position X="10.75" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Memberships\DepartmentManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Memberships.SchoolManager">
+    <Position X="12.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Memberships\SchoolManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Memberships.Manager">
+    <Position X="12" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACBABBAAAAAAAAQAAgAAAAACAQAAIAAAAAA=</HashCode>
+      <FileName>Core\Memberships\Manager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Core.Memberships.Role">
+    <Position X="10.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAgAAQAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Core\Memberships\Role.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Gift.Gift">
+    <Position X="18" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgACAAAAAAAAAgABIEAAAAQAIAAgBFAAAACQgEIAAQA=</HashCode>
+      <FileName>Gift\Gift.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LY.EMIS5.Entities.Gift.GiftType">
+    <Position X="20" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Gift\GiftType.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>

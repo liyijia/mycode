@@ -1,0 +1,587 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <!--免费-->
+  <Free>
+    <Edit>
+      <![CDATA[免费人员：<input type="button" id="SelectFree"  class="button" value="请选择用户" /><br/>
+      <table class="table1" id="Free">
+          <thead>
+            <tr>
+              <td>学生姓名/家长号码/班主任姓名-号码</td>
+              <td>免费原因</td>
+              <td>状态</td>
+              <td>操作</td>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+      </table>
+          <script type="text/javascript"> 
+          var dialogFree = new Overlay.Dialog({
+        title: '选择人员',
+        width: 800,
+        height: 400,
+        contentId: 'searchDiv',
+        success: function () {
+            var clazz = ($('#searchSchool').val()==''?'':$('#searchSchool option:selected').text()) + ($('#searchGrade').val()==''?'':$('#searchGrade option:selected').text()) + $('#searchClazz').val()==''?'':$('#searchClazz option:selected').text();
+                $('input[name="child"]:checked').each(function () {
+                    if ($('.free_' + $(this).val()).length == 0) {
+                        $('#Free tbody').append('<tr class="free_' + $(this).val() + '"><td><input type="hidden" name="Free_UserIds" value="' + $(this).val() + '" />' 
+                        + clazz + $('.' + $(this).val()).text() + '</td><td><select name="Free_Cause"><option>教师子女</option><option>教委子女</option><option>运营商子女</option><option>贫困生子女</option><option>其他</option></select></td><td><span class="none"><select name="Free_State"><option>通过</option><option>不通过</option></select></span></td><td><a href="javascript:;" onclick="RemoveFree(' + $(this).val() + ')">移除</a></td></tr>');
+                    }
+                });
+                $('select').select2({ 'dropdownAutoWidth': true });
+            this.close();
+        }
+    });
+    $(function(){
+          if('{Free_UserIds}'==''){
+          $('#SelectFree').click(function(){
+            dialogFree.show();
+          });}else{
+            $('#SelectFree').hide();
+            if('{Free_UserIds}'!=''){
+            $.post('/WorkFlow/TrialView', { clazzs: '{Free_UserIds}',type:'家长' }, function (data) {
+             var ids='{Free_UserIds}'.split(',');
+             var causes='{Free_Cause}'.split(',');
+             var states='{Free_State}'.split(',');
+             $.each(ids, function(index) {
+                var pid = parseInt(this);
+                var parent;
+                for(i in data.Parents) {
+                  var p = data.Parents[i];
+                  if (p.Id == pid) {
+                    parent = p;
+                    break;
+                  }
+                }
+                if (parent)
+                  $('#Free tbody').append('<tr><td>'+parent.Name+'</td><td>'+causes[index]+'</td><td><select name="Free_State"><option '+ (states[index]=='通过'?'selected="selected"':'')+'>通过</option><option '+ (states[index]!='通过'?'selected="selected"':'')+'>不通过</option></select></td><td>&nbsp;</td></tr>');
+                else
+                  $('#Free tbody').append('<tr class="none"><td></td><td>'+causes[index]+'</td><td><select name="Free_State"><option>通过</option><option selected="selected">不通过</option></select></td><td></td></tr>');
+             });
+             $('select').select2({ 'dropdownAutoWidth': true });
+            }, 'json');}
+          }
+        });
+     </script>
+      ]]>
+    </Edit>
+    <Preview>
+      <![CDATA[免费人员：<br/><table class="table1" id="Free">
+          <thead>
+            <tr>
+              <td>学生姓名/家长号码/班主任号码</td>
+              <td>免费原因</td>
+              <td>状态</td>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+      </table>
+      <script type="text/javascript">
+          $(function(){
+            if('{Free_UserIds}'!=''){
+              $.post('/WorkFlow/TrialView', { clazzs: '{Free_UserIds}',type:'家长' }, function (data) {
+              var ids='{Free_UserIds}'.split(',');
+              var causes='{Free_Cause}'.split(',');
+              var states='{Free_State}'.split(',');
+              $.each(data.Parents,function(){
+              var index=ids.indexOf(this.Id.toString());
+               $('#Free tbody').append('<tr><td>'+this.Name+'</td><td>'+causes[index]+'</td><td>'+states[index]+'</td></tr>');
+              });
+            }, 'json');}
+          });
+      </script>]]>
+    </Preview>
+  </Free>
+  <!--转移套餐-->
+  <Move>
+    <Edit>
+      <![CDATA[免费人员：<ul id="Move"></ul><input type="button" id="SelectMove"  class="button" value="请选择家长" />]]>
+    </Edit>
+    <Preview>
+      <![CDATA[免费人员：<ul id="Move">{Move}</ul>]]>
+    </Preview>
+  </Move>
+  <!--试用-->
+  <Trial>
+    <Edit>
+      <![CDATA[<input type="radio" name="Trial_Type" value="班级" checked="checked" />按班级
+        <input type="radio" name="Trial_Type" value="学生" />按学生 &nbsp;&nbsp;&nbsp;&nbsp;试用到期时间：<input type="text" name="Trial_Time" value=""  class="required calendar"/>
+        <span class="clazz">选择试用班级：<select id="WSchool" name="WSchool"></select></span>
+        <span class="student none"><input type="button" id="SelectTrial"  class="button" value="请选择用户" /></span>
+    <ul class="WGradeTotal"></ul>
+    <script type="text/javascript">
+    var dialogFree = new Overlay.Dialog({
+    title: '选择人员',
+    width: 800,
+    height: 400,
+    contentId: 'searchDiv',
+    success: function () {
+        var clazz = ($('#searchSchool').val()==''?'':$('#searchSchool option:selected').text()) + ($('#searchGrade').val()==''?'':$('#searchGrade option:selected').text()) + $('#searchClazz').val()==''?'':$('#searchClazz option:selected').text();
+        $('input[name="child"]:checked').each(function () {
+            if($('.Trial' + $(this).val()).length==0){
+              $('.WGradeTotal').append('<li class="Trial'+$(this).val()+'"><input type="hidden" name="Trial_Clazzs" value="' + $(this).val() + '">' + clazz+$('.' + $(this).val()).text() + '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="RemoveParent(this)">移除</a></li>');}
+        });
+        this.close();
+    }
+});
+        $(function () {
+        var Calendar = BUI.Calendar
+        var datepicker = new Calendar.DatePicker({
+            trigger: '.calendar',
+            autoRender: true
+        });
+           $('#WSchool').html('').append($("<option/>").val(0).text("请选择学校")).select2({ 'dropdownAutoWidth': true });
+    $.post("/Student/getSchool", { "schoolId": 0 }, function (data) {
+        $.each(data, function () {
+            $('#WSchool').append($("<option/>").val(this.Id).text(this.Name));
+        });
+    })
+    $('#SelectTrial').click(function(){
+      dialogFree.show();
+    });
+    $('#WSchool').change(function () {
+        $('.WGradeTotal').html('');
+        $('#WGrade').html('<option value="0">请选择年级</option>');
+        $('#WClazz').html('');
+        if ($(this).val() != 0) {
+            $.post("/Student/getGrade", { "schoolId": $(this).val() }, function (data) {
+                $('.WGradeTotal').html('')
+                $.each(data, function () {
+                    $('.WGradeTotal').append('<li>' + this.Name + ' <input type="checkbox" id="SeleceClazzs" onclick="SelectAllClass(this)"/>全选<div id="' + this.Id + '"></div></li>');
+                    var grade = this.Id;
+                    $.post("/Student/getClazz", { "gradeId": this.Id }, function (data) {
+                        $.each(data, function () {
+                            $('#' + grade).append('<label><input type="checkbox" class="required" name="Trial_Clazzs"  value="' + this.Id + '" />' + this.Name + '</label>&nbsp;&nbsp;');
+                        });
+                    })
+                });
+            })
+        }
+    });
+    $('input[name="Trial_Type"]').click(function(){
+    $('.WGradeTotal').html('');
+      if($(this).val()=='班级'){
+        $('.clazz').show();
+        $('.student').hide();
+      }else{
+        $('#WSchool').val(0);
+         $('.clazz').hide();
+        $('.student').show();
+      }
+    });
+    $('#WGrade').change(function(){
+        $('#WClazz').html('');
+    });
+        });
+        function SelectAllClass(obj) {
+          $(obj).parent().find("input").prop("checked", $(obj).prop("checked"));
+}
+    </script>]]>
+    </Edit>
+    <Preview>
+      <![CDATA[试用学校：<span class="TSchool"></span> &nbsp;试用到期时间：{Trial_Time}
+    <ul class="WGradeTotal"></ul>
+    <script type="text/javascript">
+        $(function () {
+        if('{Trial_Clazzs}'!=''){
+        $.post('/WorkFlow/TrialView', { clazzs: '{Trial_Clazzs}',type:'{Trial_Type}' }, function (data) {
+        if('{Trial_Type}'=='班级'){
+          $('.TSchool').text(data.SchoolName);
+          $.each(data.Grades, function () {
+              $('.WGradeTotal').append('<li>' + this.Name + '<div id="' + this.Id + '"></div></li>');
+          });
+          $.each(data.Clazzs, function () {
+              $('#' + this.Pid).append(this.Name + '&nbsp;&nbsp;');
+          });}else{$.each(data.Parents, function () {
+            $('.WGradeTotal').append('<li>' + this.Name + '</li>');});
+          }
+      }, 'json');}
+        });
+    </script>]]>
+    </Preview>
+  </Trial>
+  <!--现金收费-->
+  <Charge>
+    <Edit>
+      <![CDATA[<div class="charge">
+    <table id="charge">
+        <tr>
+            <td style="width: 100px;">存款方式</td>
+            <td>
+                <label>
+                    <input type="radio" name="Charge_Type" value="现金" checked="checked" />现金
+                </label>
+                <label>
+                    <input type="radio" name="Charge_Type" value="淘宝" />淘宝
+                </label>
+                <label>
+                    <input type="radio" name="Charge_Type" value="银行汇款" />银行汇款
+                </label>
+            </td>
+            <td style="width: 100px;">收费总额</td>
+            <td>
+                <input type="text" name="Charge_Money" value="{Charge_Money}" class="required digits" />元
+            </td>
+            <td style="width: 100px;">收费时间</td>
+            <td>
+                <input type="text" name="Charge_Time" value="{Charge_Time}" class="required calendar" />
+            </td>
+        </tr>
+        <tr>
+            <td>收费学校</td>
+            <td colspan="5">
+                <select id="Schools" multiple="multiple" style="width:80%" class="required"></select>
+            </td>
+        </tr>
+        <tr class="none taobao">
+            <td>淘宝订单编号</td>
+            <td>
+                <input type="text" name="Charge_Taobao" value="{Charge_Taobao}" />
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="none bank">
+            <td>汇款银行</td>
+            <td>
+                <select name="Charge_Bank">
+                    <option>建设银行 户名:XXX 账号:XXXXXXXXXXXXXXXXXX</option>
+                    <option>工商银行 户名:XXX 账号:XXXXXXXXXXXXXXXXXX</option>
+                    <option>招商银行 户名:XXX 账号:XXXXXXXXXXXXXXXXXX</option>
+                </select>
+            </td>
+            <td>汇款人姓名</td>
+            <td>
+                <input type="text" name="Charge_BankParson" value="{Charge_BankParson}" />
+            </td>
+            <td>汇款人账号</td>
+            <td>
+                <input type="text" name="Charge_BankCard" value="{Charge_BankCard}" />
+            </td>
+        </tr>
+
+    </table>
+</div>
+<script type="text/javascript">
+    $(function () {
+        ajax("/Student/getSchool", { "schoolId": 0 }, $('#Schools'));
+        $('#Schools').select2().on("select2-selecting", function (e) {
+            var text = $('#searchSchool option[value="' + e.val + '"]').text();
+            var html = '<tr id="' + e.val + '"><td>学校</td><td>' + text + '<input type="hidden" name="Charge_SchoolId_' + e.val + '" value="' + e.val + '" /><input type="hidden" name="Charge_SchoolName_' + e.val + '" value="' + text + '" /></td><td>人数</td><td><input type="text" name="Charge_SchoolNumber_' + e.val + '" class="required digits" />人</td><td>金额</td><td><input type="text" name="Charge_SchoolMoney_' + e.val + '" class="required digits money" />元</td></tr>';
+            $('#charge').append(html);
+        }).on("select2-removed", function (e) {
+            $('#' + e.val).remove();
+        });
+        var Calendar = BUI.Calendar
+        var datepicker = new Calendar.DatePicker({
+            trigger: '.calendar',
+            autoRender: true
+        });
+
+        $('input[name="Charge_Type"]').click(function () {
+            if ($(this).val() == '现金') {
+                $('.taobao').hide();
+                $('.bank').hide();
+            } else if ($(this).val() == '淘宝') {
+                $('.taobao').show();
+                $('.bank').hide();
+            } else if ($(this).val() == '银行汇款') {
+                $('.taobao').hide();
+                $('.bank').show();
+            }
+        });
+        $('input[name="Charge_Type"][value="{Charge_Type}"]').click();
+        $('select[name="Charge_Bank"]').val('{Charge_Bank}');
+    });
+</script>]]>
+    </Edit>
+    <Preview>
+      <![CDATA[<div class="charge">
+    <table>
+        <tr>
+            <td style="width: 100px;">存款方式</td>
+            <td>
+                {Charge_Type}
+            </td>
+            <td style="width: 100px;">收费金额</td>
+            <td>
+                {Charge_Money}
+            </td>
+            <td style="width: 100px;">收费时间</td>
+            <td>
+                {Charge_Time}
+            </td>
+        </tr>
+        <tr>
+            @if (Model.State == 3)
+            {
+
+                <td>收费编号</td>
+                <td colspan="5">
+                    <input type="text" name="Charge_No" value="{Charge_No}" />
+                </td>
+
+            }
+            else
+            {
+                <td>收费编号</td>
+                <td colspan="5">
+                    {Charge_No}
+                </td>
+            }
+        </tr>
+
+            @{
+    
+    foreach (var item in Model.Datas)
+    {
+        <tr>
+            <td>学校</td>
+            <td>
+                @Model.GetData("Charge_SchoolName_" + item.Data)
+            </td>
+            <td>人数</td>
+            <td>@Model.GetData("Charge_SchoolNumber_" + item.Data)人</td>
+            <td>金额</td>
+            <td>@Model.GetData("Charge_SchoolMoney_" + item.Data)元</td>
+        </tr>
+    }
+
+}
+            @{if ("{Charge_Type}" == "淘宝")
+            {
+                <tr>
+                    <td>淘宝账号</td>
+                    <td>
+                        {Charge_Taobao}
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+            else if ("{Charge_Type}" == "银行汇款")
+            {
+
+                <tr>
+                    <td>汇款银行</td>
+                    <td>
+                        {Charge_Bank}
+                    </td>
+                    <td>汇款人姓名</td>
+                    <td>
+                        {Charge_BankParson}
+                    </td>
+                    <td>汇款人账号</td>
+                    <td>
+                        {Charge_BankCard}
+                    </td>
+                </tr>
+            }
+            }
+        </table>
+    </div>]]>
+    </Preview>
+  </Charge>
+  <Phone>
+    <Edit>
+      <![CDATA[需修改的号码：{Phone_Old}<input type="hidden" name="Phone_Old" value="{Phone_Old}" />新号码<input type="text" name="Phone_New" value="{Phone_New}" class="required mobile" maxlength="11"/>]]>
+    </Edit>
+    <Preview>
+      <![CDATA[<span class="Phone"></span>,新姓名:{Phone_New}
+       <script type="text/javascript">
+          $(function(){
+            $.post('/WorkFlow/GetStudent/{Phone_Id}',function(data){
+                $('.Phone').html(data);
+            })
+          });
+       </script>
+      
+      ]]>
+    </Preview>
+  </Phone>
+  <Signature>
+    <Edit>
+      <![CDATA[<table class="table1">
+      <tr>
+        <td colspan="2" style="text-align:left">{Action_Name}</td>
+      </tr>
+      <tr>
+        <td width="100px;">处理意见</td><td style="text-align:left"><textarea name="{Signature_Name}" style="width:100%;height:150px;">{Signature_Text}</textarea></td>
+      </tr>
+    </table>]]>
+    </Edit>
+    <Preview>
+      <![CDATA[<table class="table1">
+      <tr>
+        <td colspan="2" style="text-align:left">{Action_Name}</td>
+      </tr>
+      <tr>
+        <td width="100px;">处理意见</td><td style="text-align:left">{Signature_Text}<br/>{Signature_User}<br/>{Signature_Time}</td>
+      </tr>
+    </table>]]>
+    </Preview>
+  </Signature>
+  <!--退费-->
+  <Refund>
+    <Edit>
+      <![CDATA[<div class="refund">
+        <table>
+            <tr>
+                <td style="width: 100px;" class="textr">到期时间</td>
+                <td>{Refund_ExpirationTime}<input type="hidden" name="Refund_ExpirationTime" value="{Refund_ExpirationTime}" />
+                </td>
+                <td style="width: 100px;" class="textr">学校单价</td>
+                <td>{Refund_SchoolMoney}<input type="hidden" name="Refund_SchoolMoney" value="{Refund_SchoolMoney}" />
+                </td>
+                <td style="width: 100px;" class="textr">退款金额</td>
+                <td>
+                    <input type="text" name="Refund_Money" value="{Refund_Money}" /></td>
+            </tr>
+        </table>
+    </div>]]>
+    </Edit>
+    <Preview>
+      <![CDATA[<div class="refund">
+        <table>
+            <tr>
+                <td style="width: 100px;" class="textr">到期时间</td>
+                <td>{Refund_ExpirationTime}
+                </td>
+                <td style="width: 100px;" class="textr">学校单价</td>
+                <td>{Refund_SchoolMoney}
+                </td>
+                <td style="width: 100px;" class="textr">退款金额</td>
+                <td>
+                    {Refund_Money}</td>
+            </tr>
+        </table>
+    </div>]]>
+    </Preview>
+  </Refund>
+  <!--充值-->
+  <Pay>
+    <Edit>
+      <![CDATA[<input type="radio" name="Pay_Type" value="班级" checked="checked" />按班级
+        <input type="radio" name="Pay_Type" value="学生" />按学生 &nbsp;&nbsp;&nbsp;&nbsp;充值<input type="text" name="Pay_Mouth" value=""  class="required digits"/>个月
+        <span class="clazz">选择充值班级：<select id="WSchool" name="WSchool"></select></span>
+        <span class="student none"><input type="button" id="SelectTrial"  class="button" value="请选择用户" /></span>
+    <ul class="WGradeTotal"></ul>
+    <script type="text/javascript">
+    var dialogFree = new Overlay.Dialog({
+    title: '选择人员',
+    width: 800,
+    height: 400,
+    contentId: 'searchDiv',
+    success: function () {
+        var clazz = ($('#searchSchool').val()==''?'':$('#searchSchool option:selected').text()) + ($('#searchGrade').val()==''?'':$('#searchGrade option:selected').text()) + $('#searchClazz').val()==''?'':$('#searchClazz option:selected').text();
+        $('input[name="child"]:checked').each(function () {
+            if($('.Trial' + $(this).val()).length==0){
+              $('.WGradeTotal').append('<li class="Trial'+$(this).val()+'"><input type="hidden" name="Pay_Clazzs" value="' + $(this).val() + '">' + clazz+$('.' + $(this).val()).text() + '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="RemoveParent(this)">移除</a></li>');}
+        });
+        this.close();
+    }
+});
+        $(function () {
+           $('#WSchool').html('').append($("<option/>").val(0).text("请选择学校")).select2({ 'dropdownAutoWidth': true });
+    $.post("/Student/getSchool", { "schoolId": 0 }, function (data) {
+        $.each(data, function () {
+            $('#WSchool').append($("<option/>").val(this.Id).text(this.Name));
+        });
+    })
+    $('#SelectTrial').click(function(){
+      dialogFree.show();
+    });
+    $('#WSchool').change(function () {
+        $('.WGradeTotal').html('');
+        $('#WGrade').html('<option value="0">请选择年级</option>');
+        $('#WClazz').html('');
+        if ($(this).val() != 0) {
+            $.post("/Student/getGrade", { "schoolId": $(this).val() }, function (data) {
+                $('.WGradeTotal').html('')
+                $.each(data, function () {
+                    $('.WGradeTotal').append('<li>' + this.Name + ' <input type="checkbox" id="SeleceClazzs" onclick="SelectAllClass(this)"/>全选<div id="' + this.Id + '"></div></li>');
+                    var grade = this.Id;
+                    $.post("/Student/getClazz", { "gradeId": this.Id }, function (data) {
+                        $.each(data, function () {
+                            $('#' + grade).append('<label><input type="checkbox" class="required" name="Pay_Clazzs"  value="' + this.Id + '" />' + this.Name + '</label>&nbsp;&nbsp;');
+                        });
+                    })
+                });
+            })
+        }
+    });
+    $('input[name="Pay_Type"]').click(function(){
+    $('.WGradeTotal').html('');
+      if($(this).val()=='班级'){
+        $('.clazz').show();
+        $('.student').hide();
+      }else{
+        $('#WSchool').val(0);
+         $('.clazz').hide();
+        $('.student').show();
+      }
+    });
+    $('#WGrade').change(function(){
+        $('#WClazz').html('');
+    });
+        });
+        function SelectAllClass(obj) {
+          $(obj).parent().find("input").prop("checked", $(obj).prop("checked"));
+}
+    </script>]]>
+    </Edit>
+    <Preview>
+      <![CDATA[
+      <table class="count" >
+          <tr>
+            <td>充值月数</td>
+            <td>充值人数</td>
+            <td>充值总额</td>
+            <td>账户余额</td>
+            <td>充值差额</td>
+          </tr>
+      </table>
+      <h3 class="TSchool"></h3>
+    <ul class="WGradeTotal"></ul>
+ <br/>
+    <script type="text/javascript">
+                                    $(function () {
+                                        if('{Pay_Clazzs}'!=''){
+                                            $.post('/WorkFlow/TrialView', { clazzs: '{Pay_Clazzs}',type:'{Pay_Type}' }, function (data) {
+                                                var number=0;
+                                                var maney=0;
+                                                if('{Pay_Type}'=='班级'){
+                                                    $('.TSchool').text(data.SchoolName);
+                                                    $.each(data.Grades, function () {
+                                                        $('.WGradeTotal').append('<li>' + this.Name + '(单价：'+this.Price+'元,一共'+this.Count+'人)<div id="' + this.Id + '"></div></li>');
+                                                    });
+                                                    $.each(data.Clazzs, function () {
+                                                        number+=parseInt(this.Parents);
+                                                        maney+=(parseFloat(this.Parents)*parseFloat(this.Price))
+                                                         $('#' + this.Pid).append(this.Name + '(' + this.Parents + ')&nbsp;&nbsp;');
+                                                    });
+                                                }
+                                                else{
+                                                    $.each(data.Parents, function () {
+                                                       $('.WGradeTotal').append('<li>' + this.Name + '</li>');
+                                                       maney+=parseFloat(this.Price);
+                                                    });
+                                                    number=data.Parents.length;
+                                                }
+                                                maney=maney*{Pay_Mouth}
+                                                var s=parseFloat($('#money').val())-maney;
+                                                if(s>0){s=0;}
+                                                $('.count').append('<tr><td>{Pay_Mouth}</td><td>'+number+'</td><td>'+maney.toFixed(2)+'</td><td>'+$('#money').val()+'</td><td>'+s.toFixed(2)+'</td></tr>')
+                                            }, 'json');}
+                                    });
+                                </script>]]>
+    </Preview>
+  </Pay>
+</root>

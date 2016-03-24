@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "项目列表";
+}
+@using LY.EMIS5.BLL;
+
+@section Script
+{
+    <script type="text/javascript">
+        var oTable;
+        var options = {
+            beforeSubmit: function () {
+            },
+            success: function () {
+                oTable.fnAdjustColumnSizing();
+            }
+        };
+       
+        $(function () {
+            $('.create').click(function () {
+                location.href = "/Project/Create";
+            });
+
+            oTable = $('#table-form-list').dataTable({
+                "bServerSide": true,
+                "bLengthChange": false,
+                "sAjaxSource": "/Project",
+                "fnServerParams": function (aoData) {
+                    aoData.push({ "name": "name", "value": $("[name=\"name\"]").val() });
+                    aoData.push({ "name": "state", "value": $("[name=\"state\"]").val() });
+                },
+                "aoColumns": [
+                      { "mData": "ProjectName" },
+                      { "mData": "Name" }, { "mData": "CreateDate" }, { "mData": "ProjectProgress" }, { "mData": "OpenDate" }, { "mData": "EndDate" },
+                      { "mData": "Id" }
+                ], "bSort": false, "bFilter": false,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    if (aData.Prompt) {
+                        $(nRow).css('color', 'red');
+                    }
+                    $('td:eq(6)', nRow).html('<a href="/Project/View/' + aData.Id +'">查看</a>');
+                    if (aData.Edit) { 
+                        $('td:eq(6)', nRow).append(' <a href="/Project/Create/' + aData.Id + '">编辑</a>');
+                    }
+                    if (aData.Audit) {
+                        $('td:eq(6)', nRow).append(' <a href="/Project/Audit/' + aData.Id + '">审核</a>');
+                    }
+
+                }
+            });
+
+            $('.search').click(function () {
+                oTable.fnAdjustColumnSizing();
+            });
+        });
+
+
+    </script>
+}
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    项目列表
+                    <span class="tools pull-right form-inline">
+                            <input type="text" class="form-control" name="name" placeholder="请输入项目名称" />
+                            <select name="state" class="form-control">
+                                <option value="">项目进度</option>
+                                <option>未上网</option>
+                                <option>已上网</option>
+                                <option>做资料</option>
+                                <option>打保证金</option>
+                                <option>开标结束</option>
+                                <option>保证金已退</option>
+                                <option>不能投标</option>
+                            </select>
+                        <input type="button" class="btn btn-default search" value="搜索" />
+                        <input type="button" class="btn btn-default create" value="添加" />
+                    </span>
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        <table class="display table table-bordered table-striped" id="table-form-list" cellpadding="0" cellspacing="1">
+                            <thead>
+                                <tr class="tab_top table-top">
+                                    <td>项目名称</td>
+                                    <td>业务员</td>
+                                    <td>创建时间</td>
+                                    <td>项目进度</td>
+                                    <td>开标时间</td>
+                                    <td>截至时间</td>
+                                    <td>操作</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>
+<!--body wrapper end-->

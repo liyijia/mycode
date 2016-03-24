@@ -1,0 +1,143 @@
+﻿@using LY.EMIS5.Common;
+@using LY.EMIS5.Const;
+@model LY.EMIS5.Entities.Core.Memberships.Project
+@{
+    ViewBag.Title = "添加项目";
+}
+@section Script
+{
+    <script>
+        $(function () {
+             
+            var Calendar = BUI.Calendar;
+            var datepicker = new Calendar.DatePicker({
+                trigger: '.calendar',
+                autoRender: true
+            });
+            $("#btnSbmit").click(function () {
+                if (!$("#from-createProduct").validate().form())
+                    return;
+                //self.sync();
+                ajaxSubmit($("#from-createProduct"), null, function (result) {
+                    callback(result, null)
+                });
+            });
+            $(".returns").click(function () {
+                location.href = '/Project';
+            });
+        });
+
+     
+    </script>
+}
+<div class="weizhi">
+    <h1 class="font14 fontw lvse">添加项目</h1>
+    <div class="right2">
+    </div>
+</div>
+<div class="kong"></div>
+<form id="from-createProduct" action="/Project/Create" method="post">
+    <table class="table1" border="0" cellspacing="1" cellpadding="0">
+        <tr>
+            <td width="100px">项目名称：</td>
+            <td>
+                @Html.HiddenFor(c => c.Id)
+                @Html.TextBoxFor(c => c.ProjectName, new { @class = "wborder required" })
+            </td>
+            <td width="100px">下载链接：</td>
+            <td>
+                @Html.TextBoxFor(c => c.Link, new { @class = "wborder required" })
+            </td>
+        </tr>
+        <tr>
+            <td width="100px">规模：</td>
+            <td>
+                @Html.TextBoxFor(c => c.Scale, new { @class = "wborder required" })
+            </td>
+            <td width="100px">业主：</td>
+            <td>
+                @Html.TextBoxFor(c => c.Owner, new { @class = "wborder required" })
+            </td>
+        </tr>
+        <tr>
+            <td>保证金来源：</td>
+            <td>
+                <select name="Source">
+                    <option>自打</option>
+                    <option>代打</option>
+                </select>
+            </td>
+            <td>保证金金额：</td>
+            <td>
+                @Html.TextBoxFor(c => c.Money, new { @class = "wborder required number" })元
+            </td>
+        </tr>
+        <tr>
+            <td>保证金截至时间：</td>
+            <td>
+                @Html.TextBoxFor(c => c.EndDate, new { @class = "wborder required calendar" })
+            </td>
+            <td>保证金打款方式：</td>
+            <td>
+                <select name="Type">
+                    <option>网银支付</option>
+                    <option>转账</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>保证金账户名：</td>
+            <td>
+                @Html.TextBoxFor(c => c.UserName, new { @class = "wborder required" })
+            </td>
+            <td>保证金账号：</td>
+            <td>
+                @Html.TextBoxFor(c => c.Account, new { @class = "wborder required" })
+            </td>
+        </tr>
+        <tr>
+            <td>保证金开户行：</td>
+            <td>
+                @Html.TextBoxFor(c => c.Bank, new { @class = "wborder required" })
+            </td>
+            <td>开标时间：</td>
+            <td>
+                @Html.TextBoxFor(c => c.OpenDate, new { @class = "wborder required calendar" })
+            </td>
+        </tr>
+        <tr>
+            <td>资料费：</td>
+            <td>
+                @Html.TextBoxFor(c => c.MaterialFee, new { @class = "wborder required number" })元
+            </td>
+            <td>公司名称：</td>
+            <td>
+                @Html.TextBoxFor(c => c.CompanyName, new { @class = "wborder required" })
+            </td>
+        </tr>
+        <tr>
+            <td>资料员：</td>
+            <td>
+                @Html.DropDownList("documenterId", ViewBag.List as IList<SelectListItem>)
+            </td>
+            <td></td>
+            <td>
+               
+            </td>
+        </tr>
+        <tr class="bkong">
+            <td>意见</td>
+            <td colspan="3">
+                <textarea name="SalesOpinion" class="required" style="width: 80%; height: 150px;">@Model.SalesOpinion</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="button" id="btnSbmit" class="button" value="提交" /><input type="button" class="button returns" value="返回" style="margin-left: 10px;" />
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</form>

@@ -1,0 +1,86 @@
+﻿@using LY.EMIS5.Entities.Core.Memberships;
+@using LY.EMIS5.Common.Extensions;
+@using LY.EMIS5.Common.Const;
+@using LY.EMIS5.BLL;
+
+@model Manager
+@{
+    ViewBag.Title = "个人设置";
+}
+
+@section Script
+{
+    <script type="text/javascript">
+        $(function () {
+            $(".save").click(function () {
+                if (!$("#form-Personal").validate().form())
+                    return;
+                ajaxSubmit($("#form-Personal"), null, function (result) {
+                    callback(result, null);
+                });
+            });
+        });
+    </script>
+}
+<div class="weizhi">
+    <h1 class="font14 fontw lvse">个人资料</h1>
+    <div class="right2">
+        <input type="button" class="button save " value="保存" />
+    </div>
+</div>
+<form id="form-Personal" method="post" action="/Manager/Personal">
+    <table class="table1" width="100%" cellpadding="0" cellspacing="1" border="0">
+        <tr class="bkong">
+            <td class="textr wenben-right">管理员类型：</td>
+            <td>
+                @Html.Hidden("Id",Model.Id)
+                <label>
+                    @Model.Kind
+                </label>
+            </td>
+        </tr>
+        <tr class="tablehui">
+            <td class="textr wenben-right">部门：</td>
+            <td>
+                <label>
+                    @ViewData["DepartmentNames"]
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td class="textr wenben-right">角色：</td>
+            <td>
+                <label>
+                    @ViewData["RoleNames"]
+                </label>
+            </td>
+        </tr>
+        <tr class="bkong">
+            <td class="textr wenben-right">账号：</td>
+            <td>
+                @Model.UserName
+            </td>
+        </tr>
+        <tr>
+            <td class="textr wenben-right">姓名：</td>
+            <td>@Html.TextBoxFor(m => m.Name, new { @class = "required" })</td>
+        </tr>
+        
+        <tr class="tablehui">
+            <td class="textr wenben-right">性别：</td>
+            <td>
+                <label>@Html.RadioButton("Sex", Sex.Male, Model.Sex == Sex.Male) @Sex.Male.GetDescription() </label>
+                <label>@Html.RadioButton("Sex", Sex.Female, Model.Sex == Sex.Female) @Sex.Female.GetDescription() </label>
+            </td>
+        </tr>
+        <tr>
+            <td class="textr wenben-right">Email：</td>
+            <td>@Html.TextBoxFor(m => m.Email, new { @class = "email" })</td>
+        </tr>
+        <tr class="tablehui">
+            <td class="textr wenben-right">电话号码：</td>
+            <td>@Html.TextBoxFor(m => m.Phone, new { @class = "required mobile" })</td>
+        </tr>
+       
+    </table>
+</form>

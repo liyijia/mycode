@@ -1,0 +1,123 @@
+﻿
+
+.weizhi {
+    border-bottom: 1px dotted #e2e2e2;
+    margin-bottom: 10px;
+}
+
+    .weizhi .title {
+        line-height: 35px;
+        color: #006666;
+        font-size: 18px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+.table1 {
+    width: 100%;
+    background: #e2e2e2;
+    font-size: 12px;
+}
+
+    .table1 td {
+        background: #fff;
+        line-height: 30px;
+        padding: 0px 1%;
+    }
+
+        .table1 td a:hover {
+            text-decoration: underline;
+        }
+
+.biank2 {
+    padding: 10px 0;
+    border: 1px solid #60a6d4;
+    background: #6fb3e0;
+}
+
+    .biank2 .biaot {
+        padding-left: 18px;
+        color: #1b4d6e;
+    }
+
+.tscl ul li {
+    position: relative;
+    background: #eee;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px #888888;
+    font-size: 12px;
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+
+.kong {
+    height: 10px;
+}
+
+.tscl span.cscl-numb {
+    margin-left: 10px;
+    width: 28px;
+    height: 28px;
+    background: url(images/quan.png) no-repeat;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    padding: 0px 10px 10px 10px;
+}
+
+.tscl .table1 {
+    position: relative;
+    top: 0;
+}
+
+.tscl table td {
+    text-align: center;
+    padding-right: 10px;
+}
+
+td.textr {
+    text-align: right;
+}
+
+.sy-xx {
+    padding-left: 18px;
+    line-height: 30px;
+}
+
+.parents, #Free {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    width: 100%;
+}
+
+    .parents li {
+        width: 155px;
+        float: left;
+        height: 30px;
+        display: inherit;
+        overflow: hidden;
+        text-align: left;
+    }
+
+    .parents .check {
+        width: 25px;
+        float: left;
+        height: 30px;
+    }
+
+    #Free li {
+        float: left;
+        margin-top: 10px;
+        width: 300px;
+        text-align: left;
+    }
+.WGradeTotal {
+    height:auto;
+}
+.WGradeTotal li {
+    float: left;
+    border:1px solid #6fb3e0;
+    margin:10px;
+}

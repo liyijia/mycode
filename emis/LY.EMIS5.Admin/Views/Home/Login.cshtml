@@ -1,0 +1,75 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>重庆掌信科技有限公司OA系统</title>
+    <link href="/Content/css/style.css" rel="stylesheet">
+    <link href="/Content/style-responsive.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/Scripts/html5shiv.js"></script>
+    <script src="/Scripts/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/modernizr.min.js"></script>
+    <script src="/Scripts/jquery.validate.min.js"></script>
+    <script src="/Scripts/jquery.validate.messages_cn.js"></script>
+</head>
+
+<body class="login-body">
+    <div class="container">
+        <form class="form-signin" method="post">
+            <div class="form-signin-heading text-center">
+                <h1 class="sign-title">登 录</h1>
+                <img src="/Content/images/login-logo.png" alt="" />
+            </div>
+            <div class="login-wrap">
+                <input type="text" class="form-control" name="Name" required="required" placeholder="用户名" autofocus>
+                <input type="password" class="form-control" name="Password" placeholder="密码" required="required">
+                <button class="btn btn-lg btn-login btn-block" type="submit">
+                    <i class="fa fa-check"></i>
+                </button>
+                @*<div class="registration">
+                    Not a member yet?
+                    <a class="" href="registration.html">
+                        Signup
+                    </a>
+                </div>
+                <label class="checkbox">
+                    <input type="checkbox" value="remember-me"> Remember me
+                    <span class="pull-right">
+                        <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
+                    </span>
+                </label>*@
+            </div>
+            <!-- Modal -->
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Forgot Password ?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Enter your e-mail address below to reset your password.</p>
+                            <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                            <button class="btn btn-primary" type="button">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal -->
+           </form>
+</div>
+
+</body>
+</html>

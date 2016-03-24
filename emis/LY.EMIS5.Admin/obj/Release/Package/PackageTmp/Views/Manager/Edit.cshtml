@@ -1,0 +1,212 @@
+﻿@using LY.EMIS5.Entities.Core.Memberships;
+@using LY.EMIS5.Const;
+@using LY.EMIS5.Common.Extensions;
+@using LY.EMIS5.Common.Const;
+
+@model Manager
+@{
+    ViewBag.Title = "编辑管理员";
+    Layout = null;
+}
+<link href="~/Scripts/Tree/JQuery-zTree/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/Tree/JQuery-zTree/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var departmentSetting = {
+        check: {
+            enable: true,
+            chkStyle: "radio",
+            radioType: "all"
+        },
+        data: {
+            key: {
+                name: "name",
+                checked: "_checked"
+            },
+            simpleData: {
+                enable: true,
+                idKey: "id",
+                pIdKey: "pId"
+                //rootPId: "0"
+            }
+        },
+        callback: {
+            onCheck: function (treeId, treeNode) {
+                var treeObj = $.fn.zTree.getZTreeObj("selectTree");
+                var nodes = treeObj.getCheckedNodes(true);
+                var tmpId = "";
+                var tmpName = "";
+                for (var i = 0; i < nodes.length; i++) {
+                    tmpId = tmpId + nodes[i].id + ",";
+                    tmpName = tmpName + nodes[i].name + ",";
+                }
+                if (tmpId.length > 0) {
+                    tmpId = tmpId.substring(0, tmpId.length - 1);
+                }
+                if (tmpName.length > 0) {
+                    tmpName = tmpName.substring(0, tmpName.length - 1);
+                }
+                $("#MemberOf_Id").val(tmpId);
+                $("#MemberOf_Name").val(tmpName);
+            }
+        }
+    };
+
+    var roleSetting = {
+        check: {
+            enable: true,
+            //chkStyle: "checkbox",
+        },
+        data: {
+            key: {
+                name: "name",
+                checked: "_checked"
+            },
+            simpleData: {
+                enable: true,
+                idKey: "id",
+                pIdKey: "pId"
+                //rootPId: "0"
+            }
+        },
+        callback: {
+            onCheck: function (treeId, treeNode) {
+                var tmpId = treeNode.Id;
+                var treeObj = $.fn.zTree.getZTreeObj("selectTree");
+                var nodes = treeObj.getCheckedNodes(true);
+                var tmpId = "";
+                var tmpName = "";
+                for (var i = 0; i < nodes.length; i++) {
+                    tmpId = tmpId + nodes[i].id + ",";
+                    tmpName = tmpName + nodes[i].name + ",";
+                }
+                if (tmpId.length > 0) {
+                    tmpId = tmpId.substring(0, tmpId.length - 1);
+                }
+                if (tmpName.length > 0) {
+                    tmpName = tmpName.substring(0, tmpName.length - 1);
+                }
+                $("#Roles_Id").val(tmpId);
+                $("#Roles_Name").val(tmpName);
+            }
+        }
+    };
+    $(function () {
+        var id = $("#Id").val();
+        $("#MemberOf_Name").click(function () {
+            InitTree($("#selectTree"), "/Manager/DepartmentList/" + id, departmentSetting, BeforeBindTree($("#MemberOf_Name")));
+
+        });
+        $("#Roles_Name").click(function () {
+            
+            InitTree($("#selectTree"), "/Manager/RolesList/" + id, roleSetting, BeforeBindTree($("#Roles_Name")));
+        });
+    });
+    function BeforeBindTree(bindObj) {
+        ///<summary>
+        /// 绑定Tree前要绑定的事件
+        ///</summary>
+        ///<param name="bindObj" type="jQuery">jQuery对象</param>
+        var parentObj = bindObj;
+        var parentOffset = bindObj.offset();
+        //alert("left:" + parentOffset.left + "top:" + parentOffset.top);
+        //alert("left:" + bindObj.position().left + "top:" + bindObj.position().top);
+
+        $("#treeContent").css({ left: bindObj.position().left + "px", top: (bindObj.position().top + bindObj.height() + 10) + "px" }).slideDown("fast");
+        $("body").bind("mousedown", OnBodyDown);
+    }
+    function InitTree(treeObj, url, setting, beforeBindFun) {
+        ///<summary>
+        /// 初始化Tree
+        ///</summary>
+        ///<param name="treeObj" type="JsonObject">json数据</param>
+        ///<param name="setting" type="JsonObject">json数据</param>
+        ///<param name="beforeBindFun" type="JsonObject">json数据</param>\
+        $.ajax({
+            url: url,
+            type: "get",
+            data: null,
+            error: function (msg) {
+                BUI.Message.Alert('数据加载失败', 'error');
+            },
+            success: function (data) {
+                if (beforeBindFun != null) {
+                    beforeBindFun();
+                }
+
+                $.fn.zTree.init(treeObj, setting, data);
+            }
+        });
+    }
+    function HideMenu() {
+        ///<summary>
+        /// 隐藏菜单
+        ///</summary>
+        $("#treeContent").fadeOut("fast");
+        $("body").unbind("mousedown", OnBodyDown);
+    }
+    function OnBodyDown(event) {
+        ///<summary>
+        /// 当在页面中点击鼠标时 隐藏下拉列表
+        ///</summary>
+        if (!(event.target.id == "treeContent" || $(event.target).parents("#treeContent").length > 0)) {
+            HideMenu();
+        }
+    }
+</script>
+@{Html.BeginForm("Edit", "Manager", FormMethod.Post, new { id = "form-EditManager" });}
+@Html.Hidden("Id", Model.Id)
+@Html.Hidden("MemberOf_Id", ViewData["DepartmentIds"])
+@Html.Hidden("Roles_Id", ViewData["RoleIds"])
+@Html.Hidden("CurrentSelect")
+<div class="kong"></div>
+<div id="treeContent" class="treeContent" style="display: none; position: absolute;">
+    <ul id="selectTree" class="ztree" style="margin-top: 0; border: 1px solid #617775; background: #f0f6e4; width: 195px;"></ul>
+</div>
+<table class="table1" width="100%" cellpadding="0" cellspacing="1" border="0">
+        <tr class="bkong">
+        <td class="textr wenben-right">管理员类型：</td>
+        <td colspan="3">
+            <label>@Html.RadioButton("Kind", ManagerKinds.Employee, Model.Kind == ManagerKinds.Employee, new { @id = "Kind1" }) @ManagerKinds.Employee.GetDescription()</label>
+            <label>@Html.RadioButton("Kind", ManagerKinds.SystemManager, Model.Kind == ManagerKinds.SystemManager, new { @id = "Kind5" }) @ManagerKinds.SystemManager.GetDescription()</label>
+        </td>
+    </tr>
+    <tr class="tablehui">
+        <td class="textr wenben-right">部门：</td>
+        <td>
+            <label>
+                @Html.TextBox("MemberOf.Name", ViewData["DepartmentNames"])
+            </label>
+        </td>
+        <td class="textr wenben-right">角色：</td>
+        <td>
+            <label>
+                @Html.TextBox("Roles.Name", ViewData["RoleNames"])
+            </label>
+        </td>
+    </tr>
+    <tr class="bkong">
+        <td class="textr wenben-right">账号：</td>
+        <td>
+            @Html.TextBoxFor(m => m.UserName, new { @class = "required", @readonly = "readonly" })
+        </td>
+        <td class="textr wenben-right">姓名：</td>
+        <td>@Html.TextBoxFor(m => m.Name, new { @class = "required" })</td>
+    </tr>
+    <tr class="tablehui">
+        <td class="textr wenben-right">性别：</td>
+        <td>
+            <label>@Html.RadioButton("Sex", Sex.Male, Model.Sex == Sex.Male) @Sex.Male.GetDescription() </label>
+            <label>@Html.RadioButton("Sex", Sex.Female, Model.Sex == Sex.Female) @Sex.Female.GetDescription() </label>
+        </td>
+        <td class="textr wenben-right">Email：</td>
+        <td>@Html.TextBoxFor(m => m.Email)</td>
+    </tr>
+    <tr class="tablehui">
+        <td class="textr wenben-right">电话号码：</td>
+        <td>@Html.TextBoxFor(m => m.Phone, new { @class = "required" })</td>
+        <td class="textr wenben-right"></td>
+        <td></td>
+    </tr>
+</table>
+<div class="kong"></div>
+@{Html.EndForm();}

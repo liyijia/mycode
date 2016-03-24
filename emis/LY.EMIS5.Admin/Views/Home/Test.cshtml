@@ -1,0 +1,69 @@
+﻿
+<script type="text/javascript">
+    $(function(){
+        $('#managers').select2().on("select2-selecting", function (e) { alert($('#managers option[value="'+e.val+'"]').text()); }).on("select2-removed", function (e) { alert(e.val); });
+    })
+
+</script>
+
+<form method="post" enctype="multipart/form-data">
+    <select name="managers" id="managers" style="width: 90%;" multiple="multiple">
+        <option value="1">admin</option>
+        <option value="2">唐平</option>
+        <option value="3">石元富</option>
+        <option value="4">李丽娟</option>
+        <option value="5">蒋恒</option>
+        <option value="6">杨建敏</option>
+        <option value="7">唐永洁</option>
+        <option value="8">何丹</option>
+        <option value="9">杨宁宁</option>
+        <option value="10">王元元</option>
+        <option value="11">李琴</option>
+        <option value="12">查桂芳</option>
+        <option value="13">张凤莉</option>
+        <option value="14">黄红</option>
+        <option value="15">刘玲</option>
+        <option value="16">王晓梅</option>
+        <option value="17">周漾</option>
+        <option value="18">余文静</option>
+        <option value="19">姚茜茜</option>
+        <option value="20">蒋和芳</option>
+        <option value="21">兰燕</option>
+        <option value="22">喻永清</option>
+        <option value="23">罗芳</option>
+        <option value="24">方静</option>
+        <option value="25">魏玉莲</option>
+        <option value="26">李艳</option>
+        <option value="27">陈燕红</option>
+        <option value="28">彭守燕</option>
+        <option value="29">吴建鸿</option>
+        <option value="30">乔美</option>
+        <option value="31">侯娟</option>
+        <option value="32">赖虹玲</option>
+        <option value="33">丁春花</option>
+        <option value="34">卢晓峰</option>
+        <option value="35">周云</option>
+        <option value="36">杨帆</option>
+        <option value="37">李彬</option>
+        <option value="38">冷远华</option>
+        <option value="39">文婷</option>
+        <option value="40">张芹</option>
+        <option value="41">刘信</option>
+        <option value="42">罗清平</option>
+        <option value="43">郑李兵</option>
+        <option value="44">聂鹏</option>
+        <option value="45">李婕</option>
+        <option value="46">冷攀</option>
+        <option value="47">齐江会</option>
+        <option value="48">杨阳</option>
+        <option value="49">李义佳</option>
+        <option value="50">薛娅君</option>
+        <option value="52">刘健</option>
+        <option value="53">薛沿祥</option>
+        <option value="54">洪凡</option>
+        <option value="56">柏小龙</option>
+        <option value="57">田时梅</option>
+        <option value="59">杨宁宁</option>
+        <option value="63">黄源</option>
+    </select>
+</form>

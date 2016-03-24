@@ -1,0 +1,1642 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Baidu.SDK.Push</name>
+    </assembly>
+    <members>
+        <member name="T:Baidu.SDK.Push.Dto.AppIOSCertInitRequest">
+            <summary>
+            init_app_ioscert 请求参数
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.ClientRequestBase">
+            <summary>
+            请求基础信息
+            所有REST请求共用
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.ClientRequestBase.GeneratePostData(System.String,System.String)">
+            <summary>
+            生成待POST的数据
+            </summary>
+            <param name="apiKey"></param>
+            <param name="secretKey"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.ClientRequestBase.ServiceUrl">
+            <summary>
+            ServiceUrl
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.ClientRequestBase.Method">
+            <summary>
+            方法名，必须存在
+                如：push_msg
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.ClientRequestBase.Timestamp">
+            <summary>
+            用户发起请求时的unix时间戳。本次请求签名的有效时间为该时间戳+10分钟。
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.ClientRequestBase.Expires">
+            <summary>
+            用户指定本次请求签名的失效时间。格式为unix时间戳形式。
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.ClientRequestBase.Version">
+            <summary>
+            API版本号，默认使用最高版本。
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.AppIOSCertInitRequest.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            init_app_ioscert 请求参数
+            </summary>
+            <param name="name"></param>
+            <param name="description"></param>
+            <param name="releaseCert"></param>
+            <param name="devCert"></param>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertInitRequest.ServiceUrl">
+            <summary>
+            如果查询的绑定关系与channel_id无关，则{channel_id}部分直接填写channel即可
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertInitRequest.ChannelId">
+            <summary>
+            查询的绑定关系相关channel_id
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertInitRequest.Name">
+            <summary>
+            证书名称，最长128字节
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertInitRequest.Description">
+            <summary>
+            证书描述，最长256字节
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertInitRequest.ReleaseCert">
+            <summary>
+            正式版证书内容
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertInitRequest.DevCert">
+            <summary>
+            开发版证书内容
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.AppIOSCertInitResponse">
+            <summary>
+            init_app_ioscert 请求响应
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.ClientResponseBase">
+            <summary>
+            响应基础信息
+            所有REST请求共用
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.ClientResponseBase.RequestId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.ClientResponseBase.ErrorCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.ClientResponseBase.ErrorMsg">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.BindStatus">
+            <summary>
+            绑定状态
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.BindStatus.Bind">
+            <summary>
+            绑定在线
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.BindStatus.UnBind">
+            <summary>
+            绑定离线
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.BindVerifyRequest">
+            <summary>
+            verify_bind 请求参数
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.BindVerifyRequest.#ctor(System.String)">
+            <summary>
+            verify_bind 请求参数
+            </summary>
+            <param name="userId"></param>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.BindVerifyRequest.ServiceUrl">
+            <summary>
+            如果查询的绑定关系与channel_id无关，则{channel_id}部分直接填写channel即可
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.BindVerifyRequest.ChannelId">
+            <summary>
+            查询的绑定关系相关channel_id
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.BindVerifyRequest.UserId">
+            <summary>
+            用户标识，在Android里，channel_id + userid指定某一个特定client。不超过256字节，如果存在此字段，则只推送给此用户
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.BindVerifyRequest.DeviceType">
+            <summary>
+            设备类型，取值范围为：1～5
+            云推送支持多种设备，各种设备的类型编号如下：
+            1：浏览器设备；
+            2：PC设备；
+            3：Andriod设备；
+            4：iOS设备；
+            5：Windows Phone设备；
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.BindVerifyResponse">
+            <summary>
+            verify_bind 请求响应
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.DeployStatus">
+            <summary>
+            部署状态。指定应用当前的部署状态
+            特别提醒：该功能只支持ios设备类型。 
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.DeployStatus.Development">
+            <summary>
+            开发状态
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.DeployStatus.Production">
+            <summary>
+            生产状态 
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.DeviceTypeQueryRequest">
+            <summary>
+            query_device_type 请求参数
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.DeviceTypeQueryRequest.#ctor(System.UInt64)">
+            <summary>
+            query_device_type 请求参数
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.DeviceTypeQueryRequest.ServiceUrl">
+            <summary>
+            如果查询的绑定关系与channel_id无关，则{channel_id}部分直接填写channel即可
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.DeviceTypeQueryRequest.ChannelId">
+            <summary>
+            查询的绑定关系相关channel_id
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.DeviceTypes">
+            <summary>
+            设备类型
+            如果存在此字段，则向指定的设备类型推送消息。 默认为android设备类型
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.DeviceTypes.Browser">
+            <summary>
+            浏览器设备
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.DeviceTypes.PC">
+            <summary>
+            PC设备
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.DeviceTypes.Android">
+            <summary>
+            Andriod设备
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.DeviceTypes.IOS">
+            <summary>
+            iOS设备
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.DeviceTypes.WindowsPhone">
+            <summary>
+            Windows Phone设备
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.MessageDeleteResponse">
+            <summary>
+            delete_msg 请求响应
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageDeleteResponse.ResponseParams">
+            <summary>
+            delete_msg 请求响应明细
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.MessageDeleteResponseParam">
+            <summary>
+            delete_msg 请求响应明细
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageDeleteResponseParam.SuccessAmount">
+            <summary>
+            成功删除条数
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageDeleteResponseParam.Messages">
+            <summary>
+            删除消息列表
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.MessageFetchResponseParamDetail">
+            <summary>
+            删除消息详细信息
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchResponseParamDetail.MessageID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchResponseParamDetail.Result">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.MessageFetchRequest">
+            <summary>
+            fetch_msg 请求参数
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.MessageFetchRequest.#ctor(System.String)">
+            <summary>
+            fetch_msg 请求参数
+            </summary>
+            <param name="userId"></param>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchRequest.ServiceUrl">
+            <summary>
+            如果查询的绑定关系与channel_id无关，则{channel_id}部分直接填写channel即可
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchRequest.ChannelId">
+            <summary>
+            查询的绑定关系相关channel_id
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchRequest.UserId">
+            <summary>
+            用户标识，不超过256字节
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchRequest.Start">
+            <summary>
+            查询页码，默认为0。 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchRequest.Limit">
+            <summary>
+            一次查询条数，默认为10
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.MessageFetchResponse">
+            <summary>
+            fetch_msg 请求响应 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchResponse.ResponseParams">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.MessageFetchResponseParam">
+            <summary>
+            fetch_msg 请求响应明细
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchResponseParam.TotalNumber">
+            <summary>
+            系统返回的消息个数
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchResponseParam.Messages">
+            <summary>
+            消息列表
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.MessageFetchResponseMessage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchResponseMessage.ChannelID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchResponseMessage.MessageID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchResponseMessage.MessageKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchResponseMessage.Message">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchResponseMessage.MssageLength">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchResponseMessage.MessageType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageFetchResponseMessage.MessageExpires">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.MessagePushBroadcastRequest">
+            <summary>
+            push_msg(Broadcast) 请求参数
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.MessagePushBroadcastRequest.#ctor(System.Nullable{Baidu.SDK.Push.Dto.DeviceTypes},System.Nullable{Baidu.SDK.Push.Dto.MessageTypes},System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{System.String})">
+            <summary>
+            push_msg(Broadcast) 请求参数
+            </summary>
+            <param name="deviceType"></param>
+            <param name="messageType"></param>
+            <param name="messages"></param>
+            <param name="msgKeyses"></param>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushBroadcastRequest.ServiceUrl">
+            <summary>
+            ServiceUrl
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushBroadcastRequest.PushType">
+            <summary>
+            推送类型，取值范围为：1～3
+            1：单个人，必须指定user_id 和 channel_id （指定用户的指定设备）或者user_id（指定用户的所有设备）
+            2：一群人，必须指定 tag
+            3：所有人，无需指定tag、user_id、channel_id 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushBroadcastRequest.DeviceType">
+            <summary>
+            设备类型，取值范围为：1～5
+            云推送支持多种设备，各种设备的类型编号如下：
+            1：浏览器设备；
+            2：PC设备；
+            3：Andriod设备；
+            4：iOS设备；
+            5：Windows Phone设备；
+            如果存在此字段，则向指定的设备类型推送消息。 默认为android设备类型。 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushBroadcastRequest.MessageType">
+            <summary>
+            消息类型
+            0：消息（透传给应用的消息体）
+            1：通知（对应设备上的消息通知）
+            默认值为0。 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushBroadcastRequest.MessageList">
+            <summary>
+            指定消息内容，单个消息为单独字符串。如果有二进制的消息内容，请先做 BASE64 的编码。
+            当message_type为1 （通知类型），请按以下格式指定消息内容。
+            注意：
+                当description与alert同时存在时，ios推送以alert内容作为通知内容
+                当custom_content与 ios的自定义字段"key":"value"同时存在时，ios推送的自定义字段内容会将以上两个内容合并，但推送内容整体长度不能大于256B，否则有被截断的风险。
+                此格式兼容Android和ios原生通知格式的推送。 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushBroadcastRequest.Messages">
+            <summary>
+            消息内容
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushBroadcastRequest.MessageKeyList">
+            <summary>
+            消息标识。
+            指定消息标识，必须和messages一一对应。相同消息标识的消息会自动覆盖。特别提醒：该功能只支持android、browser、pc三种设备类型。 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushBroadcastRequest.MessageKeys">
+            <summary>
+            消息标识
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushBroadcastRequest.MessageExpires">
+            <summary>
+            指定消息的过期时间，默认为86400秒。必须和messages一一对应。
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushBroadcastRequest.DeployStatus">
+            <summary>
+            部署状态。指定应用当前的部署状态，可取值：
+            1：开发状态
+            2：生产状态
+            若不指定，则默认设置为生产状态。特别提醒：该功能只支持ios设备类型。 
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.MessagePushTagRequest">
+            <summary>
+            push_msg(Tag) 请求参数
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.MessagePushTagRequest.#ctor(System.Nullable{Baidu.SDK.Push.Dto.DeviceTypes},System.String,System.Nullable{Baidu.SDK.Push.Dto.MessageTypes},System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{System.String})">
+            <summary>
+            push_msg(Tag) 请求参数
+            Push Message to special TAG
+            </summary>
+            <param name="deviceType"></param>
+            <param name="tag"></param>
+            <param name="messageType"></param>
+            <param name="messages"></param>
+            <param name="msgKeyses"></param>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushTagRequest.ServiceUrl">
+            <summary>
+            ServiceUrl
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushTagRequest.PushType">
+            <summary>
+            推送类型，取值范围为：1～3
+            1：单个人，必须指定user_id 和 channel_id （指定用户的指定设备）或者user_id（指定用户的所有设备）
+            2：一群人，必须指定 tag
+            3：所有人，无需指定tag、user_id、channel_id 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushTagRequest.DeviceType">
+            <summary>
+            设备类型，取值范围为：1～5
+            云推送支持多种设备，各种设备的类型编号如下：
+            1：浏览器设备；
+            2：PC设备；
+            3：Andriod设备；
+            4：iOS设备；
+            5：Windows Phone设备；
+            如果存在此字段，则向指定的设备类型推送消息。 默认为android设备类型。 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushTagRequest.Tag">
+            <summary>
+            标签名称，不超过128字节
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushTagRequest.MessageType">
+            <summary>
+            消息类型
+            0：消息（透传给应用的消息体）
+            1：通知（对应设备上的消息通知）
+            默认值为0。 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushTagRequest.MessageList">
+            <summary>
+            指定消息内容，单个消息为单独字符串。如果有二进制的消息内容，请先做 BASE64 的编码。
+            当message_type为1 （通知类型），请按以下格式指定消息内容。
+            注意：
+                当description与alert同时存在时，ios推送以alert内容作为通知内容
+                当custom_content与 ios的自定义字段"key":"value"同时存在时，ios推送的自定义字段内容会将以上两个内容合并，但推送内容整体长度不能大于256B，否则有被截断的风险。
+                此格式兼容Android和ios原生通知格式的推送。 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushTagRequest.Messages">
+            <summary>
+            消息内容
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushTagRequest.MessageKeyList">
+            <summary>
+            消息标识。
+            指定消息标识，必须和messages一一对应。相同消息标识的消息会自动覆盖。特别提醒：该功能只支持android、browser、pc三种设备类型。 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushTagRequest.MessageKeys">
+            <summary>
+            消息标识
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushTagRequest.MessageExpires">
+            <summary>
+            指定消息的过期时间，默认为86400秒。必须和messages一一对应。
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushTagRequest.DeployStatus">
+            <summary>
+            部署状态。指定应用当前的部署状态，可取值：
+            1：开发状态
+            2：生产状态
+            若不指定，则默认设置为生产状态。特别提醒：该功能只支持ios设备类型。 
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.MessagePushUnicastRequest">
+            <summary>
+            push_msg(Unicast) 请求参数
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.MessagePushUnicastRequest.#ctor(System.Nullable{Baidu.SDK.Push.Dto.DeviceTypes},System.UInt64,System.String,System.Nullable{Baidu.SDK.Push.Dto.MessageTypes},System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{System.String})">
+            <summary>
+            push_msg(Unicast) 请求参数
+            Push to Special user by channelId and UserId
+            </summary>
+            <param name="deviceType"></param>
+            <param name="channelId"></param>
+            <param name="userId"></param>
+            <param name="messageType"></param>
+            <param name="messages"></param>
+            <param name="msgKeyses"></param>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushUnicastRequest.ServiceUrl">
+            <summary>
+            ServiceUrl
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushUnicastRequest.PushType">
+            <summary>
+            推送类型，取值范围为：1～3
+            1：单个人，必须指定user_id 和 channel_id （指定用户的指定设备）或者user_id（指定用户的所有设备）
+            2：一群人，必须指定 tag
+            3：所有人，无需指定tag、user_id、channel_id 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushUnicastRequest.DeviceType">
+            <summary>
+            设备类型，取值范围为：1～5
+            云推送支持多种设备，各种设备的类型编号如下：
+            1：浏览器设备；
+            2：PC设备；
+            3：Andriod设备；
+            4：iOS设备；
+            5：Windows Phone设备；
+            如果存在此字段，则向指定的设备类型推送消息。 默认为android设备类型。 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushUnicastRequest.ChannelId">
+            <summary>
+            通道标识 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushUnicastRequest.UserId">
+            <summary>
+            用户标识，在Android里，channel_id + userid指定某一个特定client。不超过256字节，如果存在此字段，则只推送给此用户
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushUnicastRequest.MessageType">
+            <summary>
+            消息类型
+            0：消息（透传给应用的消息体）
+            1：通知（对应设备上的消息通知）
+            默认值为0。 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushUnicastRequest.MessageList">
+            <summary>
+            指定消息内容，单个消息为单独字符串。如果有二进制的消息内容，请先做 BASE64 的编码。
+            当message_type为1 （通知类型），请按以下格式指定消息内容。
+            注意：
+                当description与alert同时存在时，ios推送以alert内容作为通知内容
+                当custom_content与 ios的自定义字段"key":"value"同时存在时，ios推送的自定义字段内容会将以上两个内容合并，但推送内容整体长度不能大于256B，否则有被截断的风险。
+                此格式兼容Android和ios原生通知格式的推送。 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushUnicastRequest.Messages">
+            <summary>
+            消息内容
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushUnicastRequest.MessageKeyList">
+            <summary>
+            消息标识。
+            指定消息标识，必须和messages一一对应。相同消息标识的消息会自动覆盖。特别提醒：该功能只支持android、browser、pc三种设备类型。 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushUnicastRequest.MessageKeys">
+            <summary>
+            消息标识
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushUnicastRequest.MessageExpires">
+            <summary>
+            指定消息的过期时间，默认为86400秒。必须和messages一一对应。
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushUnicastRequest.DeployStatus">
+            <summary>
+            部署状态。指定应用当前的部署状态，可取值：
+            1：开发状态
+            2：生产状态
+            若不指定，则默认设置为生产状态。特别提醒：该功能只支持ios设备类型。 
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.BindListQueryRequest">
+            <summary>
+            query_bindlist 请求参数
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.BindListQueryRequest.#ctor">
+            <summary>
+            query_bindlist 请求参数
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.BindListQueryRequest.ServiceUrl">
+            <summary>
+            如果查询的绑定关系与channel_id无关，则{channel_id}部分直接填写channel即可
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.BindListQueryRequest.ChannelId">
+            <summary>
+            查询的绑定关系相关channel_id
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.BindListQueryRequest.UserId">
+            <summary>
+            用户标识。不超过256字节
+            如果存在此字段，则只返回与该用户相关的绑定关系 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.BindListQueryRequest.DeviceType">
+            <summary>
+            百度Channel支持多种设备
+            如果存在此字段，则只返回该设备类型的绑定关系。 默认不区分设备类型
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.BindListQueryRequest.Start">
+            <summary>
+            查询页码，默认为0。 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.BindListQueryRequest.Limit">
+            <summary>
+            一次查询条数，默认为10
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.RequestKeyAttribute">
+            <summary>
+            对服务端请求的属性，指定百度推送参数名称以及是否必需
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.RequestKeyAttribute.#ctor(System.String,System.Boolean)">
+            <summary>
+            设置参数名称和是否必需
+            </summary>
+            <param name="keyName">参数名称</param>
+            <param name="requied">是否必需</param>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.RequestKeyAttribute.KeyName">
+            <summary>
+            百度 REST API要求的参数名称
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.RequestKeyAttribute.IsReqired">
+            <summary>
+            是否必需
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.RequestKeyConverter">
+            <summary>
+            自定义类型转换为提交百度的String数据
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.RequestKeyConverter.ConvertDataToString(System.Object)">
+            <summary>
+            数据转换
+            </summary>
+            <param name="value">自定义类型数据，包括需转换的DateTime</param>
+            <returns></returns>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.TagInfo">
+            <summary>
+            Tag 信息
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.TagInfo.Tid">
+            <summary>
+            标签ID
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.TagInfo.Name">
+            <summary>
+            标签名称
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.TagInfo.Info">
+            <summary>
+            标签信息
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.TagInfo.Type">
+            <summary>
+            标签类型
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.TagInfo.CreateTime">
+            <summary>
+            标签创建时间
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.TagSetRequest">
+            <summary>
+            set_tag 请求参数
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.TagSetRequest.#ctor(System.String)">
+            <summary>
+            set_tag 请求参数
+            </summary>
+            <param name="tag"></param>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.TagSetRequest.ServiceUrl">
+            <summary>
+            ServiceUrl
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.TagSetRequest.Tag">
+            <summary>
+            标签名称，不超过128字节
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.TagSetRequest.UserId">
+            <summary>
+            用户标识，最长256字节
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.TagSetResponse">
+            <summary>
+            set_tag 响应
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.TagFetchRequest">
+            <summary>
+            fetch_tag 请求参数
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.TagFetchRequest.#ctor">
+            <summary>
+            fetch_tag 请求参数
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.TagFetchRequest.ServiceUrl">
+            <summary>
+            ServiceUrl
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.TagFetchRequest.Name">
+            <summary>
+            标签名称，不超过128字节
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.TagFetchRequest.Start">
+            <summary>
+            查询页码，默认为0。 
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.TagFetchRequest.Limit">
+            <summary>
+            一次查询条数，默认为10
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.TagFetchResponse">
+            <summary>
+            fetch_tag 请求响应
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.TagFetchResponse.ResponseParams">
+            <summary>
+            fetch_tag 请求响应
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.FetchTagResponseParam">
+            <summary>
+            fetch_tag 请求响应明细
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.FetchTagResponseParam.TotalNumber">
+            <summary>
+            系统返回的消息总数
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.FetchTagResponseParam.Amount">
+            <summary>
+            本次查询绑定数量
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.FetchTagResponseParam.Tags">
+            <summary>
+            标签数组
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.TagDeleteRequest">
+            <summary>
+            delete_tag 请求参数
+            </summary>
+            <remarks>
+            服务端删除用户标签。
+            特别地，当user_id被提交时，服务端将只会完成解除该用户与tag绑定关系的操作。
+            注意：该操作不可恢复，请谨慎使用。
+            </remarks>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.TagDeleteRequest.#ctor(System.String)">
+            <summary>
+            delete_tag 请求参数
+            </summary>
+            <param name="tag"></param>
+            <remarks>
+            服务端删除用户标签。
+            特别地，当user_id被提交时，服务端将只会完成解除该用户与tag绑定关系的操作。
+            注意：该操作不可恢复，请谨慎使用。
+            </remarks>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.TagDeleteRequest.ServiceUrl">
+            <summary>
+            ServiceUrl
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.TagDeleteRequest.Tag">
+            <summary>
+            标签名称，不超过128字节
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.TagDeleteRequest.UserId">
+            <summary>
+            用户标识，最长256字节
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.TagDeleteResponse">
+            <summary>
+            delete_tag 请求响应
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.BindListQueryResponse">
+            <summary>
+            query_bindlist 请求响应
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.BindListQueryResponse.ResponseParams">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.QueryBindListResponseParam">
+            <summary>
+            query_bindlist 绑定
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.QueryBindListResponseParam.TotalNumber">
+            <summary>
+            绑定数据总数
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.QueryBindListResponseParam.Amount">
+            <summary>
+            本次查询绑定数量
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.QueryBindListResponseParam.Binds">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.QueryBindListResponseBindInfo">
+            <summary>
+            query_bindlist 绑定明细
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.QueryBindListResponseBindInfo.ChannelId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.QueryBindListResponseBindInfo.UserId">
+            <summary>
+            channel绑定的user标识
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.QueryBindListResponseBindInfo.DeviceId">
+            <summary>
+            channel绑定的设备编号
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.QueryBindListResponseBindInfo.DeviceType">
+            <summary>
+            channel绑定的设备类型
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.QueryBindListResponseBindInfo.DeviceName">
+            <summary>
+            channel绑定的设备描述
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.QueryBindListResponseBindInfo.BindName">
+            <summary>
+            channel绑定名称
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.QueryBindListResponseBindInfo.BindTime">
+            <summary>
+            channel绑定时间
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.QueryBindListResponseBindInfo.Info">
+            <summary>
+            channel绑定附加信息
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.QueryBindListResponseBindInfo.BindStatus">
+            <summary>
+            绑定状态，0：绑定在线； 1：绑定离线
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.QueryBindListResponseBindInfo.OnlineStatus">
+            <summary>
+            应用在线状态，on:在线；off:离线
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.QueryBindListResponseBindInfo.OnlineTimestamp">
+            <summary>
+            连接创建时间，仅在在线状态时返回
+            Unix时间格式
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.QueryBindListResponseBindInfo.OnlineExpires">
+            <summary>
+            连接超时时，仅在在线状态时返回
+            Unix时间格式
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.AppIOSCertUpdateRequest">
+            <summary>
+             update_app_ioscert 请求参数
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.AppIOSCertUpdateRequest.#ctor">
+            <summary>
+            update_app_ioscert 请求参数
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertUpdateRequest.ServiceUrl">
+            <summary>
+            如果查询的绑定关系与channel_id无关，则{channel_id}部分直接填写channel即可
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertUpdateRequest.ChannelId">
+            <summary>
+            查询的绑定关系相关channel_id
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertUpdateRequest.Name">
+            <summary>
+            证书名称，最长128字节
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertUpdateRequest.Description">
+            <summary>
+            证书描述，最长256字节
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertUpdateRequest.ReleaseCert">
+            <summary>
+            正式版证书内容
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertUpdateRequest.DevCert">
+            <summary>
+            开发版证书内容
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.AppIOSCertUpdateResponse">
+            <summary>
+            update_app_ioscert 请求响应
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.AppIOSCertDeleteRequest">
+            <summary>
+            delete_app_ioscert 请求参数
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.AppIOSCertDeleteRequest.#ctor">
+            <summary>
+            delete_app_ioscert 请求参数
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertDeleteRequest.ServiceUrl">
+            <summary>
+            如果查询的绑定关系与channel_id无关，则{channel_id}部分直接填写channel即可
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertDeleteRequest.ChannelId">
+            <summary>
+            查询的绑定关系相关channel_id
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.AppIOSCertDeleteResponse">
+            <summary>
+            delete_app_ioscert 请求响应
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.AppIOSCertQueryRequest">
+            <summary>
+            query_app_ioscert 请求参数
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.AppIOSCertQueryRequest.#ctor">
+            <summary>
+            query_app_ioscert 请求参数
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertQueryRequest.ServiceUrl">
+            <summary>
+            如果查询的绑定关系与channel_id无关，则{channel_id}部分直接填写channel即可
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertQueryRequest.ChannelId">
+            <summary>
+            查询的绑定关系相关channel_id
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.AppIOSCertQueryResponse">
+            <summary>
+            query_app_ioscert 请求响应
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertQueryResponse.ResponseParams">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.AppIOSCertQueryResponseParam">
+            <summary>
+            query_app_ioscert 证书明细
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertQueryResponseParam.Name">
+            <summary>
+            证书名称，最长128字节
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertQueryResponseParam.Description">
+            <summary>
+            证书描述，最长256字节
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertQueryResponseParam.ReleaseCert">
+            <summary>
+            正式版证书内容
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.AppIOSCertQueryResponseParam.DevCert">
+            <summary>
+            开发版证书内容
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.MessageCountFetchRequest">
+            <summary>
+            fetch_msgcount 请求参数
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.MessageCountFetchRequest.#ctor(System.String)">
+            <summary>
+            设置 fetch_msgcount 请求参数
+            </summary>
+            <param name="userId"></param>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageCountFetchRequest.ServiceUrl">
+            <summary>
+            如果查询的绑定关系与channel_id无关，则{channel_id}部分直接填写channel即可
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageCountFetchRequest.ChannelId">
+            <summary>
+            查询的绑定关系相关channel_id
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageCountFetchRequest.UserId">
+            <summary>
+            用户标识。不超过256字节
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.MessageCountFetchResponse">
+            <summary>
+            fetch_msgcount 请求响应
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageCountFetchResponse.ResponseParams">
+            <summary>
+            fetch_msgcount 请求响应明细
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.MessageCountFetchResponseParam">
+            <summary>
+            fetch_msgcount 请求响应明细
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageCountFetchResponseParam.TotalNumber">
+            <summary>
+            系统返回的消息总数
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.MessageDeleteRequest">
+            <summary>
+            delete_msg 请求参数
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.MessageDeleteRequest.#ctor(System.String,System.Collections.Generic.IList{System.String})">
+            <summary>
+            delete_msg 请求参数
+            </summary>
+            <param name="userId"></param>
+            <param name="messageIds"></param>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageDeleteRequest.ServiceUrl">
+            <summary>
+            如果查询的绑定关系与channel_id无关，则{channel_id}部分直接填写channel即可
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageDeleteRequest.ChannelId">
+            <summary>
+            查询的绑定关系相关channel_id
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageDeleteRequest.UserId">
+            <summary>
+            用户标识。不超过256字节
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessageDeleteRequest.MessageIds">
+            <summary>
+            删除的消息id列表，由一个或多个msg_id组成，多个用json数组表示。如：123 或 [123, 456]
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.UserTagQueryRequest">
+            <summary>
+            query_user_tags 请求参数
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Dto.UserTagQueryRequest.#ctor(System.String)">
+            <summary>
+            query_user_tags 请求参数
+            </summary>
+            <param name="userId"></param>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.UserTagQueryRequest.ServiceUrl">
+            <summary>
+            ServiceUrl
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.UserTagQueryRequest.UserId">
+            <summary>
+            用户标识，最长256字节
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.UserTagQueryResponse">
+            <summary>
+            query_user_tags 响应
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.UserTagQueryResponse.ResponseParams">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.UserTagQueryResponseParam">
+            <summary>
+            query_user_tags 响应明细
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.UserTagQueryResponseParam.TagNumber">
+            <summary>
+            Tag总数
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.UserTagQueryResponseParam.Tags">
+            <summary>
+            Tag列表
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.DeviceTypeQueryResponse">
+            <summary>
+            query_user_tags 响应
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.DeviceTypeQueryResponse.ResponseParams">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.DeviceTypeQueryResponseParam">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.DeviceTypeQueryResponseParam.DeviceType">
+            <summary>
+            设备类型，取值范围为：1～5
+            云推送支持多种设备，各种设备的类型编号如下：
+            1：浏览器设备；
+            2：PC设备；
+            3：Andriod设备；
+            4：iOS设备；
+            5：Windows Phone设备；
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.MessageTypes">
+            <summary>
+            推送消息类型 
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.MessageTypes.Message">
+            <summary>
+            消息（透传给应用的消息体） 
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.MessageTypes.Notification">
+            <summary>
+            通知（对应设备上的消息通知） 
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Utility.ABCDStruct">
+            <summary>
+            Simple struct for the (a,b,c,d) which is used to compute the mesage digest.    
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Utility.MD5">
+            <summary>
+            Raw implementation of the MD5 hash algorithm rom RFC 1321.
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.Message">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Client">
+            <summary>
+            Baidu Push Client
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="apiKey"></param>
+            <param name="secretkey"></param>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.QueryBindList(Baidu.SDK.Push.Dto.BindListQueryRequest)">
+            <summary>
+            Query Binds
+            </summary>
+            <param name="request">Query Binds request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.PushMessageBroadcast(Baidu.SDK.Push.Dto.MessagePushBroadcastRequest)">
+            <summary>
+            Push Message Broadcast (to all users)
+            </summary>
+            <param name="request">Push request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.PushMessageTag(Baidu.SDK.Push.Dto.MessagePushTagRequest)">
+            <summary>
+            Push Message to Tag 
+            </summary>
+            <param name="request">Push request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.PushMessageUnicast(Baidu.SDK.Push.Dto.MessagePushUnicastRequest)">
+            <summary>
+            Push Message to unicast (special user)
+            </summary>
+            <param name="request">Push request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.InitAppIOSCert(Baidu.SDK.Push.Dto.AppIOSCertInitRequest)">
+            <summary>
+            Init App IOS Cert
+            </summary>
+            <param name="request">Push request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.UpdateAppIOSCert(Baidu.SDK.Push.Dto.AppIOSCertUpdateRequest)">
+            <summary>
+            Update App IOS Cert
+            </summary>
+            <param name="request">Push request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.DeleteAppIOSCert(Baidu.SDK.Push.Dto.AppIOSCertDeleteRequest)">
+            <summary>
+            Delete App IOS Cert
+            </summary>
+            <param name="request">Push request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.QueryAppIOSCert(Baidu.SDK.Push.Dto.AppIOSCertQueryRequest)">
+            <summary>
+            Query App IOS Cert
+            </summary>
+            <param name="request">Push request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.VerifyBind(Baidu.SDK.Push.Dto.BindVerifyRequest)">
+            <summary>
+            verify_bind
+            </summary>
+            <param name="request">set tag request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.FetchMessage(Baidu.SDK.Push.Dto.MessageFetchRequest)">
+            <summary>
+             fetch_msg
+            </summary>
+            <param name="request">set tag request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.FetchMessageCount(Baidu.SDK.Push.Dto.MessageCountFetchRequest)">
+            <summary>
+             fetch_msgcount
+            </summary>
+            <param name="request">set tag request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.DeleteMessage(Baidu.SDK.Push.Dto.MessageDeleteRequest)">
+            <summary>
+            delete_msg
+            </summary>
+            <param name="request">set tag request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.SetTag(Baidu.SDK.Push.Dto.TagSetRequest)">
+            <summary>
+            set_tag
+            </summary>
+            <param name="request">set tag request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.FetchTag(Baidu.SDK.Push.Dto.TagFetchRequest)">
+            <summary>
+            fetch_tag
+            </summary>
+            <param name="request">set tag request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.DeleteTag(Baidu.SDK.Push.Dto.TagDeleteRequest)">
+            <summary>
+            delete_tag
+            </summary>
+            <param name="request">set tag request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.QueryUserTags(Baidu.SDK.Push.Dto.UserTagQueryRequest)">
+            <summary>
+            query_user_tags
+            </summary>
+            <param name="request">set tag request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.QueryDeviceType(Baidu.SDK.Push.Dto.DeviceTypeQueryRequest)">
+            <summary>
+            query_device_type
+            </summary>
+            <param name="request">set tag request parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Client.PostData(System.String,System.String)">
+            <summary>
+            POST data to server
+            </summary>
+            <param name="url">Server url</param>
+            <param name="rquest">Push request data</param>
+            <returns></returns>
+        </member>
+        <member name="P:Baidu.SDK.Push.Client.Apikey">
+            <summary>
+                访问令牌，明文AK，可从此值获得App的信息，配合sign中的sk做合法性身份认证
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Client.SecretKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Client.RequestTimeOut">
+            <summary>
+            Default: 10000ms
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.Methods">
+            <summary>
+            推送服务的方法名
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.Methods.query_bindlist">
+            <summary>
+            查询设备、应用、用户与百度Channel的绑定关系
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.Methods.push_msg">
+            <summary>
+            推送消息，该接口可用于推送单个人、一群人、所有人以及固定设备的使用场景。
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.Methods.init_app_ioscert">
+            <summary>
+            上传iOS apns证书，使channel系统支持apns服务。
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.Methods.update_app_ioscert">
+            <summary>
+            更新iOS设备的推送证书相关内容。
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.Methods.delete_app_ioscert">
+            <summary>
+            删除iOS设备的推送证书，使得App server不再支持apns服务。
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.Methods.query_app_ioscert">
+            <summary>
+            查询该App server对应的iOS证书。
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.Methods.verify_bind">
+            <summary>
+            判断设备、应用、用户与Channel的绑定关系是否存在。
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.Methods.fetch_msg">
+            <summary>
+            查询离线消息。
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.Methods.fetch_msgcount">
+            <summary>
+            查询离线消息的个数。
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.Methods.delete_msg">
+            <summary>
+            删除离线消息。
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.Methods.set_tag">
+            <summary>
+            服务器端设置用户标签。当该标签不存在时，服务端将会创建该标签。特别地，当user_id被提交时，服务端将会完成用户和tag的绑定操作。
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.Methods.fetch_tag">
+            <summary>
+            App Server查询应用标签。
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.Methods.delete_tag">
+            <summary>
+            服务端删除用户标签。特别地，当user_id被提交时，服务端将只会完成解除该用户与tag绑定关系的操作。
+            注意：该操作不可恢复，请谨慎使用。
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.Methods.query_user_tags">
+            <summary>
+            App Server查询用户所属的标签列表。
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.Methods.query_device_type">
+            <summary>
+            根据channel_id查询设备类型。
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.MessagePushResponse">
+            <summary>
+            push_msg 请求响应
+            Broadcast/tag/Unicast共用
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.MessagePushResponse.ResponseParams">
+            <summary>
+            响应明细
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.PushMessageResponseParam">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.PushMessageResponseParam.SuccessAmount">
+            <summary>
+            push_msg 请求响应明细
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.PushMessageResponseParam.ChannelId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Baidu.SDK.Push.Dto.PushMessageResponseParam.ChannelToken">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Dto.PushTypes">
+            <summary>
+            推送类型
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.PushTypes.Unicast">
+            <summary>
+            单个人，必须指定user_id 和 channel_id （指定用户的指定设备）或者user_id（指定用户的所有设备） 
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.PushTypes.Tag">
+            <summary>
+            一群人，必须指定 tag 
+            </summary>
+        </member>
+        <member name="F:Baidu.SDK.Push.Dto.PushTypes.Broadcast">
+            <summary>
+            所有人，无需指定tag、user_id、channel_id 
+            </summary>
+        </member>
+        <member name="T:Baidu.SDK.Push.Didest.SignatureDigest">
+            <summary>
+            签名
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Didest.SignatureDigest.Digest(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.String)">
+            <summary>
+            计算签名
+            </summary>
+            <param name="httpMethod"></param>
+            <param name="url"></param>
+            <param name="paramDic"></param>
+            <param name="apiKey"></param>
+            <param name="secretKey"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Baidu.SDK.Push.Utility.UnixDateTimeConverter">
+            <summary>
+              Useful when serializing/deserializing json for use with the Stack Overflow API, which produces and consumes Unix Timestamp dates
+            </summary>
+            <remarks>
+              swiped from lfoust and fixed for latest json.net with some tweaks for handling out-of-range dates
+            </remarks>
+        </member>
+        <member name="M:Baidu.SDK.Push.Utility.UnixDateTimeConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes the JSON representation of the object.
+            </summary>
+            <param name="writer">The <see cref="T:Newtonsoft.Json.JsonWriter"/> to write to.</param><param name="value">The value.</param><param name="serializer">The calling serializer.</param>
+        </member>
+        <member name="M:Baidu.SDK.Push.Utility.UnixDateTimeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+              Reads the JSON representation of the object.
+            </summary>
+            <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param>
+            <param name="objectType">Type of the object.</param>
+            <param name="existingValue">The existing value of object being read.</param>
+            <param name="serializer">The calling serializer.</param>
+            <returns>The object value.</returns>
+        </member>
+        <member name="M:Baidu.SDK.Push.Utility.UnixDateTimeHelper.FromUnixTime(System.Int64)">
+            <summary>
+              Convert a long into a DateTime
+            </summary>
+        </member>
+        <member name="M:Baidu.SDK.Push.Utility.UnixDateTimeHelper.ToUnixTime(System.DateTime)">
+            <summary>
+              Convert a DateTime into a long
+            </summary>
+        </member>
+    </members>
+</doc>

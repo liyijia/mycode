@@ -1,0 +1,224 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>金色年华-后台管理</title>
+      @*内页引用*@
+
+    <link href="/Content/DataTables-1.9.4/media/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="/Content/validate.css" rel="stylesheet" />
+    <link href="/Scripts/build/css/bui-min.css" rel="stylesheet" />
+    <link href="/Scripts/build/css/dpl-fb.css" rel="stylesheet" />
+    <link href="/Content/style.css" rel="stylesheet">
+    <link href="/Content/expand_style.css" rel="stylesheet" />
+
+    @*框架引用*@
+    <link rel="stylesheet" href="/Content/flaty/bootstrap.css">
+    <link rel="stylesheet" href="/Content/flaty/font-awesome.css">
+    <link rel="stylesheet" href="/Content/flaty/normalize.css">
+    <link rel="stylesheet" href="/Content/flaty/flaty.css">
+    <script src="/Content/flaty/modernizr-2.js"></script>
+    @*框架引用 顺序不能变换 *@
+    <script src="/content/flaty/jquery_004.js"></script>
+    <script src="/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery-migrate-1.2.1.js" type="text/javascript"></script>
+    <script src="/content/flaty/bootstrap.js"></script>
+    <script src="/content/flaty/jquery_010.js"></script>
+    <script src="/content/flaty/jquery.js"></script>
+    <script src="/content/flaty/jquery_006.js"></script>
+    <script src="/content/flaty/jquery_009.js"></script>
+    <script src="/content/flaty/jquery_007.js"></script>
+    <script src="/content/flaty/jquery_002.js"></script>
+    <script src="/content/flaty/jquery_005.js"></script>
+    <script src="/content/flaty/jquery_003.js"></script>
+    <script src="/content/flaty/jquery_008.js"></script>
+    <script src="/content/flaty/flaty.js"></script>
+    <script src="/Scripts/select2-3.4.5/select2.min.js"></script>
+    <link href="/Scripts/select2-3.4.5/select2.css" rel="stylesheet" />
+    @*内页引用*@
+    <script src="/Scripts/jquery-ui-1.10.3.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.validate.min.js"></script>
+    <script src="/Scripts/jquery-ui-i18n.js" type="text/javascript"></script>
+    <script src="/Scripts/DataTables-1.9.4/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="/Scripts/emis.framewok.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.form.min.js"></script>
+    <link href="/Content/showLoading.css" rel="stylesheet" />
+    <script src="/Scripts/jquery.showLoading.min.js"></script>
+    <script src="/Scripts/build/bui-min.js?t=201308062006"></script>
+    <script src="/Scripts/Util.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var Overlay = BUI.Overlay;
+    </script>
+    <script type="text/javascript">
+        function onInitIform() {
+            $("#main_content").height($(window).height()-165);
+        }
+        window.onresize = onInitIform;
+        function GetUrl(url) {
+            document.getElementById("main_content").src = url;
+        }
+    </script>
+</head>
+<body onload="onInitIform()">
+    <input type="hidden" id="_Grades" /><input type="hidden" id="_Clazzs" />
+    <div id="theme-setting">
+        <a><i class="icon-gears icon-2x"></i></a>
+        <ul>
+            <li>
+                <span>Skin</span>
+                <ul class="colors" data-target="body" data-prefix="skin-">
+                    <li class="active"><a class="blue"></a></li>
+                    <li><a class="red"></a></li>
+                    <li><a class="green"></a></li>
+                    <li><a class="orange"></a></li>
+                    <li><a class="yellow"></a></li>
+                    <li><a class="pink"></a></li>
+                    <li><a class="magenta"></a></li>
+                    <li><a class="gray"></a></li>
+                    <li><a class="black"></a></li>
+                </ul>
+            </li>
+            <li>
+                <span>Navbar</span>
+                <ul class="colors" data-target="#navbar" data-prefix="navbar-">
+                    <li class="active"><a class="blue"></a></li>
+                    <li><a class="red"></a></li>
+                    <li><a class="green"></a></li>
+                    <li><a class="orange"></a></li>
+                    <li><a class="yellow"></a></li>
+                    <li><a class="pink"></a></li>
+                    <li><a class="magenta"></a></li>
+                    <li><a class="gray"></a></li>
+                    <li><a class="black"></a></li>
+                </ul>
+            </li>
+            <li>
+                <span>Sidebar</span>
+                <ul class="colors" data-target="#main-container" data-prefix="sidebar-">
+                    <li class="active"><a class="blue"></a></li>
+                    <li><a class="red"></a></li>
+                    <li><a class="green"></a></li>
+                    <li><a class="orange"></a></li>
+                    <li><a class="yellow"></a></li>
+                    <li><a class="pink"></a></li>
+                    <li><a class="magenta"></a></li>
+                    <li><a class="gray"></a></li>
+                    <li><a class="black"></a></li>
+                </ul>
+            </li>
+            <li>
+                <span></span>
+                <a data-target="navbar"><i class="icon-check-empty"></i>固定导航栏</a>
+                <a class="pull-right visible-desktop" data-target="sidebar"><i class="icon-check-empty"></i>固定侧边栏</a>
+            </li>
+        </ul>
+    </div>
+    <div id="navbar" class="navbar">
+        <div class="navbar-inner">
+
+            <div class="container-fluid" style="height: 40px;">
+                <a class="brand">
+                    <small>
+                        <i class="icon-desktop"></i>
+                        金色年华--后台管理
+                    </small>
+                </a><a class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+                    <i class="icon-reorder"></i>
+                </a>
+                <ul class="nav flaty-nav pull-right">
+                    <li class="user-profile">
+                        <a data-toggle="dropdown" class="user-menu dropdown-toggle">
+                            <img class="nav-user-photo" src="/Content/flaty/avatar1.jpg" alt="Penny's Photo">
+                            <span class="hidden-phone" id="user_info">@ViewBag.UserName
+                            </span>
+                            <i class="icon-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-navbar" id="user_menu">
+                            <li class="nav-header">
+                                <i class="icon-time"></i>
+                                登录时间 20:45
+                            </li>
+                            <li>
+                                <a>
+                                    <i class="icon-cog"></i>
+                                    个人设置
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" class="UPWD">
+                                    <i class="icon-user"></i>
+                                    修改密码
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" class="Logout">
+                                    <i class="icon-off"></i>
+                                    安全退出
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" id="main-container">
+        <div id="sidebar" class="nav-collapse">
+            @Html.Hidden("pageLink");
+            <ul style="height: auto;" class="nav nav-list">
+                @Html.Raw(ViewBag.Menus)
+            </ul>
+            <div id="sidebar-collapse" class="visible-desktop">
+                <i class="icon-double-angle-left"></i>
+            </div>
+        </div>
+        <div id="main-content">
+            <div class="page-content">
+                <iframe  name="main_content" id="main_content" src="" width="100%" frameborder="0"></iframe>
+            </div>
+            <footer>
+                <p>@System.DateTime.Now.ToString("yyyy") © 金色年华 Template.</p>
+            </footer>
+            @*<a id="btn-scrollup" class="btn btn-circle btn-large"><i class="icon-chevron-up"></i></a>*@
+        </div>
+    </div>
+    <div id="InitSchool" class="none">
+        @Html.AuthSchool("MainSchool", 1)
+    </div>
+    <div id="InitGrade" class="none">
+        @Html.AuthSchool("MainGrade", 2)
+    </div>
+    <div id="InitClazz" class="none">
+        @Html.AuthSchool("MainClazz")
+    </div>
+    <div id="Password" class="none">
+        <form id="form-upPassword" action="/School/Create" method="post">
+            <table class="table-dialog" width="100%" cellpadding="0" cellspacing="1" border="0">
+                <tr>
+                    <td>旧密码：</td>
+                    <td>
+                        <input type="password" name="oldPassword" class=" password " />
+                    </td>
+                </tr>
+                <tr>
+                    <td>新密码：</td>
+                    <td>
+                        <input type="password" id="password" class=" password " />
+                    </td>
+                </tr>
+                <tr>
+                    <td>重复密码：</td>
+                    <td>
+                        <input type="password" class=" repassword " name="newPassword" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

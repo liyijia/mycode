@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2B3EA538-D3A1-41C4-8697-9F519636F81E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LY.EMIS5.Common</RootNamespace>
+    <AssemblyName>LY.EMIS5.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Baidu.SDK.Push">
+      <HintPath>..\packages\Baidu.SDK.Push.0.9.0\lib\net35\Baidu.SDK.Push.dll</HintPath>
+    </Reference>
+    <Reference Include="Couchbase, Version=1.1.6.0, Culture=neutral, PublicKeyToken=05e9c6b5a9ec94c2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CouchbaseNHibernateCache.1.0\lib\net35\Couchbase.dll</HintPath>
+    </Reference>
+    <Reference Include="Enyim.Caching">
+      <HintPath>..\packages\CouchbaseNHibernateCache.1.0\lib\net35\Enyim.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\libraries\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationServer.Caching.Client">
+      <HintPath>..\packages\ServerAppFabric.Client.1.1.2106\lib\Microsoft.ApplicationServer.Caching.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationServer.Caching.Core">
+      <HintPath>..\packages\ServerAppFabric.Client.1.1.2106\lib\Microsoft.ApplicationServer.Caching.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Caches.AppFabric">
+      <HintPath>..\packages\NHibernate.Caches.AppFabric.1.1.0.0\lib\net35\NHibernate.Caches.AppFabric.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Caches.Couchbase">
+      <HintPath>..\packages\CouchbaseNHibernateCache.1.0\lib\net35\NHibernate.Caches.Couchbase.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Caches.Redis">
+      <HintPath>..\packages\NHibernate.Caches.Redis.1.3.0.0\lib\net40\NHibernate.Caches.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\libraries\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\libraries\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\libraries\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\libraries\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.2.0\lib\net40\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\packages\ServiceStack.Redis.3.9.71\lib\net35\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Alipay\Secure\AlipayConfig.cs" />
+    <Compile Include="Alipay\Secure\AlipayCore.cs" />
+    <Compile Include="Alipay\Secure\AlipayNotify.cs" />
+    <Compile Include="Alipay\Secure\RSA.cs" />
+    <Compile Include="Alipay\Wap\AlipayConfig.cs" />
+    <Compile Include="Alipay\Wap\AlipayCore.cs" />
+    <Compile Include="Alipay\Wap\AlipayNotify.cs" />
+    <Compile Include="Alipay\Wap\AlipaySubmit.cs" />
+    <Compile Include="Alipay\Wap\MD5.cs" />
+    <Compile Include="Alipay\Wap\RSA.cs" />
+    <Compile Include="BaiDu\BaiDuPush.cs" />
+    <Compile Include="Chart\ECharts\areaStyle.cs" />
+    <Compile Include="Chart\ECharts\axis.cs" />
+    <Compile Include="Chart\ECharts\axisLabel.cs" />
+    <Compile Include="Chart\ECharts\axisLine.cs" />
+    <Compile Include="Chart\ECharts\axisTick.cs" />
+    <Compile Include="Chart\ECharts\chartType.cs" />
+    <Compile Include="Chart\ECharts\legend.cs" />
+    <Compile Include="Chart\ECharts\lineStyle.cs" />
+    <Compile Include="Chart\ECharts\option.cs" />
+    <Compile Include="Chart\ECharts\series.cs" />
+    <Compile Include="Chart\ECharts\splitArea.cs" />
+    <Compile Include="Chart\ECharts\splitLine.cs" />
+    <Compile Include="Chart\ECharts\textStyle.cs" />
+    <Compile Include="Chart\ECharts\title.cs" />
+    <Compile Include="Chart\ECharts\toolbox.cs" />
+    <Compile Include="Chart\ECharts\tooltip.cs" />
+    <Compile Include="Chart\Extensions\EChartsExtensions.cs" />
+    <Compile Include="Extensions\DynamicLinqExpressions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Extensions\IQueryableExtensions.cs" />
+    <Compile Include="Extensions\NPOIExtensions.cs" />
+    <Compile Include="Extensions\PageExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Mvc\Caching\CacheProviders\Couchbase.cs" />
+    <Compile Include="Mvc\Caching\CacheProviders\Fabric.cs" />
+    <Compile Include="Mvc\Caching\CacheProviders\Memcached.cs" />
+    <Compile Include="Mvc\Caching\CacheProviders\Redis.cs" />
+    <Compile Include="Mvc\Caching\CacheProviders\WebCache.cs" />
+    <Compile Include="Mvc\Caching\DbOutputCache.cs" />
+    <Compile Include="Mvc\Caching\DbOutputCacheAttribute.cs" />
+    <Compile Include="Mvc\Caching\DbOutputCacheCascade.cs" />
+    <Compile Include="Mvc\Caching\ICacheProvider.cs" />
+    <Compile Include="Mvc\Attributes\AccessFrequencyAtrribute.cs" />
+    <Compile Include="Mvc\Attributes\CompressAttribute.cs" />
+    <Compile Include="Mvc\Attributes\HandleErrorAttribute.cs" />
+    <Compile Include="Const\CascadeStyle.cs" />
+    <Compile Include="Const\SecurityModes.cs" />
+    <Compile Include="Const\Sex.cs" />
+    <Compile Include="EnumHelper.cs" />
+    <Compile Include="Exceptions\AjaxException.cs" />
+    <Compile Include="Exceptions\EmisException.cs" />
+    <Compile Include="Exceptions\AlertException.cs" />
+    <Compile Include="Mvc\Constraints\ReportControllerConstraint.cs" />
+    <Compile Include="Mvc\Extensions\ControllerExtensions.cs" />
+    <Compile Include="Mvc\Extensions\HtmlExtensions.cs" />
+    <Compile Include="Mvc\Extensions\PaginationExtensions.cs" />
+    <Compile Include="Mvc\RedirectToRouteResult.cs" />
+    <Compile Include="Mvc\AjaxObject.cs" />
+    <Compile Include="Mvc\PagedQueryResult.cs" />
+    <Compile Include="Mvc\ViewEngine.cs" />
+    <Compile Include="Security\Cipher.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AuthenticationSandBox.cs" />
+    <Compile Include="Security\EncryptHelper.cs" />
+    <Compile Include="SingletonBase.cs" />
+    <Compile Include="StringUtil.cs" />
+    <Compile Include="Util.cs" />
+    <Compile Include="Utilities\CookieUtils.cs" />
+    <Compile Include="Utilities\LogUtils.cs" />
+    <Compile Include="Utilities\PhoneTypeUtils.cs" />
+    <Compile Include="Utilities\SerializeUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LY.EMIS5.Const\LY.EMIS5.Const.csproj">
+      <Project>{eeaffbc7-f170-44be-affd-37a13d608b33}</Project>
+      <Name>LY.EMIS5.Const</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NHibernate.Dynamic\NHibernate.Extensions.csproj">
+      <Project>{ff1660b4-1f5f-4b93-acd1-1e44d7551094}</Project>
+      <Name>NHibernate.Extensions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
