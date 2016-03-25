@@ -15,6 +15,7 @@ using System.Data;
 using LY.EMIS5.Const;
 using LY.EMIS5.BLL;
 using LY.EMIS5.Entities.Core;
+using LY.EMIS5.Common.Exceptions;
 
 namespace LY.EMIS5.Admin.Controllers
 {
@@ -59,15 +60,14 @@ namespace LY.EMIS5.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Manager ent, string MemberOf_Id, string Roles_Id, string password)
+        public ActionResult Create(Manager ent, string MemberOf_Id, string Roles_Id)
         {
-            ent.Password = new Cipher() { Value = password, SecurityMode = Common.Const.SecurityModes.MD5 }.Encrypt();
+            ent.Password = new Cipher() { Value = ent.Password.Value, SecurityMode = Common.Const.SecurityModes.MD5 }.Encrypt();
             ent.CreateTime = DateTime.Now;
             ent.IsEnabled = true;
 
             ent.Save(true);
-
-            return Util.Echo(100, "添加用户", string.Format("添加新用户{0}, 操作成功!", ent.Name),"/Manager/Index");
+            throw new AlertException(100, "操作成功", string.Format("添加新用户{0}, 操作成功!", ent.Name), "Manager", "Index");
         }
 
         [HttpGet]

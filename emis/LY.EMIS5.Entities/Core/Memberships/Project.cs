@@ -101,7 +101,7 @@ namespace LY.EMIS5.Entities.Core.Memberships
         /// <summary>
         /// 审批意见
         /// </summary>
-        public virtual List<Opinion> Opinions{get;set;}
+        public virtual IList<Opinion> Opinions{get;set;}
        
         /// <summary>
         /// 项目进度  1、未上网2、已上网3、做资料4、打保证金，同意开标5、开标结束、6、保证金已退，项目结束,已撤销7、不能投标

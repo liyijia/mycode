@@ -23,10 +23,9 @@
             oTable = $('#table-form-list').dataTable({
                 "bServerSide": true,
                 "bLengthChange": false,
-                "sAjaxSource": "/Project",
+                "sAjaxSource": "/Project/AuditList",
                 "fnServerParams": function (aoData) {
                     aoData.push({ "name": "name", "value": $("[name=\"name\"]").val() });
-                    aoData.push({ "name": "sale", "value": $("[name=\"sale\"]").val() });
                     aoData.push({ "name": "state", "value": $("[name=\"state\"]").val() });
                 },
                 "aoColumns": [
@@ -41,7 +40,13 @@
                     }
                     $('td:eq(10)', nRow).html('<a href="/Project/View/' + aData.Id +'">查看</a>');
                     if (aData.Edit) { 
+                        $('td:eq(10)', nRow).append(' <a href="/Project/Create/' + aData.Id + '">编辑</a>');
+                    }
+                    if (aData.Revoke) {
                         $('td:eq(10)', nRow).append(' <a href="/Project/Cancel/' + aData.Id + '">作废</a>');
+                    }
+                    if (aData.Audit) {
+                        $('td:eq(10)', nRow).append(' <a href="/Project/Audit/' + aData.Id + '">审核</a>');
                     }
                 }
             });
@@ -63,17 +68,17 @@
                     项目列表
                     <span class="tools pull-right form-inline">
                             <input type="text" class="form-control" name="name" placeholder="请输入项目名称" />
-                            <select name="state" class="form-control">
-                                <option value="">项目进度</option>
-                                <option>未上网</option>
-                                <option>已上网</option>
-                                <option>做资料</option>
-                                <option>打保证金</option>
-                                <option>开标结束</option>
-                                <option>保证金已退</option>
-                                <option>不能投标</option>
-                            </select>
-                        @Html.DropDownList("sale",ViewBag.Sales as List<SelectListItem>)
+                        <select name="state" class="form-control">
+                            <option value="">项目进度</option>
+                            <option>未上网</option>
+                            <option>已上网</option>
+                            <option>做资料</option>
+                            <option>打保证金</option>
+                            <option>统一开标</option>
+                            <option>开标结束</option>
+                            <option>保证金已退</option>
+                            <option>不能投标</option>
+                        </select>
                         <input type="button" class="btn btn-default search" value="搜索" />
                         <input type="button" class="btn btn-default create" value="添加" />
                     </span>

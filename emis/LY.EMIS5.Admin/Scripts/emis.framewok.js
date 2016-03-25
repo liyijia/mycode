@@ -67,7 +67,7 @@
             return this.optional(element) || (/^[0-9]{6}$/.test(value));
         }, "请正确填写您的邮政编码");
         $.validator.addMethod("repassword", function (value, element) {
-            return this.optional(element) || ($("#password").val() == value);
+            return this.optional(element) || ($(".password").val() == value);
         }, "两次密码不一致");
         $.validator.setDefaults({
             errorPlacement: function (error, element) {

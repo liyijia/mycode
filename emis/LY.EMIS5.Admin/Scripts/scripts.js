@@ -1,5 +1,4 @@
-
-(function() {
+jQuery(function () {
     "use strict";
 
     // custom scrollbar
@@ -15,21 +14,19 @@
     }
 
 
-
     // Toggle Left Menu
    jQuery('.menu-list > a').click(function() {
-      
       var parent = jQuery(this).parent();
       var sub = parent.find('> ul');
-      
+        
       if(!jQuery('body').hasClass('left-side-collapsed')) {
-         if(sub.is(':visible')) {
+          if (sub.is(':visible')) {
             sub.slideUp(200, function(){
                parent.removeClass('nav-active');
                jQuery('.main-content').css({height: ''});
                mainContentHeightAdjust();
             });
-         } else {
+          } else {
             visibleSubMenuClose();
             parent.addClass('nav-active');
             sub.slideDown(200, function(){
@@ -174,4 +171,4 @@
 
 
 
-})(jQuery);
+});

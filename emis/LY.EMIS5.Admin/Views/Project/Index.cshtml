@@ -23,7 +23,7 @@
             oTable = $('#table-form-list').dataTable({
                 "bServerSide": true,
                 "bLengthChange": false,
-                "sAjaxSource": "/Project",
+                "sAjaxSource": "/Project/Index",
                 "fnServerParams": function (aoData) {
                     aoData.push({ "name": "name", "value": $("[name=\"name\"]").val() });
                     aoData.push({ "name": "sale", "value": $("[name=\"sale\"]").val() });
@@ -69,13 +69,13 @@
                                 <option>已上网</option>
                                 <option>做资料</option>
                                 <option>打保证金</option>
+                                <option>统一开标</option>
                                 <option>开标结束</option>
                                 <option>保证金已退</option>
                                 <option>不能投标</option>
                             </select>
-                        @Html.DropDownList("sale",ViewBag.Sales as List<SelectListItem>)
+                        @Html.DropDownList("sale", ViewBag.Sales as List<SelectListItem>, new { @class = "form-control" })
                         <input type="button" class="btn btn-default search" value="搜索" />
-                        <input type="button" class="btn btn-default create" value="添加" />
                     </span>
                 </header>
                 <div class="panel-body">

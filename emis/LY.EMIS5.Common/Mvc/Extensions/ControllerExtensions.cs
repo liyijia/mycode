@@ -13,10 +13,6 @@ namespace LY.EMIS5.Common.Mvc.Extensions
             return new RedirectToRouteResult(error, title, message, controllerName, actionName, routeValues, innerException);
         }
 
-        public static RedirectToRouteResult RedirectToAction(this System.Web.Mvc.Controller contorller, int error, string title, string message, string actionName = null, object routeValues = null, Exception innerException = null)
-        {
-            return new RedirectToRouteResult(error, title, message, actionName, routeValues, innerException);
-        }
 
         public static RedirectToRouteResult RedirectToAction(string title, string message, string controllerName, string actionName, object routeValues = null, Exception innerException = null)
         {

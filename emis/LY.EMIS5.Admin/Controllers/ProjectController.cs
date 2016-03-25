@@ -17,6 +17,7 @@ using LY.EMIS5.BLL;
 using LY.EMIS5.Entities.Core;
 using NHibernate.Linq;
 using LY.EMIS5.Common.Exceptions;
+using LY.EMIS5.Common.Mvc.Extensions;
 
 namespace LY.EMIS5.Admin.Controllers
 {
@@ -36,7 +37,7 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpPost]
         public string Index(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", int sale = 0, string state = "", string sEcho = "")
         {
-            IQueryable<Project> query = DbHelper.Query<Project>();
+            IQueryable<Project> query = DbHelper.Query<Project>(c => c.ProjectProgress != "未上网");
             if (!string.IsNullOrWhiteSpace(name))
             {
                 query = query.Where(c => c.ProjectName.Contains(name));
@@ -75,9 +76,17 @@ namespace LY.EMIS5.Admin.Controllers
         }
 
         [HttpPost]
-        public string AuditList(int iDisplayStart = 0, int iDisplayLength = 15, string sEcho = "")
+        public string AuditList(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", string state = "", string sEcho = "")
         {
             IQueryable<Project> query = DbHelper.Query<Project>(c => c.Sale.Id == ManagerImp.Current.Id || c.Opinions.Any(m => m.Manager.Id == ManagerImp.Current.Id && !m.Done));
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                query = query.Where(c => c.ProjectName.Contains(name));
+            }
+            if (!string.IsNullOrWhiteSpace(state))
+            {
+                query = query.Where(c => c.ProjectProgress == state);
+            }
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
                 query.Count(),
                 query.Skip(iDisplayStart).Take(iDisplayLength).OrderByDescending(c => c.CreateDate).ToList().Select(c => new
@@ -85,10 +94,13 @@ namespace LY.EMIS5.Admin.Controllers
                     Id = c.Id,
                     ProjectName = c.ProjectName,
                     Name = c.Sale.Name,
-                    CreateDate = c.CreateDate.ToChineseDateString(),
-                    ProjectProgress = c.ProjectProgress,
-                    EndDate = c.EndDate.ToShortDateString(),
-                    OpenDate = c.OpenDate.ToShortDateString(),
+                    c.Scale,
+                    c.Money,
+                    c.Source,
+                    c.ProjectProgress,
+                    OpenDate = c.ProjectProgress == "未上网" ? "" : c.OpenDate.ToYearMonthDayString(),
+                    EndDate = c.ProjectProgress == "未上网" ? "" : c.EndDate.ToYearMonthDayString(),
+                    c.CompanyName,
                     Edit = c.ProjectProgress == "未上网" && ManagerImp.Current.Id == c.Sale.Id,
                     Revoke = ManagerImp.Current.Id == c.Sale.Id,
                     Audit = c.Opinions.Any(m => m.Manager.Id == ManagerImp.Current.Id && !m.Done),
@@ -105,18 +117,21 @@ namespace LY.EMIS5.Admin.Controllers
             {
                 return View(DbHelper.Get<Project>(id));
             }
-            return View();
+            return View(new Project { ProjectProgress="未上网"});
         }
 
         [HttpPost]
-        public ActionResult Create(Project model, string CompanyNames, int documentId = 0)
+        public ActionResult Create(Project model, string CompanyNames = "", int documentId = 0)
         {
-            foreach (var item in CompanyNames.Split(new string[] { ","},StringSplitOptions.None))
+            var arr = CompanyNames.Split(new char[] { ',' });
+
+            var entity = new Project();
+            using (var ts = TransactionScopes.Default)
             {
-                var entity = new Project();
-                entity.Account = model.Account;
-                entity.Bank = model.Bank;
-                entity.CompanyName = item;
+                if (model.Id > 0)
+                {
+                    entity = DbHelper.Get<Project>(model.Id);
+                }
                 entity.EndDate = model.EndDate;
                 entity.Link = model.Link;
                 entity.MaterialFee = model.MaterialFee;
@@ -129,22 +144,37 @@ namespace LY.EMIS5.Admin.Controllers
                 entity.Type = model.Type;
                 entity.UserName = model.UserName;
                 entity.SalesOpinion = model.SalesOpinion;
-                if (entity.Id > 0)
+                entity.ProjectProgress = model.ProjectProgress;
+                entity.Account = model.Account;
+                entity.Bank = model.Bank;
+                for (int i = 0; i < arr.Length; i++)
                 {
-                    entity.Update(true);
+                    entity.CompanyName = arr[i];
+                    if (model.Id > 0)
+                    {
+                        if (i == 0)
+                            entity.Update();
+                        else
+                        {
+                            entity.Id = 0;
+                            entity.Save();
+                        }
+                    }
+                    else
+                    {
+                        entity.Sale = ManagerImp.Current;
+                        entity.CreateDate = DateTime.Now;
+                        entity.Save();
+                    }
+                    if (entity.ProjectProgress != "未上网")
+                    {
+                        new Opinion { Agree = false, CreateDate = DateTime.Now, Done = false, Manager = DbHelper.Get<Manager>(documentId), Project = entity, ProjectProgress = "做资料" }.Save();
+                    }
                 }
-                else
-                {
-                    model.Sale = ManagerImp.Current;
-                    model.CreateDate = DateTime.Now;
-                    entity.Save(true);
-                }
-                if (entity.ProjectProgress != "未上网")
-                {
-                    new Opinion { Agree = false, CreateDate = DateTime.Now, Done = false, Manager = DbHelper.Get<Manager>(documentId), Project = entity, ProjectProgress = "做资料" }.Save();
-                }
+                ts.Complete();
             }
-            throw new AlertException(100, "操作成功", "保存项目成功", "Project", "Index");
+           
+            return this.RedirectToAction(100, "操作成功", "保存项目成功", "Project", "AuditList");
         }
 
         [HttpGet]
