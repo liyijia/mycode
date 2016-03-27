@@ -212,6 +212,11 @@
     <Compile Include="App_Start\ViewEngineConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\AptitudeController.cs" />
+    <Compile Include="Controllers\CertificateController.cs" />
+    <Compile Include="Controllers\RecordsController.cs" />
+    <Compile Include="Controllers\AchievementController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Global.asax.cs">
@@ -302,9 +307,27 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Project\View.cshtml" />
-    <Content Include="Views\Project\Audit.cshtml" />
     <Content Include="Scripts\bootstrap-datepicker\less\datepicker.less" />
     <Content Include="Views\Project\AuditList.cshtml" />
+    <Content Include="Views\Project\Cancel.cshtml" />
+    <Content Include="Views\Project\Audit.cshtml" />
+    <Content Include="Views\Project\Edit.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\Create.cshtml" />
+    <Content Include="Views\News\View.cshtml" />
+    <Content Include="Views\Achievement\Create.cshtml" />
+    <Content Include="Views\Achievement\Index.cshtml" />
+    <Content Include="Views\Achievement\View.cshtml" />
+    <Content Include="Views\Aptitude\Create.cshtml" />
+    <Content Include="Views\Aptitude\Index.cshtml" />
+    <Content Include="Views\Aptitude\View.cshtml" />
+    <Content Include="Views\Certificate\Create.cshtml" />
+    <Content Include="Views\Certificate\Index.cshtml" />
+    <Content Include="Views\Certificate\View.cshtml" />
+    <Content Include="Views\Records\Create.cshtml" />
+    <Content Include="Views\Records\Index.cshtml" />
+    <Content Include="Views\Records\View.cshtml" />
+    <Content Include="Views\Project\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\" />

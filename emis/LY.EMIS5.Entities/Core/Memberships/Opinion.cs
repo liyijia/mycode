@@ -50,6 +50,8 @@ namespace LY.EMIS5.Entities.Core.Memberships
 
         public virtual bool Done { get; set; }
 
+        public virtual DateTime DoneDate { get; set; }
+
         public virtual bool Agree { get; set; }
 
         public virtual string Kind { get; set; }

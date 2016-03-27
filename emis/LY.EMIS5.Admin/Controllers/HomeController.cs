@@ -25,20 +25,7 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpGet, Authorize]
         public ActionResult Index()
         {
-            return View();
-        }
-
-
-        [HttpGet]
-        public ActionResult Test()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Test(int id = 0)
-        {
-
+            
             return View();
         }
 
@@ -57,7 +44,7 @@ namespace LY.EMIS5.Admin.Controllers
         /// 密码修改
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost, Authorize]
         public JsonResult upPassword(string oldPassword, string newPassword)
         {
             var manager = DbHelper.Get<Manager>(ManagerImp.Current.Id);

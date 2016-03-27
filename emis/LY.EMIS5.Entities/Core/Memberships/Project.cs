@@ -140,5 +140,10 @@ namespace LY.EMIS5.Entities.Core.Memberships
         /// </summary>
         public virtual string MoneySituation { get; set; }
 
+        /// <summary>
+        /// 是否中标
+        /// </summary>
+        public virtual bool Bid{ get; set; }
+
     }
 }

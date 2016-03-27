@@ -9,10 +9,11 @@
     </id>
     <many-to-one name="Project" class="Project" lazy="false" column="Project_Id"/>
     <property name="CreateDate" />
-    <many-to-one name="Manager" class="Manager" lazy="false" column="Documenter_Id"/>
+    <many-to-one name="Manager" class="Manager" lazy="false" column="Manager_Id"/>
     <property name="Content" />
     <property name="ProjectProgress" />
     <property name="Done" />
+    <property name="DoneDate" />
     <property name="Agree" />
     <property name="Kind" />
   </class>

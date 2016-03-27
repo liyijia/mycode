@@ -46,7 +46,6 @@ namespace LY.EMIS5.Admin
                 //启用日志
                 XmlConfigurator.Configure(new FileInfo(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase.Replace(@"file:///", "")) + "\\log4net.cfg.xml"));
             }
-            HttpRuntime.Cache.Insert("Form", XElement.Load(Server.MapPath("/") + @"Form.xml").Elements());
 
         }
 

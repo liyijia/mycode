@@ -72,7 +72,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Memberships\News.cs" />
     <Compile Include="Core\Memberships\Opinion.cs" />
+    <Compile Include="Core\Memberships\Achievement.cs" />
+    <Compile Include="Core\Memberships\Certificate.cs" />
+    <Compile Include="Core\Memberships\Aptitude.cs" />
+    <Compile Include="Core\Memberships\Records.cs" />
     <Compile Include="Core\Memberships\Project.cs" />
     <Compile Include="Core\Memberships\Manager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,12 +107,35 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Core\Memberships\Opinion.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Core\Memberships\Project.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Core\Memberships\Opinion.hbm.xml">
+    <EmbeddedResource Include="Core\Memberships\News.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Memberships\Records.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Memberships\Certificate.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Memberships\Achievement.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Memberships\Aptitude.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

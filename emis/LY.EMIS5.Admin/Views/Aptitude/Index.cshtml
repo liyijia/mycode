@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "资质列表";
+}
+@using LY.EMIS5.BLL;
+@section Script{
+    <script type="text/javascript">
+        var table = null;
+        $(function () {
+            table = $('#dynamic-table').dataTable({
+                "bServerSide": true,
+                "bLengthChange": false,
+                "sAjaxSource": "/Aptitude/Index",
+                "fnServerParams": function (aoData) {
+                   
+                }, "aoColumns": [
+                      { "mData": "Name" },
+                      { "mData": "Level" },
+                      { "mData": "Id" }
+                ], "bFilter": false, "bSort": false,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    $('td:eq(2)', nRow).html("<a href=\"/Aptitude/View/" + aData.Id + "\">查看</a>");
+                    if (aData.Edit) {
+                        $('td:eq(2)', nRow).append(' <a href="/Aptitude/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');
+                    }
+                     
+                   
+                }
+            });
+            //搜索
+            $(".sreach").click(function () {
+                table.dataTable().fnAdjustColumnSizing();
+            });
+
+            $('.create').click(function(){
+                location.href = "/Aptitude/Create";
+            });
+           
+            function Delete(id) {
+                $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
+                    dialog.modal('hide');
+                    location.href = "/Aptitude/Delete/" + id;
+                })
+            }
+        });
+    </script>
+}
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    资质列表
+                    <span class="tools pull-right form-inline">
+                        <input type="button" class="btn btn-default create" value="添加" />
+                    </span>
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        <table class="display table table-bordered table-striped" id="dynamic-table">
+                            <thead>
+                                <tr>
+                                    <th>资质名</th>
+                                    <th>等级</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+   
+</div>
+<!--body wrapper end-->

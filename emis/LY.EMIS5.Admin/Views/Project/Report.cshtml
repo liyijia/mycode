@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "项目报表";
+}
+@using LY.EMIS5.BLL;
+
+@section Script
+{
+    <script type="text/javascript">
+        var oTable;
+        var options = {
+            beforeSubmit: function () {
+            },
+            success: function () {
+                oTable.fnAdjustColumnSizing();
+            }
+        };
+       
+        $(function () {
+            $('.create').click(function () {
+                location.href = "/Project/Create";
+            });
+
+            oTable = $('#table-form-list').dataTable({
+                "bServerSide": true,
+                "bPaginate": false,
+                "bLengthChange": false,
+                "sAjaxSource": "/Project/Index",
+                "fnServerParams": function (aoData) {
+                    aoData.push({ "name": "beginDate", "value": $("[name=\"beginDate\"]").val() });
+                    aoData.push({ "name": "endDate", "value": $("[name=\"endDate\"]").val() });
+                },
+                "aoColumns": [
+                    { "mData": "Name" },
+                      { "mData": "Register" },
+                      { "mData": "Cannot" }, { "mData": "Open" }, { "mData": "Company" }
+                ], "bSort": false, "bFilter": false,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+            
+                }
+            });
+
+            $('.search').click(function () {
+                oTable.fnAdjustColumnSizing();
+            });
+        });
+
+
+    </script>
+}
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    项目报表
+                    <span class="tools pull-right form-inline">
+                            <input type="text" class="form-control default-date-picker" name="beginDate" placeholder="开始时间" />
+                        <input type="text" class="form-control default-date-picker" name="endDate" placeholder="结束时间" />
+                        <input type="button" class="btn btn-default search" value="搜索" />
+                    </span>
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        <table class="display table table-bordered table-striped" id="table-form-list" cellpadding="0" cellspacing="1">
+                            <thead>
+                                <tr class="tab_top table-top">
+                                    <td>业务员</td>
+                                    <td>登记项目</td>
+                                    <td>不能投标项目</td>
+                                    <td>已开标项目</td>
+                                    <td>公司</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>
+<!--body wrapper end-->

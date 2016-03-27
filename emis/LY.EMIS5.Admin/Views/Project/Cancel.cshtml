@@ -1,0 +1,182 @@
+﻿@using LY.EMIS5.Common;
+@using LY.EMIS5.Const;
+@model LY.EMIS5.Entities.Core.Memberships.Project
+@{
+    ViewBag.Title = "项目作废";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                项目作废
+            </header>
+            <div class="panel-body">
+                <form class="form-horizontal adminex-form" method="post">
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">项目名称</label>
+                        <div class="col-sm-10">
+                            @Html.HiddenFor(c => c.Id)
+                            <label class="control-label">@Model.ProjectName</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">状态</label>
+                        <div class="col-sm-10">
+                            <label class="control-label">@Model.ProjectProgress</label>
+                        </div>
+                    </div>
+                    @{
+                        if (Model.ProjectProgress != "未上网")
+                        {
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">下载链接</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.Link</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">规模</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.Scale</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">业主</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.Owner</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">保证金来源</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.Source</label>
+                                </div>
+                            </div>
+                            if (Model.Source == "代打")
+                            {
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-sm-2 control-label">代打金额</label>
+                                    <div class="col-sm-10 input-group">
+                                        <label class="control-label">@(Model.ReplaceMoney)万元</label>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">保证金金额</label>
+                                <div class="col-sm-10 input-group">
+                                    <label class="control-label">@(Model.Money)万元</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">保证金截至时间</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.EndDate.ToYearMonthDayString()</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">保证金打款方式</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.Type</label>
+                                </div>
+                            </div>
+                            if (Model.Type == "网银支付")
+                            {
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-sm-2 control-label">保证金账户名</label>
+                                    <div class="col-sm-10">
+                                        <label class="control-label">@Model.UserName</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-sm-2 control-label">保证金账号</label>
+                                    <div class="col-sm-10">
+                                        <label class="control-label">@Model.Account</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-sm-2 control-label">保证金开户行</label>
+                                    <div class="col-sm-10">
+                                        <label class="control-label">@Model.Bank</label>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">开标时间</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.OpenDate.ToYearMonthDayString()</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">资料费</label>
+                                <div class="col-sm-10 input-group">
+                                    <label class="control-label">@(Model.MaterialFee)元</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">公司名称</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.CompanyName</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">资质要求</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.Aptitude</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">费用收费情况</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.MoneySituation</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">@Model.Sale.Name</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.SalesOpinion</label>
+                                </div>
+                            </div>
+                        }
+                    }
+                    @foreach (var item in Model.Opinions.Where(c => c.Done).OrderBy(c => c.Id))
+                    {
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">@item.ProjectProgress</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@item.Content</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">@item.Manager.Name</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@item.CreateDate.ToChineseDateString()</label>
+                            </div>
+                        </div>
+
+                    }
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">总经理</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownList("managerId", ViewBag.List as IList<SelectListItem>, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">作废原因</label>
+                        <div class="col-sm-10">
+                            @Html.TextArea("Content", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button class="btn btn-primary" type="submit">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+   
+</div>

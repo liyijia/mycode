@@ -16,6 +16,7 @@ using LY.EMIS5.Const;
 using LY.EMIS5.BLL;
 using LY.EMIS5.Entities.Core;
 using LY.EMIS5.Common.Exceptions;
+using LY.EMIS5.Common.Mvc.Extensions;
 
 namespace LY.EMIS5.Admin.Controllers
 {
@@ -23,13 +24,13 @@ namespace LY.EMIS5.Admin.Controllers
     {
 
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public ActionResult Index()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public string Index(string txt = "", int iDisplayStart = 0, int iDisplayLength = 15, string sSortDir_0 = "desc", string sEcho = "")
         {
             IQueryable<Manager> query = DbHelper.Query<Manager>();
@@ -51,7 +52,7 @@ namespace LY.EMIS5.Admin.Controllers
 
         
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public ActionResult Create()
         {
             var ent = new Manager();
@@ -59,18 +60,18 @@ namespace LY.EMIS5.Admin.Controllers
             return View(ent);
         }
 
-        [HttpPost]
-        public ActionResult Create(Manager ent, string MemberOf_Id, string Roles_Id)
+        [HttpPost, Authorize]
+        public ActionResult Create(Manager ent, string password)
         {
-            ent.Password = new Cipher() { Value = ent.Password.Value, SecurityMode = Common.Const.SecurityModes.MD5 }.Encrypt();
+            ent.Password = new Cipher() { Value = password, SecurityMode = Common.Const.SecurityModes.MD5 }.Encrypt();
             ent.CreateTime = DateTime.Now;
             ent.IsEnabled = true;
 
             ent.Save(true);
-            throw new AlertException(100, "操作成功", string.Format("添加新用户{0}, 操作成功!", ent.Name), "Manager", "Index");
+            return this.RedirectToAction(100, "操作成功", string.Format("添加新用户{0}, 操作成功!", ent.Name), "Manager", "Index");
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public ActionResult Edit(int id = 0)
         {
             var ent = DbHelper.Query<Manager>(m => m.Id == id).FirstOrDefault();
@@ -81,7 +82,7 @@ namespace LY.EMIS5.Admin.Controllers
             return View(ent);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public ActionResult Edit(Manager ent, string MemberOf_Id, string Roles_Id)
         {
             if (ent == null)
@@ -105,7 +106,7 @@ namespace LY.EMIS5.Admin.Controllers
 
             return Util.Echo(Const.IconFlags.success, "编辑用户", string.Format("编辑用户{0}, 操作成功!", ent.Name));
         }
-        [HttpGet]
+        [HttpGet, Authorize]
         public ActionResult Personal()
         {
             return View(ManagerImp.Current);
@@ -115,7 +116,7 @@ namespace LY.EMIS5.Admin.Controllers
         /// </summary>
         /// <param name="manager"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost, Authorize]
         public JsonResult Personal(Manager manager)
         {
             using (var ts = TransactionScopes.Default)
@@ -183,7 +184,7 @@ namespace LY.EMIS5.Admin.Controllers
             return Json(isExists, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public ActionResult Import()
         {
             var Table = new DataTable("管理员导入模版");
@@ -195,7 +196,7 @@ namespace LY.EMIS5.Admin.Controllers
             return Table.ExportToXls(Table.TableName + ".xls");
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public ActionResult Import(int id = 0)
         {
             var Table = Request.Files["file"].ImportFromXls();

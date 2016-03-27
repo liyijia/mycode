@@ -154,34 +154,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alipay\Secure\AlipayConfig.cs" />
-    <Compile Include="Alipay\Secure\AlipayCore.cs" />
-    <Compile Include="Alipay\Secure\AlipayNotify.cs" />
-    <Compile Include="Alipay\Secure\RSA.cs" />
-    <Compile Include="Alipay\Wap\AlipayConfig.cs" />
-    <Compile Include="Alipay\Wap\AlipayCore.cs" />
-    <Compile Include="Alipay\Wap\AlipayNotify.cs" />
-    <Compile Include="Alipay\Wap\AlipaySubmit.cs" />
-    <Compile Include="Alipay\Wap\MD5.cs" />
-    <Compile Include="Alipay\Wap\RSA.cs" />
-    <Compile Include="BaiDu\BaiDuPush.cs" />
-    <Compile Include="Chart\ECharts\areaStyle.cs" />
-    <Compile Include="Chart\ECharts\axis.cs" />
-    <Compile Include="Chart\ECharts\axisLabel.cs" />
-    <Compile Include="Chart\ECharts\axisLine.cs" />
-    <Compile Include="Chart\ECharts\axisTick.cs" />
-    <Compile Include="Chart\ECharts\chartType.cs" />
-    <Compile Include="Chart\ECharts\legend.cs" />
-    <Compile Include="Chart\ECharts\lineStyle.cs" />
-    <Compile Include="Chart\ECharts\option.cs" />
-    <Compile Include="Chart\ECharts\series.cs" />
-    <Compile Include="Chart\ECharts\splitArea.cs" />
-    <Compile Include="Chart\ECharts\splitLine.cs" />
-    <Compile Include="Chart\ECharts\textStyle.cs" />
-    <Compile Include="Chart\ECharts\title.cs" />
-    <Compile Include="Chart\ECharts\toolbox.cs" />
-    <Compile Include="Chart\ECharts\tooltip.cs" />
-    <Compile Include="Chart\Extensions\EChartsExtensions.cs" />
     <Compile Include="Extensions\DynamicLinqExpressions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
