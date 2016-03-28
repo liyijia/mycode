@@ -4,7 +4,7 @@
 .dataTables_paginate a{
     color:rgb(122, 118, 118);margin:0 3px;
 }
-table{
+table,table th{
     text-align:center
 }
 

@@ -82,9 +82,9 @@ namespace LY.EMIS5.Admin.Controllers
         }
 
         [HttpGet, Authorize]
-        public ActionResult Detlete(int id = 0)
+        public ActionResult Delete(int id = 0)
         {
-            DbHelper.Get<News>(id).Delete();
+            DbHelper.Get<News>(id).Delete(true);
             return this.RedirectToAction(100, "操作成功", "删除公告成功!", "News", "Index");
         }
 

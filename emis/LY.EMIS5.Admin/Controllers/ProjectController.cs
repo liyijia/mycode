@@ -303,7 +303,7 @@ namespace LY.EMIS5.Admin.Controllers
         {
             var entity = DbHelper.Get<Project>(id);
             if (entity.ProjectProgress == "未上网") {
-                entity.Delete();
+                entity.Delete(true);
             }
             return this.RedirectToAction(100, "操作成功", "项目作废申请成功", "Project", "AuditList");
         }
@@ -342,8 +342,8 @@ namespace LY.EMIS5.Admin.Controllers
                     query = query.Where(m => m.CreateDate <= DateTime.Parse(endDate).AddDays(1));
                 }
 
-                list.Add(new { Name = c.Name, Register = query.Where(m => m.CompanyName == "城开").Count(), Cannot = query.Where(m => m.CompanyName == "城开" && m.ProjectProgress == "不能投标"), Open = query.Where(m => m.CompanyName == "城开" && m.ProjectProgress != "不能投标" && m.OpenDate < DateTime.Now), Company = "城开" });
-                list.Add(new { Name = c.Name, Register = query.Where(m => m.CompanyName == "正泰").Count(), Cannot = query.Where(m => m.CompanyName == "正泰" && m.ProjectProgress == "不能投标"), Open = query.Where(m => m.CompanyName == "正泰" && m.ProjectProgress != "不能投标" && m.OpenDate < DateTime.Now), Company = "正泰" });
+                list.Add(new { Name = c.Name, Register = query.Where(m => m.CompanyName == "城开").Count(), Cannot = query.Where(m => m.CompanyName == "城开" && m.ProjectProgress == "不能投标").Count(), Open = query.Where(m => m.CompanyName == "城开" && m.ProjectProgress != "不能投标" && m.OpenDate < DateTime.Now).Count(), Company = "城开" });
+                list.Add(new { Name = c.Name, Register = query.Where(m => m.CompanyName == "正泰").Count(), Cannot = query.Where(m => m.CompanyName == "正泰" && m.ProjectProgress == "不能投标").Count(), Open = query.Where(m => m.CompanyName == "正泰" && m.ProjectProgress != "不能投标" && m.OpenDate < DateTime.Now).Count(), Company = "正泰" });
             });
 
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,

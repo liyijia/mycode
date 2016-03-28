@@ -346,7 +346,6 @@ F:\mycode\emis\LY.EMIS5.Admin\bin\System.Web.WebPages.Deployment.dll
 F:\mycode\emis\LY.EMIS5.Admin\bin\System.Web.WebPages.dll
 F:\mycode\emis\LY.EMIS5.Admin\bin\System.Web.WebPages.Razor.dll
 F:\mycode\emis\LY.EMIS5.Admin\bin\WebGrease.dll
-F:\mycode\emis\LY.EMIS5.Admin\bin\Baidu.SDK.Push.dll
 F:\mycode\emis\LY.EMIS5.Admin\bin\NPOI.dll
 F:\mycode\emis\LY.EMIS5.Admin\bin\Microsoft.ApplicationServer.Caching.Client.dll
 F:\mycode\emis\LY.EMIS5.Admin\bin\Microsoft.ApplicationServer.Caching.Core.dll
@@ -389,8 +388,6 @@ F:\mycode\emis\LY.EMIS5.Admin\bin\System.Web.Razor.xml
 F:\mycode\emis\LY.EMIS5.Admin\bin\System.Web.WebPages.xml
 F:\mycode\emis\LY.EMIS5.Admin\bin\System.Web.WebPages.Deployment.xml
 F:\mycode\emis\LY.EMIS5.Admin\bin\System.Web.WebPages.Razor.xml
-F:\mycode\emis\LY.EMIS5.Admin\bin\Baidu.SDK.Push.pdb
-F:\mycode\emis\LY.EMIS5.Admin\bin\Baidu.SDK.Push.xml
 F:\mycode\emis\LY.EMIS5.Admin\bin\zh-Hans\System.Web.Optimization.resources.dll
 F:\mycode\emis\LY.EMIS5.Admin\bin\zh-Hans\System.Web.Mvc.resources.dll
 F:\mycode\emis\LY.EMIS5.Admin\bin\zh-Hans\System.Web.Razor.resources.dll

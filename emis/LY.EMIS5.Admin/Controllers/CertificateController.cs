@@ -56,7 +56,7 @@ namespace LY.EMIS5.Admin.Controllers
             if (id > 0) {
                 return View(DbHelper.Get<Certificate>(id));
             }
-            return View(new Certificate());
+            return View();
         }
 
         [HttpPost, Authorize]
@@ -75,9 +75,9 @@ namespace LY.EMIS5.Admin.Controllers
         }
 
         [HttpGet, Authorize]
-        public ActionResult Detlete(int id = 0)
+        public ActionResult Delete(int id = 0)
         {
-            DbHelper.Get<Certificate>(id).Delete();
+            DbHelper.Get<Certificate>(id).Delete(true);
             return this.RedirectToAction(100, "操作成功", "删除证书成功!", "Certificate", "Index");
         }
 
