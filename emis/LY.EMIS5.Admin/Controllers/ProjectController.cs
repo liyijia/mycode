@@ -37,7 +37,7 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpPost, Authorize]
         public string Index(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", int sale = 0, string state = "", string sEcho = "")
         {
-            IQueryable<Project> query = DbHelper.Query<Project>(c => c.ProjectProgress != "未上网");
+            IQueryable<Project> query = DbHelper.Query<Project>();
             if (!string.IsNullOrWhiteSpace(name))
             {
                 query = query.Where(c => c.ProjectName.Contains(name));
