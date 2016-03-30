@@ -5,7 +5,7 @@
     color:rgb(122, 118, 118);margin:0 3px;
 }
 table,table th{
-    text-align:center
+    text-align:center !important
 }
 
 .input-group[class*=col-] {

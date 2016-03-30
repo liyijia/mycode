@@ -77,3 +77,4 @@ D:\mycode\emis\LY.EMIS5.Const\bin\Debug\RazorEngine.pdb
 D:\mycode\emis\LY.EMIS5.Const\bin\Debug\RazorEngine.xml
 D:\mycode\emis\LY.EMIS5.Const\bin\Debug\System.Web.Razor.xml
 D:\mycode\emis\LY.EMIS5.Const\bin\Debug\zh-Hans\System.Web.Razor.resources.dll
+F:\mycode\emis\LY.EMIS5.Const\obj\Debug\LY.EMIS5.Const.csprojResolveAssemblyReference.cache
