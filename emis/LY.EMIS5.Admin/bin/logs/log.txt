@@ -1002,3 +1002,651 @@ System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒ
    ÔÚ System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
    ÔÚ System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
  
+10:34:49,437 [5] ERROR NHibernate.Util.ReflectHelper - Could not load type Finisar.SQLite.SQLiteConnection, SQLite.NET.
+ 
+System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒÀÀµÏî¡£ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£
+ÎÄ¼şÃû:¡°SQLite.NET¡±
+   ÔÚ System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   ÔÚ System.Reflection.Assembly.Load(String assemblyString)
+   ÔÚ NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+
+=== Ô¤°ó¶¨×´Ì¬ĞÅÏ¢ ===
+ÈÕÖ¾: DisplayName = SQLite.NET
+ (Partial)
+¾¯¸æ: Îª³ÌĞò¼¯Ìá¹©ÁË²¿·Ö°ó¶¨ĞÅÏ¢:
+¾¯¸æ: ³ÌĞò¼¯Ãû³Æ: SQLite.NET | Óò ID: 2
+¾¯¸æ: µ±½öÌá¹©³ÌĞò¼¯ÏÔÊ¾Ãû³ÆµÄÒ»²¿·ÖÊ±£¬½«·¢Éú²¿·Ö°ó¶¨¡£
+¾¯¸æ: Õâ¿ÉÄÜµ¼ÖÂÁª±à³ÌĞò¼ÓÔØ´íÎóµÄ³ÌĞò¼¯¡£
+¾¯¸æ: ½¨ÒéÎª³ÌĞò¼¯Ìá¹©ÍêÈ«Ö¸¶¨µÄÎÄ×Ö±êÊ¶£¬
+¾¯¸æ: ²¢ÓÉ¼òµ¥Ãû³Æ¡¢°æ±¾¡¢ÇøÓòĞÔºÍ¹«Ô¿±ê¼Ç×é³É¡£
+¾¯¸æ: ÓĞ¹Ø´ËÎÊÌâµÄÏêÏ¸ĞÅÏ¢ºÍ³£¼û½â¾ö·½°¸£¬Çë²Î¼û°×Æ¤Êé http://go.microsoft.com/fwlink/?LinkId=109270¡£
+ÈÕÖ¾: Appbase = file:///F:/mycode/emis/LY.EMIS5.Admin/
+ÈÕÖ¾: ³õÊ¼ PrivatePath = F:\mycode\emis\LY.EMIS5.Admin\bin
+µ÷ÓÃ³ÌĞò¼¯: NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4¡£
+===
+ÈÕÖ¾: ´Ë°ó¶¨´Ó default ¼ÓÔØÉÏÏÂÎÄ¿ªÊ¼¡£
+ÈÕÖ¾: ÕıÔÚÊ¹ÓÃÓ¦ÓÃ³ÌĞòÅäÖÃÎÄ¼ş: F:\mycode\emis\LY.EMIS5.Admin\web.config
+ÈÕÖ¾: Ê¹ÓÃÖ÷»úÅäÖÃÎÄ¼ş: D:\ÎÒµÄÎÄµµ\IISExpress\config\aspnet.config
+ÈÕÖ¾: Ê¹ÓÃ C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config µÄ¼ÆËã»úÅäÖÃÎÄ¼ş¡£
+ÈÕÖ¾: ´ËÊ±Ã»ÓĞÎªÒıÓÃÓ¦ÓÃ²ßÂÔ(Ë½ÓĞ¡¢×Ô¶¨Òå¡¢·Ö²¿»ò»ùÓÚÎ»ÖÃµÄ³ÌĞò¼¯°ó¶¨)¡£
+ÈÕÖ¾: ÏàÍ¬µÄ°ó¶¨ÒÑ³öÏÖ¹ı£¬Òò hr = 0x80070002 ¶øÊ§°Ü¡£
+
+10:34:49,462 [5] ERROR NHibernate.Util.ReflectHelper - Could not load type Finisar.SQLite.SQLiteCommand, SQLite.NET.
+ 
+System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒÀÀµÏî¡£ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£
+ÎÄ¼şÃû:¡°SQLite.NET¡±
+   ÔÚ System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   ÔÚ System.Reflection.Assembly.Load(String assemblyString)
+   ÔÚ NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+
+=== Ô¤°ó¶¨×´Ì¬ĞÅÏ¢ ===
+ÈÕÖ¾: DisplayName = SQLite.NET
+ (Partial)
+¾¯¸æ: Îª³ÌĞò¼¯Ìá¹©ÁË²¿·Ö°ó¶¨ĞÅÏ¢:
+¾¯¸æ: ³ÌĞò¼¯Ãû³Æ: SQLite.NET | Óò ID: 2
+¾¯¸æ: µ±½öÌá¹©³ÌĞò¼¯ÏÔÊ¾Ãû³ÆµÄÒ»²¿·ÖÊ±£¬½«·¢Éú²¿·Ö°ó¶¨¡£
+¾¯¸æ: Õâ¿ÉÄÜµ¼ÖÂÁª±à³ÌĞò¼ÓÔØ´íÎóµÄ³ÌĞò¼¯¡£
+¾¯¸æ: ½¨ÒéÎª³ÌĞò¼¯Ìá¹©ÍêÈ«Ö¸¶¨µÄÎÄ×Ö±êÊ¶£¬
+¾¯¸æ: ²¢ÓÉ¼òµ¥Ãû³Æ¡¢°æ±¾¡¢ÇøÓòĞÔºÍ¹«Ô¿±ê¼Ç×é³É¡£
+¾¯¸æ: ÓĞ¹Ø´ËÎÊÌâµÄÏêÏ¸ĞÅÏ¢ºÍ³£¼û½â¾ö·½°¸£¬Çë²Î¼û°×Æ¤Êé http://go.microsoft.com/fwlink/?LinkId=109270¡£
+ÈÕÖ¾: Appbase = file:///F:/mycode/emis/LY.EMIS5.Admin/
+ÈÕÖ¾: ³õÊ¼ PrivatePath = F:\mycode\emis\LY.EMIS5.Admin\bin
+µ÷ÓÃ³ÌĞò¼¯: NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4¡£
+===
+ÈÕÖ¾: ´Ë°ó¶¨´Ó default ¼ÓÔØÉÏÏÂÎÄ¿ªÊ¼¡£
+ÈÕÖ¾: ÕıÔÚÊ¹ÓÃÓ¦ÓÃ³ÌĞòÅäÖÃÎÄ¼ş: F:\mycode\emis\LY.EMIS5.Admin\web.config
+ÈÕÖ¾: Ê¹ÓÃÖ÷»úÅäÖÃÎÄ¼ş: D:\ÎÒµÄÎÄµµ\IISExpress\config\aspnet.config
+ÈÕÖ¾: Ê¹ÓÃ C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config µÄ¼ÆËã»úÅäÖÃÎÄ¼ş¡£
+ÈÕÖ¾: ´ËÊ±Ã»ÓĞÎªÒıÓÃÓ¦ÓÃ²ßÂÔ(Ë½ÓĞ¡¢×Ô¶¨Òå¡¢·Ö²¿»ò»ùÓÚÎ»ÖÃµÄ³ÌĞò¼¯°ó¶¨)¡£
+ÈÕÖ¾: ÏàÍ¬µÄ°ó¶¨ÒÑ³öÏÖ¹ı£¬Òò hr = 0x80070002 ¶øÊ§°Ü¡£
+
+10:34:49,800 [5] ERROR NHibernate.Util.ReflectHelper - Could not load type Finisar.SQLite.SQLiteConnection, SQLite.NET.
+ 
+System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒÀÀµÏî¡£ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£
+ÎÄ¼şÃû:¡°SQLite.NET¡±
+   ÔÚ System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   ÔÚ System.Reflection.Assembly.Load(String assemblyString)
+   ÔÚ NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+
+=== Ô¤°ó¶¨×´Ì¬ĞÅÏ¢ ===
+ÈÕÖ¾: DisplayName = SQLite.NET
+ (Partial)
+¾¯¸æ: Îª³ÌĞò¼¯Ìá¹©ÁË²¿·Ö°ó¶¨ĞÅÏ¢:
+¾¯¸æ: ³ÌĞò¼¯Ãû³Æ: SQLite.NET | Óò ID: 2
+¾¯¸æ: µ±½öÌá¹©³ÌĞò¼¯ÏÔÊ¾Ãû³ÆµÄÒ»²¿·ÖÊ±£¬½«·¢Éú²¿·Ö°ó¶¨¡£
+¾¯¸æ: Õâ¿ÉÄÜµ¼ÖÂÁª±à³ÌĞò¼ÓÔØ´íÎóµÄ³ÌĞò¼¯¡£
+¾¯¸æ: ½¨ÒéÎª³ÌĞò¼¯Ìá¹©ÍêÈ«Ö¸¶¨µÄÎÄ×Ö±êÊ¶£¬
+¾¯¸æ: ²¢ÓÉ¼òµ¥Ãû³Æ¡¢°æ±¾¡¢ÇøÓòĞÔºÍ¹«Ô¿±ê¼Ç×é³É¡£
+¾¯¸æ: ÓĞ¹Ø´ËÎÊÌâµÄÏêÏ¸ĞÅÏ¢ºÍ³£¼û½â¾ö·½°¸£¬Çë²Î¼û°×Æ¤Êé http://go.microsoft.com/fwlink/?LinkId=109270¡£
+ÈÕÖ¾: Appbase = file:///F:/mycode/emis/LY.EMIS5.Admin/
+ÈÕÖ¾: ³õÊ¼ PrivatePath = F:\mycode\emis\LY.EMIS5.Admin\bin
+µ÷ÓÃ³ÌĞò¼¯: NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4¡£
+===
+ÈÕÖ¾: ´Ë°ó¶¨´Ó default ¼ÓÔØÉÏÏÂÎÄ¿ªÊ¼¡£
+ÈÕÖ¾: ÕıÔÚÊ¹ÓÃÓ¦ÓÃ³ÌĞòÅäÖÃÎÄ¼ş: F:\mycode\emis\LY.EMIS5.Admin\web.config
+ÈÕÖ¾: Ê¹ÓÃÖ÷»úÅäÖÃÎÄ¼ş: D:\ÎÒµÄÎÄµµ\IISExpress\config\aspnet.config
+ÈÕÖ¾: Ê¹ÓÃ C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config µÄ¼ÆËã»úÅäÖÃÎÄ¼ş¡£
+ÈÕÖ¾: ´ËÊ±Ã»ÓĞÎªÒıÓÃÓ¦ÓÃ²ßÂÔ(Ë½ÓĞ¡¢×Ô¶¨Òå¡¢·Ö²¿»ò»ùÓÚÎ»ÖÃµÄ³ÌĞò¼¯°ó¶¨)¡£
+ÈÕÖ¾: ÏàÍ¬µÄ°ó¶¨ÒÑ³öÏÖ¹ı£¬Òò hr = 0x80070002 ¶øÊ§°Ü¡£
+
+10:34:49,814 [5] ERROR NHibernate.Util.ReflectHelper - Could not load type Finisar.SQLite.SQLiteCommand, SQLite.NET.
+ 
+System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒÀÀµÏî¡£ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£
+ÎÄ¼şÃû:¡°SQLite.NET¡±
+   ÔÚ System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   ÔÚ System.Reflection.Assembly.Load(String assemblyString)
+   ÔÚ NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+
+=== Ô¤°ó¶¨×´Ì¬ĞÅÏ¢ ===
+ÈÕÖ¾: DisplayName = SQLite.NET
+ (Partial)
+¾¯¸æ: Îª³ÌĞò¼¯Ìá¹©ÁË²¿·Ö°ó¶¨ĞÅÏ¢:
+¾¯¸æ: ³ÌĞò¼¯Ãû³Æ: SQLite.NET | Óò ID: 2
+¾¯¸æ: µ±½öÌá¹©³ÌĞò¼¯ÏÔÊ¾Ãû³ÆµÄÒ»²¿·ÖÊ±£¬½«·¢Éú²¿·Ö°ó¶¨¡£
+¾¯¸æ: Õâ¿ÉÄÜµ¼ÖÂÁª±à³ÌĞò¼ÓÔØ´íÎóµÄ³ÌĞò¼¯¡£
+¾¯¸æ: ½¨ÒéÎª³ÌĞò¼¯Ìá¹©ÍêÈ«Ö¸¶¨µÄÎÄ×Ö±êÊ¶£¬
+¾¯¸æ: ²¢ÓÉ¼òµ¥Ãû³Æ¡¢°æ±¾¡¢ÇøÓòĞÔºÍ¹«Ô¿±ê¼Ç×é³É¡£
+¾¯¸æ: ÓĞ¹Ø´ËÎÊÌâµÄÏêÏ¸ĞÅÏ¢ºÍ³£¼û½â¾ö·½°¸£¬Çë²Î¼û°×Æ¤Êé http://go.microsoft.com/fwlink/?LinkId=109270¡£
+ÈÕÖ¾: Appbase = file:///F:/mycode/emis/LY.EMIS5.Admin/
+ÈÕÖ¾: ³õÊ¼ PrivatePath = F:\mycode\emis\LY.EMIS5.Admin\bin
+µ÷ÓÃ³ÌĞò¼¯: NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4¡£
+===
+ÈÕÖ¾: ´Ë°ó¶¨´Ó default ¼ÓÔØÉÏÏÂÎÄ¿ªÊ¼¡£
+ÈÕÖ¾: ÕıÔÚÊ¹ÓÃÓ¦ÓÃ³ÌĞòÅäÖÃÎÄ¼ş: F:\mycode\emis\LY.EMIS5.Admin\web.config
+ÈÕÖ¾: Ê¹ÓÃÖ÷»úÅäÖÃÎÄ¼ş: D:\ÎÒµÄÎÄµµ\IISExpress\config\aspnet.config
+ÈÕÖ¾: Ê¹ÓÃ C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config µÄ¼ÆËã»úÅäÖÃÎÄ¼ş¡£
+ÈÕÖ¾: ´ËÊ±Ã»ÓĞÎªÒıÓÃÓ¦ÓÃ²ßÂÔ(Ë½ÓĞ¡¢×Ô¶¨Òå¡¢·Ö²¿»ò»ùÓÚÎ»ÖÃµÄ³ÌĞò¼¯°ó¶¨)¡£
+ÈÕÖ¾: ÏàÍ¬µÄ°ó¶¨ÒÑ³öÏÖ¹ı£¬Òò hr = 0x80070002 ¶øÊ§°Ü¡£
+
+10:34:55,106 [10] ERROR LY.EMIS5.Common.Utilities.LogUtils - System.Web.HttpException (0x80004005): Î´ÕÒµ½Â·¾¶¡°/favicon.ico¡±µÄ¿ØÖÆÆ÷»ò¸Ã¿ØÖÆÆ÷Î´ÊµÏÖ IController¡£
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   ÔÚ System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   ÔÚ System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   ÔÚ System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+ 
+10:34:55,133 [7] ERROR LY.EMIS5.Common.Utilities.LogUtils - System.Web.HttpException (0x80004005): Î´ÕÒµ½Â·¾¶¡°/Error¡±µÄ¿ØÖÆÆ÷»ò¸Ã¿ØÖÆÆ÷Î´ÊµÏÖ IController¡£
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   ÔÚ System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   ÔÚ System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   ÔÚ System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+ 
+10:43:13,270 [6] ERROR NHibernate.Util.ReflectHelper - Could not load type Finisar.SQLite.SQLiteConnection, SQLite.NET.
+ 
+System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒÀÀµÏî¡£ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£
+ÎÄ¼şÃû:¡°SQLite.NET¡±
+   ÔÚ System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   ÔÚ System.Reflection.Assembly.Load(String assemblyString)
+   ÔÚ NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+
+=== Ô¤°ó¶¨×´Ì¬ĞÅÏ¢ ===
+ÈÕÖ¾: DisplayName = SQLite.NET
+ (Partial)
+¾¯¸æ: Îª³ÌĞò¼¯Ìá¹©ÁË²¿·Ö°ó¶¨ĞÅÏ¢:
+¾¯¸æ: ³ÌĞò¼¯Ãû³Æ: SQLite.NET | Óò ID: 2
+¾¯¸æ: µ±½öÌá¹©³ÌĞò¼¯ÏÔÊ¾Ãû³ÆµÄÒ»²¿·ÖÊ±£¬½«·¢Éú²¿·Ö°ó¶¨¡£
+¾¯¸æ: Õâ¿ÉÄÜµ¼ÖÂÁª±à³ÌĞò¼ÓÔØ´íÎóµÄ³ÌĞò¼¯¡£
+¾¯¸æ: ½¨ÒéÎª³ÌĞò¼¯Ìá¹©ÍêÈ«Ö¸¶¨µÄÎÄ×Ö±êÊ¶£¬
+¾¯¸æ: ²¢ÓÉ¼òµ¥Ãû³Æ¡¢°æ±¾¡¢ÇøÓòĞÔºÍ¹«Ô¿±ê¼Ç×é³É¡£
+¾¯¸æ: ÓĞ¹Ø´ËÎÊÌâµÄÏêÏ¸ĞÅÏ¢ºÍ³£¼û½â¾ö·½°¸£¬Çë²Î¼û°×Æ¤Êé http://go.microsoft.com/fwlink/?LinkId=109270¡£
+ÈÕÖ¾: Appbase = file:///F:/mycode/emis/LY.EMIS5.Admin/
+ÈÕÖ¾: ³õÊ¼ PrivatePath = F:\mycode\emis\LY.EMIS5.Admin\bin
+µ÷ÓÃ³ÌĞò¼¯: NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4¡£
+===
+ÈÕÖ¾: ´Ë°ó¶¨´Ó default ¼ÓÔØÉÏÏÂÎÄ¿ªÊ¼¡£
+ÈÕÖ¾: ÕıÔÚÊ¹ÓÃÓ¦ÓÃ³ÌĞòÅäÖÃÎÄ¼ş: F:\mycode\emis\LY.EMIS5.Admin\web.config
+ÈÕÖ¾: Ê¹ÓÃÖ÷»úÅäÖÃÎÄ¼ş: D:\ÎÒµÄÎÄµµ\IISExpress\config\aspnet.config
+ÈÕÖ¾: Ê¹ÓÃ C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config µÄ¼ÆËã»úÅäÖÃÎÄ¼ş¡£
+ÈÕÖ¾: ´ËÊ±Ã»ÓĞÎªÒıÓÃÓ¦ÓÃ²ßÂÔ(Ë½ÓĞ¡¢×Ô¶¨Òå¡¢·Ö²¿»ò»ùÓÚÎ»ÖÃµÄ³ÌĞò¼¯°ó¶¨)¡£
+ÈÕÖ¾: ÏàÍ¬µÄ°ó¶¨ÒÑ³öÏÖ¹ı£¬Òò hr = 0x80070002 ¶øÊ§°Ü¡£
+
+10:43:13,296 [6] ERROR NHibernate.Util.ReflectHelper - Could not load type Finisar.SQLite.SQLiteCommand, SQLite.NET.
+ 
+System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒÀÀµÏî¡£ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£
+ÎÄ¼şÃû:¡°SQLite.NET¡±
+   ÔÚ System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   ÔÚ System.Reflection.Assembly.Load(String assemblyString)
+   ÔÚ NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+
+=== Ô¤°ó¶¨×´Ì¬ĞÅÏ¢ ===
+ÈÕÖ¾: DisplayName = SQLite.NET
+ (Partial)
+¾¯¸æ: Îª³ÌĞò¼¯Ìá¹©ÁË²¿·Ö°ó¶¨ĞÅÏ¢:
+¾¯¸æ: ³ÌĞò¼¯Ãû³Æ: SQLite.NET | Óò ID: 2
+¾¯¸æ: µ±½öÌá¹©³ÌĞò¼¯ÏÔÊ¾Ãû³ÆµÄÒ»²¿·ÖÊ±£¬½«·¢Éú²¿·Ö°ó¶¨¡£
+¾¯¸æ: Õâ¿ÉÄÜµ¼ÖÂÁª±à³ÌĞò¼ÓÔØ´íÎóµÄ³ÌĞò¼¯¡£
+¾¯¸æ: ½¨ÒéÎª³ÌĞò¼¯Ìá¹©ÍêÈ«Ö¸¶¨µÄÎÄ×Ö±êÊ¶£¬
+¾¯¸æ: ²¢ÓÉ¼òµ¥Ãû³Æ¡¢°æ±¾¡¢ÇøÓòĞÔºÍ¹«Ô¿±ê¼Ç×é³É¡£
+¾¯¸æ: ÓĞ¹Ø´ËÎÊÌâµÄÏêÏ¸ĞÅÏ¢ºÍ³£¼û½â¾ö·½°¸£¬Çë²Î¼û°×Æ¤Êé http://go.microsoft.com/fwlink/?LinkId=109270¡£
+ÈÕÖ¾: Appbase = file:///F:/mycode/emis/LY.EMIS5.Admin/
+ÈÕÖ¾: ³õÊ¼ PrivatePath = F:\mycode\emis\LY.EMIS5.Admin\bin
+µ÷ÓÃ³ÌĞò¼¯: NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4¡£
+===
+ÈÕÖ¾: ´Ë°ó¶¨´Ó default ¼ÓÔØÉÏÏÂÎÄ¿ªÊ¼¡£
+ÈÕÖ¾: ÕıÔÚÊ¹ÓÃÓ¦ÓÃ³ÌĞòÅäÖÃÎÄ¼ş: F:\mycode\emis\LY.EMIS5.Admin\web.config
+ÈÕÖ¾: Ê¹ÓÃÖ÷»úÅäÖÃÎÄ¼ş: D:\ÎÒµÄÎÄµµ\IISExpress\config\aspnet.config
+ÈÕÖ¾: Ê¹ÓÃ C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config µÄ¼ÆËã»úÅäÖÃÎÄ¼ş¡£
+ÈÕÖ¾: ´ËÊ±Ã»ÓĞÎªÒıÓÃÓ¦ÓÃ²ßÂÔ(Ë½ÓĞ¡¢×Ô¶¨Òå¡¢·Ö²¿»ò»ùÓÚÎ»ÖÃµÄ³ÌĞò¼¯°ó¶¨)¡£
+ÈÕÖ¾: ÏàÍ¬µÄ°ó¶¨ÒÑ³öÏÖ¹ı£¬Òò hr = 0x80070002 ¶øÊ§°Ü¡£
+
+10:43:13,505 [6] ERROR NHibernate.Util.ReflectHelper - Could not load type Finisar.SQLite.SQLiteConnection, SQLite.NET.
+ 
+System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒÀÀµÏî¡£ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£
+ÎÄ¼şÃû:¡°SQLite.NET¡±
+   ÔÚ System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   ÔÚ System.Reflection.Assembly.Load(String assemblyString)
+   ÔÚ NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+
+=== Ô¤°ó¶¨×´Ì¬ĞÅÏ¢ ===
+ÈÕÖ¾: DisplayName = SQLite.NET
+ (Partial)
+¾¯¸æ: Îª³ÌĞò¼¯Ìá¹©ÁË²¿·Ö°ó¶¨ĞÅÏ¢:
+¾¯¸æ: ³ÌĞò¼¯Ãû³Æ: SQLite.NET | Óò ID: 2
+¾¯¸æ: µ±½öÌá¹©³ÌĞò¼¯ÏÔÊ¾Ãû³ÆµÄÒ»²¿·ÖÊ±£¬½«·¢Éú²¿·Ö°ó¶¨¡£
+¾¯¸æ: Õâ¿ÉÄÜµ¼ÖÂÁª±à³ÌĞò¼ÓÔØ´íÎóµÄ³ÌĞò¼¯¡£
+¾¯¸æ: ½¨ÒéÎª³ÌĞò¼¯Ìá¹©ÍêÈ«Ö¸¶¨µÄÎÄ×Ö±êÊ¶£¬
+¾¯¸æ: ²¢ÓÉ¼òµ¥Ãû³Æ¡¢°æ±¾¡¢ÇøÓòĞÔºÍ¹«Ô¿±ê¼Ç×é³É¡£
+¾¯¸æ: ÓĞ¹Ø´ËÎÊÌâµÄÏêÏ¸ĞÅÏ¢ºÍ³£¼û½â¾ö·½°¸£¬Çë²Î¼û°×Æ¤Êé http://go.microsoft.com/fwlink/?LinkId=109270¡£
+ÈÕÖ¾: Appbase = file:///F:/mycode/emis/LY.EMIS5.Admin/
+ÈÕÖ¾: ³õÊ¼ PrivatePath = F:\mycode\emis\LY.EMIS5.Admin\bin
+µ÷ÓÃ³ÌĞò¼¯: NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4¡£
+===
+ÈÕÖ¾: ´Ë°ó¶¨´Ó default ¼ÓÔØÉÏÏÂÎÄ¿ªÊ¼¡£
+ÈÕÖ¾: ÕıÔÚÊ¹ÓÃÓ¦ÓÃ³ÌĞòÅäÖÃÎÄ¼ş: F:\mycode\emis\LY.EMIS5.Admin\web.config
+ÈÕÖ¾: Ê¹ÓÃÖ÷»úÅäÖÃÎÄ¼ş: D:\ÎÒµÄÎÄµµ\IISExpress\config\aspnet.config
+ÈÕÖ¾: Ê¹ÓÃ C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config µÄ¼ÆËã»úÅäÖÃÎÄ¼ş¡£
+ÈÕÖ¾: ´ËÊ±Ã»ÓĞÎªÒıÓÃÓ¦ÓÃ²ßÂÔ(Ë½ÓĞ¡¢×Ô¶¨Òå¡¢·Ö²¿»ò»ùÓÚÎ»ÖÃµÄ³ÌĞò¼¯°ó¶¨)¡£
+ÈÕÖ¾: ÏàÍ¬µÄ°ó¶¨ÒÑ³öÏÖ¹ı£¬Òò hr = 0x80070002 ¶øÊ§°Ü¡£
+
+10:43:13,517 [6] ERROR NHibernate.Util.ReflectHelper - Could not load type Finisar.SQLite.SQLiteCommand, SQLite.NET.
+ 
+System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒÀÀµÏî¡£ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£
+ÎÄ¼şÃû:¡°SQLite.NET¡±
+   ÔÚ System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   ÔÚ System.Reflection.Assembly.Load(String assemblyString)
+   ÔÚ NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+
+=== Ô¤°ó¶¨×´Ì¬ĞÅÏ¢ ===
+ÈÕÖ¾: DisplayName = SQLite.NET
+ (Partial)
+¾¯¸æ: Îª³ÌĞò¼¯Ìá¹©ÁË²¿·Ö°ó¶¨ĞÅÏ¢:
+¾¯¸æ: ³ÌĞò¼¯Ãû³Æ: SQLite.NET | Óò ID: 2
+¾¯¸æ: µ±½öÌá¹©³ÌĞò¼¯ÏÔÊ¾Ãû³ÆµÄÒ»²¿·ÖÊ±£¬½«·¢Éú²¿·Ö°ó¶¨¡£
+¾¯¸æ: Õâ¿ÉÄÜµ¼ÖÂÁª±à³ÌĞò¼ÓÔØ´íÎóµÄ³ÌĞò¼¯¡£
+¾¯¸æ: ½¨ÒéÎª³ÌĞò¼¯Ìá¹©ÍêÈ«Ö¸¶¨µÄÎÄ×Ö±êÊ¶£¬
+¾¯¸æ: ²¢ÓÉ¼òµ¥Ãû³Æ¡¢°æ±¾¡¢ÇøÓòĞÔºÍ¹«Ô¿±ê¼Ç×é³É¡£
+¾¯¸æ: ÓĞ¹Ø´ËÎÊÌâµÄÏêÏ¸ĞÅÏ¢ºÍ³£¼û½â¾ö·½°¸£¬Çë²Î¼û°×Æ¤Êé http://go.microsoft.com/fwlink/?LinkId=109270¡£
+ÈÕÖ¾: Appbase = file:///F:/mycode/emis/LY.EMIS5.Admin/
+ÈÕÖ¾: ³õÊ¼ PrivatePath = F:\mycode\emis\LY.EMIS5.Admin\bin
+µ÷ÓÃ³ÌĞò¼¯: NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4¡£
+===
+ÈÕÖ¾: ´Ë°ó¶¨´Ó default ¼ÓÔØÉÏÏÂÎÄ¿ªÊ¼¡£
+ÈÕÖ¾: ÕıÔÚÊ¹ÓÃÓ¦ÓÃ³ÌĞòÅäÖÃÎÄ¼ş: F:\mycode\emis\LY.EMIS5.Admin\web.config
+ÈÕÖ¾: Ê¹ÓÃÖ÷»úÅäÖÃÎÄ¼ş: D:\ÎÒµÄÎÄµµ\IISExpress\config\aspnet.config
+ÈÕÖ¾: Ê¹ÓÃ C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config µÄ¼ÆËã»úÅäÖÃÎÄ¼ş¡£
+ÈÕÖ¾: ´ËÊ±Ã»ÓĞÎªÒıÓÃÓ¦ÓÃ²ßÂÔ(Ë½ÓĞ¡¢×Ô¶¨Òå¡¢·Ö²¿»ò»ùÓÚÎ»ÖÃµÄ³ÌĞò¼¯°ó¶¨)¡£
+ÈÕÖ¾: ÏàÍ¬µÄ°ó¶¨ÒÑ³öÏÖ¹ı£¬Òò hr = 0x80070002 ¶øÊ§°Ü¡£
+
+10:43:18,116 [13] ERROR LY.EMIS5.Common.Utilities.LogUtils - System.Web.HttpException (0x80004005): Î´ÕÒµ½Â·¾¶¡°/favicon.ico¡±µÄ¿ØÖÆÆ÷»ò¸Ã¿ØÖÆÆ÷Î´ÊµÏÖ IController¡£
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   ÔÚ System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   ÔÚ System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   ÔÚ System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+ 
+10:43:18,141 [6] ERROR LY.EMIS5.Common.Utilities.LogUtils - System.Web.HttpException (0x80004005): Î´ÕÒµ½Â·¾¶¡°/Error¡±µÄ¿ØÖÆÆ÷»ò¸Ã¿ØÖÆÆ÷Î´ÊµÏÖ IController¡£
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   ÔÚ System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   ÔÚ System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   ÔÚ System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+ 
+10:43:39,976 [7] ERROR LY.EMIS5.Common.Utilities.LogUtils - System.Web.HttpException (0x80004005): Î´ÕÒµ½Â·¾¶¡°/favicon.ico¡±µÄ¿ØÖÆÆ÷»ò¸Ã¿ØÖÆÆ÷Î´ÊµÏÖ IController¡£
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   ÔÚ System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   ÔÚ System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   ÔÚ System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+ 
+10:43:40,006 [8] ERROR LY.EMIS5.Common.Utilities.LogUtils - System.Web.HttpException (0x80004005): Î´ÕÒµ½Â·¾¶¡°/Error¡±µÄ¿ØÖÆÆ÷»ò¸Ã¿ØÖÆÆ÷Î´ÊµÏÖ IController¡£
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   ÔÚ System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   ÔÚ System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   ÔÚ System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+ 
+10:43:41,115 [9] ERROR LY.EMIS5.Common.Utilities.LogUtils - System.Web.HttpException (0x80004005): Î´ÕÒµ½Â·¾¶¡°/favicon.ico¡±µÄ¿ØÖÆÆ÷»ò¸Ã¿ØÖÆÆ÷Î´ÊµÏÖ IController¡£
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   ÔÚ System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   ÔÚ System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   ÔÚ System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+ 
+10:43:41,156 [7] ERROR LY.EMIS5.Common.Utilities.LogUtils - System.Web.HttpException (0x80004005): Î´ÕÒµ½Â·¾¶¡°/Error¡±µÄ¿ØÖÆÆ÷»ò¸Ã¿ØÖÆÆ÷Î´ÊµÏÖ IController¡£
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   ÔÚ System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   ÔÚ System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   ÔÚ System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+ 
+10:44:33,545 [6] ERROR NHibernate.Util.ReflectHelper - Could not load type Finisar.SQLite.SQLiteConnection, SQLite.NET.
+ 
+System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒÀÀµÏî¡£ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£
+ÎÄ¼şÃû:¡°SQLite.NET¡±
+   ÔÚ System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   ÔÚ System.Reflection.Assembly.Load(String assemblyString)
+   ÔÚ NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+
+=== Ô¤°ó¶¨×´Ì¬ĞÅÏ¢ ===
+ÈÕÖ¾: DisplayName = SQLite.NET
+ (Partial)
+¾¯¸æ: Îª³ÌĞò¼¯Ìá¹©ÁË²¿·Ö°ó¶¨ĞÅÏ¢:
+¾¯¸æ: ³ÌĞò¼¯Ãû³Æ: SQLite.NET | Óò ID: 3
+¾¯¸æ: µ±½öÌá¹©³ÌĞò¼¯ÏÔÊ¾Ãû³ÆµÄÒ»²¿·ÖÊ±£¬½«·¢Éú²¿·Ö°ó¶¨¡£
+¾¯¸æ: Õâ¿ÉÄÜµ¼ÖÂÁª±à³ÌĞò¼ÓÔØ´íÎóµÄ³ÌĞò¼¯¡£
+¾¯¸æ: ½¨ÒéÎª³ÌĞò¼¯Ìá¹©ÍêÈ«Ö¸¶¨µÄÎÄ×Ö±êÊ¶£¬
+¾¯¸æ: ²¢ÓÉ¼òµ¥Ãû³Æ¡¢°æ±¾¡¢ÇøÓòĞÔºÍ¹«Ô¿±ê¼Ç×é³É¡£
+¾¯¸æ: ÓĞ¹Ø´ËÎÊÌâµÄÏêÏ¸ĞÅÏ¢ºÍ³£¼û½â¾ö·½°¸£¬Çë²Î¼û°×Æ¤Êé http://go.microsoft.com/fwlink/?LinkId=109270¡£
+ÈÕÖ¾: Appbase = file:///F:/mycode/emis/LY.EMIS5.Admin/
+ÈÕÖ¾: ³õÊ¼ PrivatePath = F:\mycode\emis\LY.EMIS5.Admin\bin
+µ÷ÓÃ³ÌĞò¼¯: NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4¡£
+===
+ÈÕÖ¾: ´Ë°ó¶¨´Ó default ¼ÓÔØÉÏÏÂÎÄ¿ªÊ¼¡£
+ÈÕÖ¾: ÕıÔÚÊ¹ÓÃÓ¦ÓÃ³ÌĞòÅäÖÃÎÄ¼ş: F:\mycode\emis\LY.EMIS5.Admin\web.config
+ÈÕÖ¾: Ê¹ÓÃÖ÷»úÅäÖÃÎÄ¼ş: D:\ÎÒµÄÎÄµµ\IISExpress\config\aspnet.config
+ÈÕÖ¾: Ê¹ÓÃ C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config µÄ¼ÆËã»úÅäÖÃÎÄ¼ş¡£
+ÈÕÖ¾: ´ËÊ±Ã»ÓĞÎªÒıÓÃÓ¦ÓÃ²ßÂÔ(Ë½ÓĞ¡¢×Ô¶¨Òå¡¢·Ö²¿»ò»ùÓÚÎ»ÖÃµÄ³ÌĞò¼¯°ó¶¨)¡£
+ÈÕÖ¾: ÏàÍ¬µÄ°ó¶¨ÒÑ³öÏÖ¹ı£¬Òò hr = 0x80070002 ¶øÊ§°Ü¡£
+
+10:44:33,572 [6] ERROR NHibernate.Util.ReflectHelper - Could not load type Finisar.SQLite.SQLiteCommand, SQLite.NET.
+ 
+System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒÀÀµÏî¡£ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£
+ÎÄ¼şÃû:¡°SQLite.NET¡±
+   ÔÚ System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   ÔÚ System.Reflection.Assembly.Load(String assemblyString)
+   ÔÚ NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+
+=== Ô¤°ó¶¨×´Ì¬ĞÅÏ¢ ===
+ÈÕÖ¾: DisplayName = SQLite.NET
+ (Partial)
+¾¯¸æ: Îª³ÌĞò¼¯Ìá¹©ÁË²¿·Ö°ó¶¨ĞÅÏ¢:
+¾¯¸æ: ³ÌĞò¼¯Ãû³Æ: SQLite.NET | Óò ID: 3
+¾¯¸æ: µ±½öÌá¹©³ÌĞò¼¯ÏÔÊ¾Ãû³ÆµÄÒ»²¿·ÖÊ±£¬½«·¢Éú²¿·Ö°ó¶¨¡£
+¾¯¸æ: Õâ¿ÉÄÜµ¼ÖÂÁª±à³ÌĞò¼ÓÔØ´íÎóµÄ³ÌĞò¼¯¡£
+¾¯¸æ: ½¨ÒéÎª³ÌĞò¼¯Ìá¹©ÍêÈ«Ö¸¶¨µÄÎÄ×Ö±êÊ¶£¬
+¾¯¸æ: ²¢ÓÉ¼òµ¥Ãû³Æ¡¢°æ±¾¡¢ÇøÓòĞÔºÍ¹«Ô¿±ê¼Ç×é³É¡£
+¾¯¸æ: ÓĞ¹Ø´ËÎÊÌâµÄÏêÏ¸ĞÅÏ¢ºÍ³£¼û½â¾ö·½°¸£¬Çë²Î¼û°×Æ¤Êé http://go.microsoft.com/fwlink/?LinkId=109270¡£
+ÈÕÖ¾: Appbase = file:///F:/mycode/emis/LY.EMIS5.Admin/
+ÈÕÖ¾: ³õÊ¼ PrivatePath = F:\mycode\emis\LY.EMIS5.Admin\bin
+µ÷ÓÃ³ÌĞò¼¯: NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4¡£
+===
+ÈÕÖ¾: ´Ë°ó¶¨´Ó default ¼ÓÔØÉÏÏÂÎÄ¿ªÊ¼¡£
+ÈÕÖ¾: ÕıÔÚÊ¹ÓÃÓ¦ÓÃ³ÌĞòÅäÖÃÎÄ¼ş: F:\mycode\emis\LY.EMIS5.Admin\web.config
+ÈÕÖ¾: Ê¹ÓÃÖ÷»úÅäÖÃÎÄ¼ş: D:\ÎÒµÄÎÄµµ\IISExpress\config\aspnet.config
+ÈÕÖ¾: Ê¹ÓÃ C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config µÄ¼ÆËã»úÅäÖÃÎÄ¼ş¡£
+ÈÕÖ¾: ´ËÊ±Ã»ÓĞÎªÒıÓÃÓ¦ÓÃ²ßÂÔ(Ë½ÓĞ¡¢×Ô¶¨Òå¡¢·Ö²¿»ò»ùÓÚÎ»ÖÃµÄ³ÌĞò¼¯°ó¶¨)¡£
+ÈÕÖ¾: ÏàÍ¬µÄ°ó¶¨ÒÑ³öÏÖ¹ı£¬Òò hr = 0x80070002 ¶øÊ§°Ü¡£
+
+10:44:33,756 [6] ERROR NHibernate.Util.ReflectHelper - Could not load type Finisar.SQLite.SQLiteConnection, SQLite.NET.
+ 
+System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒÀÀµÏî¡£ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£
+ÎÄ¼şÃû:¡°SQLite.NET¡±
+   ÔÚ System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   ÔÚ System.Reflection.Assembly.Load(String assemblyString)
+   ÔÚ NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+
+=== Ô¤°ó¶¨×´Ì¬ĞÅÏ¢ ===
+ÈÕÖ¾: DisplayName = SQLite.NET
+ (Partial)
+¾¯¸æ: Îª³ÌĞò¼¯Ìá¹©ÁË²¿·Ö°ó¶¨ĞÅÏ¢:
+¾¯¸æ: ³ÌĞò¼¯Ãû³Æ: SQLite.NET | Óò ID: 3
+¾¯¸æ: µ±½öÌá¹©³ÌĞò¼¯ÏÔÊ¾Ãû³ÆµÄÒ»²¿·ÖÊ±£¬½«·¢Éú²¿·Ö°ó¶¨¡£
+¾¯¸æ: Õâ¿ÉÄÜµ¼ÖÂÁª±à³ÌĞò¼ÓÔØ´íÎóµÄ³ÌĞò¼¯¡£
+¾¯¸æ: ½¨ÒéÎª³ÌĞò¼¯Ìá¹©ÍêÈ«Ö¸¶¨µÄÎÄ×Ö±êÊ¶£¬
+¾¯¸æ: ²¢ÓÉ¼òµ¥Ãû³Æ¡¢°æ±¾¡¢ÇøÓòĞÔºÍ¹«Ô¿±ê¼Ç×é³É¡£
+¾¯¸æ: ÓĞ¹Ø´ËÎÊÌâµÄÏêÏ¸ĞÅÏ¢ºÍ³£¼û½â¾ö·½°¸£¬Çë²Î¼û°×Æ¤Êé http://go.microsoft.com/fwlink/?LinkId=109270¡£
+ÈÕÖ¾: Appbase = file:///F:/mycode/emis/LY.EMIS5.Admin/
+ÈÕÖ¾: ³õÊ¼ PrivatePath = F:\mycode\emis\LY.EMIS5.Admin\bin
+µ÷ÓÃ³ÌĞò¼¯: NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4¡£
+===
+ÈÕÖ¾: ´Ë°ó¶¨´Ó default ¼ÓÔØÉÏÏÂÎÄ¿ªÊ¼¡£
+ÈÕÖ¾: ÕıÔÚÊ¹ÓÃÓ¦ÓÃ³ÌĞòÅäÖÃÎÄ¼ş: F:\mycode\emis\LY.EMIS5.Admin\web.config
+ÈÕÖ¾: Ê¹ÓÃÖ÷»úÅäÖÃÎÄ¼ş: D:\ÎÒµÄÎÄµµ\IISExpress\config\aspnet.config
+ÈÕÖ¾: Ê¹ÓÃ C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config µÄ¼ÆËã»úÅäÖÃÎÄ¼ş¡£
+ÈÕÖ¾: ´ËÊ±Ã»ÓĞÎªÒıÓÃÓ¦ÓÃ²ßÂÔ(Ë½ÓĞ¡¢×Ô¶¨Òå¡¢·Ö²¿»ò»ùÓÚÎ»ÖÃµÄ³ÌĞò¼¯°ó¶¨)¡£
+ÈÕÖ¾: ÏàÍ¬µÄ°ó¶¨ÒÑ³öÏÖ¹ı£¬Òò hr = 0x80070002 ¶øÊ§°Ü¡£
+
+10:44:33,770 [6] ERROR NHibernate.Util.ReflectHelper - Could not load type Finisar.SQLite.SQLiteCommand, SQLite.NET.
+ 
+System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒÀÀµÏî¡£ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£
+ÎÄ¼şÃû:¡°SQLite.NET¡±
+   ÔÚ System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   ÔÚ System.Reflection.Assembly.Load(String assemblyString)
+   ÔÚ NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+
+=== Ô¤°ó¶¨×´Ì¬ĞÅÏ¢ ===
+ÈÕÖ¾: DisplayName = SQLite.NET
+ (Partial)
+¾¯¸æ: Îª³ÌĞò¼¯Ìá¹©ÁË²¿·Ö°ó¶¨ĞÅÏ¢:
+¾¯¸æ: ³ÌĞò¼¯Ãû³Æ: SQLite.NET | Óò ID: 3
+¾¯¸æ: µ±½öÌá¹©³ÌĞò¼¯ÏÔÊ¾Ãû³ÆµÄÒ»²¿·ÖÊ±£¬½«·¢Éú²¿·Ö°ó¶¨¡£
+¾¯¸æ: Õâ¿ÉÄÜµ¼ÖÂÁª±à³ÌĞò¼ÓÔØ´íÎóµÄ³ÌĞò¼¯¡£
+¾¯¸æ: ½¨ÒéÎª³ÌĞò¼¯Ìá¹©ÍêÈ«Ö¸¶¨µÄÎÄ×Ö±êÊ¶£¬
+¾¯¸æ: ²¢ÓÉ¼òµ¥Ãû³Æ¡¢°æ±¾¡¢ÇøÓòĞÔºÍ¹«Ô¿±ê¼Ç×é³É¡£
+¾¯¸æ: ÓĞ¹Ø´ËÎÊÌâµÄÏêÏ¸ĞÅÏ¢ºÍ³£¼û½â¾ö·½°¸£¬Çë²Î¼û°×Æ¤Êé http://go.microsoft.com/fwlink/?LinkId=109270¡£
+ÈÕÖ¾: Appbase = file:///F:/mycode/emis/LY.EMIS5.Admin/
+ÈÕÖ¾: ³õÊ¼ PrivatePath = F:\mycode\emis\LY.EMIS5.Admin\bin
+µ÷ÓÃ³ÌĞò¼¯: NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4¡£
+===
+ÈÕÖ¾: ´Ë°ó¶¨´Ó default ¼ÓÔØÉÏÏÂÎÄ¿ªÊ¼¡£
+ÈÕÖ¾: ÕıÔÚÊ¹ÓÃÓ¦ÓÃ³ÌĞòÅäÖÃÎÄ¼ş: F:\mycode\emis\LY.EMIS5.Admin\web.config
+ÈÕÖ¾: Ê¹ÓÃÖ÷»úÅäÖÃÎÄ¼ş: D:\ÎÒµÄÎÄµµ\IISExpress\config\aspnet.config
+ÈÕÖ¾: Ê¹ÓÃ C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config µÄ¼ÆËã»úÅäÖÃÎÄ¼ş¡£
+ÈÕÖ¾: ´ËÊ±Ã»ÓĞÎªÒıÓÃÓ¦ÓÃ²ßÂÔ(Ë½ÓĞ¡¢×Ô¶¨Òå¡¢·Ö²¿»ò»ùÓÚÎ»ÖÃµÄ³ÌĞò¼¯°ó¶¨)¡£
+ÈÕÖ¾: ÏàÍ¬µÄ°ó¶¨ÒÑ³öÏÖ¹ı£¬Òò hr = 0x80070002 ¶øÊ§°Ü¡£
+
+10:44:37,814 [13] ERROR LY.EMIS5.Common.Utilities.LogUtils - System.Web.HttpException (0x80004005): Î´ÕÒµ½Â·¾¶¡°/favicon.ico¡±µÄ¿ØÖÆÆ÷»ò¸Ã¿ØÖÆÆ÷Î´ÊµÏÖ IController¡£
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   ÔÚ System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   ÔÚ System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   ÔÚ System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+ 
+10:44:37,855 [8] ERROR LY.EMIS5.Common.Utilities.LogUtils - System.Web.HttpException (0x80004005): Î´ÕÒµ½Â·¾¶¡°/Error¡±µÄ¿ØÖÆÆ÷»ò¸Ã¿ØÖÆÆ÷Î´ÊµÏÖ IController¡£
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   ÔÚ System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   ÔÚ System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   ÔÚ System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+ 
+10:45:48,461 [6] ERROR NHibernate.Util.ReflectHelper - Could not load type Finisar.SQLite.SQLiteConnection, SQLite.NET.
+ 
+System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒÀÀµÏî¡£ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£
+ÎÄ¼şÃû:¡°SQLite.NET¡±
+   ÔÚ System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   ÔÚ System.Reflection.Assembly.Load(String assemblyString)
+   ÔÚ NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+
+=== Ô¤°ó¶¨×´Ì¬ĞÅÏ¢ ===
+ÈÕÖ¾: DisplayName = SQLite.NET
+ (Partial)
+¾¯¸æ: Îª³ÌĞò¼¯Ìá¹©ÁË²¿·Ö°ó¶¨ĞÅÏ¢:
+¾¯¸æ: ³ÌĞò¼¯Ãû³Æ: SQLite.NET | Óò ID: 4
+¾¯¸æ: µ±½öÌá¹©³ÌĞò¼¯ÏÔÊ¾Ãû³ÆµÄÒ»²¿·ÖÊ±£¬½«·¢Éú²¿·Ö°ó¶¨¡£
+¾¯¸æ: Õâ¿ÉÄÜµ¼ÖÂÁª±à³ÌĞò¼ÓÔØ´íÎóµÄ³ÌĞò¼¯¡£
+¾¯¸æ: ½¨ÒéÎª³ÌĞò¼¯Ìá¹©ÍêÈ«Ö¸¶¨µÄÎÄ×Ö±êÊ¶£¬
+¾¯¸æ: ²¢ÓÉ¼òµ¥Ãû³Æ¡¢°æ±¾¡¢ÇøÓòĞÔºÍ¹«Ô¿±ê¼Ç×é³É¡£
+¾¯¸æ: ÓĞ¹Ø´ËÎÊÌâµÄÏêÏ¸ĞÅÏ¢ºÍ³£¼û½â¾ö·½°¸£¬Çë²Î¼û°×Æ¤Êé http://go.microsoft.com/fwlink/?LinkId=109270¡£
+ÈÕÖ¾: Appbase = file:///F:/mycode/emis/LY.EMIS5.Admin/
+ÈÕÖ¾: ³õÊ¼ PrivatePath = F:\mycode\emis\LY.EMIS5.Admin\bin
+µ÷ÓÃ³ÌĞò¼¯: NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4¡£
+===
+ÈÕÖ¾: ´Ë°ó¶¨´Ó default ¼ÓÔØÉÏÏÂÎÄ¿ªÊ¼¡£
+ÈÕÖ¾: ÕıÔÚÊ¹ÓÃÓ¦ÓÃ³ÌĞòÅäÖÃÎÄ¼ş: F:\mycode\emis\LY.EMIS5.Admin\web.config
+ÈÕÖ¾: Ê¹ÓÃÖ÷»úÅäÖÃÎÄ¼ş: D:\ÎÒµÄÎÄµµ\IISExpress\config\aspnet.config
+ÈÕÖ¾: Ê¹ÓÃ C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config µÄ¼ÆËã»úÅäÖÃÎÄ¼ş¡£
+ÈÕÖ¾: ´ËÊ±Ã»ÓĞÎªÒıÓÃÓ¦ÓÃ²ßÂÔ(Ë½ÓĞ¡¢×Ô¶¨Òå¡¢·Ö²¿»ò»ùÓÚÎ»ÖÃµÄ³ÌĞò¼¯°ó¶¨)¡£
+ÈÕÖ¾: ÏàÍ¬µÄ°ó¶¨ÒÑ³öÏÖ¹ı£¬Òò hr = 0x80070002 ¶øÊ§°Ü¡£
+
+10:45:48,486 [6] ERROR NHibernate.Util.ReflectHelper - Could not load type Finisar.SQLite.SQLiteCommand, SQLite.NET.
+ 
+System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒÀÀµÏî¡£ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£
+ÎÄ¼şÃû:¡°SQLite.NET¡±
+   ÔÚ System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   ÔÚ System.Reflection.Assembly.Load(String assemblyString)
+   ÔÚ NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+
+=== Ô¤°ó¶¨×´Ì¬ĞÅÏ¢ ===
+ÈÕÖ¾: DisplayName = SQLite.NET
+ (Partial)
+¾¯¸æ: Îª³ÌĞò¼¯Ìá¹©ÁË²¿·Ö°ó¶¨ĞÅÏ¢:
+¾¯¸æ: ³ÌĞò¼¯Ãû³Æ: SQLite.NET | Óò ID: 4
+¾¯¸æ: µ±½öÌá¹©³ÌĞò¼¯ÏÔÊ¾Ãû³ÆµÄÒ»²¿·ÖÊ±£¬½«·¢Éú²¿·Ö°ó¶¨¡£
+¾¯¸æ: Õâ¿ÉÄÜµ¼ÖÂÁª±à³ÌĞò¼ÓÔØ´íÎóµÄ³ÌĞò¼¯¡£
+¾¯¸æ: ½¨ÒéÎª³ÌĞò¼¯Ìá¹©ÍêÈ«Ö¸¶¨µÄÎÄ×Ö±êÊ¶£¬
+¾¯¸æ: ²¢ÓÉ¼òµ¥Ãû³Æ¡¢°æ±¾¡¢ÇøÓòĞÔºÍ¹«Ô¿±ê¼Ç×é³É¡£
+¾¯¸æ: ÓĞ¹Ø´ËÎÊÌâµÄÏêÏ¸ĞÅÏ¢ºÍ³£¼û½â¾ö·½°¸£¬Çë²Î¼û°×Æ¤Êé http://go.microsoft.com/fwlink/?LinkId=109270¡£
+ÈÕÖ¾: Appbase = file:///F:/mycode/emis/LY.EMIS5.Admin/
+ÈÕÖ¾: ³õÊ¼ PrivatePath = F:\mycode\emis\LY.EMIS5.Admin\bin
+µ÷ÓÃ³ÌĞò¼¯: NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4¡£
+===
+ÈÕÖ¾: ´Ë°ó¶¨´Ó default ¼ÓÔØÉÏÏÂÎÄ¿ªÊ¼¡£
+ÈÕÖ¾: ÕıÔÚÊ¹ÓÃÓ¦ÓÃ³ÌĞòÅäÖÃÎÄ¼ş: F:\mycode\emis\LY.EMIS5.Admin\web.config
+ÈÕÖ¾: Ê¹ÓÃÖ÷»úÅäÖÃÎÄ¼ş: D:\ÎÒµÄÎÄµµ\IISExpress\config\aspnet.config
+ÈÕÖ¾: Ê¹ÓÃ C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config µÄ¼ÆËã»úÅäÖÃÎÄ¼ş¡£
+ÈÕÖ¾: ´ËÊ±Ã»ÓĞÎªÒıÓÃÓ¦ÓÃ²ßÂÔ(Ë½ÓĞ¡¢×Ô¶¨Òå¡¢·Ö²¿»ò»ùÓÚÎ»ÖÃµÄ³ÌĞò¼¯°ó¶¨)¡£
+ÈÕÖ¾: ÏàÍ¬µÄ°ó¶¨ÒÑ³öÏÖ¹ı£¬Òò hr = 0x80070002 ¶øÊ§°Ü¡£
+
+10:45:48,672 [6] ERROR NHibernate.Util.ReflectHelper - Could not load type Finisar.SQLite.SQLiteConnection, SQLite.NET.
+ 
+System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒÀÀµÏî¡£ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£
+ÎÄ¼şÃû:¡°SQLite.NET¡±
+   ÔÚ System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   ÔÚ System.Reflection.Assembly.Load(String assemblyString)
+   ÔÚ NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+
+=== Ô¤°ó¶¨×´Ì¬ĞÅÏ¢ ===
+ÈÕÖ¾: DisplayName = SQLite.NET
+ (Partial)
+¾¯¸æ: Îª³ÌĞò¼¯Ìá¹©ÁË²¿·Ö°ó¶¨ĞÅÏ¢:
+¾¯¸æ: ³ÌĞò¼¯Ãû³Æ: SQLite.NET | Óò ID: 4
+¾¯¸æ: µ±½öÌá¹©³ÌĞò¼¯ÏÔÊ¾Ãû³ÆµÄÒ»²¿·ÖÊ±£¬½«·¢Éú²¿·Ö°ó¶¨¡£
+¾¯¸æ: Õâ¿ÉÄÜµ¼ÖÂÁª±à³ÌĞò¼ÓÔØ´íÎóµÄ³ÌĞò¼¯¡£
+¾¯¸æ: ½¨ÒéÎª³ÌĞò¼¯Ìá¹©ÍêÈ«Ö¸¶¨µÄÎÄ×Ö±êÊ¶£¬
+¾¯¸æ: ²¢ÓÉ¼òµ¥Ãû³Æ¡¢°æ±¾¡¢ÇøÓòĞÔºÍ¹«Ô¿±ê¼Ç×é³É¡£
+¾¯¸æ: ÓĞ¹Ø´ËÎÊÌâµÄÏêÏ¸ĞÅÏ¢ºÍ³£¼û½â¾ö·½°¸£¬Çë²Î¼û°×Æ¤Êé http://go.microsoft.com/fwlink/?LinkId=109270¡£
+ÈÕÖ¾: Appbase = file:///F:/mycode/emis/LY.EMIS5.Admin/
+ÈÕÖ¾: ³õÊ¼ PrivatePath = F:\mycode\emis\LY.EMIS5.Admin\bin
+µ÷ÓÃ³ÌĞò¼¯: NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4¡£
+===
+ÈÕÖ¾: ´Ë°ó¶¨´Ó default ¼ÓÔØÉÏÏÂÎÄ¿ªÊ¼¡£
+ÈÕÖ¾: ÕıÔÚÊ¹ÓÃÓ¦ÓÃ³ÌĞòÅäÖÃÎÄ¼ş: F:\mycode\emis\LY.EMIS5.Admin\web.config
+ÈÕÖ¾: Ê¹ÓÃÖ÷»úÅäÖÃÎÄ¼ş: D:\ÎÒµÄÎÄµµ\IISExpress\config\aspnet.config
+ÈÕÖ¾: Ê¹ÓÃ C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config µÄ¼ÆËã»úÅäÖÃÎÄ¼ş¡£
+ÈÕÖ¾: ´ËÊ±Ã»ÓĞÎªÒıÓÃÓ¦ÓÃ²ßÂÔ(Ë½ÓĞ¡¢×Ô¶¨Òå¡¢·Ö²¿»ò»ùÓÚÎ»ÖÃµÄ³ÌĞò¼¯°ó¶¨)¡£
+ÈÕÖ¾: ÏàÍ¬µÄ°ó¶¨ÒÑ³öÏÖ¹ı£¬Òò hr = 0x80070002 ¶øÊ§°Ü¡£
+
+10:45:48,689 [6] ERROR NHibernate.Util.ReflectHelper - Could not load type Finisar.SQLite.SQLiteCommand, SQLite.NET.
+ 
+System.IO.FileNotFoundException: Î´ÄÜ¼ÓÔØÎÄ¼ş»ò³ÌĞò¼¯¡°SQLite.NET¡±»òËüµÄÄ³Ò»¸öÒÀÀµÏî¡£ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£
+ÎÄ¼şÃû:¡°SQLite.NET¡±
+   ÔÚ System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean forIntrospection)
+   ÔÚ System.Reflection.RuntimeAssembly.InternalLoad(String assemblyString, Evidence assemblySecurity, StackCrawlMark& stackMark, Boolean forIntrospection)
+   ÔÚ System.Reflection.Assembly.Load(String assemblyString)
+   ÔÚ NHibernate.Util.ReflectHelper.TypeFromAssembly(AssemblyQualifiedTypeName name, Boolean throwOnError)
+
+=== Ô¤°ó¶¨×´Ì¬ĞÅÏ¢ ===
+ÈÕÖ¾: DisplayName = SQLite.NET
+ (Partial)
+¾¯¸æ: Îª³ÌĞò¼¯Ìá¹©ÁË²¿·Ö°ó¶¨ĞÅÏ¢:
+¾¯¸æ: ³ÌĞò¼¯Ãû³Æ: SQLite.NET | Óò ID: 4
+¾¯¸æ: µ±½öÌá¹©³ÌĞò¼¯ÏÔÊ¾Ãû³ÆµÄÒ»²¿·ÖÊ±£¬½«·¢Éú²¿·Ö°ó¶¨¡£
+¾¯¸æ: Õâ¿ÉÄÜµ¼ÖÂÁª±à³ÌĞò¼ÓÔØ´íÎóµÄ³ÌĞò¼¯¡£
+¾¯¸æ: ½¨ÒéÎª³ÌĞò¼¯Ìá¹©ÍêÈ«Ö¸¶¨µÄÎÄ×Ö±êÊ¶£¬
+¾¯¸æ: ²¢ÓÉ¼òµ¥Ãû³Æ¡¢°æ±¾¡¢ÇøÓòĞÔºÍ¹«Ô¿±ê¼Ç×é³É¡£
+¾¯¸æ: ÓĞ¹Ø´ËÎÊÌâµÄÏêÏ¸ĞÅÏ¢ºÍ³£¼û½â¾ö·½°¸£¬Çë²Î¼û°×Æ¤Êé http://go.microsoft.com/fwlink/?LinkId=109270¡£
+ÈÕÖ¾: Appbase = file:///F:/mycode/emis/LY.EMIS5.Admin/
+ÈÕÖ¾: ³õÊ¼ PrivatePath = F:\mycode\emis\LY.EMIS5.Admin\bin
+µ÷ÓÃ³ÌĞò¼¯: NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4¡£
+===
+ÈÕÖ¾: ´Ë°ó¶¨´Ó default ¼ÓÔØÉÏÏÂÎÄ¿ªÊ¼¡£
+ÈÕÖ¾: ÕıÔÚÊ¹ÓÃÓ¦ÓÃ³ÌĞòÅäÖÃÎÄ¼ş: F:\mycode\emis\LY.EMIS5.Admin\web.config
+ÈÕÖ¾: Ê¹ÓÃÖ÷»úÅäÖÃÎÄ¼ş: D:\ÎÒµÄÎÄµµ\IISExpress\config\aspnet.config
+ÈÕÖ¾: Ê¹ÓÃ C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config µÄ¼ÆËã»úÅäÖÃÎÄ¼ş¡£
+ÈÕÖ¾: ´ËÊ±Ã»ÓĞÎªÒıÓÃÓ¦ÓÃ²ßÂÔ(Ë½ÓĞ¡¢×Ô¶¨Òå¡¢·Ö²¿»ò»ùÓÚÎ»ÖÃµÄ³ÌĞò¼¯°ó¶¨)¡£
+ÈÕÖ¾: ÏàÍ¬µÄ°ó¶¨ÒÑ³öÏÖ¹ı£¬Òò hr = 0x80070002 ¶øÊ§°Ü¡£
+
+10:45:53,405 [10] ERROR LY.EMIS5.Common.Utilities.LogUtils - System.Web.HttpException (0x80004005): Î´ÕÒµ½Â·¾¶¡°/favicon.ico¡±µÄ¿ØÖÆÆ÷»ò¸Ã¿ØÖÆÆ÷Î´ÊµÏÖ IController¡£
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   ÔÚ System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   ÔÚ System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   ÔÚ System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+ 
+10:45:53,472 [8] ERROR LY.EMIS5.Common.Utilities.LogUtils - System.Web.HttpException (0x80004005): Î´ÕÒµ½Â·¾¶¡°/Error¡±µÄ¿ØÖÆÆ÷»ò¸Ã¿ØÖÆÆ÷Î´ÊµÏÖ IController¡£
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   ÔÚ System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   ÔÚ System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   ÔÚ System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   ÔÚ System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   ÔÚ System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+ 
