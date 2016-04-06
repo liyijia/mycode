@@ -134,7 +134,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div id="bankinfo none">
+                        <div id="bankinfo">
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-2 control-label">保证金账户名</label>
                                 <div class="col-sm-10">
@@ -174,7 +174,7 @@
                                 <div class="col-sm-10">
                                     @foreach (var company in ViewBag.Companys as List<Company>)
                                     {
-                                        <label class="checkbox-inline"><input type="radio" name="CompanyName"  value="@company.Name" @(Model.CompanyName==company.Name?"checked=\"checked\"":"") />@company.Name</label> 
+                                        <label class="checkbox-inline"><input type="radio" name="CompanyName" value="@company.Name" @(string.IsNullOrEmpty(Model.CompanyName) || Model.CompanyName==company.Name?"checked=\"checked\"":"") />@company.Name</label> 
                                     }
                                 </div>
                             </div>

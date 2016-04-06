@@ -22,7 +22,7 @@
                       { "mData": "Id" }
                 ], "bFilter": false, "bSort": false,
                 "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                    $('td:eq(10)', nRow).html("<a href=\"/News/View/" + aData.Id + "\">查看</a>");
+                    $('td:eq(10)', nRow).html("<a href=\"/Records/View/" + aData.Id + "\">查看</a>");
                     if (aData.Edit) {
                         $('td:eq(10)', nRow).append(' <a href="/Records/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');
                     }

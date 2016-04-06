@@ -30,7 +30,7 @@
                     aoData.push({ "name": "endDate", "value": $("[name=\"endDate\"]").val() });
                 },
                 "aoColumns": [
-                    { "mData": "Name" },
+                    { "mData": "Name" }, { "mData": "NotOnLine" },
                       { "mData": "Register" },
                       { "mData": "Cannot" }, { "mData": "Open" }, { "mData": "Company" }
                 ], "bSort": false, "bFilter": false,
@@ -66,6 +66,7 @@
                             <thead>
                                 <tr class="tab_top table-top">
                                     <td>业务员</td>
+                                    <td>未上网</td>
                                     <td>登记项目</td>
                                     <td>不能投标项目</td>
                                     <td>已开标项目</td>
