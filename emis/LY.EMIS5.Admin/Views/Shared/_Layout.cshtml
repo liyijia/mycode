@@ -15,6 +15,7 @@
     <link href="/Content/css/style.css" rel="stylesheet">
     <link href="/Content/css/style-responsive.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/Scripts/bootstrap-datepicker/css/datepicker-custom.css" />
+    <link href="/Scripts/bootstrap-datetimepicker/css/datetimepicker.css" rel="stylesheet" />
     <link href="/Content/css/mystyle.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -35,6 +36,8 @@
     <!--dynamic table initialization -->
     <script src="/Scripts/jquery.validate.min.js"></script>
     <script src="/Scripts/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="/Scripts/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/Scripts/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script src="/Scripts/emis.framewok.js"></script>
     <!--common scripts for all pages-->
     <script src="/Scripts/scripts.js"></script>
@@ -55,13 +58,19 @@
             #scrollDiv li {
                 height: 50px;
                 padding-left: 10px;
+                color:red;
             }
+
+                #scrollDiv li a {
+                    color:red;
+                }
     </style>
     <script type="text/javascript">
         $(function () {
             $('.default-date-picker').datepicker({
                 format: 'yyyy-mm-dd'
             });
+            $(".form_datetime").datetimepicker({ language: 'zh-CN', format: 'yyyy-mm-dd hh:ii' });
             $('.form-horizontal').validate();
             $.post('/News/Top', function (result) {
                 $.each(result, function () {
@@ -124,6 +133,7 @@
                             <li class="menu-list">
                                 <a href="#"><i class="fa fa-laptop"></i> <span>系统管理</span></a>
                                 <ul class="sub-menu-list">
+                                    <li><a href="/Company">公司管理</a></li>
                                     <li><a href="/Manager">员工管理</a></li>
                                 </ul>
                             </li>

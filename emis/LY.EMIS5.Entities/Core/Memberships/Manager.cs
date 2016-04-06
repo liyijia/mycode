@@ -69,6 +69,11 @@ namespace LY.EMIS5.Entities.Core.Memberships
         /// </summary>
         public virtual DateTime CreateTime { get; set; }
 
+        /// <summary>
+        /// 公司
+        /// </summary>
+        public virtual Company Company { get; set; }
+
         public Manager()
         {
             this.CreateTime = DateTime.Now;

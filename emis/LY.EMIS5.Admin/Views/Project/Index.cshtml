@@ -32,16 +32,17 @@
                 "aoColumns": [
                     { "mData": "Id" },
                       { "mData": "ProjectName" },
-                      { "mData": "Name" }, { "mData": "Scale" }, { "mData": "Money" }, { "mData": "Source" }, { "mData": "ProjectProgress" }, { "mData": "OpenDate" }, { "mData": "EndDate" }, { "mData": "CompanyName" },
+                      { "mData": "Name" }, { "mData": "Scale" }, { "mData": "Money" }, { "mData": "Source" }, { "mData": "ProjectProgress" }, { "mData": "OpenDate" }, { "mData": "EndDate" }, { "mData": "CompanyName" }, { "mData": "CreateDate" },
                       { "mData": "Id" }
                 ], "bSort": false, "bFilter": false,
                 "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                     if (aData.Prompt) {
                         $(nRow).css('color', 'red');
                     }
-                    $('td:eq(10)', nRow).html('<a href="/Project/View/' + aData.Id +'">查看</a>');
+                    $('td:eq(1)', nRow).addClass('text-left');
+                    $('td:eq(11)', nRow).html('<a href="/Project/View/' + aData.Id +'">查看</a>');
                     if (aData.Edit) { 
-                        $('td:eq(10)', nRow).append(' <a href="/Project/Cancel/' + aData.Id + '">作废</a>');
+                        $('td:eq(11)', nRow).append(' <a href="/Project/Cancel/' + aData.Id + '">作废</a>');
                     }
                 }
             });
@@ -93,6 +94,7 @@
                                     <th>开标时间</th>
                                     <th>保证金截止时间</th>
                                     <th>公司</th>
+                                    <th>登记时间</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>

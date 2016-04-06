@@ -20,5 +20,6 @@
     </component>
     <property name="IsEnabled" />
     <property name="CreateTime" />
+    <many-to-one name="Company" class="Company" lazy="false" column="Company_Id"/>
   </class>
 </hibernate-mapping>

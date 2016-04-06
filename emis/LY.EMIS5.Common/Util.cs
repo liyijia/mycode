@@ -111,12 +111,13 @@ namespace LY.EMIS5.Common
 
         public static string ToChineseDateString(this DateTime datetime)
         {
-            return datetime.ToString("yyyy年MM月dd日HH:mm:ss");
+            return datetime.ToString("yyyy-MM-dd HH:mm");
         }
         public static string ToYearMonthDayString(this DateTime datetime)
         {
             return datetime.ToString("yyyy-MM-dd");
         }
+
         /// <summary>
         /// 获取配置文件参数
         /// </summary>

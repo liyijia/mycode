@@ -20,7 +20,7 @@ using LY.EMIS5.Common.Mvc.Extensions;
 
 namespace LY.EMIS5.Admin.Controllers
 {
-    public class NewsController : Controller
+    public class CompanyController : Controller
     {
 
 
@@ -33,66 +33,52 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpPost, Authorize]
         public string Index(string txt = "", int iDisplayStart = 0, int iDisplayLength = 15, string sSortDir_0 = "desc", string sEcho = "")
         {
-            IQueryable<News> query = DbHelper.Query<News>(c => c.Type == "公告");
-            if (!string.IsNullOrWhiteSpace(txt))
-                query = query.Where(m => m.Title.Contains(txt));
+            IQueryable<Company> query = DbHelper.Query<Company>();
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
                 query.Count(),
                 query.Skip(iDisplayStart).Take(iDisplayLength).OrderByDescending(c => c.Id).ToList().Select(c => new
                 {
                     Id = c.Id,
-                    c.Title,
-                    UserName = c.Manager.Name,
-                    CreateDate = c.CreateDate.ToYearMonthDayString(),
-                    Edit = c.Manager.Id == ManagerImp.Current.Id || ManagerImp.Current.Kind=="管理员"
-                }).ToList<object>())
-            { }.ToDataTablesResult(sEcho);
+                    c.Name
+                }).ToList<object>()) { }.ToDataTablesResult(sEcho);
         }
 
-        [HttpGet, Authorize]
-        public ActionResult View(int id)
-        {
-            return View(DbHelper.Get<News>(id));
-        }
+        
 
         [HttpGet, Authorize]
-        public ActionResult Create(int id = 0)
+        public ActionResult Create(int id=0)
         {
-            if (id > 0)
-            {
-                return View(DbHelper.Get<News>(id));
+            if (id > 0) {
+                return View(DbHelper.Get<Company>(id));
             }
-            return View(new News());
+            return View();
         }
 
         [HttpPost, Authorize]
-        [ValidateInput(false)]
-        public ActionResult Create(News entity)
+        public ActionResult Create(Company entity)
         {
             if (entity.Id > 0)
             {
                 entity.Update(true);
             }
             else {
-                entity.CreateDate = DateTime.Now;
-                entity.Manager = ManagerImp.Current;
-                entity.Type = "公告";
                 entity.Save(true);
             }
-            return this.RedirectToAction(100, "操作成功", "编辑公告成功!", "News", "Index");
+            return this.RedirectToAction(100, "操作成功", "编辑公司成功!", "Company", "Index");
         }
 
         [HttpGet, Authorize]
         public ActionResult Delete(int id = 0)
         {
-            DbHelper.Get<News>(id).Delete(true);
-            return this.RedirectToAction(100, "操作成功", "删除公告成功!", "News", "Index");
+            DbHelper.Get<Company>(id).Delete(true);
+            return this.RedirectToAction(100, "操作成功", "删除公司成功!", "Company", "Index");
         }
 
-
-        public ActionResult Top()
+        [HttpGet, Authorize]
+        public ActionResult View(int id)
         {
-            return Json(DbHelper.Query<News>().Take(10).OrderByDescending(c => c.Id).Select(c => new { c.Id, c.Title }), JsonRequestBehavior.AllowGet);
+            return View(DbHelper.Get<Company>(id));
         }
+
     }
 }

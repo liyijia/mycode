@@ -44,7 +44,7 @@ namespace LY.EMIS5.Admin.Controllers
                     Name = c.Name,
                     UserName = c.UserName,
                     Phone = c.Phone,
-                    Email = c.Email,
+                    Email = c.Company!=null?c.Company.Name:"",
                     Roles = c.Kind,
                     Stat = !c.IsEnabled ? "禁用" : "启用"
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
@@ -55,9 +55,8 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpGet, Authorize]
         public ActionResult Create()
         {
-            var ent = new Manager();
-
-            return View(ent);
+            ViewBag.Companys = DbHelper.Query<Company>().AsSelectItemList(c => c.Id, c => c.Name);
+            return View(new Manager());
         }
 
         [HttpPost, Authorize]
@@ -68,44 +67,48 @@ namespace LY.EMIS5.Admin.Controllers
             ent.IsEnabled = true;
 
             ent.Save(true);
-            return this.RedirectToAction(100, "操作成功", string.Format("添加新用户{0}, 操作成功!", ent.Name), "Manager", "Index");
+            return this.RedirectToAction(100, "操作成功", "添加用户成功", "Manager", "Index");
         }
 
         [HttpGet, Authorize]
-        public ActionResult Edit(int id = 0)
+        public ActionResult Edit(int id)
         {
-            var ent = DbHelper.Query<Manager>(m => m.Id == id).FirstOrDefault();
-            if (ent == null)
-            {
-                ent = new Manager();
-            }
-            return View(ent);
+            ViewBag.Companys = DbHelper.Query<Company>().AsSelectItemList(c => c.Id, c => c.Name);
+            return View(DbHelper.Get<Manager>(id));
         }
 
         [HttpPost, Authorize]
-        public ActionResult Edit(Manager ent, string MemberOf_Id, string Roles_Id)
+        public ActionResult Edit(Manager ent)
         {
-            if (ent == null)
-            {
-                return Util.Echo(Const.IconFlags.error, "保存失败", "无保存的对象");
-            }
-
-            var oldEnt = DbHelper.Query<Manager>(m => m.Id == ent.Id).FirstOrDefault();
-            if (oldEnt == null)
-            {
-                return Util.Echo(Const.IconFlags.error, "操作出错", string.Format("无法编辑用户{0}, 数据库中无对应数据!", ent.Name));
-            }
-
-            oldEnt.Kind = ent.Kind;
-            oldEnt.Name = ent.Name;
-            oldEnt.UserName = ent.UserName;
-            oldEnt.Phone = ent.Phone;
-            oldEnt.Email = ent.Email;
-            oldEnt.Sex = ent.Sex;
-            oldEnt.Update(true);
-
-            return Util.Echo(Const.IconFlags.success, "编辑用户", string.Format("编辑用户{0}, 操作成功!", ent.Name));
+            var entity = DbHelper.Get<Manager>(ent.Id);
+            entity.Company = ent.Company;
+            entity.Email = ent.Email;
+            entity.Kind = ent.Kind;
+            entity.Name = ent.Name;
+            entity.Phone = ent.Phone;
+            entity.Sex = ent.Sex;
+            entity.UserName = ent.UserName;
+            entity.Update(true);
+            return this.RedirectToAction(100, "操作成功", "编辑用户成功", "Manager", "Index");
         }
+
+        [HttpGet, Authorize]
+        public ActionResult EditPassword()
+        {
+            return View();
+        }
+
+        [HttpPost, Authorize]
+        public ActionResult EditPassword(string oldpassword,string newpassword)
+        {
+            if (ManagerImp.Current.Password.Value == new Cipher() { Value = oldpassword, SecurityMode = Common.Const.SecurityModes.MD5 }.Encrypt().Value) {
+                ManagerImp.Current.Password = new Cipher() { Value = newpassword, SecurityMode = Common.Const.SecurityModes.MD5 }.Encrypt();
+                ManagerImp.Current.Update(true);
+                return this.RedirectToAction(100, "操作成功", "密码修改成功", "Manager", "EditPassword");
+            }
+            return this.RedirectToAction(100, "操作失败", "原密码不正确", "Manager", "EditPassword");
+        }
+
         [HttpGet, Authorize]
         public ActionResult Personal()
         {
@@ -140,26 +143,7 @@ namespace LY.EMIS5.Admin.Controllers
                 return Util.Echo(Const.IconFlags.success, "编辑用户", string.Format("编辑用户{0}, 操作成功!", manager.Name), "/Manager/Personal");
             }
         }
-
-        //批量删除
-        public JsonResult Delete(List<Manager> obj)
-        {
-            if (obj == null)
-                return Util.Echo(0, "操作失败", "请选择删除对象");
-            var Ids = obj.Select(s => s.Id).ToList();
-            var List = DbHelper.Query<Manager>(s => Ids.Contains(s.Id)).ToList();
-            using (var ts = TransactionScopes.Default)
-            {
-                foreach (var item in List)
-                {
-                    item.Delete();
-                }
-                ts.Complete();
-            }
-            return Util.Echo(100, "操作成功", "删除成功");
-
-
-        }
+    
         public JsonResult Reset(int id)
         {
             var entity = DbHelper.Get<Manager>(id);
@@ -183,62 +167,6 @@ namespace LY.EMIS5.Admin.Controllers
 
             return Json(isExists, JsonRequestBehavior.AllowGet);
         }
-
-        [HttpGet, Authorize]
-        public ActionResult Import()
-        {
-            var Table = new DataTable("管理员导入模版");
-            Table.Columns.Add("登录名");
-            Table.Columns.Add("姓名");
-            Table.Columns.Add("密码");
-            Table.Columns.Add("电话");
-            Table.Columns.Add("邮箱");
-            return Table.ExportToXls(Table.TableName + ".xls");
-        }
-
-        [HttpPost, Authorize]
-        public ActionResult Import(int id = 0)
-        {
-            var Table = Request.Files["file"].ImportFromXls();
-            if (Table.Rows.Count == 0)
-                return Util.Echo(0, "导入数据格式错误", "导入数据格式错误");
-            var error = "";
-            try
-            {
-                using (var ts = TransactionScopes.Default)
-                {
-                    foreach (DataRow tr in Table.Rows)
-                    {
-                        if (!string.IsNullOrEmpty(tr["登录名"].ToString()))
-                        {
-                            if (DbHelper.Query<Manager>(c => c.UserName == tr["登录名"].ToString()).Count() == 0)
-                            {
-                                new Manager() { UserName = tr["登录名"].ToString(), Name = tr["姓名"].ToString(), Password = new Cipher() { SecurityMode = Common.Const.SecurityModes.MD5, Value = tr["密码"].ToString() }.Encrypt(), Phone = tr["电话"].ToString(), Email = tr["邮箱"].ToString() }.Save();
-                            }
-                            else
-                            {
-                                error += tr["登录名"].ToString() + ",";
-                            }
-                        }
-                    }
-                    ts.Complete();
-                }
-            }
-            catch (Exception)
-            {
-                return Util.Echo(0, "导入数据格式错误", "导入数据格式错误");
-            }
-            if (error.Length > 0)
-            {
-                return Util.Echo(100, "导入成功", "导入成功，用户名" + error.TrimEnd(',') + "已存在");
-            }
-            else
-            {
-                return Util.Echo(100, "导入成功", "导入成功");
-            }
-        }
-
-
 
     }
 }

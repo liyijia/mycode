@@ -15,3 +15,7 @@ table,table th{
 .none {
     display:none
 }
+
+.text-left {
+   text-align:left; max-width:30%
+}

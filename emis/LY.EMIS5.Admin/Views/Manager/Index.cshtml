@@ -26,7 +26,7 @@
                     $('td:eq(3)', nRow).addClass("hidden-phone");
                     $('td:eq(4)', nRow).addClass("hidden-phone");
                         $('td:eq(5)', nRow).html("<a onclick='Enabled(this)' rel='" + aData.Id + "' href=\"#\">" + aData.Stat + "</a>");
-                        $('td:eq(6)', nRow).html("<a onclick='Reset(\"/Manager/Reset/" + aData.Id + "\")'  href=\"#\">重置密码</a>");
+                        $('td:eq(6)', nRow).html("<a href=\"/Manager/Edit/"+aData.Id+"\">编辑</a> <a onclick='Reset(\"/Manager/Reset/" + aData.Id + "\")'  href=\"#\">重置密码</a>");
                    
                 }
             });
@@ -82,7 +82,7 @@
                                     <th>姓名</th>
                                     <th>账号</th>
                                     <th class="hidden-phone">电话号码</th>
-                                    <th class="hidden-phone">电子邮箱</th>
+                                    <th class="hidden-phone">公司</th>
                                     <th class="hidden-phone">角色类型</th>
                                     <th>状态</th>
                                     <th>操作</th>
