@@ -40,20 +40,7 @@ namespace LY.EMIS5.Admin.Controllers
             Response.Cookies[FormsAuthentication.FormsCookieName].Expires = DateTime.Now;
             return RedirectToAction("Login", "Home");
         }
-        /// <summary>
-        /// 密码修改
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost, Authorize]
-        public JsonResult upPassword(string oldPassword, string newPassword)
-        {
-            var manager = DbHelper.Get<Manager>(ManagerImp.Current.Id);
-            if (new Cipher { Value = oldPassword, SecurityMode = SecurityModes.MD5 }.Encrypt().Value != manager.Password.Value)
-                return Util.Echo(0, "操作失败", "原密码输入不正确");
-            manager.Password = new Cipher { Value = newPassword, SecurityMode = SecurityModes.MD5 }.Encrypt();
-            manager.Update(true);
-            return Util.Echo(100, "操作成功", "操作成功!");
-        }
+
 
         private void WriteCookie(int managerId)
         {
@@ -72,7 +59,7 @@ namespace LY.EMIS5.Admin.Controllers
         {
             var manager = ManagerImp.Login(Name, Password);
             WriteCookie(manager.Id);
-            return RedirectToAction("Index", "Project");
+            return RedirectToAction("AuditList", "Project");
         }
        
     }

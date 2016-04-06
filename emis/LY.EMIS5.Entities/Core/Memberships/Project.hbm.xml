@@ -35,5 +35,6 @@
     <property name="Aptitude" />
     <property name="MoneySituation" />
     <property name="Bid" />
+    <property name="Remark" />
   </class>
 </hibernate-mapping>

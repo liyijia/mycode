@@ -1,5 +1,5 @@
 ﻿@using LY.EMIS5.Common;
-@using LY.EMIS5.Const;
+@using LY.EMIS5.BLL;
 @model LY.EMIS5.Entities.Core.Memberships.Project
 @{
     ViewBag.Title = "项目资料";
@@ -139,6 +139,15 @@
                                     <label class="control-label">@Model.SalesOpinion</label>
                                 </div>
                             </div>
+                            if (Model.Sale.Id == ManagerImp.Current.Id)
+                            {
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-sm-2 control-label">备注</label>
+                                    <div class="col-sm-10">
+                                        <label class="control-label">@Model.Remark</label>
+                                    </div>
+                                </div>
+                            }
                         }
                     }
                     @foreach (var item in Model.Opinions.Where(c => c.Done).OrderBy(c => c.Id))

@@ -151,6 +151,7 @@ namespace LY.EMIS5.Admin.Controllers
                 entity.CompanyName = model.CompanyName;
                 entity.ReplaceMoney = model.ReplaceMoney;
                 entity.Aptitude = model.Aptitude;
+                entity.Remark = model.Remark;
                 entity.MoneySituation = model.MoneySituation;
                 if (entity.ProjectProgress != "未上网") {
                     entity.Sort = 1;

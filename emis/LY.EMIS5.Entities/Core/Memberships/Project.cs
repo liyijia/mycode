@@ -145,5 +145,10 @@ namespace LY.EMIS5.Entities.Core.Memberships
         /// </summary>
         public virtual bool Bid{ get; set; }
 
+        /// <summary>
+        /// 备注(仅登记人可查看)
+        /// </summary>
+        public virtual string Remark { get; set; }
+
     }
 }

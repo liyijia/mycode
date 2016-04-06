@@ -12,7 +12,7 @@
                 "sAjaxSource": "/Records/Index",
                 "fnServerParams": function (aoData) {
                    
-                }, "aoColumns": [
+                }, "aoColumns": [{ "mData": "Id" },
                       { "mData": "Area" },
                       { "mData": "IsRecord" },
                       { "mData": "WebSite" },
@@ -22,9 +22,9 @@
                       { "mData": "Id" }
                 ], "bFilter": false, "bSort": false,
                 "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                    $('td:eq(9)', nRow).html("<a href=\"/News/View/" + aData.Id + "\">查看</a>");
+                    $('td:eq(10)', nRow).html("<a href=\"/News/View/" + aData.Id + "\">查看</a>");
                     if (aData.Edit) {
-                        $('td:eq(9)', nRow).append(' <a href="/Records/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');
+                        $('td:eq(10)', nRow).append(' <a href="/Records/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');
                     }
                      
                    
@@ -65,7 +65,7 @@
                     <div class="adv-table">
                         <table class="display table table-bordered table-striped" id="dynamic-table">
                             <thead>
-                                <tr>
+                                <tr><th>编号</th>
                                     <th>区域</th>
                                     <th>是否备案</th>
                                     <th>网址</th>

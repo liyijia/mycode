@@ -12,7 +12,7 @@
                 "sAjaxSource": "/Achievement/Index",
                 "fnServerParams": function (aoData) {
                    
-                }, "aoColumns": [
+                }, "aoColumns": [{ "mData": "Id" },
                       { "mData": "ProjectName" },
                       { "mData": "Scale" },
                       { "mData": "StartDate" },
@@ -22,9 +22,10 @@
                       { "mData": "Id" }
                 ], "bFilter": false, "bSort": false,
                 "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                    $('td:eq(6)', nRow).html("<a href=\"/News/View/" + aData.Id + "\">查看</a>");
+                    $('td:eq(1)', nRow).addClass('text-left');
+                    $('td:eq(7)', nRow).html("<a href=\"/News/View/" + aData.Id + "\">查看</a>");
                     if (aData.Edit) {
-                        $('td:eq(6)', nRow).append(' <a href="/Achievement/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');
+                        $('td:eq(7)', nRow).append(' <a href="/Achievement/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');
                     }
                      
                    
@@ -66,6 +67,7 @@
                         <table class="display table table-bordered table-striped" id="dynamic-table">
                             <thead>
                                 <tr>
+                                    <th>编号</th>
                                     <th>项目名称</th>
                                     <th>规模</th>
                                     <th>开工时间</th>
