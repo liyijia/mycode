@@ -330,7 +330,7 @@ namespace LY.EMIS5.Admin.Controllers
                 }
                 foreach (var item in companys)
                 {
-                    list.Add(new { Name = c.Name, Register = query.Where(m => m.CompanyName == item.Name && m.ProjectProgress!="未上网" && m.ProjectProgress!="不能投标").Count(), NotOnLine = query.Where(m => m.CompanyName == item.Name && m.ProjectProgress == "未上网").Count(), Cannot = query.Where(m => m.CompanyName == item.Name && m.ProjectProgress == "不能投标").Count(), Open = query.Where(m => m.CompanyName == item.Name && (m.ProjectProgress== "开标结束" || m.ProjectProgress == "项目结束" || m.ProjectProgress == "保证金已退") ).Count(), Company = item.Name });
+                    list.Add(new { Name = c.Name, Register = query.Where(m => m.CompanyName == item.Name).Count(), NotOnLine = query.Where(m => m.CompanyName == item.Name && m.ProjectProgress == "未上网").Count(), Cannot = query.Where(m => m.CompanyName == item.Name && m.ProjectProgress == "不能投标").Count(), Open = query.Where(m => m.CompanyName == item.Name && (m.ProjectProgress== "开标结束" || m.ProjectProgress == "项目结束" || m.ProjectProgress == "保证金已退") ).Count(), Company = item.Name });
                 }
                
             });
