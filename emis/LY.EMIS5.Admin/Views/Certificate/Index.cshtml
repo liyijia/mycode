@@ -38,13 +38,14 @@
                 location.href = "/Certificate/Create";
             });
            
-            function Delete(id) {
-                $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
-                    dialog.modal('hide');
-                    location.href = "/Certificate/Delete/" + id;
-                })
-            }
+            
         });
+        function Delete(id) {
+            $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
+                dialog.modal('hide');
+                location.href = "/Certificate/Delete/" + id;
+            })
+        }
     </script>
 }
 

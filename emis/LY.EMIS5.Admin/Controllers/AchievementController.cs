@@ -57,7 +57,7 @@ namespace LY.EMIS5.Admin.Controllers
             if (id > 0) {
                 return View(DbHelper.Get<Achievement>(id));
             }
-            return View(new Achievement());
+            return View();
         }
 
         [HttpPost, Authorize]
@@ -76,9 +76,9 @@ namespace LY.EMIS5.Admin.Controllers
         }
 
         [HttpGet, Authorize]
-        public ActionResult Detlete(int id = 0)
+        public ActionResult Delete(int id = 0)
         {
-            DbHelper.Get<Achievement>(id).Delete();
+            DbHelper.Get<Achievement>(id).Delete(true);
             return this.RedirectToAction(100, "操作成功", "删除业绩成功!", "Achievement", "Index");
         }
 

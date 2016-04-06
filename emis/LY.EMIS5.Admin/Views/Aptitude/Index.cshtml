@@ -35,13 +35,14 @@
                 location.href = "/Aptitude/Create";
             });
            
-            function Delete(id) {
-                $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
-                    dialog.modal('hide');
-                    location.href = "/Aptitude/Delete/" + id;
-                })
-            }
+            
         });
+        function Delete(id) {
+            $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
+                dialog.modal('hide');
+                location.href = "/Aptitude/Delete/" + id;
+            })
+        }
     </script>
 }
 

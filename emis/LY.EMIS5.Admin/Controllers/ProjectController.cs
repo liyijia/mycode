@@ -37,7 +37,7 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpPost, Authorize]
         public string Index(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", int sale = 0, string state = "", string sEcho = "")
         {
-            IQueryable<Project> query = DbHelper.Query<Project>(c => c.ProjectProgress != "未上网");
+            IQueryable<Project> query = DbHelper.Query<Project>();
             if (!string.IsNullOrWhiteSpace(name))
             {
                 query = query.Where(c => c.ProjectName.Contains(name));
@@ -59,11 +59,11 @@ namespace LY.EMIS5.Admin.Controllers
                     ProjectName = c.ProjectName,
                     Name = c.Sale.Name,
                     c.Scale,
-                    c.Money,
-                    c.Source,
+                    Money = c.ProjectProgress == "未上网" ? "" : c.Money.ToString(),
+                    Source=c.ProjectProgress == "未上网" ? "" :c.Source,
                     c.ProjectProgress,
-                    OpenDate = c.OpenDate.ToYearMonthDayString(),
-                    EndDate = c.EndDate.ToYearMonthDayString(),
+                    OpenDate =c.ProjectProgress == "未上网"?"": c.OpenDate.ToYearMonthDayString(),
+                    EndDate =c.ProjectProgress == "未上网"?"": c.EndDate.ToYearMonthDayString(),
                     c.CompanyName,
                     Edit=ManagerImp.Current.Kind=="管理员"|| ManagerImp.Current.Kind=="资料员",
                     Prompt = c.ProjectProgress != "未上网" && (c.OpenDate - DateTime.Now).Days < 30
@@ -96,8 +96,8 @@ namespace LY.EMIS5.Admin.Controllers
                     ProjectName = c.ProjectName,
                     Name = c.Sale.Name,
                     c.Scale,
-                    c.Money,
-                    c.Source,
+                    Money = c.ProjectProgress == "未上网" ? "" : c.Money.ToString(),
+                    Source = c.ProjectProgress == "未上网" ? "" : c.Source,
                     c.ProjectProgress,
                     OpenDate = c.ProjectProgress == "未上网" ? "" : c.OpenDate.ToYearMonthDayString(),
                     EndDate = c.ProjectProgress == "未上网" ? "" : c.EndDate.ToYearMonthDayString(),
@@ -303,7 +303,7 @@ namespace LY.EMIS5.Admin.Controllers
         {
             var entity = DbHelper.Get<Project>(id);
             if (entity.ProjectProgress == "未上网") {
-                entity.Delete();
+                entity.Delete(true);
             }
             return this.RedirectToAction(100, "操作成功", "项目作废申请成功", "Project", "AuditList");
         }
@@ -342,8 +342,8 @@ namespace LY.EMIS5.Admin.Controllers
                     query = query.Where(m => m.CreateDate <= DateTime.Parse(endDate).AddDays(1));
                 }
 
-                list.Add(new { Name = c.Name, Register = query.Where(m => m.CompanyName == "城开").Count(), Cannot = query.Where(m => m.CompanyName == "城开" && m.ProjectProgress == "不能投标"), Open = query.Where(m => m.CompanyName == "城开" && m.ProjectProgress != "不能投标" && m.OpenDate < DateTime.Now), Company = "城开" });
-                list.Add(new { Name = c.Name, Register = query.Where(m => m.CompanyName == "正泰").Count(), Cannot = query.Where(m => m.CompanyName == "正泰" && m.ProjectProgress == "不能投标"), Open = query.Where(m => m.CompanyName == "正泰" && m.ProjectProgress != "不能投标" && m.OpenDate < DateTime.Now), Company = "正泰" });
+                list.Add(new { Name = c.Name, Register = query.Where(m => m.CompanyName == "城开").Count(), Cannot = query.Where(m => m.CompanyName == "城开" && m.ProjectProgress == "不能投标").Count(), Open = query.Where(m => m.CompanyName == "城开" && m.ProjectProgress != "不能投标" && m.OpenDate < DateTime.Now).Count(), Company = "城开" });
+                list.Add(new { Name = c.Name, Register = query.Where(m => m.CompanyName == "正泰").Count(), Cannot = query.Where(m => m.CompanyName == "正泰" && m.ProjectProgress == "不能投标").Count(), Open = query.Where(m => m.CompanyName == "正泰" && m.ProjectProgress != "不能投标" && m.OpenDate < DateTime.Now).Count(), Company = "正泰" });
             });
 
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,

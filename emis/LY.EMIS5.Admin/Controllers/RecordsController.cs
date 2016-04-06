@@ -60,7 +60,7 @@ namespace LY.EMIS5.Admin.Controllers
             if (id > 0) {
                 return View(DbHelper.Get<Records>(id));
             }
-            return View(new Records());
+            return View();
         }
 
         [HttpPost, Authorize]
@@ -75,14 +75,14 @@ namespace LY.EMIS5.Admin.Controllers
                 entity.Manager = ManagerImp.Current;
                 entity.Save(true);
             }
-            return this.RedirectToAction(100, "操作成功", "编辑公告成功!", "Records", "Index");
+            return this.RedirectToAction(100, "操作成功", "编辑备案成功!", "Records", "Index");
         }
 
         [HttpGet, Authorize]
-        public ActionResult Detlete(int id = 0)
+        public ActionResult Delete(int id = 0)
         {
-            DbHelper.Get<Records>(id).Delete();
-            return this.RedirectToAction(100, "操作成功", "删除公告成功!", "Records", "Index");
+            DbHelper.Get<Records>(id).Delete(true);
+            return this.RedirectToAction(100, "操作成功", "删除备案成功!", "Records", "Index");
         }
 
         [HttpGet, Authorize]
