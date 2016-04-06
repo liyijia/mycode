@@ -2,164 +2,165 @@
 @using LY.EMIS5.Const;
 @model LY.EMIS5.Entities.Core.Memberships.Project
 @{
-    ViewBag.Title = "项目详情";
+    ViewBag.Title = "项目资料";
 }
-@section Script
-{
-   
-}
-<div class="weizhi">
-    <h1 class="font14 fontw lvse">项目详情</h1>
-    <div class="right2">
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                项目资料
+            </header>
+            <div class="panel-body">
+                <form class="form-horizontal adminex-form" method="post">
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">项目名称</label>
+                        <div class="col-sm-10">
+                            @Html.HiddenFor(c => c.Id)
+                            <label class="control-label">@Model.ProjectName</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">状态</label>
+                        <div class="col-sm-10">
+                            <label class="control-label">@Model.ProjectProgress</label>
+                        </div>
+                    </div>
+                    @{
+                        if (Model.ProjectProgress != "未上网")
+                        {
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">下载链接</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.Link</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">规模</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.Scale</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">业主</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.Owner</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">保证金来源</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.Source</label>
+                                </div>
+                            </div>
+                            if (Model.Source == "代打")
+                            {
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-sm-2 control-label">代打金额</label>
+                                    <div class="col-sm-10 input-group">
+                                        <label class="control-label">@(Model.ReplaceMoney)万元</label>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">保证金金额</label>
+                                <div class="col-sm-10 input-group">
+                                    <label class="control-label">@(Model.Money)万元</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">保证金截至时间</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.EndDate.ToYearMonthDayString()</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">保证金打款方式</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.Type</label>
+                                </div>
+                            </div>
+                            if (Model.Type == "网银支付")
+                            {
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-sm-2 control-label">保证金账户名</label>
+                                    <div class="col-sm-10">
+                                        <label class="control-label">@Model.UserName</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-sm-2 control-label">保证金账号</label>
+                                    <div class="col-sm-10">
+                                        <label class="control-label">@Model.Account</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-sm-2 control-label">保证金开户行</label>
+                                    <div class="col-sm-10">
+                                        <label class="control-label">@Model.Bank</label>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">开标时间</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.OpenDate.ToYearMonthDayString()</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">资料费</label>
+                                <div class="col-sm-10 input-group">
+                                    <label class="control-label">@(Model.MaterialFee)元</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">公司名称</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.CompanyName</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">资质要求</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.Aptitude</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">费用收费情况</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.MoneySituation</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">@Model.Sale.Name</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.SalesOpinion</label>
+                                </div>
+                            </div>
+                        }
+                    }
+                    @foreach (var item in Model.Opinions.Where(c => c.Done).OrderBy(c => c.Id))
+                    {
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">@item.ProjectProgress</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@item.Content</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">@item.Manager.Name</label>
+                            <div class="col-sm-10">
+                                <label class="control-label">@item.DoneDate.ToChineseDateString()</label>
+                            </div>
+                        </div>
+
+                    }
+                </form>
+            </div>
+
+
+        </section>
     </div>
 </div>
-<div class="kong"></div>
-<form id="from-createProduct" action="/Project/Create" method="post">
-    <table class="table1" border="0" cellspacing="1" cellpadding="0">
-        <tr>
-            <td width="100px">项目名称：</td>
-            <td>
-                @Model.ProjectName
-              
-            </td>
-            <td width="100px">下载链接：</td>
-            <td>
-                <a href="@Model.Link">@Model.Link</a>
-            </td>
-        </tr>
-        <tr>
-            <td width="100px">规模：</td>
-            <td>
-                @Model.Scale
-            </td>
-            <td width="100px">业主：</td>
-            <td>
-                @Model.Owner
-            </td>
-        </tr>
-        <tr>
-            <td>保证金来源：</td>
-            <td>
-                @Model.Source
-            </td>
-            <td>保证金金额：</td>
-            <td>
-                @(Model.Owner)元
-            </td>
-        </tr>
-        <tr>
-            <td>保证金截至时间：</td>
-            <td>
-                @Model.EndDate.ToShortDateString()
-            </td>
-            <td>保证金打款方式：</td>
-            <td>
-                @Model.Type
-            </td>
-        </tr>
-        <tr>
-            <td>保证金账户名：</td>
-            <td>
-                @Model.UserName
-            </td>
-            <td>保证金账号：</td>
-            <td>
-                @Model.Account
-            </td>
-        </tr>
-        <tr>
-            <td>保证金开户行：</td>
-            <td>
-                @Model.Bank
-            </td>
-            <td>开标时间：</td>
-            <td>
-                @Model.OpenDate.ToShortDateString()
-            </td>
-        </tr>
-        <tr>
-            <td>资料费：</td>
-            <td>
-                @(Model.MaterialFee)元
-            </td>
-            <td>公司名称：</td>
-            <td>
-                @Model.CompanyName
-            </td>
-        </tr>
-        <tr>
-            <td>当前进度：</td>
-            <td>
-                @Model.ProjectProgress
-            </td>
-            <td>上传时间：</td>
-            <td>
-                @Model.CreateDate.ToChineseDateString()
-            </td>
-        </tr>
-        <tr>
-            <td>业务员：</td>
-            <td>
-                @Model.Sale.Name
-            </td>
-            <td>业务员意见：</td>
-            <td>
-                @Model.SalesOpinion
-            </td>
-        </tr>
-        @{
-            if (Model.Documenter != null)
-            {
-                <tr>
-                    <td>资料员：</td>
-                    <td>
-                        @Model.Documenter.Name
-                    </td>
-                    <td>资料员意见：</td>
-                    <td>
-                        @Model.DocumenterOpinion
-                    </td>
-                </tr>
-            }
-            if (Model.Finance != null)
-            {
-                <tr>
-                    <td>财务：</td>
-                    <td>
-                        @Model.Finance.Name
-                    </td>
-                    <td>财务意见：</td>
-                    <td>
-                        @Model.FinanceOpinion
-                    </td>
-                </tr>
-            }
-            if (Model.CEO != null)
-            {
-                <tr>
-                    <td>总经理：</td>
-                    <td>
-                        @Model.CEO.Name
-                    </td>
-                    <td>总经理意见：</td>
-                    <td>
-                        @Model.CEOOpinion
-                    </td>
-                </tr>
-            }
-            if (Model.OpenPeople != null)
-            {
-                <tr>
-                    <td>开标人：</td>
-                    <td>
-                        @Model.OpenPeople.Name
-                    </td>
-                    <td>开标情况：</td>
-                    <td>
-                        @Model.Situation
-                    </td>
-                </tr>
-            }
-        }
-    </table>
-</form>

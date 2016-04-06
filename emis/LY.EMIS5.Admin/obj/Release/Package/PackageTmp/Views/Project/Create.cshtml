@@ -4,140 +4,206 @@
 @{
     ViewBag.Title = "添加项目";
 }
-@section Script
-{
+@section Script{
     <script>
         $(function () {
-             
-            var Calendar = BUI.Calendar;
-            var datepicker = new Calendar.DatePicker({
-                trigger: '.calendar',
-                autoRender: true
+            $("#ProjectName").autocomplete({
+                source: "/Project/SearchProject",
+                minLength: 2,
             });
-            $("#btnSbmit").click(function () {
-                if (!$("#from-createProduct").validate().form())
-                    return;
-                //self.sync();
-                ajaxSubmit($("#from-createProduct"), null, function (result) {
-                    callback(result, null)
-                });
-            });
-            $(".returns").click(function () {
-                location.href = '/Project';
-            });
-        });
+            $('[name="ProjectProgress"]').change(function () {
+                if ($(this).val() == '未上网') {
+                    $('#content').hide().find('.form-control').removeClass('required');
+                } else {
+                    $('#content').show().find('.form-control').addClass('required');
 
-     
+                }
+                $('[name="Source"]').change();
+                $('[name="Type"]').change();
+            });
+
+            $('[name="Type"]').change(function () {
+                if ($(this).val() == '网银支付') {
+                    $('#bankinfo').show().find('.form-control').addClass('required');
+                } else {
+                    $('#bankinfo').hide().find('form-control').removeClass('required');
+                }
+            });
+
+            $('[name="Source"]').change(function () {
+                if ($('[name="Source"]').val() == '代打') {
+                    $('#replace').show().find('input.form-control').addClass('required');
+                } else {
+                    $('#replace').hide().find('input.form-control').removeClass('required');
+                }
+            });
+            $('[name="ProjectProgress"]').val('@Model.ProjectProgress');
+            if ('@Model.Type' != '') {
+                $('[name="Type"]').val('@Model.Type');
+            }
+            if ('@Model.Source' != '') {
+                $('[name="Source"]').val('@Model.Source');
+            }
+            $('[name="ProjectProgress"]').change();
+        });
     </script>
 }
-<div class="weizhi">
-    <h1 class="font14 fontw lvse">添加项目</h1>
-    <div class="right2">
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                项目资料
+            </header>
+            <div class="panel-body">
+                <form class="form-horizontal adminex-form" action="/Project/Create" method="post">
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">项目名称</label>
+                        <div class="col-sm-10">
+                            @Html.HiddenFor(c => c.Id)
+                            @Html.TextBoxFor(c => c.ProjectName, new { @class = "form-control required" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">状态</label>
+                        <div class="col-sm-10">
+                            <select name="ProjectProgress" class="form-control required">
+                                <option>未上网</option>
+                                <option>已上网</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="content" class="none">
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">下载链接</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.Link, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">规模</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.Scale, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">业主</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.Owner, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">保证金来源</label>
+                            <div class="col-sm-10">
+                                <select name="Source" class="form-control">
+                                    <option>自打</option>
+                                    <option>代打</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="replace" class="form-group none">
+                            <label class="col-sm-2 col-sm-2 control-label">代打金额</label>
+                            <div class="col-sm-10 input-group">
+                                @Html.TextBox("ReplaceMoney", (Model.ProjectProgress == "未上网" ? "" : Model.ReplaceMoney.ToString()), new { @class = "form-control number form-control-addon" })<span class="input-group-addon">万元</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">保证金金额</label>
+                            <div class="col-sm-10 input-group">
+                                @Html.TextBox("Money", Model.ProjectProgress == "未上网" ? "" : Model.Money.ToString(), new { @class = "form-control number form-control-addon" })<span class="input-group-addon">万元</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">保证金截至时间</label>
+                            <div class="col-sm-10">
+                                @Html.TextBox("EndDate", Model.ProjectProgress == "未上网" ? "" : Model.EndDate.ToYearMonthDayString(), new { @class = "form-control default-date-picker" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">保证金打款方式</label>
+                            <div class="col-sm-10">
+                                <select name="Type" class="form-control required">
+                                    <option>网银支付</option>
+                                    <option>转账</option>
+                                    <option>现场刷卡</option>
+                                    <option>其他方式</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="bankinfo none">
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">保证金账户名</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(c => c.UserName, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">保证金账号</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(c => c.Account, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">保证金开户行</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(c => c.Bank, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">开标时间</label>
+                            <div class="col-sm-10">
+                                @Html.TextBox("OpenDate", Model.ProjectProgress == "未上网" ? "" : Model.OpenDate.ToYearMonthDayString(), new { @class = "form-control default-date-picker" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">资料费</label>
+                            <div class="col-sm-10 input-group">
+                                @Html.TextBox("MaterialFee", Model.ProjectProgress == "未上网" ? "" : Model.MaterialFee.ToString(), new { @class = "form-control number form-control-addon" })<span class="input-group-addon">元</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">公司名称</label>
+                            <div class="col-sm-10">
+                                <label class="checkbox-inline"><input type="checkbox" name="CompanyNames" value="城开" />城开</label>
+                                <label class="checkbox-inline"><input type="checkbox" name="CompanyNames" value="正泰" />正泰</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">资质要求</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.Aptitude, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">费用收费情况</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.MoneySituation, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">资料员</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownList("documentId", ViewBag.List as IList<SelectListItem>, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">意见</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(c => c.SalesOpinion, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button class="btn btn-primary" type="submit">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
     </div>
 </div>
-<div class="kong"></div>
-<form id="from-createProduct" action="/Project/Create" method="post">
-    <table class="table1" border="0" cellspacing="1" cellpadding="0">
-        <tr>
-            <td width="100px">项目名称：</td>
-            <td>
-                @Html.HiddenFor(c => c.Id)
-                @Html.TextBoxFor(c => c.ProjectName, new { @class = "wborder required" })
-            </td>
-            <td width="100px">下载链接：</td>
-            <td>
-                @Html.TextBoxFor(c => c.Link, new { @class = "wborder required" })
-            </td>
-        </tr>
-        <tr>
-            <td width="100px">规模：</td>
-            <td>
-                @Html.TextBoxFor(c => c.Scale, new { @class = "wborder required" })
-            </td>
-            <td width="100px">业主：</td>
-            <td>
-                @Html.TextBoxFor(c => c.Owner, new { @class = "wborder required" })
-            </td>
-        </tr>
-        <tr>
-            <td>保证金来源：</td>
-            <td>
-                <select name="Source">
-                    <option>自打</option>
-                    <option>代打</option>
-                </select>
-            </td>
-            <td>保证金金额：</td>
-            <td>
-                @Html.TextBoxFor(c => c.Money, new { @class = "wborder required number" })元
-            </td>
-        </tr>
-        <tr>
-            <td>保证金截至时间：</td>
-            <td>
-                @Html.TextBoxFor(c => c.EndDate, new { @class = "wborder required calendar" })
-            </td>
-            <td>保证金打款方式：</td>
-            <td>
-                <select name="Type">
-                    <option>网银支付</option>
-                    <option>转账</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>保证金账户名：</td>
-            <td>
-                @Html.TextBoxFor(c => c.UserName, new { @class = "wborder required" })
-            </td>
-            <td>保证金账号：</td>
-            <td>
-                @Html.TextBoxFor(c => c.Account, new { @class = "wborder required" })
-            </td>
-        </tr>
-        <tr>
-            <td>保证金开户行：</td>
-            <td>
-                @Html.TextBoxFor(c => c.Bank, new { @class = "wborder required" })
-            </td>
-            <td>开标时间：</td>
-            <td>
-                @Html.TextBoxFor(c => c.OpenDate, new { @class = "wborder required calendar" })
-            </td>
-        </tr>
-        <tr>
-            <td>资料费：</td>
-            <td>
-                @Html.TextBoxFor(c => c.MaterialFee, new { @class = "wborder required number" })元
-            </td>
-            <td>公司名称：</td>
-            <td>
-                @Html.TextBoxFor(c => c.CompanyName, new { @class = "wborder required" })
-            </td>
-        </tr>
-        <tr>
-            <td>资料员：</td>
-            <td>
-                @Html.DropDownList("documenterId", ViewBag.List as IList<SelectListItem>)
-            </td>
-            <td></td>
-            <td>
-               
-            </td>
-        </tr>
-        <tr class="bkong">
-            <td>意见</td>
-            <td colspan="3">
-                <textarea name="SalesOpinion" class="required" style="width: 80%; height: 150px;">@Model.SalesOpinion</textarea>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input type="button" id="btnSbmit" class="button" value="提交" /><input type="button" class="button returns" value="返回" style="margin-left: 10px;" />
-            </td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-</form>

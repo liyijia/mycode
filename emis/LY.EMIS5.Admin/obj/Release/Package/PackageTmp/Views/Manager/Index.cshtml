@@ -5,38 +5,14 @@
 @section Script{
     <script type="text/javascript">
         var table = null;
-        var dialog = new Overlay.Dialog({
-            title: '导入管理员',
-            width: 400,
-            height: 100,
-            contentId: 'import',
-            success: function () {
-                $('#form-Import').ajaxSubmit({
-                    beforeSubmit: function () {
-                    },
-                    success: function (data) {
-                        if (data.icon == 'success') {
-                            BUI.Message.Alert(data.message, function () {
-                                table.dataTable().fnAdjustColumnSizing();
-                            }, 'success');
-                        } else {
-                            BUI.Message.Alert(data.message, 'warning');
-                        }
-                    }
-                })
-                table.dataTable().fnAdjustColumnSizing();
-                this.close();
-            }
-        });
         $(function () {
-            table = $('#table-Manager-list').dataTable({
+            table = $('#dynamic-table').dataTable({
                 "bServerSide": true,
                 "bLengthChange": false,
                 "sAjaxSource": "/Manager/Index",
                 "fnServerParams": function (aoData) {
                     aoData.push({ "name": "txt", "value": $("#txt").val() });
                 }, "aoColumns": [
-                      { "mData": "Id" },
                       { "mData": "Name" },
                       { "mData": "UserName" },
                       { "mData": "Phone" },
@@ -46,142 +22,78 @@
                       { "mData": "Id" }
                 ], "bFilter": false, "bSort": false,
                 "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                    $('td:eq(0)', nRow).html("<input type=\"checkbox\" class=\"child\" value=\"" + aData.Id + "\" />");
-                   
-                        $('td:eq(6)', nRow).html("<a onclick='Enabled(this)' rel='" + aData.Id + "' class='" + (aData.Stat == "启用" ? "" : "red") + "'>" + aData.Stat + "</a>");
-                        $('td:eq(7)', nRow).html("<a onclick='Reset(\"/Manager/Reset/" + aData.Id + "\")' >重置密码</a>");
+                    $('td:eq(2)', nRow).addClass("hidden-phone");
+                    $('td:eq(3)', nRow).addClass("hidden-phone");
+                    $('td:eq(4)', nRow).addClass("hidden-phone");
+                        $('td:eq(5)', nRow).html("<a onclick='Enabled(this)' rel='" + aData.Id + "' href=\"#\">" + aData.Stat + "</a>");
+                        $('td:eq(6)', nRow).html("<a onclick='Reset(\"/Manager/Reset/" + aData.Id + "\")'  href=\"#\">重置密码</a>");
                    
                 }
             });
-            //加载全选
-            ListSelectAll();
-            //添加
-            var create=new Overlay.Dialog({
-                title: '添加管理员',
-                width: 700,
-                loader: {
-                    url: '/Manager/Create'
-                },
-                closeAction: 'destroy',
-                success: function () {
-                    var form = $("#form-CreateManager");
-                    var userName = form.find("#UserName").val();
-                    var p1 = form.find("#Password_Value").val();
-                    var p2 = form.find("#password").val();
-                    if (!form.validate().form()) {
-                        return false;
-                    }
-                    if (p1 != p2) {
-                        BUI.Message.Alert('两次输入密码不正确', 'error');
-                        return false;
-                    }
-                    $.ajax({
-                        url: "/Manager/CheckUserName",
-                        type: "get",
-                        data: "userName=" + userName,
-                        error: function (msg) {
-                            BUI.Message.Alert('未能成功检测用户' + userName + "是否存在", 'error');
-                            return false;
-                        },
-                        success: function (msg) {
-                            if (!msg) {
-                                ajaxSubmit($("#form-CreateManager"), null, function (result) {
-                                    callback(result, table);
-                                });
-                            }
-                            else {
-                                BUI.Message.Alert(userName + "已经存在,不能添加重复登陆账号", 'error');
-                                return false;
-                            }
-                        }
-                    });
-                }
-            });
-            $(".create").click(function () {
-                create.show();
-            });
-
             //搜索
             $(".sreach").click(function () {
                 table.dataTable().fnAdjustColumnSizing();
             });
-            //批量删除
-            $(".delete").click(function () {
-                deletes(table, '/Manager/Delete');
-            });
-            $(".import").click(function () {
-                dialog.show();
-            })
 
+            $('.create').click(function(){
+                location.href="/Manager/Create";
+            });
+           
         });
-
-        function Edit(href) {
-            var edit = new Overlay.Dialog({
-                title: '修改管理员',
-                width: 700,
-                closeAction: 'destroy',
-                loader: {
-                    url: href
-                },
-                success: function () {
-                    ajaxSubmit($("#form-EditManager"), null, function (result) {
-                        callback(result, table);
-                    });
-                    this.close();
-                }
-            });
-
-            edit.show();
-        }
         function Reset(href) {
-            BUI.Message.Confirm('确认要重置该用户的密码吗？', function () {
+            $.myDialog('confirm', '确认要重置该用户的密码吗？', 'confirm', function (dialog) {
+                dialog.modal('hide');
                 $.get(href, function () {
-                    BUI.Message.Alert('密码重置成功', 'success');
+                           
                 })
-            }, 'question');
+            })
         }
         function Enabled(obj) {
-            var b = $(obj).text() == "启用";
-            BUI.Message.Confirm('确认要' + (b ? "禁用" : "启用") + '吗？', function () {
-                $.get("/Manager/Enabled/" + $(obj).attr("rel") + "?t=" + new Date(), function () {
-                    $(obj).text((b ? "禁用" : "启用")).attr('class', (b ? "red" : ""));
-                    BUI.Message.Alert((b ? "禁用" : "启用") + '成功', 'success');
+            var b = $(obj).text();
+            $.myDialog('confirm', '确认要' + (b == "启用" ? "禁用" : "启用") + '吗？', 'confirm', function (dialog) {
+                dialog.modal('hide');
+                $.get("/Manager/Enabled/" + $(obj).attr("rel") + "?t=" + new Date(), function (dialog) {
+                    $(obj).text((b == "启用" ? "禁用" : "启用"));
                 })
-            }, 'question');
+            })
         }
 
     </script>
 }
-<div class="weizhi">
-    <h1 class="font14 fontw lvse">管理员列表</h1>
-    <div class="right2">
-        <input type="text" id="txt" value="@Request["txt"]"  placeholder="管理员姓名"/>
-        <input type="button" class="button sreach" value="搜索" />
-        <input type="button" class="button create" value="添加" />
-        <input type="button" class="button delete" value="删除" />
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    管理员列表
+                    <span class="tools pull-right form-inline">
+                        <input type="text" id="txt" value="@Request["txt"]" class="form-control" placeholder="管理员姓名" />
+                        <input type="button" class="btn btn-default sreach" value="搜索" />
+                        <input type="button" class="btn btn-default create" value="添加" />
+                    </span>
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        <table class="display table table-bordered table-striped" id="dynamic-table">
+                            <thead>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>账号</th>
+                                    <th class="hidden-phone">电话号码</th>
+                                    <th class="hidden-phone">电子邮箱</th>
+                                    <th class="hidden-phone">角色类型</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
+   
 </div>
-<div class="kong"></div>
-<form method="post" id="form-datalist">
-    <table id="table-Manager-list" class="table dataTable" width="90%" cellpadding="0" cellspacing="1" border="0">
-        <thead>
-            <tr class="table-top tab_top">
-                <td>
-                    <input type="checkbox" class="select" /></td>
-                <td>姓名</td>
-                <td>账号</td>
-                <td>电话号码</td>
-                <td>电子邮箱</td>
-                <td>角色类型</td>
-                <td>状态</td>
-                <td>操作</td>
-            </tr>
-        </thead>
-    </table>
-</form>
-<div id="import" class="none">
-    <form id="form-Import" action="/Manager/Import" method="post" enctype="multipart/form-data">
-        文件选择：<input name="file" type="file" /><br />
-        <a href="/Manager/Import">模版下载</a>
-    </form>
-</div>
+<!--body wrapper end-->

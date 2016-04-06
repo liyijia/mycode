@@ -1,16 +1,67 @@
-﻿@{
+﻿@using LY.EMIS5.Common.Exceptions;
+@model HandleErrorInfo
+@{
     Layout = null;
 }
-@model HandleErrorInfo
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>提示信息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+    <title>提示页</title>
+    <link href="/Content/css/style.css" rel="stylesheet">
+    <link href="/Content/css/style-responsive.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/Scripts/html5shiv.js"></script>
+    <script src="/Scripts/respond.min.js"></script>
+    <![endif]-->
+
+
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/Scripts/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/modernizr.min.js"></script>
+    @{
+        AlertException exception = null;
+
+        if (Model.Exception is AlertException)
+        {
+            exception = (AlertException)Model.Exception;
+        }
+
+    }
+    <script type="text/javascript">
+    var second = 0;
+    var timer;
+    clearInterval(timer);
+    function ontimeout(args) {
+        if (--second == 0){
+            clearInterval(timer);
+            location.href = "@(exception == null ? Model.Exception.HelpLink : "/" + exception.ControllerName + "/" + exception.ActionName)";
+        }
+    }
+    $(function () {
+        second = 2;
+        timer = setInterval(ontimeout, 1000);
+    });
+    </script>
+
 </head>
-<body>
-    <div class="prompt_bt">@Model.Exception.HResult : @Model.Exception.Message</div>
-    <a href="@Model.Exception.HelpLink" >返回</a>
+
+<body class="error-page">
+    <section>
+        <div class="container ">
+            <section class="error-wrapper text-center">
+                <h1><img alt="" src="/Content/images/500-error.png"></h1>
+                <h2>@(exception == null ? Model.Exception.Message : exception.Title)</h2>
+                <h3>@Model.Exception.Message</h3>
+                <a class="back-btn" href="@(exception == null ? Model.Exception.HelpLink : "/" + exception.ControllerName + "/" + exception.ActionName)">返回</a>
+            </section>
+        </div>
+    </section>
+
 </body>
 </html>
