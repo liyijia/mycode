@@ -315,7 +315,7 @@ namespace LY.EMIS5.Admin.Controllers
         public string Report(int iDisplayStart = 0, int iDisplayLength = 25, string beginDate = "", string endDate = "", string sEcho = "")
         {
             List<object> list = new List<object>();
-
+            var companys = DbHelper.Query<Company>().ToList();
             DbHelper.Query<Manager>(c => c.Kind == "业务员").ForEach(c =>
             {
                 IQueryable<Project> query = DbHelper.Query<Project>(m => m.Sale.Id == c.Id);
@@ -327,9 +327,11 @@ namespace LY.EMIS5.Admin.Controllers
                 {
                     query = query.Where(m => m.CreateDate <= DateTime.Parse(endDate).AddDays(1));
                 }
-
-                list.Add(new { Name = c.Name, Register = query.Where(m => m.CompanyName == "城开").Count(), Cannot = query.Where(m => m.CompanyName == "城开" && m.ProjectProgress == "不能投标").Count(), Open = query.Where(m => m.CompanyName == "城开" && m.ProjectProgress != "不能投标" && m.OpenDate < DateTime.Now).Count(), Company = "城开" });
-                list.Add(new { Name = c.Name, Register = query.Where(m => m.CompanyName == "正泰").Count(), Cannot = query.Where(m => m.CompanyName == "正泰" && m.ProjectProgress == "不能投标").Count(), Open = query.Where(m => m.CompanyName == "正泰" && m.ProjectProgress != "不能投标" && m.OpenDate < DateTime.Now).Count(), Company = "正泰" });
+                foreach (var item in companys)
+                {
+                    list.Add(new { Name = c.Name, Register = query.Where(m => m.CompanyName == item.Name).Count(), Cannot = query.Where(m => m.CompanyName == item.Name && m.ProjectProgress == "不能投标").Count(), Open = query.Where(m => m.CompanyName == item.Name && m.ProjectProgress != "不能投标" && m.OpenDate < DateTime.Now).Count(), Company = item.Name });
+                }
+               
             });
 
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
