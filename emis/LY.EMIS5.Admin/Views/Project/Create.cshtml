@@ -28,8 +28,10 @@
             });
 
             $('[name="Type"]').change(function () {
-                if ($(this).val() == '网银支付') {
-                    $('#bankinfo').show().find('.form-control').addClass('required');
+                if ($(this).val() == '转账') {
+                    $('#bankinfo').show();
+                    if ($('[name="ProjectProgress"]').val() != '未上网')
+                        $('#bankinfo').find('.form-control').addClass('required');
                 } else {
                     $('#bankinfo').hide().find('form-control').removeClass('required');
                 }

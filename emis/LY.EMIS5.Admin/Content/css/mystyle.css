@@ -4,9 +4,13 @@
 .dataTables_paginate a{
     color:rgb(122, 118, 118);margin:0 3px;
 }
+table {
+    table-layout:fixed;
+}
 table,table th{
     text-align:center !important
 }
+
 
 .input-group[class*=col-] {
     padding-left: 15px;
@@ -15,4 +19,8 @@ table,table th{
 .none {
     display:none
 }
-
+@media only screen and (max-width: 800px) {
+    .hidden-phone {
+        display:none
+    }
+}

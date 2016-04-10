@@ -3,6 +3,23 @@
 }
 @using LY.EMIS5.BLL;
 @section Script{
+<style type="text/css">
+    @@media only screen and (max-width: 800px) {
+        table td:nth-child(1),
+        table th:nth-child(1),
+        table td:nth-child(3),
+        table th:nth-child(3) {
+            display: none;
+        }
+
+        table td:nth-child(2), table th:nth-child(2) {
+            width: 65%;
+            overflow: hidden;
+            text-overflow: ellipsis; /*以省略号替代截除部分*/
+            white-space: nowrap;
+        }
+    }
+</style>
     <script type="text/javascript">
         var table = null;
         $(function () {

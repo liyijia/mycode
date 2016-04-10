@@ -104,7 +104,7 @@ namespace LY.EMIS5.Admin.Controllers
                     EndDate = c.EndDate.Year < 1000 ? "" : c.EndDate.ToChineseDateString(),
                     c.CompanyName,
                     CreateDate = c.CreateDate.ToYearMonthDayString(),
-                    Edit = c.ProjectProgress == "未上网" && ManagerImp.Current.Id == c.Sale.Id,
+                    Edit = ManagerImp.Current.Id == c.Sale.Id,
                     Revoke = c.ProjectProgress != "未上网" && c.ProjectProgress!= "作废审核" && ManagerImp.Current.Id == c.Sale.Id,
                     Audit = c.Opinions.Any(m => m.Manager.Id == ManagerImp.Current.Id && !m.Done),
                     Prompt = c.ProjectProgress != "未上网" && (c.OpenDate - DateTime.Now).Days < 30
@@ -174,6 +174,33 @@ namespace LY.EMIS5.Admin.Controllers
             }
            
             return this.RedirectToAction(100, "操作成功", "保存项目成功", "Project", "AuditList");
+        }
+
+        [HttpGet, Authorize]
+        public ActionResult Edit(int id)
+        {
+           
+                return View(DbHelper.Get<Project>(id));
+          
+        }
+
+        [HttpPost, Authorize]
+        public ActionResult Edit(Project model)
+        {
+            using (var ts = TransactionScopes.Default)
+            {
+                    var entity = DbHelper.Get<Project>(model.Id);
+                entity.MaterialFee = model.MaterialFee;
+                entity.Source = model.Source;
+                entity.ReplaceMoney = model.ReplaceMoney;
+                entity.Remark = model.Remark;
+                
+                    entity.Update();
+                
+                ts.Complete();
+            }
+
+            return this.RedirectToAction(100, "操作成功", "修改项目成功", "Project", "AuditList");
         }
 
         [HttpGet, Authorize]

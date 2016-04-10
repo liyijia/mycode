@@ -5,6 +5,44 @@
 
 @section Script
 {
+<style type="text/css">
+    @@media only screen and (max-width: 800px) {
+        table td:nth-child(1),
+        table th:nth-child(1),
+        table td:nth-child(3),
+        table th:nth-child(3),
+        table td:nth-child(4),
+        table th:nth-child(4),
+        table td:nth-child(5),
+        table th:nth-child(5),
+        table td:nth-child(6),
+        table th:nth-child(6),
+        table td:nth-child(7),
+        table th:nth-child(7),
+        table td:nth-child(8),
+        table th:nth-child(8),
+        table td:nth-child(9),
+        table th:nth-child(9),
+        table td:nth-child(10),
+        table th:nth-child(10),
+        table td:nth-child(11),
+        table th:nth-child(11) {
+            display: none;
+        }
+
+        table td:nth-child(2), table th:nth-child(2) {
+            width: 65%;
+            overflow: hidden;
+            text-overflow: ellipsis; /*以省略号替代截除部分*/
+            white-space: nowrap;
+        }
+    }
+    table td:nth-child(2), table th:nth-child(2) {
+            width: 35%;
+           
+        }
+    
+</style>
     <script type="text/javascript">
         var oTable;
         var options = {
@@ -38,10 +76,13 @@
                     if (aData.Prompt) {
                         $(nRow).css('color', 'red');
                     }
-                    $('td:eq(1)', nRow).addClass('text-left');
+                    $('td:eq(1)', nRow).addClass('text-left').width(100);
                     $('td:eq(11)', nRow).html('');
                     if (aData.Edit) {
-                        $('td:eq(11)', nRow).append('<a href="/Project/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');
+                        if (aData.ProjectProgress=='未上网')
+                            $('td:eq(11)', nRow).append('<a href="/Project/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');
+                        else 
+                            $('td:eq(11)', nRow).append('<a href="/Project/Edit/' + aData.Id + '">编辑</a>');
                     } else {
                         $('td:eq(11)', nRow).append('<a href="/Project/View/' + aData.Id + '">查看</a>');
                     }
@@ -77,8 +118,8 @@
                 <header class="panel-heading">
                     我的项目
                     <span class="tools pull-right form-inline">
-                            <input type="text" class="form-control" name="name" placeholder="请输入项目名称" />
-                        <select name="state" class="form-control">
+                            <input type="text" class="form-control hidden-phone" name="name" placeholder="请输入项目名称" />
+                        <select name="state" class="form-control hidden-phone">
                             <option value="">项目进度</option>
                             <option>未上网</option>
                             <option>已上网</option>
@@ -89,7 +130,7 @@
                             <option>保证金已退</option>
                             <option>不能投标</option>
                         </select>
-                        <input type="button" class="btn btn-default search" value="搜索" />
+                        <input type="button" class="btn btn-default search hidden-phone" value="搜索" />
                         <input type="button" class="btn btn-default create" value="添加" />
                     </span>
                 </header>
@@ -98,18 +139,18 @@
                         <table class="display table table-bordered table-striped" id="table-form-list" cellpadding="0" cellspacing="1">
                             <thead>
                                 <tr class="tab_top table-top">
-                                    <td>编号</td>
-                                    <td>项目名称</td>
-                                    <td>业务员</td>
-                                    <td>项目规模</td>
-                                    <td>保证金金额</td>
-                                    <td>保证金来源</td>
-                                    <td>项目进度</td>
-                                    <td>开标时间</td>
-                                    <td>保证金截止时间</td>
-                                    <td>公司</td>
-                                    <td>登记时间</td>
-                                    <td>操作</td>
+                                    <th>编号</th>
+                                    <th>项目名称</th>
+                                    <th>业务员</th>
+                                    <th>项目规模</th>
+                                    <th>保证金金额</th>
+                                    <th>保证金来源</th>
+                                    <th>项目进度</th>
+                                    <th>开标时间</th>
+                                    <th>保证金截止时间</th>
+                                    <th>公司</th>
+                                    <th>登记时间</th>
+                                    <th>操作</th>
                                 </tr>
                             </thead>
                         </table>
