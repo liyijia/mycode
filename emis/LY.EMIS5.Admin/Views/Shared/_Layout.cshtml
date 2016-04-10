@@ -48,10 +48,13 @@
         }
 
         #scrollDiv {
+            width:calc(100% - 195px);
             height: 50px;
             line-height: 50px;
             overflow: hidden;
-            float:left
+            float:left;
+            text-overflow: ellipsis; /*以省略号替代截除部分*/
+            white-space: nowrap;
         }
 
             #scrollDiv li {
