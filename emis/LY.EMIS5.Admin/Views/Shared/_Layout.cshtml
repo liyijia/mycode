@@ -48,7 +48,6 @@
         }
 
         #scrollDiv {
-            width:calc(100% - 195px);
             height: 50px;
             line-height: 50px;
             overflow: hidden;
@@ -56,6 +55,13 @@
             text-overflow: ellipsis; /*以省略号替代截除部分*/
             white-space: nowrap;
         }
+        @@media only screen and (max-width: 800px) {
+    
+        #scrollDiv {
+            width:calc(100% - 195px);
+           
+        }
+}
 
             #scrollDiv li {
                 height: 50px;

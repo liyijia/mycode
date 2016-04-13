@@ -38,7 +38,7 @@ namespace LY.EMIS5.Admin.Controllers
                 query = query.Where(m => m.Title.Contains(txt));
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
                 query.Count(),
-                query.Skip(iDisplayStart).Take(iDisplayLength).OrderByDescending(c => c.Id).ToList().Select(c => new
+                query.OrderByDescending(c => c.Id).Skip(iDisplayStart).Take(iDisplayLength).ToList().Select(c => new
                 {
                     Id = c.Id,
                     c.Title,

@@ -87,7 +87,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">保证金截至时间</label>
                         <div class="col-sm-10">
-                            <label class="control-label">@Model.EndDate.ToChineseDateString()</label>
+                            @Html.TextBox("EndDate", Model.EndDate.ToChineseDateString(), new { @class = "form-control form_datetime" })
                         </div>
                     </div>
                     <div class="form-group">
@@ -117,7 +117,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">开标时间</label>
                         <div class="col-sm-10">
-                            <label class="control-label">@Model.OpenDate.ToChineseDateString()</label>
+                           @Html.TextBox("OpenDate", Model.OpenDate.ToChineseDateString(), new { @class = "form-control form_datetime" })
                         </div>
                     </div>
                     <div class="form-group">

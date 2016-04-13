@@ -53,7 +53,7 @@ namespace LY.EMIS5.Admin.Controllers
 
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
                 query.Count(),
-                query.Skip(iDisplayStart).Take(iDisplayLength).OrderByDescending(c => c.Sort).OrderByDescending(c => c.Id).ToList().Select(c => new
+                query.OrderByDescending(c => c.Sort).OrderByDescending(c=>c.Id).Skip(iDisplayStart).Take(iDisplayLength).ToList().Select(c => new
                 {
                     Id = c.Id,
                     ProjectName = c.ProjectName,
@@ -194,7 +194,8 @@ namespace LY.EMIS5.Admin.Controllers
                 entity.Source = model.Source;
                 entity.ReplaceMoney = model.ReplaceMoney;
                 entity.Remark = model.Remark;
-                
+                entity.OpenDate = model.OpenDate;
+                entity.EndDate = model.EndDate;
                     entity.Update();
                 
                 ts.Complete();

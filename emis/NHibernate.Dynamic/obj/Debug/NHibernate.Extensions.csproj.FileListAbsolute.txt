@@ -43,8 +43,8 @@ D:\mycode\emis\NHibernate.Dynamic\bin\Debug\Iesi.Collections.xml
 D:\mycode\emis\NHibernate.Dynamic\bin\Debug\NHibernate.xml
 D:\mycode\emis\NHibernate.Dynamic\bin\Debug\NHibernate.Caches.Redis.pdb
 D:\mycode\emis\NHibernate.Dynamic\bin\Debug\NHibernate.Caches.Redis.xml
-D:\mycode\emis\NHibernate.Dynamic\obj\Debug\NHibernate.Extensions.csprojResolveAssemblyReference.cache
 D:\mycode\emis\NHibernate.Dynamic\obj\Debug\NHibernate.Extensions.dll
 D:\mycode\emis\NHibernate.Dynamic\obj\Debug\NHibernate.Extensions.pdb
 F:\mycode\emis\NHibernate.Dynamic\bin\Debug\ICSharpCode.SharpZipLib.dll
 F:\mycode\emis\NHibernate.Dynamic\obj\Debug\NHibernate.Extensions.csprojResolveAssemblyReference.cache
+D:\mycode\emis\NHibernate.Dynamic\obj\Debug\NHibernate.Extensions.csprojResolveAssemblyReference.cache

@@ -36,7 +36,7 @@ namespace LY.EMIS5.Admin.Controllers
             IQueryable<Company> query = DbHelper.Query<Company>();
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
                 query.Count(),
-                query.Skip(iDisplayStart).Take(iDisplayLength).OrderBy(c => c.Id).ToList().Select(c => new
+                query.OrderBy(c => c.Id).Skip(iDisplayStart).Take(iDisplayLength).ToList().Select(c => new
                 {
                     Id = c.Id,
                     c.Name
