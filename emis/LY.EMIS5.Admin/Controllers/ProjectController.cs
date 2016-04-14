@@ -91,7 +91,7 @@ namespace LY.EMIS5.Admin.Controllers
             }
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
                 query.Count(),
-                query.Skip(iDisplayStart).Take(iDisplayLength).OrderByDescending(c => c.CreateDate).ToList().Select(c => new
+                query.OrderByDescending(c => c.Id).Skip(iDisplayStart).Take(iDisplayLength).ToList().Select(c => new
                 {
                     Id = c.Id,
                     ProjectName = c.ProjectName,
