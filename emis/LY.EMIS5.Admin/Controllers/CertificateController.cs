@@ -64,7 +64,13 @@ namespace LY.EMIS5.Admin.Controllers
         {
             if (entity.Id > 0)
             {
-                entity.Update(true);
+                var ent = DbHelper.Get<Certificate>(entity.Id);
+                ent.AnnualVerificationDate = entity.AnnualVerificationDate;
+                ent.Major = entity.Major;
+                ent.Name = entity.Name;
+                ent.Post = entity.Post;
+                ent.Remarks = entity.Remarks;
+                ent.Update(true);
             }
             else {
                 entity.CreateDate = DateTime.Now;

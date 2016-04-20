@@ -71,7 +71,10 @@ namespace LY.EMIS5.Admin.Controllers
         {
             if (entity.Id > 0)
             {
-                entity.Update(true);
+                var news = DbHelper.Get<News>(entity.Id);
+                news.Title = entity.Title;
+                news.Content = entity.Content;
+                news.Update(true);
             }
             else {
                 entity.CreateDate = DateTime.Now;

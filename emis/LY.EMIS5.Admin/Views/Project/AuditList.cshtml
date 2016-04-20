@@ -67,11 +67,11 @@
                     aoData.push({ "name": "state", "value": $("[name=\"state\"]").val() });
                 },
                 "aoColumns": [
-                    { "mData": "Id" },
-                      { "mData": "ProjectName" },
-                      { "mData": "Name" }, { "mData": "Scale" }, { "mData": "Money" }, { "mData": "Source" }, { "mData": "ProjectProgress" }, { "mData": "OpenDate" }, { "mData": "EndDate" }, { "mData": "CompanyName" }, { "mData": "CreateDate" },
-                      { "mData": "Id" }
-                ], "bSort": false, "bFilter": false,
+                { "mData": "Id" },
+                      { "mData": "ProjectName", "bSortable": false },
+                      { "mData": "Name", "bSortable": false }, { "mData": "Scale", "bSortable": false }, { "mData": "Money", "bSortable": false }, { "mData": "Source", "bSortable": false }, { "mData": "ProjectProgress" }, { "mData": "OpenDate" }, { "mData": "EndDate" }, { "mData": "CompanyName", "bSortable": false }, { "mData": "CreateDate" },
+                      { "mData": "Id", "bSortable": false }
+                ], "bFilter": false, "aaSorting": [[7, "desc"]],
                 "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                     if (aData.Prompt) {
                         $(nRow).css('color', 'red');

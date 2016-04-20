@@ -61,7 +61,10 @@ namespace LY.EMIS5.Admin.Controllers
         {
             if (entity.Id > 0)
             {
-                entity.Update(true);
+                var ent = DbHelper.Get<Aptitude>(entity.Id);
+                ent.Level = entity.Level;
+                ent.Name = entity.Name;
+                ent.Update(true);
             }
             else {
                 entity.CreateDate = DateTime.Now;

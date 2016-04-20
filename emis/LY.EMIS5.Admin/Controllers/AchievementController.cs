@@ -65,7 +65,14 @@ namespace LY.EMIS5.Admin.Controllers
         {
             if (entity.Id > 0)
             {
-                entity.Update(true);
+                var ent = DbHelper.Get<Achievement>(entity.Id);
+                ent.EndDate = entity.EndDate;
+                ent.ProjectManager = entity.ProjectName;
+                ent.Scale = entity.Scale;
+                ent.StartDate = entity.StartDate;
+                ent.Type = entity.Type;
+                
+                ent.Update(true);
             }
             else {
                 entity.CreateDate = DateTime.Now;

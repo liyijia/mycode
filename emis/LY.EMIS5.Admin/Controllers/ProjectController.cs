@@ -35,7 +35,7 @@ namespace LY.EMIS5.Admin.Controllers
         }
 
         [HttpPost, Authorize]
-        public string Index(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", int sale = 0, string state = "", string sEcho = "")
+        public string Index(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", int sale = 0, int iSortCol_0=6,string sSortDir_0 = "desc",  string state = "", string sEcho = "")
         {
             IQueryable<Project> query = DbHelper.Query<Project>();
             if (!string.IsNullOrWhiteSpace(name))
@@ -50,10 +50,60 @@ namespace LY.EMIS5.Admin.Controllers
             {
                 query = query.Where(c => c.Sale.Id == sale);
             }
-
+            
+            if (iSortCol_0 == 6)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.Sort).OrderByDescending(c => c.Id);
+                }
+                else {
+                    query = query.OrderBy(c => c.Sort).OrderByDescending(c => c.Id);
+                }
+            }
+            else if (iSortCol_0==0)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.Id);
+                }
+                else {
+                    query = query.OrderBy(c => c.Id);
+                }
+            }
+            else if (iSortCol_0 == 7)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.Sort).OrderByDescending(c => c.OpenDate);
+                }
+                else {
+                    query = query.OrderByDescending(c => c.Sort).OrderBy(c => c.OpenDate);
+                }
+            }
+            else if (iSortCol_0 == 8)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.Sort).OrderByDescending(c => c.EndDate);
+                }
+                else {
+                    query = query.OrderByDescending(c => c.Sort).OrderBy(c => c.EndDate);
+                }
+            }
+            else if (iSortCol_0 == 10)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.CreateDate);
+                }
+                else {
+                    query = query.OrderBy(c => c.CreateDate);
+                }
+            }
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
                 query.Count(),
-                query.OrderByDescending(c => c.Sort).OrderByDescending(c=>c.Id).Skip(iDisplayStart).Take(iDisplayLength).ToList().Select(c => new
+                query.Skip(iDisplayStart).Take(iDisplayLength).ToList().Select(c => new
                 {
                     Id = c.Id,
                     ProjectName = c.ProjectName,
@@ -78,7 +128,7 @@ namespace LY.EMIS5.Admin.Controllers
         }
 
         [HttpPost, Authorize]
-        public string AuditList(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", string state = "", string sEcho = "")
+        public string AuditList(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", string state = "", string sEcho = "", int iSortCol_0 = 7, string sSortDir_0 = "desc")
         {
             IQueryable<Project> query = DbHelper.Query<Project>(c => c.Sale.Id == ManagerImp.Current.Id || c.Opinions.Any(m => m.Manager.Id == ManagerImp.Current.Id && !m.Done));
             if (!string.IsNullOrWhiteSpace(name))
@@ -89,9 +139,59 @@ namespace LY.EMIS5.Admin.Controllers
             {
                 query = query.Where(c => c.ProjectProgress == state);
             }
+            if (iSortCol_0 == 6)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.Sort).OrderByDescending(c => c.Id);
+                }
+                else {
+                    query = query.OrderBy(c => c.Sort).OrderByDescending(c => c.Id);
+                }
+            }
+            else if (iSortCol_0 == 0)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.Id);
+                }
+                else {
+                    query = query.OrderBy(c => c.Id);
+                }
+            }
+            else if (iSortCol_0 == 7)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.Sort).OrderByDescending(c => c.OpenDate);
+                }
+                else {
+                    query = query.OrderByDescending(c => c.Sort).OrderBy(c => c.OpenDate);
+                }
+            }
+            else if (iSortCol_0 == 8)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.Sort).OrderByDescending(c => c.EndDate);
+                }
+                else {
+                    query = query.OrderByDescending(c => c.Sort).OrderBy(c => c.EndDate);
+                }
+            }
+            else if (iSortCol_0 == 10)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.CreateDate);
+                }
+                else {
+                    query = query.OrderBy(c => c.CreateDate);
+                }
+            }
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
                 query.Count(),
-                query.OrderByDescending(c => c.Id).Skip(iDisplayStart).Take(iDisplayLength).ToList().Select(c => new
+                query.Skip(iDisplayStart).Take(iDisplayLength).ToList().Select(c => new
                 {
                     Id = c.Id,
                     ProjectName = c.ProjectName,
