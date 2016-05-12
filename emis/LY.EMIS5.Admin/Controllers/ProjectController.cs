@@ -215,12 +215,23 @@ namespace LY.EMIS5.Admin.Controllers
         public ActionResult Create(int id = 0)
         {
             ViewBag.Companys = DbHelper.Query<Company>().ToList();
+            var sales = DbHelper.Query<Manager>(c => c.Kind == "业务员").AsSelectItemList(c => c.Id, c => c.Name);
+            var sale = sales.FirstOrDefault(c => c.Value == ManagerImp.Current.Id.ToString());
+            
             ViewBag.List = DbHelper.Query<Manager>(c => c.Kind == "资料员").AsSelectItemList(c => c.Id, c => c.Name);
+            var Project = new Project { ProjectProgress = "未上网" };
             if (id > 0)
             {
-                return View(DbHelper.Get<Project>(id));
+                Project = DbHelper.Get<Project>(id);
+                sale = sales.FirstOrDefault(c => c.Value == Project.Sale.Id.ToString());
+                return View(Project);
             }
-            return View(new Project { ProjectProgress="未上网"});
+            if (sale!=null)
+            {
+                sale.Selected = true;
+            }
+            ViewBag.Sales = sales;
+            return View(Project);
         }
 
         [HttpPost, Authorize]
@@ -253,6 +264,7 @@ namespace LY.EMIS5.Admin.Controllers
                 entity.Aptitude = model.Aptitude;
                 entity.Remark = model.Remark;
                 entity.MoneySituation = model.MoneySituation;
+                entity.Sale = model.Sale;
                 if (entity.ProjectProgress != "未上网") {
                     entity.Sort = 1;
                 }
@@ -262,7 +274,6 @@ namespace LY.EMIS5.Admin.Controllers
                 }
                 else
                 {
-                    entity.Sale = ManagerImp.Current;
                     entity.CreateDate = DateTime.Now;
                     entity.Save();
                 }
@@ -290,12 +301,12 @@ namespace LY.EMIS5.Admin.Controllers
             using (var ts = TransactionScopes.Default)
             {
                     var entity = DbHelper.Get<Project>(model.Id);
-                entity.MaterialFee = model.MaterialFee;
-                entity.Source = model.Source;
-                entity.ReplaceMoney = model.ReplaceMoney;
-                entity.Remark = model.Remark;
-                entity.OpenDate = model.OpenDate;
-                entity.EndDate = model.EndDate;
+                    entity.MaterialFee = model.MaterialFee;
+                    entity.Source = model.Source;
+                    entity.ReplaceMoney = model.ReplaceMoney;
+                    entity.Remark = model.Remark;
+                    entity.OpenDate = model.OpenDate;
+                    entity.EndDate = model.EndDate;
                     entity.Update();
                 
                 ts.Complete();
