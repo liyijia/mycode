@@ -79,15 +79,15 @@
                     $('td:eq(1)', nRow).addClass('text-left').width(100);
                     $('td:eq(11)', nRow).html('');
                     if (aData.Edit) {
-                        if (aData.ProjectProgress=='未上网')
-                            $('td:eq(11)', nRow).append('<a href="/Project/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');
+                        if (aData.ProjectProgress == '未上网')
+                            $('td:eq(11)', nRow).append('<a href="/Project/Create/' + aData.Id + '">编辑</a>');
                         else 
                             $('td:eq(11)', nRow).append('<a href="/Project/Edit/' + aData.Id + '">编辑</a>');
                     } else {
                         $('td:eq(11)', nRow).append('<a href="/Project/View/' + aData.Id + '">查看</a>');
                     }
                     if (aData.Revoke) {
-                        $('td:eq(11)', nRow).append(' <a href="/Project/Cancel/' + aData.Id + '">作废</a>');
+                        $('td:eq(11)', nRow).append(' <a href="/Project/Cancel/' + aData.Id + '">删除</a>');
                     }
                     if (aData.Audit) {
                         $('td:eq(11)', nRow).append(' <a href="/Project/Audit/' + aData.Id + '">审核</a>');

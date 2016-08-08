@@ -18,5 +18,6 @@
     <property name="Remarks" />
     <many-to-one name="Manager" class="Manager" lazy="false" column="Manager_Id"/>
     <property name="CreateDate" />
+    <property name="Company" />
   </class>
 </hibernate-mapping>

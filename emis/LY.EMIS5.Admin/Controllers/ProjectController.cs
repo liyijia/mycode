@@ -18,6 +18,8 @@ using LY.EMIS5.Entities.Core;
 using NHibernate.Linq;
 using LY.EMIS5.Common.Exceptions;
 using LY.EMIS5.Common.Mvc.Extensions;
+using LY.EMIS5.Admin.Models;
+using Newtonsoft.Json;
 
 namespace LY.EMIS5.Admin.Controllers
 {
@@ -28,6 +30,8 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpGet, Authorize]
         public ActionResult Index()
         {
+            ViewBag.Company= DbHelper.Query < Company >().AsSelectItemList(c => c.Id, c => c.Name);
+            ViewBag.ProjectProgresses = EnumHelper<ProjectProgresses>.EnumToSelectList();
             var list = DbHelper.Query<Manager>(c => c.Kind == "业务员").AsSelectItemList(c => c.Id, c => c.Name);
             list.Insert(0, new SelectListItem() { Text = "请选择业务员", Value = "0" });
             ViewBag.Sales = list;
@@ -35,22 +39,33 @@ namespace LY.EMIS5.Admin.Controllers
         }
 
         [HttpPost, Authorize]
-        public string Index(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", int sale = 0, int iSortCol_0=6,string sSortDir_0 = "desc",  string state = "", string sEcho = "")
+        public string Index(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", string company="", string begin="", string end = "", int sale = 0, int iSortCol_0=6,string sSortDir_0 = "desc",  int state =0, string sEcho = "")
         {
             IQueryable<Project> query = DbHelper.Query<Project>();
             if (!string.IsNullOrWhiteSpace(name))
             {
                 query = query.Where(c => c.ProjectName.Contains(name));
             }
-            if (!string.IsNullOrWhiteSpace(state))
+            if (state>0)
             {
-                query = query.Where(c => c.ProjectProgress == state);
+                query = query.Where(c => c.ProjectProgress == (ProjectProgresses)state);
             }
             if (sale > 0)
             {
                 query = query.Where(c => c.Sale.Id == sale);
             }
-            
+            if (!string.IsNullOrEmpty(company)) {
+                query = query.Where(c => c.CompanyName.Contains(company));
+            }
+            if (!string.IsNullOrEmpty(begin))
+            {
+                query = query.Where(c => c.OpenDate>=DateTime.Parse(begin));
+            }
+            if (!string.IsNullOrEmpty(end))
+            {
+                query = query.Where(c => c.OpenDate <= DateTime.Parse(end).AddDays(1));
+            }
+
             if (iSortCol_0 == 6)
             {
                 if (sSortDir_0 == "desc")
@@ -61,7 +76,7 @@ namespace LY.EMIS5.Admin.Controllers
                     query = query.OrderBy(c => c.Sort).OrderByDescending(c => c.Id);
                 }
             }
-            else if (iSortCol_0==0)
+            else if (iSortCol_0 == 0)
             {
                 if (sSortDir_0 == "desc")
                 {
@@ -101,6 +116,9 @@ namespace LY.EMIS5.Admin.Controllers
                     query = query.OrderBy(c => c.CreateDate);
                 }
             }
+            else {
+                query = query.OrderByDescending(c => c.Sort).OrderBy(c => c.ProjectProgress);
+            }
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
                 query.Count(),
                 query.Skip(iDisplayStart).Take(iDisplayLength).ToList().Select(c => new
@@ -111,13 +129,13 @@ namespace LY.EMIS5.Admin.Controllers
                     c.Scale,
                     c.Money,
                     c.Source,
-                    c.ProjectProgress,
+                    ProjectProgress=c.ProjectProgress.GetDescription(),
                     OpenDate =c.OpenDate.Year<1000?"": c.OpenDate.ToChineseDateString(),
                     EndDate = c.EndDate.Year < 1000 ? "": c.EndDate.ToChineseDateString(),
                     CreateDate = c.CreateDate.ToYearMonthDayString(),
                     c.CompanyName,
-                    Edit=ManagerImp.Current.Kind=="管理员"|| ManagerImp.Current.Kind=="资料员",
-                    Prompt = c.ProjectProgress != "未上网" && (c.OpenDate - DateTime.Now).Days < 30
+                    Edit=ManagerImp.Current.Kind=="管理员"|| ManagerImp.Current.Kind=="总经理",
+                    //Prompt = c.ProjectProgress != "未上网" && (c.OpenDate - DateTime.Now).Days < 30
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
         }
 
@@ -128,16 +146,16 @@ namespace LY.EMIS5.Admin.Controllers
         }
 
         [HttpPost, Authorize]
-        public string AuditList(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", string state = "", string sEcho = "", int iSortCol_0 = 7, string sSortDir_0 = "desc")
+        public string AuditList(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", int state = 0, string sEcho = "", int iSortCol_0 = 7, string sSortDir_0 = "desc")
         {
-            IQueryable<Project> query = DbHelper.Query<Project>(c => c.Sale.Id == ManagerImp.Current.Id || c.Opinions.Any(m => m.Manager.Id == ManagerImp.Current.Id && !m.Done));
+            IQueryable<Project> query = DbHelper.Query<Project>(c => c.Sale.Id == ManagerImp.Current.Id || c.Current.Manager.Id==ManagerImp.Current.Id && !c.Current.Done);
             if (!string.IsNullOrWhiteSpace(name))
             {
                 query = query.Where(c => c.ProjectName.Contains(name));
             }
-            if (!string.IsNullOrWhiteSpace(state))
+            if (state>0)
             {
-                query = query.Where(c => c.ProjectProgress == state);
+                query = query.Where(c => c.ProjectProgress ==  (ProjectProgresses)state);
             }
             if (iSortCol_0 == 6)
             {
@@ -189,6 +207,9 @@ namespace LY.EMIS5.Admin.Controllers
                     query = query.OrderBy(c => c.CreateDate);
                 }
             }
+            else {
+                query = query.OrderByDescending(c => c.Sort).OrderBy(c => c.ProjectProgress);
+            }
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
                 query.Count(),
                 query.Skip(iDisplayStart).Take(iDisplayLength).ToList().Select(c => new
@@ -199,32 +220,34 @@ namespace LY.EMIS5.Admin.Controllers
                     c.Scale,
                     c.Money,
                     c.Source,
-                    c.ProjectProgress,
+                    ProjectProgress = c.ProjectProgress.GetDescription(),
                     OpenDate = c.OpenDate.Year < 1000 ? "" : c.OpenDate.ToChineseDateString(),
                     EndDate = c.EndDate.Year < 1000 ? "" : c.EndDate.ToChineseDateString(),
                     c.CompanyName,
                     CreateDate = c.CreateDate.ToYearMonthDayString(),
-                    Edit = ManagerImp.Current.Id == c.Sale.Id,
-                    Revoke = c.ProjectProgress != "未上网" && c.ProjectProgress!= "作废审核" && ManagerImp.Current.Id == c.Sale.Id,
-                    Audit = c.Opinions.Any(m => m.Manager.Id == ManagerImp.Current.Id && !m.Done),
-                    Prompt = c.ProjectProgress != "未上网" && (c.OpenDate - DateTime.Now).Days < 30
+                    Edit = ManagerImp.Current.Id == c.Sale.Id && c.ProjectProgress != ProjectProgresses.Success && c.ProjectProgress != ProjectProgresses.Cancel,
+                    Revoke = c.ProjectProgress != ProjectProgresses.NotOnline && c.ProjectProgress!= ProjectProgresses.Cancel && c.ProjectProgress != ProjectProgresses.Success && ManagerImp.Current.Id == c.Sale.Id,
+                    Audit = c.ProjectProgress != ProjectProgresses.NotOnline && c.Opinions.Any(m => m.Manager.Id == ManagerImp.Current.Id && !m.Done),
+                    Prompt = c.ProjectProgress != ProjectProgresses.Success && c.ProjectProgress!=ProjectProgresses.Cancel && (c.OpenDate - DateTime.Now).Days < 30
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
         }
 
         [HttpGet, Authorize]
         public ActionResult Create(int id = 0)
         {
+            var flow = HttpRuntime.Cache.Get("flow") as Flow;
+            flow.setAction();
+            ViewBag.Flow = flow;
             ViewBag.Companys = DbHelper.Query<Company>().ToList();
-            var sales = DbHelper.Query<Manager>(c => c.Kind == "业务员").AsSelectItemList(c => c.Id, c => c.Name);
+            var sales = DbHelper.Query<Manager>(c => c.Kind == flow.src.role).AsSelectItemList(c => c.Id, c => c.Name);
             var sale = sales.FirstOrDefault(c => c.Value == ManagerImp.Current.Id.ToString());
             
-            ViewBag.List = DbHelper.Query<Manager>(c => c.Kind == "资料员").AsSelectItemList(c => c.Id, c => c.Name);
-            var Project = new Project { ProjectProgress = "未上网" };
+            ViewBag.List = DbHelper.Query<Manager>(c => c.Kind == flow.dest.role).AsSelectItemList(c => c.Id, c => c.Name);
+            var Project = new Project { ProjectProgress = ProjectProgresses.NotOnline };
             if (id > 0)
             {
                 Project = DbHelper.Get<Project>(id);
                 sale = sales.FirstOrDefault(c => c.Value == Project.Sale.Id.ToString());
-                return View(Project);
             }
             if (sale!=null)
             {
@@ -244,6 +267,7 @@ namespace LY.EMIS5.Admin.Controllers
                 {
                     entity = DbHelper.Get<Project>(model.Id);
                 }
+                
                 entity.EndDate = model.EndDate;
                 entity.Link = model.Link;
                 entity.MaterialFee = model.MaterialFee;
@@ -259,27 +283,47 @@ namespace LY.EMIS5.Admin.Controllers
                 entity.ProjectProgress = model.ProjectProgress;
                 entity.Account = model.Account;
                 entity.Bank = model.Bank;
-                entity.CompanyName = model.CompanyName;
+                entity.CompanyName = Request.Form["companys"];
                 entity.ReplaceMoney = model.ReplaceMoney;
                 entity.Aptitude = model.Aptitude;
                 entity.Remark = model.Remark;
                 entity.MoneySituation = model.MoneySituation;
                 entity.Sale = model.Sale;
-                if (entity.ProjectProgress != "未上网") {
+                entity.Proxy = model.Proxy;
+                entity.Requirement = model.Requirement;
+                if (entity.ProjectProgress != ProjectProgresses.NotOnline) {
                     entity.Sort = 1;
                 }
+                Flow flow;
                 if (model.Id > 0)
                 {
+                    flow = JsonConvert.DeserializeObject<Flow>(entity.Flow);
                     entity.Update();
                 }
                 else
                 {
+                    entity.Flow = HttpRuntime.Cache.Get("json").ToString();
+                    flow = JsonConvert.DeserializeObject<Flow>(entity.Flow);
                     entity.CreateDate = DateTime.Now;
                     entity.Save();
+                    var Progress = entity.ProjectProgress.GetDescription();
+                    entity.Current=new Opinion { Content = entity.SalesOpinion, Agree = false, CreateDate = DateTime.Now, Done = false, Manager = entity.Sale, Project = entity, ProjectProgress = Progress, NodeId=flow.nodes.First(c=>c.name== Progress).id }.Save();
+                    entity.Update();
                 }
-                if (entity.ProjectProgress != "未上网")
+                flow = JsonConvert.DeserializeObject<Flow>(entity.Flow);
+                if (entity.ProjectProgress != ProjectProgresses.NotOnline)
                 {
-                    new Opinion { Agree = false, CreateDate = DateTime.Now, Done = false, Manager = DbHelper.Get<Manager>(documentId), Project = entity, ProjectProgress = "做资料", Kind = "财务" }.Save();
+                    var Progress = entity.ProjectProgress.GetDescription();
+                    var op= new Opinion { Agree = false, CreateDate = DateTime.Now, Done = false, Manager = DbHelper.Get<Manager>(documentId), Project = entity, ProjectProgress = Progress, NodeId = flow.nodes.First(c => c.name == Progress).id, Src= entity.Current }.Save();
+                    entity.Current.Dest = op;
+                    entity.Current.Agree = true;
+                    entity.Current.DoneDate = DateTime.Now;
+                    entity.Current.Done = true;
+                    entity.Current.Update();
+                    entity.Current = op;
+                    entity.ProjectProgress = EnumHelper<ProjectProgresses>.EnumFromString(op.ProjectProgress);
+                    entity.Update();
+
                 }
                 ts.Complete();
             }
@@ -290,13 +334,19 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpGet, Authorize]
         public ActionResult Edit(int id)
         {
-           
-                return View(DbHelper.Get<Project>(id));
+            var pro = DbHelper.Get<Project>(id);
+            var list = DbHelper.Query<Manager>(c=>c.Kind!="管理员").AsSelectItemList(c => c.Id, c => c.Name);
+            list.Insert(0, new SelectListItem { Text = "", Value = "0" });
+            if (pro.OpenManager != null) {
+                list.First(c => c.Value == pro.OpenManager.Id.ToString()).Selected = true;
+            }
+            ViewBag.List = list;
+            return View(DbHelper.Get<Project>(id));
           
         }
 
         [HttpPost, Authorize]
-        public ActionResult Edit(Project model)
+        public ActionResult Edit(Project model,int openId)
         {
             using (var ts = TransactionScopes.Default)
             {
@@ -307,7 +357,12 @@ namespace LY.EMIS5.Admin.Controllers
                     entity.Remark = model.Remark;
                     entity.OpenDate = model.OpenDate;
                     entity.EndDate = model.EndDate;
-                    entity.Update();
+                entity.Bid = model.Bid;
+                if (openId > 0) {
+                    entity.OpenManager = DbHelper.Get<Manager>(openId);
+                }
+
+                entity.Update();
                 
                 ts.Complete();
             }
@@ -325,61 +380,40 @@ namespace LY.EMIS5.Admin.Controllers
         public ActionResult Audit(int id)
         {
             var entity = DbHelper.Get<Project>(id);
-            var opinion = entity.Opinions.FirstOrDefault(c => !c.Done);
-            if(opinion!=null && opinion.Kind!="")
-                ViewBag.List = DbHelper.Query<Manager>(c => c.Kind == opinion.Kind).AsSelectItemList(c => c.Id, c => c.Name);
+            var flow = JsonConvert.DeserializeObject<Flow>(entity.Flow);
+            flow.setAction(flow.actions.First(c => c.src == entity.Current.NodeId));
+            ViewBag.Flow = flow;
+            if(flow.dest.role!=null)
+                ViewBag.List = DbHelper.Query<Manager>(c => c.Kind == flow.dest.role).AsSelectItemList(c => c.Id, c => c.Name);
             return View(entity);
         }
 
         [HttpPost, Authorize]
-        public ActionResult Audit(int opinionid, string content, bool agree, int managerId = 0)
+        public ActionResult Audit(int id, string content, int managerId = 0)
         {
             using (var ts = TransactionScopes.Default)
             {
-                var entity = DbHelper.Get<Opinion>(opinionid);
-                if (Request.Form["bid"] != null) {
-                    entity.Project.Bid = bool.Parse( Request.Form["bid"]);
+
+                var entity = DbHelper.Get<Project>(id);
+                var flow = JsonConvert.DeserializeObject<Flow>(entity.Flow);
+                flow.setAction(flow.actions.First(c => c.src == entity.Current.NodeId));
+                entity.Current.Content = content;
+                entity.Current.DoneDate = DateTime.Now;
+                entity.Current.Done = true;
+                entity.Current.Update();
+                if (flow.dest.person != null) {
+                    if (flow.dest.person == "创建人")
+                        managerId = entity.Sale.Id;
                 }
-                entity.Content = content;
-                if (agree)
+                if (managerId != 0)
                 {
-                    entity.Project.ProjectProgress = entity.ProjectProgress;
-                    if (managerId > 0)
-                    {
-                        Opinion op = new Opinion { Agree = false, CreateDate = DateTime.Now, Done = false, Manager = DbHelper.Get<Manager>(managerId), Project = entity.Project };
-                        if (entity.ProjectProgress == "做资料")
-                        {
-                            op.ProjectProgress = "打保证金";
-                            op.Kind = "总经理";
-                        }
-                        else if (entity.ProjectProgress == "打保证金")
-                        {
-                            op.ProjectProgress = "同意开标";
-                            op.Kind = "总经理";
-                        }
-                        else if (entity.ProjectProgress == "同意开标")
-                        {
-                            op.ProjectProgress = "开标结束";
-                            op.Kind = "财务";
-                        }
-                        else if (entity.ProjectProgress == "开标结束")
-                        {
-                            op = null;
-                        }
-                        if(op!=null)
-                            op.Save();
-                    }
+                    entity.Current = new Opinion { Agree = false, CreateDate = DateTime.Now, Done = false, Manager = DbHelper.Get<Manager>(managerId), Project = entity, ProjectProgress = flow.dest.name, NodeId = flow.dest.id, Src = entity.Current }.Save();
                 }
-                else
-                {
-                    entity.Project.Sort = -1;
-                    entity.Project.ProjectProgress = "不能投标";
+                else {
+                    entity.Current = null;
                 }
-                entity.Done = true;
-                entity.Agree = agree;
-                entity.DoneDate = DateTime.Now;
+                entity.ProjectProgress = EnumHelper<ProjectProgresses>.EnumFromString(flow.dest.name);
                 entity.Update();
-                entity.Project.Update();
                 ts.Complete();
             }
             return this.RedirectToAction(100, "操作成功", "审核项目成功", "Project", "AuditList");
@@ -389,8 +423,11 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpGet, Authorize]
         public ActionResult Cancel(int id)
         {
-            ViewBag.List = DbHelper.Query<Manager>(c => c.Kind == "总经理").AsSelectItemList(c => c.Id, c => c.Name);
-            return View(DbHelper.Get<Project>(id));
+            var entity = DbHelper.Get<Project>(id);
+            entity.Current = null;
+            entity.ProjectProgress = ProjectProgresses.Cancel;
+            entity.Update(true);
+            return this.RedirectToAction(100, "操作成功", "项目删除成功", "Project", "AuditList");
         }
 
         [HttpPost, Authorize]
@@ -404,7 +441,7 @@ namespace LY.EMIS5.Admin.Controllers
                     c.Delete();
                 });
                 entity.Sort = -1;
-                entity.ProjectProgress = "作废审核";
+                entity.ProjectProgress = ProjectProgresses.Cancel;
                 entity.Update();
                 new Opinion { Agree=true, Content=content, CreateDate=DateTime.Now,Done=true, DoneDate= DateTime.Now, Kind= "总经理", Manager=ManagerImp.Current, Project= entity, ProjectProgress="作废申请" }.Save();
                 new Opinion { CreateDate = DateTime.Now, Kind = "", Manager = DbHelper.Get<Manager>(managerId), Project = entity, ProjectProgress = "作废审核" }.Save();
@@ -417,10 +454,8 @@ namespace LY.EMIS5.Admin.Controllers
         public ActionResult Delete(int id)
         {
             var entity = DbHelper.Get<Project>(id);
-            if (entity.ProjectProgress == "未上网") {
                 entity.Delete(true);
-            }
-            return this.RedirectToAction(100, "操作成功", "项目作废申请成功", "Project", "AuditList");
+            return this.RedirectToAction(100, "操作成功", "项目删除成功", "Project", "Index");
         }
 
         public ActionResult SearchProject(string term)
@@ -437,12 +472,12 @@ namespace LY.EMIS5.Admin.Controllers
         public ActionResult ManagerById(int id) {
             var entity = DbHelper.Get<Project>(id);
             var opinion = entity.Opinions.FirstOrDefault(c => !c.Done);
-            return Json( DbHelper.Query<Manager>(c => c.Kind == opinion.Kind && c.Company.Name==entity.CompanyName).Select(c => new{ c.Id, c.Name}), JsonRequestBehavior.AllowGet);
+            return Json( DbHelper.Query<Manager>(c => c.Kind == opinion.Kind).Select(c => new{ c.Id, c.Name}), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ManagerByKind(string company,string kind)
         {
-            return Json(DbHelper.Query<Manager>(c => c.Kind == kind && c.Company.Name == company).Select(c => new { c.Id, c.Name }), JsonRequestBehavior.AllowGet);
+            return Json(DbHelper.Query<Manager>(c => c.Kind == kind).Select(c => new { c.Id, c.Name }), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet, Authorize]
@@ -469,7 +504,7 @@ namespace LY.EMIS5.Admin.Controllers
                 }
                 foreach (var item in companys)
                 {
-                    list.Add(new { Name = c.Name, Register = query.Where(m => m.CompanyName == item.Name).Count(), NotOnLine = query.Where(m => m.CompanyName == item.Name && m.ProjectProgress == "未上网").Count(), Cannot = query.Where(m => m.CompanyName == item.Name && m.ProjectProgress == "不能投标").Count(), Open = query.Where(m => m.CompanyName == item.Name && (m.ProjectProgress== "开标结束" || m.ProjectProgress == "项目结束" || m.ProjectProgress == "保证金已退") ).Count(), Company = item.Name });
+                    //list.Add(new { Name = c.Name, Register = query.Where(m => m.CompanyName == item.Name).Count(), NotOnLine = query.Where(m => m.CompanyName == item.Name && m.ProjectProgress == "未上网").Count(), Cannot = query.Where(m => m.CompanyName == item.Name && m.ProjectProgress == "不能投标").Count(), Open = query.Where(m => m.CompanyName == item.Name && (m.ProjectProgress== "开标结束" || m.ProjectProgress == "项目结束" || m.ProjectProgress == "保证金已退") ).Count(), Company = item.Name });
                 }
                
             });
@@ -480,7 +515,68 @@ namespace LY.EMIS5.Admin.Controllers
             { }.ToDataTablesResult(sEcho);
         }
 
-
+        [HttpGet, Authorize]
+        public ActionResult Export()
+        {
+            
+            var Table = new DataTable("项目表");
+            Table.Columns.Add("编号").ReadOnly = true;
+            Table.Columns.Add("项目名称").ReadOnly = true;
+            Table.Columns.Add("进度").ReadOnly = true;
+            Table.Columns.Add("业务员").ReadOnly = true;
+            Table.Columns.Add("创建时间").ReadOnly = true;
+            Table.Columns.Add("下载链接").ReadOnly = true;
+            Table.Columns.Add("规模").ReadOnly = true;
+            Table.Columns.Add("业主").ReadOnly = true;
+            Table.Columns.Add("保证金来源").ReadOnly = true;
+            Table.Columns.Add("代打金额").ReadOnly = true;
+            Table.Columns.Add("保证金金额(万元)").ReadOnly = true;
+            Table.Columns.Add("保证金截至时间").ReadOnly = true;
+            Table.Columns.Add("保证金打款方式").ReadOnly = true;
+            Table.Columns.Add("保证金账户名").ReadOnly = true;
+            Table.Columns.Add("保证金账号").ReadOnly = true;
+            Table.Columns.Add("保证金开户行").ReadOnly = true;
+            Table.Columns.Add("开标时间").ReadOnly = true;
+            Table.Columns.Add("开标人").ReadOnly = true;
+            Table.Columns.Add("是否中标").ReadOnly = true;
+            Table.Columns.Add("资料费(元)").ReadOnly = true;
+            Table.Columns.Add("公司名称").ReadOnly = true;
+            Table.Columns.Add("资质要求").ReadOnly = true;
+            Table.Columns.Add("费用收费情况").ReadOnly = true;
+            Table.Columns.Add("代理公司").ReadOnly = true;
+            Table.Columns.Add("人员要求").ReadOnly = true;
+            foreach (var item in DbHelper.Query<Project>().OrderByDescending(c => c.Id))
+            {
+                var Row = Table.NewRow();
+                Row["编号"] = item.Id;
+                Row["项目名称"] = item.ProjectName;
+                Row["进度"] = item.ProjectProgress.GetDescription();
+                Row["业务员"] = item.Sale.Name;
+                Row["创建时间"] = item.CreateDate.ToChineseDateString();
+                Row["下载链接"] = item.Link;
+                Row["规模"] = item.Scale;
+                Row["业主"] = item.Owner;
+                Row["保证金来源"] = item.Source;
+                Row["代打金额"] = item.ReplaceMoney;
+                Row["保证金金额(万元)"] = item.Money;
+                Row["保证金截至时间"] = item.EndDate;
+                Row["保证金打款方式"] = item.Type;
+                Row["保证金账户名"] = item.UserName;
+                Row["保证金账号"] = item.Account;
+                Row["保证金开户行"] = item.Bank;
+                Row["开标时间"] = item.OpenDate;
+                Row["开标人"] = item.OpenManager==null?"":item.OpenManager.Name;
+                Row["是否中标"] = item.Bid?"是":"否";
+                Row["资料费(元)"] = item.MaterialFee;
+                Row["公司名称"] = item.CompanyName;
+                Row["资质要求"] = item.Aptitude;
+                Row["费用收费情况"] = item.MoneySituation;
+                Row["代理公司"] = item.Proxy;
+                Row["人员要求"] = item.Requirement;
+                Table.Rows.Add(Row);
+            }
+            return Table.ExportToXls(Table.TableName + ".xls");
+        }
     }
 
 }

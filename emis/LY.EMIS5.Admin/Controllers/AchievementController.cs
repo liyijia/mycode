@@ -27,13 +27,18 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpGet, Authorize]
         public ActionResult Index()
         {
+            ViewBag.Companys = DbHelper.Query<Company>().AsSelectItemList(c=>c.Name,c=>c.Name);
             return View();
         }
 
         [HttpPost, Authorize]
-        public string Index(string txt = "", int iDisplayStart = 0, int iDisplayLength = 15, string sSortDir_0 = "desc", string sEcho = "")
+        public string Index(string txt = "", string company = "", int iDisplayStart = 0, int iDisplayLength = 15, string sSortDir_0 = "desc", string sEcho = "")
         {
             IQueryable<Achievement> query = DbHelper.Query<Achievement>();
+            if (!string.IsNullOrEmpty(company))
+            {
+                query = query.Where(c => c.Company.Contains(company));
+            }
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
                 query.Count(),
                 query.OrderBy(c => c.Id).Skip(iDisplayStart).Take(iDisplayLength).ToList().Select(c => new
@@ -54,6 +59,7 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpGet, Authorize]
         public ActionResult Create(int id=0)
         {
+            ViewBag.Companys = DbHelper.Query<Company>().ToList();
             if (id > 0) {
                 return View(DbHelper.Get<Achievement>(id));
             }
@@ -71,7 +77,7 @@ namespace LY.EMIS5.Admin.Controllers
                 ent.Scale = entity.Scale;
                 ent.StartDate = entity.StartDate;
                 ent.Type = entity.Type;
-                
+                ent.Company = entity.Company;
                 ent.Update(true);
             }
             else {

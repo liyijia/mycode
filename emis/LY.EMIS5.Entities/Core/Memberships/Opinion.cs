@@ -55,5 +55,11 @@ namespace LY.EMIS5.Entities.Core.Memberships
         public virtual bool Agree { get; set; }
 
         public virtual string Kind { get; set; }
+
+        public virtual Opinion Src { get; set; }
+
+        public virtual Opinion Dest { get; set; }
+
+        public virtual int NodeId { get; set; }
     }
 }

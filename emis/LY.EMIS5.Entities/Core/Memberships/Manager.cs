@@ -72,7 +72,7 @@ namespace LY.EMIS5.Entities.Core.Memberships
         /// <summary>
         /// 公司
         /// </summary>
-        public virtual Company Company { get; set; }
+        public virtual string Company { get; set; }
 
         public Manager()
         {

@@ -77,5 +77,7 @@ namespace LY.EMIS5.Entities.Core.Memberships
         /// 管理员
         /// </summary>
         public virtual Manager Manager { get; set; }
+
+        public virtual string Company { get; set; }
     }
 }

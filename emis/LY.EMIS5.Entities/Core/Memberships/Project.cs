@@ -89,6 +89,11 @@ namespace LY.EMIS5.Entities.Core.Memberships
         public virtual DateTime OpenDate { get; set; }
 
         /// <summary>
+        /// 开标人
+        /// </summary>
+        public virtual Manager OpenManager { get; set; }
+
+        /// <summary>
         /// 业务员
         /// </summary>
         public virtual Manager Sale { get; set; }
@@ -98,6 +103,8 @@ namespace LY.EMIS5.Entities.Core.Memberships
         /// </summary>
         public virtual string SalesOpinion { get; set; }
 
+        public virtual Opinion Current { get; set; }
+
         /// <summary>
         /// 审批意见
         /// </summary>
@@ -106,7 +113,7 @@ namespace LY.EMIS5.Entities.Core.Memberships
         /// <summary>
         /// 项目进度  1、未上网2、已上网3、做资料4、打保证金，同意开标5、开标结束、6、保证金已退，项目结束,已撤销7、不能投标
         /// </summary>
-        public virtual string ProjectProgress { get; set; }
+        public virtual ProjectProgresses ProjectProgress { get; set; }
 
         /// <summary>
         /// 创建时间
@@ -149,6 +156,12 @@ namespace LY.EMIS5.Entities.Core.Memberships
         /// 备注(仅登记人可查看)
         /// </summary>
         public virtual string Remark { get; set; }
+
+        public virtual string Flow { get; set; }
+
+        public virtual string Proxy { get; set; }
+
+        public virtual string Requirement { get; set; }
 
     }
 }

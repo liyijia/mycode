@@ -42,5 +42,7 @@ namespace LY.EMIS5.Entities.Core.Memberships
         /// 创建时间
         /// </summary>
         public virtual DateTime CreateDate { get; set; }
+
+        public virtual string Company { get; set; }
     }
 }

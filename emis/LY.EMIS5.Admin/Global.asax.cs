@@ -19,6 +19,8 @@ using System.Web.Security;
 using System.Xml.Linq;
 using LY.EMIS5.Common.Utilities;
 using LY.EMIS5.Entities.Core.Memberships;
+using Newtonsoft.Json;
+using LY.EMIS5.Admin.Models;
 
 namespace LY.EMIS5.Admin
 {
@@ -45,6 +47,11 @@ namespace LY.EMIS5.Admin
                 DbHelper.Configure(new IDynamicNamingStrategy[] { SchoolNamingStrategy.Instance },  typeof(Manager).Assembly);
                 //启用日志
                 XmlConfigurator.Configure(new FileInfo(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase.Replace(@"file:///", "")) + "\\log4net.cfg.xml"));
+                var json = File.ReadAllText(Server.MapPath("/") + "json.json");
+                HttpRuntime.Cache.Insert("json", json);
+                var flow = JsonConvert.DeserializeObject<Flow>(json);
+                flow.setDic();
+                HttpRuntime.Cache.Insert("flow", flow);
             }
 
         }

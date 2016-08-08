@@ -16,5 +16,8 @@
     <property name="DoneDate" />
     <property name="Agree" />
     <property name="Kind" />
+  <many-to-one name="Src" class="Opinion" lazy="false" column="Src_Id"/>
+    <many-to-one name="Dest" class="Opinion" lazy="false" column="Dest_Id"/>
+    <property name="NodeId" />
   </class>
 </hibernate-mapping>

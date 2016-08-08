@@ -90,7 +90,9 @@
                 <header class="panel-heading">
                     备案列表
                     <span class="tools pull-right form-inline">
-                        <input type="button" class="btn btn-default create" value="添加" />
+                       @Html.DropDownList("company", ViewBag.Companys as List<SelectListItem>, "公司选择", new { @class = "form-control" })
+                    <input type="button" class="btn btn-default create" value="添加" />
+                    <input type="button" class="btn btn-default import" value="导入" />
                     </span>
                 </header>
                 <div class="panel-body">

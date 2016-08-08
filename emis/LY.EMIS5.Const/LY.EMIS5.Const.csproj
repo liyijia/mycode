@@ -62,7 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AttendanceResults.cs" />
+    <Compile Include="ProjectProgresses.cs" />
     <Compile Include="AttendanceTargets.cs" />
     <Compile Include="BankStates.cs" />
     <Compile Include="AttendanceType.cs" />

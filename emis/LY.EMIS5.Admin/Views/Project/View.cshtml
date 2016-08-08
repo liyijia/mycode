@@ -1,5 +1,6 @@
 ﻿@using LY.EMIS5.Common;
 @using LY.EMIS5.BLL;
+@using LY.EMIS5.Common.Extensions;
 @model LY.EMIS5.Entities.Core.Memberships.Project
 @{
     ViewBag.Title = "项目资料";
@@ -23,12 +24,11 @@
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">状态</label>
                         <div class="col-sm-10">
-                            <label class="control-label">@Model.ProjectProgress</label>
+                            <label class="control-label">@Model.ProjectProgress.GetDescription()</label>
                         </div>
                     </div>
                     @{
-                        if (Model.ProjectProgress != "未上网")
-                        {
+                   
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-2 control-label">下载链接</label>
                                 <div class="col-sm-10">
@@ -139,7 +139,7 @@
                                     <label class="control-label">@Model.SalesOpinion</label>
                                 </div>
                             </div>
-                            if (Model.Sale.Id == ManagerImp.Current.Id)
+                            if (Model.Sale.Id == ManagerImp.Current.Id || ManagerImp.Current.Kind=="总经理")
                             {
                                 <div class="form-group">
                                     <label class="col-sm-2 col-sm-2 control-label">备注</label>
@@ -148,7 +148,6 @@
                                     </div>
                                 </div>
                             }
-                        }
                     }
                     @foreach (var item in Model.Opinions.Where(c => c.Done).OrderBy(c => c.Id))
                     {<div class="form-group">

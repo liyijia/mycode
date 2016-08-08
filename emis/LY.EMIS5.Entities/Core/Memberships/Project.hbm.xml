@@ -20,7 +20,9 @@
     <property name="Account" />
     <property name="Bank" />
     <property name="OpenDate" />
+    <many-to-one name="OpenManager" class="Manager" lazy="false" column="Open_Id"/>
     <many-to-one name="Sale" class="Manager" lazy="false" column="Sale_Id"/>
+    <many-to-one name="Current" class="Opinion" lazy="false" column="Current_Id"/>
     <property name="SalesOpinion" />
     <bag name="Opinions" lazy="extra">
       <key column="Project_Id" />
@@ -36,5 +38,8 @@
     <property name="MoneySituation" />
     <property name="Bid" />
     <property name="Remark" />
+    <property name="Flow" length="4000"/>
+    <property name="Proxy" />
+    <property name="Requirement" />
   </class>
 </hibernate-mapping>

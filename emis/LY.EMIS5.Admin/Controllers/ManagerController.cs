@@ -44,7 +44,7 @@ namespace LY.EMIS5.Admin.Controllers
                     Name = c.Name,
                     UserName = c.UserName,
                     Phone = c.Phone,
-                    Email = c.Company!=null?c.Company.Name:"",
+                    Email = c.Company==null?"":c.Company,
                     Roles = c.Kind,
                     Stat = !c.IsEnabled ? "禁用" : "启用"
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
@@ -55,7 +55,7 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpGet, Authorize]
         public ActionResult Create()
         {
-            ViewBag.Companys = DbHelper.Query<Company>().AsSelectItemList(c => c.Id, c => c.Name);
+            ViewBag.Companys = DbHelper.Query<Company>().ToList();
             return View(new Manager());
         }
 
@@ -73,7 +73,7 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpGet, Authorize]
         public ActionResult Edit(int id)
         {
-            ViewBag.Companys = DbHelper.Query<Company>().AsSelectItemList(c => c.Id, c => c.Name);
+            ViewBag.Companys = DbHelper.Query<Company>().ToList();
             return View(DbHelper.Get<Manager>(id));
         }
 
