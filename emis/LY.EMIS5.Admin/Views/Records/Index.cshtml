@@ -42,7 +42,7 @@
                 "bLengthChange": false,
                 "sAjaxSource": "/Records/Index",
                 "fnServerParams": function (aoData) {
-                   
+                    aoData.push({ "name": "company", "value": $("[name=\"company\"]").val() });
                 }, "aoColumns": [{ "mData": "Id" },
                       { "mData": "Area" },
                       { "mData": "IsRecord" },
@@ -70,7 +70,9 @@
             $('.create').click(function(){
                 location.href = "/Records/Create";
             });
-           
+            $(".import").click(function () {
+                location.href = "/Home/Upload?name=备案"
+            });
            
         });
         function Delete(id) {
@@ -91,8 +93,9 @@
                     备案列表
                     <span class="tools pull-right form-inline">
                        @Html.DropDownList("company", ViewBag.Companys as List<SelectListItem>, "公司选择", new { @class = "form-control" })
-                    <input type="button" class="btn btn-default create" value="添加" />
-                    <input type="button" class="btn btn-default import" value="导入" />
+                        <input type="button" class="btn btn-default sreach" value="搜索" />
+                        <input type="button" class="btn btn-default create" value="添加" />
+                        <input type="button" class="btn btn-default import" value="导入" />
                     </span>
                 </header>
                 <div class="panel-body">

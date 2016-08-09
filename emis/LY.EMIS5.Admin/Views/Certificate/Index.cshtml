@@ -28,7 +28,7 @@
                 "bLengthChange": false,
                 "sAjaxSource": "/Certificate/Index",
                 "fnServerParams": function (aoData) {
-                   
+                    aoData.push({ "name": "company", "value": $("[name=\"company\"]").val() });
                 }, "aoColumns": [{ "mData": "Id" },
                       { "mData": "Post" },
                       { "mData": "Major" },
@@ -55,7 +55,14 @@
             $('.create').click(function(){
                 location.href = "/Certificate/Create";
             });
+
+            $(".import").click(function () {
+                location.href = "/Home/Upload?name=证书"
+            });
            
+            $(".report").click(function () {
+                location.href = "/Certificate/Report"
+            });
             
         });
         function Delete(id) {
@@ -76,8 +83,10 @@
                     证书列表
                     <span class="tools pull-right form-inline">
                         @Html.DropDownList("company", ViewBag.Companys as List<SelectListItem>, "公司选择", new { @class = "form-control" })
+                        <input type="button" class="btn btn-default sreach" value="搜索" />
                         <input type="button" class="btn btn-default create" value="添加" />
                         <input type="button" class="btn btn-default import" value="导入" />
+                        <input type="button" class="btn btn-default report" value="报表" />
                     </span>
                 </header>
                 <div class="panel-body">

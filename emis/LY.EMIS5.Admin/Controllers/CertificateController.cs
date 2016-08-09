@@ -49,7 +49,7 @@ namespace LY.EMIS5.Admin.Controllers
                     c.Name,
                     AnnualVerificationDate=c.AnnualVerificationDate.ToYearMonthDayString(),
                     c.Remarks,
-                    Edit = c.Manager.Id==ManagerImp.Current.Id
+                    Edit = c.Manager.Id==ManagerImp.Current.Id || ManagerImp.Current.Kind == "管理员"
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
         }
 
@@ -98,6 +98,13 @@ namespace LY.EMIS5.Admin.Controllers
         public ActionResult View(int id)
         {
             return View(DbHelper.Get<Certificate>(id));
+        }
+
+        [HttpGet, Authorize]
+        public ActionResult Report()
+        {
+            ViewBag.Companys = DbHelper.Query<Company>().ToList();
+            return View(DbHelper.Query<Certificate>().ToList());
         }
 
     }

@@ -16,6 +16,7 @@ using Enyim.Caching.Memcached;
 using System.Data;
 using NHibernate.Extensions;
 using LY.EMIS5.Const;
+using LY.EMIS5.Common.Mvc.Extensions;
 
 namespace LY.EMIS5.Admin.Controllers
 {
@@ -25,7 +26,7 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpGet, Authorize]
         public ActionResult Index()
         {
-            
+
             return View();
         }
 
@@ -61,6 +62,52 @@ namespace LY.EMIS5.Admin.Controllers
             WriteCookie(manager.Id);
             return RedirectToAction("AuditList", "Project");
         }
-       
+
+        [HttpGet, Authorize]
+        public ActionResult Upload()
+        {
+            return View();
+        }
+
+        [HttpPost, Authorize]
+        public void Upload(string name)
+        {
+            DataTable dt = Util.ImportFromXls(Request.Files[0]);
+            using (var ts = TransactionScopes.Default)
+            {
+                switch (name)
+                {
+                    case "业绩":
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            new Achievement { Company = row["公司"].ToString(), CreateDate = DateTime.Now, EndDate = DateTime.Parse(row["竣工时间"].ToString()), Manager = ManagerImp.Current, ProjectManager = row["项目经理"].ToString(), ProjectName = row["项目名称"].ToString(), Scale = row["规模"].ToString(), StartDate = DateTime.Parse(row["开工时间"].ToString()), Type = row["类型"].ToString() }.Save();
+                        }
+                        break;
+                    case "资质":
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            new Aptitude { Company = row["公司"].ToString(), CreateDate = DateTime.Now, Level = row["等级"].ToString(), Manager = ManagerImp.Current, Name = row["资质名"].ToString() }.Save();
+                        }
+                        break;
+                    case "证书":
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            new Certificate { AnnualVerificationDate = DateTime.Parse(row["年审时间"].ToString()), Company = row["公司"].ToString(), CreateDate = DateTime.Now, Major = row["专业"].ToString(), Manager = ManagerImp.Current, Name = row["姓名"].ToString(), Post = row["岗位"].ToString(), Remarks = row["备注"].ToString() }.Save();
+                        }
+                        break;
+                    case "备案":
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            new Records { Area = row["区域"].ToString(), Company = row["公司"].ToString(), CreateDate = DateTime.Now, Date = DateTime.Parse(row["备案时间"].ToString()), IsRecord = row["是否备案"].ToString() == "是" ? true : false, Manager = ManagerImp.Current, Password = row["密码"].ToString(), Phone = row["电话"].ToString(), Remarks = row["备注"].ToString(), Situation = row["备案情况"].ToString(), Username = row["登录名"].ToString(), WebSite = row["网址"].ToString() }.Save();
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                ts.Complete();
+            }
+        }
+
     }
 }

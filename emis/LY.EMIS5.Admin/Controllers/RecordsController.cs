@@ -53,7 +53,7 @@ namespace LY.EMIS5.Admin.Controllers
                     c.Situation,
                     Date=c.Date.ToYearMonthDayString(),
                     c.Remarks,
-                    Edit = c.Manager.Id==ManagerImp.Current.Id
+                    Edit = c.Manager.Id==ManagerImp.Current.Id || ManagerImp.Current.Kind == "管理员"
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
         }
 

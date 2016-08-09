@@ -557,7 +557,7 @@ require.register("dropzone/lib/dropzone.js", function(exports, require, module){
         this.element.attr("enctype", "multipart/form-data");
       }
       if (this.element.hasClass("dropzone") && this.element.find(".message").length === 0) {
-        this.element.append(o("<div class=\"default message\"><span>Drop files here to upload</span></div>"));
+        this.element.append(o("<div class=\"default message\"><span>拖拽文件到此上传</span></div>"));
       }
       capableBrowser = true;
       if (window.File && window.FileReader && window.FileList && window.Blob && window.FormData) {
@@ -846,7 +846,7 @@ require.register("dropzone/lib/dropzone.js", function(exports, require, module){
       xhr.setRequestHeader("Accept", "application/json");
       xhr.setRequestHeader("Cache-Control", "no-cache");
       xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-      xhr.setRequestHeader("X-File-Name", file.name);
+      xhr.setRequestHeader("X-File-Name", encodeURIComponent(file.name));
       formData = new FormData();
       if (this.options.params) {
         _ref1 = this.options.params;

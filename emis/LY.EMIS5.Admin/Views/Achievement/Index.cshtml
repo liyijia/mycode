@@ -36,7 +36,7 @@
                 "bLengthChange": false,
                 "sAjaxSource": "/Achievement/Index",
                 "fnServerParams": function (aoData) {
-                   
+                    aoData.push({ "name": "company", "value": $("[name=\"company\"]").val() });
                 }, "aoColumns": [{ "mData": "Id" },
                       { "mData": "ProjectName" },
                       { "mData": "Scale" },
@@ -59,6 +59,10 @@
             //搜索
             $(".sreach").click(function () {
                 table.dataTable().fnAdjustColumnSizing();
+            });
+
+            $(".import").click(function () {
+                location.href = "/Home/Upload?name=业绩"
             });
 
             $('.create').click(function(){
@@ -85,6 +89,7 @@
                     业绩列表
                     <span class="tools pull-right form-inline">
                        @Html.DropDownList("company", ViewBag.Companys as List<SelectListItem>, "公司选择", new { @class = "form-control" })
+                        <input type="button" class="btn btn-default sreach" value="搜索" />
                         <input type="button" class="btn btn-default create" value="添加" />
                         <input type="button" class="btn btn-default import" value="导入" />
                     </span>

@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "上传文件";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+ <!--body wrapper start-->
+<div class="wrapper">
+    <section class="panel">
+        <header class="panel-heading">
+            导入数据
+            <span class="tools pull-right">
+                <a class="btn btn-default " href="/Content/xls/@(Request.QueryString["name"]).xls"><i class="fa fa-cloud-download"></i> 下载模板</a>
+            </span>
+        </header>
+        <div class="panel-body">
+            <form action="upload?name=@(Request.QueryString["name"])" class="dropzone" method="post" >
+            </form>
+        </div>
+    </section>
+</div>
+<!--body wrapper end-->

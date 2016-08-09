@@ -46,7 +46,7 @@ namespace LY.EMIS5.Admin.Controllers
                     Id = c.Id,
                     c.Name,
                     c.Level,
-                    Edit = c.Manager.Id==ManagerImp.Current.Id
+                    Edit = c.Manager.Id==ManagerImp.Current.Id || ManagerImp.Current.Kind == "管理员"
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
         }
 

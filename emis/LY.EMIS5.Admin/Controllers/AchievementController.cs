@@ -50,7 +50,7 @@ namespace LY.EMIS5.Admin.Controllers
                     EndDate=c.EndDate.ToYearMonthDayString(),
                     c.ProjectManager,
                     c.Type,
-                    Edit = c.Manager.Id==ManagerImp.Current.Id
+                    Edit = c.Manager.Id==ManagerImp.Current.Id || ManagerImp.Current.Kind=="管理员"
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
         }
 

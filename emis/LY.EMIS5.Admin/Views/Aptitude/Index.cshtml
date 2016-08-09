@@ -28,7 +28,7 @@
                 "bLengthChange": false,
                 "sAjaxSource": "/Aptitude/Index",
                 "fnServerParams": function (aoData) {
-                   
+                    aoData.push({ "name": "company", "value": $("[name=\"company\"]").val() });
                 }, "aoColumns": [{ "mData": "Id" },
                       { "mData": "Name" },
                       { "mData": "Level" },
@@ -52,7 +52,9 @@
             $('.create').click(function(){
                 location.href = "/Aptitude/Create";
             });
-           
+            $(".import").click(function () {
+                location.href = "/Home/Upload?name=资质"
+            });
             
         });
         function Delete(id) {
@@ -73,6 +75,7 @@
                     资质列表
                     <span class="tools pull-right form-inline">
                         @Html.DropDownList("company", ViewBag.Companys as List<SelectListItem>, "公司选择", new { @class = "form-control" })
+                        <input type="button" class="btn btn-default sreach" value="搜索" />
                         <input type="button" class="btn btn-default create" value="添加" />
                         <input type="button" class="btn btn-default import" value="导入" />
                     </span>

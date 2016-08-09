@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "证书统计";
+}
+@using LY.EMIS5.BLL;
+@using LY.EMIS5.Entities.Core.Memberships;
+@model List<Certificate>
+@section Script{
+<style type="text/css">
+    @@media only screen and (max-width: 800px) {
+        table td:nth-child(1),
+        table th:nth-child(1),
+        table td:nth-child(3),
+        table th:nth-child(3),
+        table td:nth-child(5),
+        table th:nth-child(5),
+        table td:nth-child(6),
+        table th:nth-child(6)
+        {
+            display: none;
+        }
+
+       
+    }
+</style>
+    <script type="text/javascript">
+        var table = null;
+        $(function () {
+            table = $('#dynamic-table').dataTable({
+                "bServerSide": false, "bLengthChange": false,
+                "bFilter": false
+            });
+            //搜索
+            $(".sreach").click(function () {
+                table.dataTable().fnAdjustColumnSizing();
+            });
+
+            $('.create').click(function(){
+                location.href = "/Certificate/Create";
+            });
+
+            $(".import").click(function () {
+                location.href = "/Home/Upload?name=证书"
+            });
+           
+            
+        });
+        function Delete(id) {
+            $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
+                dialog.modal('hide');
+                location.href = "/Certificate/Delete/" + id;
+            })
+        }
+    </script>
+}
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    证书统计
+                    <span class="tools pull-right form-inline">
+                       
+                    </span>
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        @{
+                            var companys = ViewBag.Companys as List<Company>;
+                        }
+                        <table class="display table table-bordered table-striped" id="dynamic-table">
+                            <thead>
+                                <tr><th>岗位/专业</th>
+                                    @foreach (var item in companys)
+                                    {
+                                        <th>@item.Name</th>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @{ foreach (var item in Model.Select(c => new { c.Major, c.Post }).Distinct())
+                                        {
+                                            <td>@(item.Post+"/"+item.Major)</td>
+                                            foreach (var co in companys)
+                                            {
+                                                <td>@(Model.Count(c => c.Major == item.Major && c.Post == item.Post && c.Company.Contains(co.Name)))</td>
+                                                
+                                            }
+                                        }}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+   
+</div>
+<!--body wrapper end-->

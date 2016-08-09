@@ -292,6 +292,12 @@
     <None Include="log4net.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Scripts\dropzone\css\basic.css" />
+    <Content Include="Scripts\dropzone\css\dropzone.css" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
+    <Content Include="Scripts\dropzone\dropzone.js" />
+    <Content Include="Scripts\dropzone\images\spritemap%402x.png" />
+    <Content Include="Scripts\dropzone\images\spritemap.png" />
     <Content Include="Scripts\dynamic_table_init.js" />
     <Content Include="Scripts\editable-table.js" />
     <Content Include="Scripts\emis.framewok.js" />
@@ -376,10 +382,15 @@
     <Content Include="Scripts\bootstrap-datetimepicker\less\datetimepicker.less" />
     <Content Include="Views\Manager\EditPassword.cshtml" />
     <Content Include="Views\Manager\Edit.cshtml" />
+    <Content Include="Scripts\dropzone\css\stylus\basic.styl" />
+    <Content Include="Scripts\dropzone\css\stylus\dropzone.styl" />
+    <Content Include="Views\Home\Upload.cshtml" />
+    <Content Include="Views\Certificate\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\" />
     <Folder Include="Content\images\" />
+    <Folder Include="Content\xls\" />
     <Folder Include="PDF\" />
     <Folder Include="Scripts\advanced-datatable\" />
     <Folder Include="Scripts\bootstrap-colorpicker\" />
@@ -392,7 +403,6 @@
     <Folder Include="Scripts\chart-js\" />
     <Folder Include="Scripts\ckeditor\" />
     <Folder Include="Scripts\data-tables\" />
-    <Folder Include="Scripts\dropzone\" />
     <Folder Include="Scripts\easypiechart\" />
     <Folder Include="Scripts\flot-chart\" />
     <Folder Include="Scripts\fuelux\" />
