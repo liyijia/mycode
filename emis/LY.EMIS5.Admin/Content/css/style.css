@@ -2038,9 +2038,9 @@ ul.user-states li {
 }
 
 .fc-event-skin {
-    background-color: #5d708c !important;
-    border-color: #5d708c !important;
-    color: #FFFFFF !important;
+    background-color: #5d708c ;
+    border-color: #5d708c ;
+    color: #FFFFFF;
 }
 
 .fc-grid th {

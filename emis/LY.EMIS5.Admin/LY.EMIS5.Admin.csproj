@@ -230,7 +230,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\bootstrap-fileupload.min.css" />
+    <Content Include="Content\css\bootstrap-reset.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\clndr.css" />
+    <Content Include="Content\css\jquery-ui-1.10.3.css" />
+    <Content Include="Content\css\jquery.stepy.css" />
     <Content Include="Content\css\mystyle.css" />
+    <Content Include="Content\css\style-responsive.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\table-responsive.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap-datepicker\css\datepicker-custom.css" />
     <Content Include="Scripts\bootstrap-datepicker\css\datepicker.css" />
@@ -282,6 +292,10 @@
     <Content Include="Scripts\bootstrap-fileupload.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\calendar\clndr.js" />
+    <Content Include="Scripts\calendar\clndr.min.js" />
+    <Content Include="Scripts\calendar\evnt.calendar.init.js" />
+    <Content Include="Scripts\calendar\moment-2.2.1.js" />
     <Content Include="Scripts\dashboard-chart-init.js" />
     <Content Include="App_Data\db.db" />
     <None Include="hibernate.cfg.xml">
@@ -307,6 +321,12 @@
     <None Include="Properties\PublishProfiles\LY.EMIS5.pubxml" />
     <Content Include="Scripts\external-dragging-calendar.js" />
     <Content Include="Scripts\flot.chart.init.js" />
+    <Content Include="Scripts\fullcalendar\bootstrap-fullcalendar.css" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.css" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.js" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Scripts\fullcalendar\gcal.js" />
     <Content Include="Scripts\html5shiv.js" />
     <Content Include="Scripts\icheck-init.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -399,14 +419,12 @@
     <Folder Include="Scripts\bootstrap-timepicker\" />
     <Folder Include="Scripts\bootstrap-wysihtml5\" />
     <Folder Include="Scripts\c3-chart\" />
-    <Folder Include="Scripts\calendar\" />
     <Folder Include="Scripts\chart-js\" />
     <Folder Include="Scripts\ckeditor\" />
     <Folder Include="Scripts\data-tables\" />
     <Folder Include="Scripts\easypiechart\" />
     <Folder Include="Scripts\flot-chart\" />
     <Folder Include="Scripts\fuelux\" />
-    <Folder Include="Scripts\fullcalendar\" />
     <Folder Include="Scripts\google-map\" />
     <Folder Include="Scripts\gritter\" />
     <Folder Include="Scripts\iCheck\" />

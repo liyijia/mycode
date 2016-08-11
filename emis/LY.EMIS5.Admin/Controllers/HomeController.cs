@@ -1,21 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LY.EMIS5.BLL;
 using LY.EMIS5.Entities.Core.Memberships;
 using NHibernate.Extensions.Data;
-using System.Text;
 using System.Web.Security;
-using LY.EMIS5.Common.Security;
 using LY.EMIS5.Common;
-using LY.EMIS5.Common.Const;
-using Couchbase;
-using Enyim.Caching.Memcached;
 using System.Data;
 using NHibernate.Extensions;
-using LY.EMIS5.Const;
+using LY.EMIS5.Common.Extensions;
 using LY.EMIS5.Common.Mvc.Extensions;
 
 namespace LY.EMIS5.Admin.Controllers
@@ -26,8 +20,19 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpGet, Authorize]
         public ActionResult Index()
         {
-
+            ViewBag.List = DbHelper.Query<Manager>(c => c.Kind != "管理员").AsSelectItemList(c => c.Id, c => c.Name);
             return View();
+        }
+
+        [HttpPost, Authorize]
+        public ActionResult Index(Work work,int managerId)
+        {
+            work.CreateManager = ManagerImp.Current;
+            work.WorkManager = DbHelper.Get<Manager>(managerId);
+            work.CreateDate = DateTime.Now;
+            work.State = 0;
+            work.Save(true);
+            return this.RedirectToAction(100, "操作成功", "工作安排成功!", "Home", "Index");
         }
 
 
@@ -107,6 +112,15 @@ namespace LY.EMIS5.Admin.Controllers
 
                 ts.Complete();
             }
+        }
+
+        public ActionResult Open() {
+            var list = DbHelper.Query<Project>(c => c.OpenManager.Id == ManagerImp.Current.Id).Select(c => new { title = c.ProjectName, start = c.OpenDate.ToChineseDateString(), content = "项目" + c.ProjectName + "开标", user = c.Sale.Name,color = "#257e4a" }).ToList();
+            if (list == null)
+                list = DbHelper.Query<Work>(c => c.WorkManager.Id == ManagerImp.Current.Id).Select(c => new { title = c.Content, start = c.Date.ToChineseDateString(), content = c.Content, user = c.CreateManager.Name, color = "" }).ToList();
+            else
+                list.AddRange(DbHelper.Query<Work>(c => c.WorkManager.Id == ManagerImp.Current.Id).Select(c => new { title = c.Content, start = c.Date.ToChineseDateString(), content = c.Content, user = c.CreateManager.Name, color = "" }).ToList());
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
     }
