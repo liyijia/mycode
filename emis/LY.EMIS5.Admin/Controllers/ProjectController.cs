@@ -37,6 +37,16 @@ namespace LY.EMIS5.Admin.Controllers
             ViewBag.Sales = list;
             return View();
         }
+        [HttpGet, Authorize]
+        public ActionResult SaleIndex()
+        {
+            ViewBag.Company = DbHelper.Query<Company>().AsSelectItemList(c => c.Id, c => c.Name);
+            ViewBag.ProjectProgresses = EnumHelper<ProjectProgresses>.EnumToSelectList();
+            var list = DbHelper.Query<Manager>(c => c.Kind == "业务员").AsSelectItemList(c => c.Id, c => c.Name);
+            list.Insert(0, new SelectListItem() { Text = "请选择业务员", Value = "0" });
+            ViewBag.Sales = list;
+            return View();
+        }
 
         [HttpPost, Authorize]
         public string Index(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", string company="", string begin="", string end = "", int sale = 0, int iSortCol_0=6,string sSortDir_0 = "desc",  int state =0, string sEcho = "")
@@ -226,6 +236,7 @@ namespace LY.EMIS5.Admin.Controllers
                     c.CompanyName,
                     CreateDate = c.CreateDate.ToYearMonthDayString(),
                     Edit = ManagerImp.Current.Id == c.Sale.Id && c.ProjectProgress != ProjectProgresses.Success && c.ProjectProgress != ProjectProgresses.Cancel,
+                    Open=c.ProjectProgress==ProjectProgresses.Arrange,
                     Revoke = c.ProjectProgress != ProjectProgresses.NotOnline && c.ProjectProgress!= ProjectProgresses.Cancel && c.ProjectProgress != ProjectProgresses.Success && ManagerImp.Current.Id == c.Sale.Id,
                     Audit = c.ProjectProgress != ProjectProgresses.NotOnline && c.Opinions.Any(m => m.Manager.Id == ManagerImp.Current.Id && !m.Done),
                     Prompt = c.ProjectProgress != ProjectProgresses.Success && c.ProjectProgress!=ProjectProgresses.Cancel && (c.OpenDate - DateTime.Now).Days < 30
@@ -346,7 +357,7 @@ namespace LY.EMIS5.Admin.Controllers
         }
 
         [HttpPost, Authorize]
-        public ActionResult Edit(Project model,int openId)
+        public ActionResult Edit(Project model)
         {
             using (var ts = TransactionScopes.Default)
             {
@@ -356,18 +367,42 @@ namespace LY.EMIS5.Admin.Controllers
                     entity.ReplaceMoney = model.ReplaceMoney;
                     entity.Remark = model.Remark;
                     entity.OpenDate = model.OpenDate;
-                    entity.EndDate = model.EndDate;
-                entity.Bid = model.Bid;
-                if (openId > 0) {
-                    entity.OpenManager = DbHelper.Get<Manager>(openId);
-                }
-
+                    entity.EndDate = model.EndDate;            
                 entity.Update();
                 
                 ts.Complete();
             }
 
             return this.RedirectToAction(100, "操作成功", "修改项目成功", "Project", "AuditList");
+        }
+
+        [HttpGet, Authorize]
+        public ActionResult SetOpen(int id)
+        {
+            var pro = DbHelper.Get<Project>(id);
+            var list = DbHelper.Query<Manager>(c => c.Kind != "管理员").AsSelectItemList(c => c.Id, c => c.Name);
+            if (pro.OpenManager != null)
+            {
+                list.First(c => c.Value == pro.OpenManager.Id.ToString()).Selected = true;
+            }
+            ViewBag.List = list;
+            return View(DbHelper.Get<Project>(id));
+
+        }
+
+        [HttpPost, Authorize]
+        public ActionResult SetOpen(Project model,int openId)
+        {
+            using (var ts = TransactionScopes.Default)
+            {
+                var entity = DbHelper.Get<Project>(model.Id);
+                entity.OpenManager = DbHelper.Get<Manager>(openId);
+                entity.Update();
+
+                ts.Complete();
+            }
+
+            return this.RedirectToAction(100, "操作成功", "设置开标人成功", "Project", "AuditList");
         }
 
         [HttpGet, Authorize]
@@ -481,6 +516,23 @@ namespace LY.EMIS5.Admin.Controllers
         }
 
         [HttpGet, Authorize]
+        public ActionResult Open(int id)
+        {
+            return View(DbHelper.Get<Project>(id));
+        }
+
+        [HttpPost, Authorize]
+        public ActionResult Open(Project model)
+        {
+            var entity = DbHelper.Get<Project>(model.Id);
+            entity.IsOpen = true;
+            entity.OpenRemark = model.OpenRemark;
+            entity.Bid = model.Bid;
+            entity.Update(true);
+            return this.RedirectToAction(100, "操作成功", "项目开标完成", "Home", "Index");
+        }
+
+        [HttpGet, Authorize]
         public ActionResult Report()
         {
             return View();
@@ -542,7 +594,7 @@ namespace LY.EMIS5.Admin.Controllers
             Table.Columns.Add("资料费(元)").ReadOnly = true;
             Table.Columns.Add("公司名称").ReadOnly = true;
             Table.Columns.Add("资质要求").ReadOnly = true;
-            Table.Columns.Add("费用收费情况").ReadOnly = true;
+            Table.Columns.Add("收费情况").ReadOnly = true;
             Table.Columns.Add("代理公司").ReadOnly = true;
             Table.Columns.Add("人员要求").ReadOnly = true;
             foreach (var item in DbHelper.Query<Project>().OrderByDescending(c => c.Id))
@@ -570,7 +622,7 @@ namespace LY.EMIS5.Admin.Controllers
                 Row["资料费(元)"] = item.MaterialFee;
                 Row["公司名称"] = item.CompanyName;
                 Row["资质要求"] = item.Aptitude;
-                Row["费用收费情况"] = item.MoneySituation;
+                Row["收费情况"] = item.MoneySituation;
                 Row["代理公司"] = item.Proxy;
                 Row["人员要求"] = item.Requirement;
                 Table.Rows.Add(Row);

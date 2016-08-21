@@ -406,6 +406,9 @@
     <Content Include="Scripts\dropzone\css\stylus\dropzone.styl" />
     <Content Include="Views\Home\Upload.cshtml" />
     <Content Include="Views\Certificate\Report.cshtml" />
+    <Content Include="Views\Project\Open.cshtml" />
+    <Content Include="Views\Project\SetOpen.cshtml" />
+    <Content Include="Views\Project\SaleIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\" />

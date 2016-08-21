@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "项目列表";
+}
+@using LY.EMIS5.BLL;
+
+@section Script
+{<style type="text/css">
+    @@media only screen and (max-width: 800px) {
+        .table td:nth-child(1),
+        .table th:nth-child(1),
+        .table td:nth-child(3),
+        .table th:nth-child(3),
+        .table td:nth-child(4),
+        .table th:nth-child(4),
+        .table td:nth-child(5),
+        .table th:nth-child(5),
+        .table td:nth-child(6),
+        .table th:nth-child(6),
+        .table td:nth-child(7),
+        .table th:nth-child(7),
+        .table td:nth-child(8),
+        .table th:nth-child(8),
+        .table td:nth-child(9),
+        .table th:nth-child(9),
+        .table td:nth-child(10),
+        .table th:nth-child(10),
+        .table td:nth-child(11),
+        .table th:nth-child(11) {
+            display: none;
+        }
+
+        .table td:nth-child(2),.table th:nth-child(2) {
+            width: 65%;
+            overflow: hidden;
+            text-overflow: ellipsis; /*以省略号替代截除部分*/
+            white-space: nowrap;
+        }
+    }
+    .table td:nth-child(2), .table th:nth-child(2) {
+            width: 35%;
+           
+        }
+</style>
+    <script type="text/javascript">
+        var oTable;
+        var options = {
+            beforeSubmit: function () {
+            },
+            success: function () {
+                oTable.fnAdjustColumnSizing();
+            }
+        };
+       
+        $(function () {
+            $('.create').click(function () {
+                location.href = "/Project/Create";
+            });
+
+            oTable = $('#table-form-list').dataTable({
+                "bServerSide": true,
+                "bLengthChange": false,
+                "sAjaxSource": "/Project/Index",
+                "fnServerParams": function (aoData) {
+                    aoData.push({ "name": "name", "value": $("[name=\"name\"]").val() });
+                    aoData.push({ "name": "state", "value": $("[name=\"state\"]").val() });
+                    aoData.push({ "name": "begin", "value": $("[name=\"begin\"]").val() });
+                    aoData.push({ "name": "end", "value": $("[name=\"end\"]").val() });
+                    aoData.push({ "name": "company", "value": $("[name=\"company\"]").val() });
+                },
+                "aoColumns": [
+                    { "mData": "Id" },
+                      { "mData": "ProjectName", "bSortable": false },
+                      { "mData": "Scale", "bSortable": false }, { "mData": "Money", "bSortable": false }, { "mData": "Source", "bSortable": false }, { "mData": "OpenDate" }, { "mData": "EndDate" }, { "mData": "CompanyName", "bSortable": false }, { "mData": "CreateDate" }
+                ],"aaSorting": [[ 6, "desc" ]],
+                "bFilter": false,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    if (aData.Prompt) {
+                        $(nRow).css('color', 'red');
+                    }
+                    $('td:eq(1)', nRow).addClass('text-left');
+                }
+            });
+
+            $('.search').click(function () {
+                oTable.fnAdjustColumnSizing();
+            });
+
+            $('.export').click(function () {
+                location.href = "Export";
+            });
+        });
+
+        function c(id) {
+            $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
+                dialog.modal('hide');
+                location.href = "/Project/Delete/" + id;
+            })
+        }
+
+
+    </script>
+}
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    项目列表
+                    <span class="tools pull-right form-inline hidden-phone">
+                            <input type="text" class="form-control" name="name" placeholder="请输入项目名称" />
+                        <input type="text" class="form-control default-date-picker" name="begin" placeholder="开始时间" />
+                        <input type="text" class="form-control default-date-picker" name="end" placeholder="结束时间" />
+                        @Html.DropDownList("company", ViewBag.Company as List<SelectListItem>,"公司选择", new { @class = "form-control" })
+                        <input type="button" class="btn btn-default search" value="搜索" />
+                        <input type="button" class="btn btn-default export" value="导出" />
+                    </span>
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        <table class="display table table-bordered table-striped" id="table-form-list" cellpadding="0" cellspacing="1">
+                            <thead>
+                                <tr class="tab_top table-top">
+                                    <th>编号</th>
+                                    <th>项目名称</th>
+                                    <th>项目规模</th>
+                                    <th>保证金金额</th>
+                                    <th>保证金来源</th>
+                                    <th>开标时间</th>
+                                    <th>保证金截止时间</th>
+                                    <th>公司</th>
+                                    <th>登记时间</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>
+<!--body wrapper end-->

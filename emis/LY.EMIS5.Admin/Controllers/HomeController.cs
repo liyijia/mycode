@@ -20,19 +20,34 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpGet, Authorize]
         public ActionResult Index()
         {
+            ViewBag.Open = DbHelper.Query<Project>(c => !c.IsOpen && c.OpenManager.Id == ManagerImp.Current.Id).OrderByDescending(c => c.OpenDate).ToList() ;
+            ViewBag.News = DbHelper.Query<News>(c => c.Type == "公司通知").OrderByDescending(c => c.Id).Take(10).ToList();
+            ViewBag.Projects=DbHelper.Query<Project>(c => c.Current.Manager.Id == ManagerImp.Current.Id).ToList();
             ViewBag.List = DbHelper.Query<Manager>(c => c.Kind != "管理员").AsSelectItemList(c => c.Id, c => c.Name);
             return View();
         }
 
         [HttpPost, Authorize]
-        public ActionResult Index(Work work,int managerId)
+        public ActionResult Index(Work work=null,int managerId=0, bool radio=false, int id=0,  string remark="")
         {
-            work.CreateManager = ManagerImp.Current;
-            work.WorkManager = DbHelper.Get<Manager>(managerId);
-            work.CreateDate = DateTime.Now;
-            work.State = 0;
-            work.Save(true);
-            return this.RedirectToAction(100, "操作成功", "工作安排成功!", "Home", "Index");
+            if (managerId > 0)
+            {
+                work.CreateManager = ManagerImp.Current;
+                work.WorkManager = DbHelper.Get<Manager>(managerId);
+                work.CreateDate = DateTime.Now;
+                work.State = 0;
+                work.Save(true);
+                return this.RedirectToAction(100, "操作成功", "工作安排成功!", "Home", "Index");
+            }
+            else {
+                var ent = DbHelper.Get<Project>(id);
+                ent.Bid = radio;
+                ent.OpenRemark = remark;
+                ent.IsOpen = true;
+                ent.Update(true);
+                return this.RedirectToAction(100, "操作成功", "项目开标完成功", "Home", "Index");
+            }
+           
         }
 
 
@@ -65,7 +80,7 @@ namespace LY.EMIS5.Admin.Controllers
         {
             var manager = ManagerImp.Login(Name, Password);
             WriteCookie(manager.Id);
-            return RedirectToAction("AuditList", "Project");
+            return RedirectToAction("Index");
         }
 
         [HttpGet, Authorize]
@@ -113,15 +128,12 @@ namespace LY.EMIS5.Admin.Controllers
                 ts.Complete();
             }
         }
-
-        public ActionResult Open() {
-            var list = DbHelper.Query<Project>(c => c.OpenManager.Id == ManagerImp.Current.Id).Select(c => new { title = c.ProjectName, start = c.OpenDate.ToChineseDateString(), content = "项目" + c.ProjectName + "开标", user = c.Sale.Name,color = "#257e4a" }).ToList();
-            if (list == null)
-                list = DbHelper.Query<Work>(c => c.WorkManager.Id == ManagerImp.Current.Id).Select(c => new { title = c.Content, start = c.Date.ToChineseDateString(), content = c.Content, user = c.CreateManager.Name, color = "" }).ToList();
-            else
-                list.AddRange(DbHelper.Query<Work>(c => c.WorkManager.Id == ManagerImp.Current.Id).Select(c => new { title = c.Content, start = c.Date.ToChineseDateString(), content = c.Content, user = c.CreateManager.Name, color = "" }).ToList());
-            return Json(list, JsonRequestBehavior.AllowGet);
+        [HttpGet, Authorize]
+        public ActionResult Date() {
+            return Json(DbHelper.Query<Work>(c => c.WorkManager.Id == ManagerImp.Current.Id).Select(c => new { title = c.Content, start = c.Date.ToChineseDateString(), content = c.Content, user = c.CreateManager.Name, color = "" }).ToList(), JsonRequestBehavior.AllowGet);
         }
+
+  
 
     }
 }

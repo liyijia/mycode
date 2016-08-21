@@ -31,9 +31,9 @@ namespace LY.EMIS5.Admin.Controllers
         }
 
         [HttpPost, Authorize]
-        public string Index(string txt = "", int iDisplayStart = 0, int iDisplayLength = 15, string sSortDir_0 = "desc", string sEcho = "")
+        public string Index(string txt = "",string t="通知", int iDisplayStart = 0, int iDisplayLength = 15, string sSortDir_0 = "desc", string sEcho = "")
         {
-            IQueryable<News> query = DbHelper.Query<News>(c => c.Type == "公告");
+            IQueryable<News> query = DbHelper.Query<News>(c => c.Type == t);
             if (!string.IsNullOrWhiteSpace(txt))
                 query = query.Where(m => m.Title.Contains(txt));
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
@@ -56,13 +56,13 @@ namespace LY.EMIS5.Admin.Controllers
         }
 
         [HttpGet, Authorize]
-        public ActionResult Create(int id = 0)
+        public ActionResult Create(int id = 0, string t = "")
         {
             if (id > 0)
             {
                 return View(DbHelper.Get<News>(id));
             }
-            return View(new News());
+            return View(new News() { Type= t });
         }
 
         [HttpPost, Authorize]
@@ -79,17 +79,18 @@ namespace LY.EMIS5.Admin.Controllers
             else {
                 entity.CreateDate = DateTime.Now;
                 entity.Manager = ManagerImp.Current;
-                entity.Type = "公告";
                 entity.Save(true);
             }
-            return this.RedirectToAction(100, "操作成功", "编辑公告成功!", "News", "Index");
+            return this.RedirectToAction(100, "操作成功", "编辑成功!", "News", "Index?t="+ entity.Type);
         }
 
         [HttpGet, Authorize]
         public ActionResult Delete(int id = 0)
         {
-            DbHelper.Get<News>(id).Delete(true);
-            return this.RedirectToAction(100, "操作成功", "删除公告成功!", "News", "Index");
+            var entity = DbHelper.Get<News>(id);
+            if(entity!=null)
+                entity.Delete(true);
+            return this.RedirectToAction(100, "操作成功", "删除成功!", "News", "Index?t=" + entity.Type);
         }
 
 

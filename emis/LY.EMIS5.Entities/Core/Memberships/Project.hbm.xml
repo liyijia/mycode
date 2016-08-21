@@ -41,5 +41,7 @@
     <property name="Flow" length="4000"/>
     <property name="Proxy" />
     <property name="Requirement" />
+    <property name="OpenRemark" />
+    <property name="IsOpen" />
   </class>
 </hibernate-mapping>

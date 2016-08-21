@@ -11,17 +11,6 @@
         $(function () {
 
 
-            $('[name="Source"]').change(function () {
-                if ($('[name="Source"]').val() == '代打') {
-                    $('#replace').show().find('input.form-control').addClass('required');
-                } else {
-                    $('#replace').hide().find('input.form-control').removeClass('required');
-                }
-            });
-            if ('@Model.Source' != '') {
-                $('[name="Source"]').val('@Model.Source');
-            }
-            $('[name="Source"]').change();
         });
     </script>
 }
@@ -65,12 +54,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">代理公司</label>
-                        <div class="col-sm-10">
-                            <label class="control-label">@Model.Proxy</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">保证金来源</label>
                         <div class="col-sm-10">
                             <select name="Source" class="form-control">
@@ -82,7 +65,7 @@
                     <div id="replace" class="form-group none">
                         <label class="col-sm-2 col-sm-2 control-label">代打金额</label>
                         <div class="col-sm-10 input-group">
-                            @Html.TextBox("ReplaceMoney", Model.ReplaceMoney.ToString(), new { @class = "form-control number form-control-addon" })<span class="input-group-addon">万元</span>
+                            <label class="control-label">@(Model.ReplaceMoney)万元</label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -94,8 +77,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">保证金截至时间</label>
                         <div class="col-sm-10">
-                            @Html.TextBox("EndDate", Model.EndDate.ToChineseDateString(), new { @class = "form-control form_datetime" })
-                        </div>
+                            <label class="control-label">@Model.EndDate.ToChineseDateString()</label>
+</div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">保证金打款方式</label>
@@ -124,20 +107,19 @@
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">开标时间</label>
                         <div class="col-sm-10">
-                           @Html.TextBox("OpenDate", Model.OpenDate.ToChineseDateString(), new { @class = "form-control form_datetime" })
+                            <label class="control-label">@Model.OpenDate.ToChineseDateString()</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">开标人</label>
                         <div class="col-sm-10">
-                            <label class="control-label">@(Model.OpenManager != null ? Model.OpenManager.Name : "")</label>
+                            @Html.DropDownList("OpenId", ViewBag.List as IList<SelectListItem>, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">资料费</label>
                         <div class="col-sm-10 input-group">
-
-                            @Html.TextBox("MaterialFee", Model.MaterialFee.ToString(), new { @class = "form-control number form-control-addon" })<span class="input-group-addon">元</span>
+                            <label class="control-label">@(Model.MaterialFee)元</label>
                         </div>
                     </div>
 
@@ -159,17 +141,16 @@
                             <label class="control-label">@Model.MoneySituation</label>
                         </div>
                     </div>
-                    
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">代理公司</label>
+                        <div class="col-sm-10">
+                            <label class="control-label">@Model.Proxy</label>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">人员要求</label>
                         <div class="col-sm-10">
                             <label class="control-label">@Model.Requirement</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">登记人</label>
-                        <div class="col-sm-10">
-                            @Html.TextAreaFor(c => c.Remark, new { @class = "form-control", placeholder = "该选项只有自己才能看见，此信息为私密信息" })
                         </div>
                     </div>
                     <div class="form-group">

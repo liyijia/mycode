@@ -86,6 +86,9 @@
                     } else {
                         $('td:eq(11)', nRow).append('<a href="/Project/View/' + aData.Id + '">查看</a>');
                     }
+                    if (aData.Open) {
+                        $('td:eq(11)', nRow).append(' <a href="/Project/SetOpen/' + aData.Id + '">开标人</a>');
+                    }
                     if (aData.Revoke) {
                         $('td:eq(11)', nRow).append(' <a href="/Project/Cancel/' + aData.Id + '">删除</a>');
                     }

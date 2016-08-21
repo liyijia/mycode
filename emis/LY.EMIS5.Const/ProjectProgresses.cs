@@ -9,7 +9,7 @@ namespace LY.EMIS5.Const
 {
     public enum ProjectProgresses
     {
-        [Description("未上网")]
+        [Description("登记项目")]
         NotOnline = 1,
         [Description("做资料")]
         DoData = 2,

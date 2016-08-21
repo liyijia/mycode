@@ -94,6 +94,13 @@ namespace LY.EMIS5.Entities.Core.Memberships
         public virtual Manager OpenManager { get; set; }
 
         /// <summary>
+        /// 开标情况
+        /// </summary>
+        public virtual string OpenRemark { get; set; }
+
+        public virtual bool IsOpen { get; set; }
+
+        /// <summary>
         /// 业务员
         /// </summary>
         public virtual Manager Sale { get; set; }
