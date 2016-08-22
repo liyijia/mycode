@@ -83,12 +83,7 @@
             });
             $(".form_datetime").datetimepicker({ language: 'zh-CN', format: 'yyyy-mm-dd hh:ii' });
             $('.form-horizontal').validate();
-            $.post('/News/Top', function (result) {
-                $.each(result, function () {
-                    $('#scrollDiv ul').append('<li><a href="/News/View/'+this.Id+'">'+this.Title+'</a></li>')
-                })
-                setInterval('AutoScroll("#scrollDiv")', 2000);
-            })
+           
             $.post('/Project/Top', function (result) {
                 $('#task').text(result.length);
                 $.each(result, function () {
@@ -96,13 +91,7 @@
                 })
             })
         });
-        function AutoScroll(obj){
-            $(obj).find("ul:first").animate({
-                marginTop:"-50px"
-            },500,function(){
-                $(this).css({marginTop:"0px"}).find("li:first").appendTo(this);
-            });
-        }
+        
     </script>
 
     @RenderSection("Script", false)
@@ -186,11 +175,7 @@
                 <a class="toggle-btn"><i class="fa fa-bars"></i></a>
                 <!--toggle button end-->
                 <!--search start-->
-                <div id="scrollDiv">
-                    <ul>
-                        
-                    </ul>
-                </div>
+                
                 <!--search end-->
                 <!--notification menu start -->
                 <div class="menu-right">

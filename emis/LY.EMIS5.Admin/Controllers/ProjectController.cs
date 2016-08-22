@@ -302,9 +302,7 @@ namespace LY.EMIS5.Admin.Controllers
                 entity.Sale = model.Sale;
                 entity.Proxy = model.Proxy;
                 entity.Requirement = model.Requirement;
-                if (entity.ProjectProgress != ProjectProgresses.NotOnline) {
-                    entity.Sort = 1;
-                }
+              
                 Flow flow;
                 if (model.Id > 0)
                 {
@@ -324,16 +322,33 @@ namespace LY.EMIS5.Admin.Controllers
                 flow = JsonConvert.DeserializeObject<Flow>(entity.Flow);
                 if (entity.ProjectProgress != ProjectProgresses.NotOnline)
                 {
-                    var Progress = entity.ProjectProgress.GetDescription();
-                    var op= new Opinion { Agree = false, CreateDate = DateTime.Now, Done = false, Manager = DbHelper.Get<Manager>(documentId), Project = entity, ProjectProgress = Progress, NodeId = flow.nodes.First(c => c.name == Progress).id, Src= entity.Current }.Save();
-                    entity.Current.Dest = op;
-                    entity.Current.Agree = true;
-                    entity.Current.DoneDate = DateTime.Now;
-                    entity.Current.Done = true;
-                    entity.Current.Update();
-                    entity.Current = op;
-                    entity.ProjectProgress = EnumHelper<ProjectProgresses>.EnumFromString(op.ProjectProgress);
-                    entity.Update();
+                    var companys = entity.CompanyName.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                    for (int i = 0; i < companys.Length; i++)
+                    {
+                        var Progress = entity.ProjectProgress.GetDescription();
+                        if (i != 0)
+                        {
+                            entity = new Project { Account = entity.Account, Aptitude = entity.Aptitude, Bank = entity.Bank, Bid = entity.Bid, CompanyName = companys[i], CreateDate = entity.CreateDate, Current = null, EndDate = entity.EndDate, Flow = entity.Flow, IsOpen = entity.IsOpen, Link = entity.Link, MaterialFee = entity.MaterialFee, Money = entity.Money, MoneySituation = entity.MoneySituation, OpenDate = entity.OpenDate, OpenManager = null, OpenRemark = "", Opinions = null, Owner = entity.Owner, ProjectName = entity.ProjectName, ProjectProgress = entity.ProjectProgress, Proxy = entity.Proxy, Remark = entity.Remark, ReplaceMoney = entity.ReplaceMoney, Requirement = entity.Requirement, Sale = entity.Sale, SalesOpinion = entity.SalesOpinion, Scale = entity.Scale, Sort = entity.Sort, Source = entity.Source, State = entity.State, Type = entity.Type, UserName = entity.UserName }.Save();
+                            entity.Save();
+                            entity.Current = new Opinion { Content = entity.SalesOpinion, Agree = false, CreateDate = DateTime.Now, Done = false, Manager = entity.Sale, Project = entity, ProjectProgress = Progress, NodeId = flow.nodes.First(c => c.name == Progress).id }.Save();
+                        }
+                        else {
+                            entity.CompanyName = companys[i];
+                        }
+                    
+                        var op = new Opinion { Agree = false, CreateDate = DateTime.Now, Done = false, Manager = DbHelper.Query<Manager>(c=>c.Company.Contains(companys[i])&&c.Kind=="资料员").First(), Project = entity, ProjectProgress = Progress, NodeId = flow.nodes.First(c => c.name == Progress).id, Src = entity.Current }.Save();
+                        entity.Current.Dest = op;
+                        entity.Current.Agree = true;
+                        entity.Current.DoneDate = DateTime.Now;
+                        entity.Current.Done = true;
+                        entity.Current.Update();
+                        entity.Current = op;
+                        entity.ProjectProgress = EnumHelper<ProjectProgresses>.EnumFromString(op.ProjectProgress);
+                        entity.Update();
+                       
+                    }
+                    
+                    
 
                 }
                 ts.Complete();
@@ -419,7 +434,7 @@ namespace LY.EMIS5.Admin.Controllers
             flow.setAction(flow.actions.First(c => c.src == entity.Current.NodeId));
             ViewBag.Flow = flow;
             if(flow.dest.role!=null)
-                ViewBag.List = DbHelper.Query<Manager>(c => c.Kind == flow.dest.role).AsSelectItemList(c => c.Id, c => c.Name);
+                ViewBag.List = DbHelper.Query<Manager>(c => c.Kind == flow.dest.role && c.Company.Contains(entity.CompanyName)).AsSelectItemList(c => c.Id, c => c.Name);
             return View(entity);
         }
 
