@@ -54,27 +54,27 @@
             height: 50px;
             line-height: 50px;
             overflow: hidden;
-            float:left;
+            float: left;
             text-overflow: ellipsis; /*以省略号替代截除部分*/
             white-space: nowrap;
         }
+
         @@media only screen and (max-width: 800px) {
-    
-        #scrollDiv {
-            width:calc(100% - 195px);
-           
-        }
-}
 
-            #scrollDiv li {
-                height: 50px;
-                padding-left: 10px;
-                color:red;
+            #scrollDiv {
+                width: calc(100% - 195px);
             }
+        }
 
-                #scrollDiv li a {
-                    color:red;
-                }
+        #scrollDiv li {
+            height: 50px;
+            padding-left: 10px;
+            color: red;
+        }
+
+            #scrollDiv li a {
+                color: red;
+            }
     </style>
     <script type="text/javascript">
         $(function () {
@@ -83,7 +83,7 @@
             });
             $(".form_datetime").datetimepicker({ language: 'zh-CN', format: 'yyyy-mm-dd hh:ii' });
             $('.form-horizontal').validate();
-           
+
             $.post('/Project/Top', function (result) {
                 $('#task').text(result.length);
                 $.each(result, function () {
@@ -91,7 +91,7 @@
                 })
             })
         });
-        
+
     </script>
 
     @RenderSection("Script", false)
@@ -110,7 +110,7 @@
             <!--logo and iconic logo end-->
 
             <div class="left-side-inner">
-                
+
                 <!--sidebar nav start-->
                 <ul class="nav nav-pills nav-stacked custom-nav">
                     <li>
@@ -128,23 +128,20 @@
                         }
                         if (ManagerImp.Current.Kind != "开标人")
                         {
-                    <li class="menu-list">
-                        <a href="#"><i class="fa fa-th-list"></i> <span>项目管理</span></a>
-                        <ul class="sub-menu-list">
-                            <li><a href="/Project/AuditList">我的项目</a></li>
-                            @if (ManagerImp.Current.Kind != "业务员")
-                            {
-                            <li><a href="/Project">全部项目</a></li>
+                            <li class="menu-list">
+                                <a href="#"><i class="fa fa-th-list"></i> <span>项目管理</span></a>
+                                <ul class="sub-menu-list">
+                                    <li><a href="/Project/AuditList">我的项目</a></li>
+                                    <li><a href="/Project">全部项目</a></li>
+                                    @if (ManagerImp.Current.Kind != "业务员")
+                                    {
+                                        <li><a href="/Project/Report">项目报表</a></li>
+                                    }
 
-                            <li><a href="/Project/Report">项目报表</a></li>
-                            }
-                            else {
-                                <li><a href="/Project/SaleIndex">全部项目</a></li>
-                            }
-                        </ul>
-                    </li>
+                                </ul>
+                            </li>
                         }
-                        }
+                    }
                     <li class="menu-list">
                         <a href="#"><i class="fa fa-bullhorn"></i> <span>公告管理</span></a>
                         <ul class="sub-menu-list">
@@ -153,66 +150,66 @@
                             <li><a href="/News?t=公司新闻">公司新闻</a></li>
                         </ul>
                     </li>
-                    <li class="menu-list">
-                        <a href="#"><i class="fa fa-trophy"></i> <span>企业信息</span></a>
-                        <ul class="sub-menu-list">
-                            <li><a href="/Records">备案管理</a></li>
-                            <li><a href="/Certificate">证书管理</a></li>
-                            <li><a href="/Achievement">业绩管理</a></li>
-                            <li><a href="/Aptitude">公司资质</a></li>
+                  
+                            <li class="menu-list">
+                                <a href="#"><i class="fa fa-trophy"></i> <span>企业信息</span></a>
+                                <ul class="sub-menu-list">
+                                    <li><a href="/Records">备案管理</a></li>
+                                    <li><a href="/Certificate">证书管理</a></li>
+                                    <li><a href="/Achievement">业绩管理</a></li>
+                                    <li><a href="/Aptitude">公司资质</a></li>
+                                </ul>
+                              
+                            </li>
+                     
                         </ul>
-                    </li>
-                </ul>
                 <!--sidebar nav end-->
-            </div>
-        </div>
+                    </div>
+                </div>
         <!-- left side end-->
         <!-- main content start-->
-        <div class="main-content">
-            <!-- header section start-->
-            <div class="header-section">
-                <!--toggle button start-->
-                <a class="toggle-btn"><i class="fa fa-bars"></i></a>
-                <!--toggle button end-->
-                <!--search start-->
-                
-                <!--search end-->
-                <!--notification menu start -->
-                <div class="menu-right">
-                    <ul class="notification-menu">
-                        <li>
-                            <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
-                                <i class="fa fa-tasks"></i>
-                                <span id="task" class="badge">0</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-head pull-right">
-                                <ul id="task_list" class="dropdown-list user-list">
-                                    
-                                </ul>
+                            <div class="main-content">
+                                <!-- header section start-->
+                                <div class="header-section">
+                                    <!--toggle button start-->
+                                    <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+                                    <!--toggle button end-->
+                                    <!--search start-->
+                                    <!--search end-->
+                                    <!--notification menu start -->
+                                    <div class="menu-right">
+                                        <ul class="notification-menu">
+                                            <li>
+                                                <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+                                                    <i class="fa fa-tasks"></i>
+                                                    <span id="task" class="badge">0</span>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-head pull-right">
+                                                    <ul id="task_list" class="dropdown-list user-list"></ul>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                    @ManagerImp.Current.Name
+                                                    <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                                                    @*<li><a href="#"><i class="fa fa-user"></i>  Profile</a></li>*@
+                                                    <li><a href="/Manager/EditPassword"><i class="fa fa-cog"></i>修改密码</a></li>
+                                                    <li><a href="/Home/Logout"><i class="fa fa-sign-out"></i>退出</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!--notification menu end -->
+                                </div>
+                                <!-- header section end-->
+
+                                @RenderBody()
+
                             </div>
-                        </li>
-                        <li>
-                            <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                @ManagerImp.Current.Name
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                                @*<li><a href="#"><i class="fa fa-user"></i>  Profile</a></li>*@
-                                <li><a href="/Manager/EditPassword"><i class="fa fa-cog"></i>修改密码</a></li>
-                                <li><a href="/Home/Logout"><i class="fa fa-sign-out"></i>退出</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <!--notification menu end -->
-            </div>
-            <!-- header section end-->
-            
-          @RenderBody()
-
-        </div>
         <!-- main content end-->
-    </section>
-</body>
+                        </section>
+                    </body>
 
-</html>
+                </html>

@@ -69,7 +69,7 @@
                 "aoColumns": [
                 { "mData": "Id" },
                       { "mData": "ProjectName", "bSortable": false },
-                      { "mData": "Name", "bSortable": false }, { "mData": "Scale", "bSortable": false }, { "mData": "Money", "bSortable": false }, { "mData": "Source", "bSortable": false }, { "mData": "ProjectProgress" }, { "mData": "OpenDate" }, { "mData": "EndDate" }, { "mData": "CompanyName", "bSortable": false }, { "mData": "CreateDate" },
+                      { "mData": "Name", "bSortable": false }, { "mData": "Scale" }, { "mData": "Money", "bSortable": false }, { "mData": "Source", "bSortable": false }, { "mData": "ProjectProgress" }, { "mData": "OpenDate" }, { "mData": "EndDate" }, { "mData": "CompanyName" }, { "mData": "CreateDate" },
                       { "mData": "Id", "bSortable": false }
                 ], "bFilter": false, "aaSorting": [[7, "desc"]],
                 "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
@@ -79,15 +79,12 @@
                     $('td:eq(1)', nRow).addClass('text-left').width(100);
                     $('td:eq(11)', nRow).html('');
                     if (aData.Edit) {
-                        if (aData.ProjectProgress == '未上网')
+                        if (aData.ProjectProgress == '登记项目')
                             $('td:eq(11)', nRow).append('<a href="/Project/Create/' + aData.Id + '">编辑</a>');
                         else 
                             $('td:eq(11)', nRow).append('<a href="/Project/Edit/' + aData.Id + '">编辑</a>');
                     } else {
                         $('td:eq(11)', nRow).append('<a href="/Project/View/' + aData.Id + '">查看</a>');
-                    }
-                    if (aData.Open) {
-                        $('td:eq(11)', nRow).append(' <a href="/Project/SetOpen/' + aData.Id + '">开标人</a>');
                     }
                     if (aData.Revoke) {
                         $('td:eq(11)', nRow).append(' <a href="/Project/Cancel/' + aData.Id + '">删除</a>');
@@ -122,22 +119,21 @@
                     我的项目
                     <span class="tools pull-right form-inline">
                             <input type="text" class="form-control hidden-phone" name="name" placeholder="请输入项目名称" />
-                        <select name="state" class="form-control hidden-phone">
-                            <option value="">项目进度</option>
-                            <option>未上网</option>
-                            <option>已上网</option>
-                            <option>做资料</option>
-                            <option>打保证金</option>
-                            <option>统一开标</option>
-                            <option>开标结束</option>
-                            <option>保证金已退</option>
-                            <option>不能投标</option>
-                        </select>
+                        
+                        @Html.DropDownList("state",ViewBag.ProjectProgresses as SelectList,"全部进度",new { @class="form-control hidden-phone"})
                         <input type="button" class="btn btn-default search hidden-phone" value="搜索" />
                         <input type="button" class="btn btn-default create" value="添加" />
                     </span>
                 </header>
                 <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="/Project/AuditList">我的项目</a>
+                        </li>
+                        <li class="">
+                            <a href="/Project/HList">历史项目</a>
+                        </li>
+                    </ul>
                     <div class="adv-table">
                         <table class="display table table-bordered table-striped" id="table-form-list" cellpadding="0" cellspacing="1">
                             <thead>

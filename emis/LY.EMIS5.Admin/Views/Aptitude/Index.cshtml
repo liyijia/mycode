@@ -32,16 +32,17 @@
                 }, "aoColumns": [{ "mData": "Id" },
                       { "mData": "Name" },
                       { "mData": "Level" },
+                      { "mData": "Company" },
                       { "mData": "Id" }
                 ], "bFilter": false, "bSort": false,
                 "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                     $('td:eq(1)', nRow).addClass('text-left');
-                    $('td:eq(3)', nRow).html("<a href=\"/Aptitude/View/" + aData.Id + "\">查看</a>");
-                    if (aData.Edit) {
-                        $('td:eq(3)', nRow).append(' <a href="/Aptitude/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');
+                    $('td:eq(4)', nRow).html("<a href=\"/Aptitude/View/" + aData.Id + "\">查看</a>");
+                    if ('@(ManagerImp.Current.Kind == "管理员" || ManagerImp.Current.Kind == "资料员")'=='True') {
+                        $('td:eq(4)', nRow).append(' <a href="/Aptitude/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');
                     }
-                     
-                   
+
+
                 }
             });
             //搜索
@@ -55,7 +56,7 @@
             $(".import").click(function () {
                 location.href = "/Home/Upload?name=资质"
             });
-            
+
         });
         function Delete(id) {
             $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
@@ -76,8 +77,11 @@
                     <span class="tools pull-right form-inline">
                         @Html.DropDownList("company", ViewBag.Companys as List<SelectListItem>, "公司选择", new { @class = "form-control" })
                         <input type="button" class="btn btn-default sreach" value="搜索" />
+                       @if (ManagerImp.Current.Kind == "管理员" || ManagerImp.Current.Kind == "资料员")
+                       {
                         <input type="button" class="btn btn-default create" value="添加" />
-                        <input type="button" class="btn btn-default import" value="导入" />
+                            <input type="button" class="btn btn-default import" value="导入" />
+                       }
                     </span>
                 </header>
                 <div class="panel-body">
@@ -88,6 +92,7 @@
                                     <th>编号</th>
                                     <th>资质名</th>
                                     <th>等级</th>
+                                    <th>公司</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>

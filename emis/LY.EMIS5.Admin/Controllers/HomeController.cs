@@ -22,7 +22,7 @@ namespace LY.EMIS5.Admin.Controllers
         {
             ViewBag.Open = DbHelper.Query<Project>(c => !c.IsOpen && c.OpenManager.Id == ManagerImp.Current.Id).OrderByDescending(c => c.OpenDate).ToList() ;
             ViewBag.News = DbHelper.Query<News>(c => c.Type == "公司通知").OrderByDescending(c => c.Id).Take(10).ToList();
-            ViewBag.Projects=DbHelper.Query<Project>(c => c.Current.Manager.Id == ManagerImp.Current.Id).ToList();
+            ViewBag.Projects=DbHelper.Query<Project>(c => c.Current.Manager.Id == ManagerImp.Current.Id).OrderByDescending(c=>c.Id).ToList();
             ViewBag.List = DbHelper.Query<Manager>(c => c.Kind != "管理员").AsSelectItemList(c => c.Id, c => c.Name);
             return View();
         }
@@ -130,7 +130,7 @@ namespace LY.EMIS5.Admin.Controllers
         }
         [HttpGet, Authorize]
         public ActionResult Date() {
-            return Json(DbHelper.Query<Work>(c => c.WorkManager.Id == ManagerImp.Current.Id).Select(c => new { title = c.Content, start = c.Date.ToChineseDateString(), content = c.Content, user = c.CreateManager.Name, color = "" }).ToList(), JsonRequestBehavior.AllowGet);
+            return Json(DbHelper.Query<Work>(c => c.WorkManager.Id == ManagerImp.Current.Id || c.CreateManager.Id == ManagerImp.Current.Id).Select(c => new { title = c.CreateManager.Id == ManagerImp.Current.Id?"已安排"+c.WorkManager.Name : c.Content, start = c.Date.ToChineseDateString(), content = c.Content, user = c.CreateManager.Name, color = "" }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
   

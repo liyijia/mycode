@@ -35,13 +35,14 @@
                       { "mData": "Name" },
                       { "mData": "AnnualVerificationDate" },
                       { "mData": "Remarks" },
+                      { "mData": "Company" },
                       { "mData": "Id" }
                 ], "bFilter": false, "bSort": false,
                 "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                     $('td:eq(1)', nRow).addClass('text-left');
-                    $('td:eq(6)', nRow).html("<a href=\"/Certificate/View/" + aData.Id + "\">查看</a>");
-                    if (aData.Edit) {
-                        $('td:eq(6)', nRow).append(' <a href="/Certificate/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');
+                    $('td:eq(7)', nRow).html("<a href=\"/Certificate/View/" + aData.Id + "\">查看</a>");
+                    if ('@(ManagerImp.Current.Kind == "管理员" || ManagerImp.Current.Kind == "资料员")' == 'True') {
+                        $('td:eq(7)', nRow).append(' <a href="/Certificate/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');
                     }
                      
                    
@@ -84,8 +85,11 @@
                     <span class="tools pull-right form-inline">
                         @Html.DropDownList("company", ViewBag.Companys as List<SelectListItem>, "公司选择", new { @class = "form-control" })
                         <input type="button" class="btn btn-default sreach" value="搜索" />
-                        <input type="button" class="btn btn-default create" value="添加" />
-                        <input type="button" class="btn btn-default import" value="导入" />
+                        @if (ManagerImp.Current.Kind == "管理员" || ManagerImp.Current.Kind == "资料员")
+                        {
+                            <input type="button" class="btn btn-default create" value="添加" />
+                            <input type="button" class="btn btn-default import" value="导入" />
+                        }
                         <input type="button" class="btn btn-default report" value="报表" />
                     </span>
                 </header>
@@ -99,6 +103,7 @@
                                     <th>姓名</th>
                                     <th>年审时间</th>
                                     <th>备注</th>
+                                <th>公司</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>

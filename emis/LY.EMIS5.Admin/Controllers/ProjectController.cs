@@ -30,7 +30,7 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpGet, Authorize]
         public ActionResult Index()
         {
-            ViewBag.Company= DbHelper.Query < Company >().AsSelectItemList(c => c.Id, c => c.Name);
+            ViewBag.Company= DbHelper.Query < Company >().AsSelectItemList(c => c.Name, c => c.Name);
             ViewBag.ProjectProgresses = EnumHelper<ProjectProgresses>.EnumToSelectList();
             var list = DbHelper.Query<Manager>(c => c.Kind == "业务员").AsSelectItemList(c => c.Id, c => c.Name);
             list.Insert(0, new SelectListItem() { Text = "请选择业务员", Value = "0" });
@@ -40,7 +40,7 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpGet, Authorize]
         public ActionResult SaleIndex()
         {
-            ViewBag.Company = DbHelper.Query<Company>().AsSelectItemList(c => c.Id, c => c.Name);
+            ViewBag.Company = DbHelper.Query<Company>().AsSelectItemList(c => c.Name, c => c.Name);
             ViewBag.ProjectProgresses = EnumHelper<ProjectProgresses>.EnumToSelectList();
             var list = DbHelper.Query<Manager>(c => c.Kind == "业务员").AsSelectItemList(c => c.Id, c => c.Name);
             list.Insert(0, new SelectListItem() { Text = "请选择业务员", Value = "0" });
@@ -86,6 +86,16 @@ namespace LY.EMIS5.Admin.Controllers
                     query = query.OrderBy(c => c.Sort).OrderByDescending(c => c.Id);
                 }
             }
+            else if (iSortCol_0 == 3)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.Sale.Id);
+                }
+                else {
+                    query = query.OrderBy(c => c.Sale.Id);
+                }
+            }
             else if (iSortCol_0 == 0)
             {
                 if (sSortDir_0 == "desc")
@@ -96,24 +106,46 @@ namespace LY.EMIS5.Admin.Controllers
                     query = query.OrderBy(c => c.Id);
                 }
             }
+            else if (iSortCol_0 == 6)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.ProjectProgress);
+                }
+                else {
+                    query = query.OrderBy(c => c.ProjectProgress);
+                }
+            }
+
+
             else if (iSortCol_0 == 7)
             {
                 if (sSortDir_0 == "desc")
                 {
-                    query = query.OrderByDescending(c => c.Sort).OrderByDescending(c => c.OpenDate);
+                    query = query.OrderByDescending(c => c.OpenDate);
                 }
                 else {
-                    query = query.OrderByDescending(c => c.Sort).OrderBy(c => c.OpenDate);
+                    query = query.OrderBy(c => c.OpenDate);
                 }
             }
             else if (iSortCol_0 == 8)
             {
                 if (sSortDir_0 == "desc")
                 {
-                    query = query.OrderByDescending(c => c.Sort).OrderByDescending(c => c.EndDate);
+                    query = query.OrderByDescending(c => c.EndDate);
                 }
                 else {
-                    query = query.OrderByDescending(c => c.Sort).OrderBy(c => c.EndDate);
+                    query = query.OrderBy(c => c.EndDate);
+                }
+            }
+            else if (iSortCol_0 == 9)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.CompanyName);
+                }
+                else {
+                    query = query.OrderBy(c => c.CompanyName);
                 }
             }
             else if (iSortCol_0 == 10)
@@ -127,7 +159,7 @@ namespace LY.EMIS5.Admin.Controllers
                 }
             }
             else {
-                query = query.OrderByDescending(c => c.Sort).OrderBy(c => c.ProjectProgress);
+                query = query.OrderByDescending(c => c.Id);
             }
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
                 query.Count(),
@@ -145,13 +177,16 @@ namespace LY.EMIS5.Admin.Controllers
                     CreateDate = c.CreateDate.ToYearMonthDayString(),
                     c.CompanyName,
                     Edit=ManagerImp.Current.Kind=="管理员"|| ManagerImp.Current.Kind=="总经理",
-                    //Prompt = c.ProjectProgress != "未上网" && (c.OpenDate - DateTime.Now).Days < 30
+                    Prompt = c.ProjectProgress != ProjectProgresses.NotOnline
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
         }
+
+       
 
         [HttpGet, Authorize]
         public ActionResult AuditList()
         {
+            ViewBag.ProjectProgresses = EnumHelper<ProjectProgresses>.EnumToSelectList();
             return View();
         }
 
@@ -177,6 +212,16 @@ namespace LY.EMIS5.Admin.Controllers
                     query = query.OrderBy(c => c.Sort).OrderByDescending(c => c.Id);
                 }
             }
+            else if (iSortCol_0 == 3)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.Sale.Id);
+                }
+                else {
+                    query = query.OrderBy(c => c.Sale.Id);
+                }
+            }
             else if (iSortCol_0 == 0)
             {
                 if (sSortDir_0 == "desc")
@@ -187,24 +232,46 @@ namespace LY.EMIS5.Admin.Controllers
                     query = query.OrderBy(c => c.Id);
                 }
             }
+            else if (iSortCol_0 == 6)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.ProjectProgress);
+                }
+                else {
+                    query = query.OrderBy(c => c.ProjectProgress);
+                }
+            }
+
+
             else if (iSortCol_0 == 7)
             {
                 if (sSortDir_0 == "desc")
                 {
-                    query = query.OrderByDescending(c => c.Sort).OrderByDescending(c => c.OpenDate);
+                    query = query.OrderByDescending(c => c.OpenDate);
                 }
                 else {
-                    query = query.OrderByDescending(c => c.Sort).OrderBy(c => c.OpenDate);
+                    query = query.OrderBy(c => c.OpenDate);
                 }
             }
             else if (iSortCol_0 == 8)
             {
                 if (sSortDir_0 == "desc")
                 {
-                    query = query.OrderByDescending(c => c.Sort).OrderByDescending(c => c.EndDate);
+                    query = query.OrderByDescending(c => c.EndDate);
                 }
                 else {
-                    query = query.OrderByDescending(c => c.Sort).OrderBy(c => c.EndDate);
+                    query = query.OrderBy(c => c.EndDate);
+                }
+            }
+            else if (iSortCol_0 == 9)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.CompanyName);
+                }
+                else {
+                    query = query.OrderBy(c => c.CompanyName);
                 }
             }
             else if (iSortCol_0 == 10)
@@ -218,7 +285,7 @@ namespace LY.EMIS5.Admin.Controllers
                 }
             }
             else {
-                query = query.OrderByDescending(c => c.Sort).OrderBy(c => c.ProjectProgress);
+                query = query.OrderByDescending(c => c.Id);
             }
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
                 query.Count(),
@@ -237,10 +304,139 @@ namespace LY.EMIS5.Admin.Controllers
                     CreateDate = c.CreateDate.ToYearMonthDayString(),
                     Edit = ManagerImp.Current.Id == c.Sale.Id && c.ProjectProgress != ProjectProgresses.Success && c.ProjectProgress != ProjectProgresses.Cancel,
                     Open=c.ProjectProgress==ProjectProgresses.Arrange,
-                    Revoke = c.ProjectProgress != ProjectProgresses.NotOnline && c.ProjectProgress!= ProjectProgresses.Cancel && c.ProjectProgress != ProjectProgresses.Success && ManagerImp.Current.Id == c.Sale.Id,
+                    Revoke = c.ProjectProgress == ProjectProgresses.NotOnline && ManagerImp.Current.Id == c.Sale.Id,
                     Audit = c.ProjectProgress != ProjectProgresses.NotOnline && c.Opinions.Any(m => m.Manager.Id == ManagerImp.Current.Id && !m.Done),
-                    Prompt = c.ProjectProgress != ProjectProgresses.Success && c.ProjectProgress!=ProjectProgresses.Cancel && (c.OpenDate - DateTime.Now).Days < 30
+                    Prompt = c.ProjectProgress != ProjectProgresses.NotOnline
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
+        }
+
+        [HttpGet, Authorize]
+        public ActionResult HList()
+        {
+            ViewBag.ProjectProgresses = EnumHelper<ProjectProgresses>.EnumToSelectList();
+            return View();
+        }
+
+        [HttpPost, Authorize]
+        public string HtList(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", int state = 0, string sEcho = "", int iSortCol_0 = 7, string sSortDir_0 = "desc")
+        {
+            IQueryable<Project> query = DbHelper.Query<Project>(c => c.Opinions.Any(n=>n.Manager.Id==ManagerImp.Current.Id));
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                query = query.Where(c => c.ProjectName.Contains(name));
+            }
+            if (state > 0)
+            {
+                query = query.Where(c => c.ProjectProgress == (ProjectProgresses)state);
+            }
+            if (iSortCol_0 == 6)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.Sort).OrderByDescending(c => c.Id);
+                }
+                else {
+                    query = query.OrderBy(c => c.Sort).OrderByDescending(c => c.Id);
+                }
+            }
+            else if (iSortCol_0 == 3)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.Sale.Id);
+                }
+                else {
+                    query = query.OrderBy(c => c.Sale.Id);
+                }
+            }
+            else if (iSortCol_0 == 0)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.Id);
+                }
+                else {
+                    query = query.OrderBy(c => c.Id);
+                }
+            }
+            else if (iSortCol_0 == 6)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.ProjectProgress);
+                }
+                else {
+                    query = query.OrderBy(c => c.ProjectProgress);
+                }
+            }
+
+
+            else if (iSortCol_0 == 7)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.OpenDate);
+                }
+                else {
+                    query = query.OrderBy(c => c.OpenDate);
+                }
+            }
+            else if (iSortCol_0 == 8)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.EndDate);
+                }
+                else {
+                    query = query.OrderBy(c => c.EndDate);
+                }
+            }
+            else if (iSortCol_0 == 9)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.CompanyName);
+                }
+                else {
+                    query = query.OrderBy(c => c.CompanyName);
+                }
+            }
+            else if (iSortCol_0 == 10)
+            {
+                if (sSortDir_0 == "desc")
+                {
+                    query = query.OrderByDescending(c => c.CreateDate);
+                }
+                else {
+                    query = query.OrderBy(c => c.CreateDate);
+                }
+            }
+            else {
+                query = query.OrderByDescending(c => c.Id);
+            }
+            return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
+                query.Count(),
+                query.Skip(iDisplayStart).Take(iDisplayLength).ToList().Select(c => new
+                {
+                    Id = c.Id,
+                    ProjectName = c.ProjectName,
+                    Name = c.Sale.Name,
+                    c.Scale,
+                    c.Money,
+                    c.Source,
+                    ProjectProgress = c.ProjectProgress.GetDescription(),
+                    OpenDate = c.OpenDate.Year < 1000 ? "" : c.OpenDate.ToChineseDateString(),
+                    OpenManager = c.OpenManager!=null?c.OpenManager.Name:"",
+                    EndDate = c.EndDate.Year < 1000 ? "" : c.EndDate.ToChineseDateString(),
+                    c.CompanyName,
+                    CreateDate = c.CreateDate.ToYearMonthDayString(),
+                    Edit = ManagerImp.Current.Id == c.Sale.Id && c.ProjectProgress != ProjectProgresses.Success && c.ProjectProgress != ProjectProgresses.Cancel,
+                    Open = c.ProjectProgress == ProjectProgresses.Arrange,
+                    Revoke = c.ProjectProgress != ProjectProgresses.NotOnline && c.ProjectProgress != ProjectProgresses.Cancel && c.ProjectProgress != ProjectProgresses.Success && ManagerImp.Current.Id == c.Sale.Id,
+                    Audit = c.ProjectProgress != ProjectProgresses.NotOnline && c.Opinions.Any(m => m.Manager.Id == ManagerImp.Current.Id && !m.Done),
+                    Prompt = c.ProjectProgress != ProjectProgresses.NotOnline
+                }).ToList<object>())
+            { }.ToDataTablesResult(sEcho);
         }
 
         [HttpGet, Authorize]
@@ -434,7 +630,7 @@ namespace LY.EMIS5.Admin.Controllers
             flow.setAction(flow.actions.First(c => c.src == entity.Current.NodeId));
             ViewBag.Flow = flow;
             if(flow.dest.role!=null)
-                ViewBag.List = DbHelper.Query<Manager>(c => c.Kind == flow.dest.role && c.Company.Contains(entity.CompanyName)).AsSelectItemList(c => c.Id, c => c.Name);
+                ViewBag.List = DbHelper.Query<Manager>(c => c.Kind == flow.dest.role).AsSelectItemList(c => c.Id, c => c.Name);
             return View(entity);
         }
 

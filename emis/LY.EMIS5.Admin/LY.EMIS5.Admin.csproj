@@ -409,6 +409,7 @@
     <Content Include="Views\Project\Open.cshtml" />
     <Content Include="Views\Project\SetOpen.cshtml" />
     <Content Include="Views\Project\SaleIndex.cshtml" />
+    <Content Include="Views\Project\HList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\" />

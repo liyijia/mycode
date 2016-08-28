@@ -1,45 +1,49 @@
 ﻿@{
-    ViewBag.Title = "项目列表";
+    ViewBag.Title = "我的项目";
 }
 @using LY.EMIS5.BLL;
 
 @section Script
-{<style type="text/css">
+{
+<style type="text/css">
     @@media only screen and (max-width: 800px) {
-        .table td:nth-child(1),
-        .table th:nth-child(1),
-        .table td:nth-child(3),
-        .table th:nth-child(3),
-        .table td:nth-child(4),
-        .table th:nth-child(4),
-        .table td:nth-child(5),
-        .table th:nth-child(5),
-        .table td:nth-child(6),
-        .table th:nth-child(6),
-        .table td:nth-child(7),
-        .table th:nth-child(7),
-        .table td:nth-child(8),
-        .table th:nth-child(8),
-        .table td:nth-child(9),
-        .table th:nth-child(9),
-        .table td:nth-child(10),
-        .table th:nth-child(10),
-        .table td:nth-child(11),
-        .table th:nth-child(11) {
+        table td:nth-child(1),
+        table th:nth-child(1),
+        table td:nth-child(3),
+        table th:nth-child(3),
+        table td:nth-child(4),
+        table th:nth-child(4),
+        table td:nth-child(5),
+        table th:nth-child(5),
+        table td:nth-child(6),
+        table th:nth-child(6),
+        table td:nth-child(7),
+        table th:nth-child(7),
+        table td:nth-child(8),
+        table th:nth-child(8),
+        table td:nth-child(9),
+        table th:nth-child(9),
+        table td:nth-child(10),
+        table th:nth-child(10),
+        table td:nth-child(11),
+        table th:nth-child(11),
+        table td:nth-child(12),
+        table th:nth-child(12) {
             display: none;
         }
 
-        .table td:nth-child(2),.table th:nth-child(2) {
+        table td:nth-child(2), table th:nth-child(2) {
             width: 65%;
             overflow: hidden;
             text-overflow: ellipsis; /*以省略号替代截除部分*/
             white-space: nowrap;
         }
     }
-    .table td:nth-child(2), .table th:nth-child(2) {
+    table td:nth-child(2), table th:nth-child(2) {
             width: 35%;
            
         }
+    
 </style>
     <script type="text/javascript">
         var oTable;
@@ -59,35 +63,35 @@
             oTable = $('#table-form-list').dataTable({
                 "bServerSide": true,
                 "bLengthChange": false,
-                "sAjaxSource": "/Project/Index",
+                "sAjaxSource": "/Project/AuditList",
                 "fnServerParams": function (aoData) {
                     aoData.push({ "name": "name", "value": $("[name=\"name\"]").val() });
-                    aoData.push({ "name": "sale", "value": $("[name=\"sale\"]").val() });
                     aoData.push({ "name": "state", "value": $("[name=\"state\"]").val() });
-                    aoData.push({ "name": "begin", "value": $("[name=\"begin\"]").val() });
-                    aoData.push({ "name": "end", "value": $("[name=\"end\"]").val() });
-                    aoData.push({ "name": "company", "value": $("[name=\"company\"]").val() });
                 },
                 "aoColumns": [
-                    { "mData": "Id" },
+                { "mData": "Id" },
                       { "mData": "ProjectName", "bSortable": false },
-                      { "mData": "Name", "bSortable": false }, { "mData": "Scale" }, { "mData": "Money", "bSortable": false }, { "mData": "Source", "bSortable": false }, { "mData": "ProjectProgress" }, { "mData": "OpenDate" }, { "mData": "EndDate" }, { "mData": "CompanyName" }, { "mData": "CreateDate" },
+                      { "mData": "Name", "bSortable": false }, { "mData": "Scale" }, { "mData": "Money", "bSortable": false }, { "mData": "Source", "bSortable": false }, { "mData": "ProjectProgress" }, { "mData": "OpenDate" }, { "mData": "OpenManager" }, { "mData": "EndDate" }, { "mData": "CompanyName" }, { "mData": "CreateDate" },
                       { "mData": "Id", "bSortable": false }
-                ],"aaSorting": [[ 6, "asc" ]],
-                "bFilter": false,
+                ], "bFilter": false, "aaSorting": [[7, "desc"]],
                 "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                     if (aData.Prompt) {
                         $(nRow).css('color', 'red');
                     }
-                    $('td:eq(1)', nRow).addClass('text-left');
-                    if ('@ManagerImp.Current.Kind' != '业务员') {
-                        $('td:eq(11)', nRow).html('<a href="/Project/View/' + aData.Id + '">查看</a>');
-                    } else {
-                        $('td:eq(11)', nRow).html('');
+                    $('td:eq(1)', nRow).addClass('text-left').width(100);
+                    if (aData.OpenManager == '') {
+                        $('td:eq(12)', nRow).html('<a href="/Project/SetOpen/' + aData.Id + '">设置开标人</a>');
                     }
                     
-                    if (aData.Edit) { 
-                        $('td:eq(11)', nRow).append(' <a href="#" onclick="Delete(aData.Id)">删除</a>');
+                    $('td:eq(12)', nRow).html('');
+                    if (aData.Edit) {
+                            $('td:eq(12)', nRow).append('<a href="/Project/Edit/' + aData.Id + '">编辑</a>');
+                    } else {
+                        $('td:eq(12)', nRow).append('<a href="/Project/View/' + aData.Id + '">查看</a>');
+                    }
+                  
+                    if (aData.Audit) {
+                        $('td:eq(12)', nRow).append(' <a href="/Project/Audit/' + aData.Id + '">审核</a>');
                     }
                 }
             });
@@ -95,19 +99,15 @@
             $('.search').click(function () {
                 oTable.fnAdjustColumnSizing();
             });
-
-            $('.export').click(function () {
-                location.href = "Export";
-            });
         });
 
-        function c(id) {
+
+        function Delete(id){
             $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
                 dialog.modal('hide');
                 location.href = "/Project/Delete/" + id;
             })
         }
-
 
     </script>
 }
@@ -117,18 +117,24 @@
         <div class="col-sm-12">
             <section class="panel">
                 <header class="panel-heading">
-                    项目列表
-                    <span class="tools pull-right form-inline hidden-phone">
-                            <input type="text" class="form-control" name="name" placeholder="请输入项目名称" />
-                        <input type="text" class="form-control default-date-picker" name="begin" placeholder="开始时间" />
-                        <input type="text" class="form-control default-date-picker" name="end" placeholder="结束时间" />
-                        @Html.DropDownList("company", ViewBag.Company as List<SelectListItem>,"公司选择", new { @class = "form-control" })
-                        @Html.DropDownList("sale", ViewBag.Sales as List<SelectListItem>, new { @class = "form-control" })
-                        <input type="button" class="btn btn-default search" value="搜索" />
-                        <input type="button" class="btn btn-default export" value="导出" />
+                    历史项目
+                    <span class="tools pull-right form-inline">
+                            <input type="text" class="form-control hidden-phone" name="name" placeholder="请输入项目名称" />
+                        
+                        @Html.DropDownList("state",ViewBag.ProjectProgresses as SelectList,"全部进度",new { @class="form-control hidden-phone"})
+                        <input type="button" class="btn btn-default search hidden-phone" value="搜索" />
+                        <input type="button" class="btn btn-default create" value="添加" />
                     </span>
                 </header>
                 <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="">
+                            <a href="/Project/AuditList">我的项目</a>
+                        </li>
+                        <li class="active">
+                            <a href="/Project/HList">历史项目</a>
+                        </li>
+                    </ul>
                     <div class="adv-table">
                         <table class="display table table-bordered table-striped" id="table-form-list" cellpadding="0" cellspacing="1">
                             <thead>
@@ -141,6 +147,7 @@
                                     <th>保证金来源</th>
                                     <th>项目进度</th>
                                     <th>开标时间</th>
+                                    <th>开标人</th>
                                     <th>保证金截止时间</th>
                                     <th>公司</th>
                                     <th>登记时间</th>
@@ -157,3 +164,4 @@
 
 </div>
 <!--body wrapper end-->
+

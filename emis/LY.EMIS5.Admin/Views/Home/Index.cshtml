@@ -1,5 +1,6 @@
 ﻿@using LY.EMIS5.Entities.Core.Memberships;
 @using LY.EMIS5.Common;
+@using LY.EMIS5.Const;
 @{
 
 }
@@ -67,9 +68,18 @@
                     <div class="panel-body">
                         @foreach (var item in ViewBag.Projects as List<Project>)
                         {
-                            <p class="text-primary">
-                                <a href="/project/audit/@item.Id">@item.ProjectName</a>
-                            </p>
+                            if (item.ProjectProgress != ProjectProgresses.NotOnline)
+                            {
+                                <p class="text-primary">
+                                    <a href="/Project/Audit/@item.Id">@item.ProjectName</a>
+                                </p>
+                            }
+                            else {
+                                <p class="text-primary">
+                                    <a href="/Project/Create/@item.Id">@item.ProjectName</a>
+                                </p>
+                            }
+
                         }
                     </div>
                 </section>
@@ -191,7 +201,9 @@
 
                 }, eventClick: function (calEvent, jsEvent, view) {
                     $('.date').text(calEvent.start.Format("yyyy-MM-dd hh:mm"))
-                    $('.content').text(calEvent.content)
+                    $('.content').text(calEvent.content);
+                    $('.user').text(calEvent.user)
+                    
                         $('#detailModal').modal('show');
 
                 }

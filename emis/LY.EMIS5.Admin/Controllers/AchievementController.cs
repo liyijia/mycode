@@ -48,8 +48,10 @@ namespace LY.EMIS5.Admin.Controllers
                     c.Scale,
                     StartDate=c.StartDate.ToYearMonthDayString(),
                     EndDate=c.EndDate.ToYearMonthDayString(),
+                    
                     c.ProjectManager,
                     c.Type,
+                    c.Company,
                     Edit = c.Manager.Id==ManagerImp.Current.Id || ManagerImp.Current.Kind=="管理员"
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
         }
