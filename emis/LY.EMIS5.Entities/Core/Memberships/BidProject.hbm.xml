@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+  namespace="LY.EMIS5.Entities.Core.Memberships" assembly="LY.EMIS5.Entities">
+  <class name="BidProject" table="BidProject" >
+    <cache usage="read-write" />
+    <id name="Id">
+      <column name="Id" sql-type="int" not-null="true"/>
+      <generator class="native"/>
+    </id>
+    <property name="ProjectName" />
+    <property name="ProjectType" />
+    <property name="Scale" />
+    <property name="Money" />
+    <property name="BidDate" />
+    <property name="Address" />
+    <property name="UserName" />
+    <property name="TeletePhone" />
+    <property name="OpenDate" />
+    <property name="EndDate" />
+    <property name="InDate" />
+    <property name="TimeLimit" />
+    <property name="ProjectManager" />
+    <property name="Members" />
+    <property name="ProjectProgress" />
+    <property name="Data" />
+    <property name="Company" />
+    <property name="CreateDate" />
+    <property name="ProjectData" />
+    <many-to-one name="CreateManager" class="Manager" lazy="false" column="Manager_Id"/>
+  </class>
+</hibernate-mapping>

@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Memberships\BidProject.cs" />
     <Compile Include="Core\Memberships\Work.cs" />
     <Compile Include="Core\Memberships\Company.cs" />
     <Compile Include="Core\Memberships\News.cs" />
@@ -148,6 +149,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Core\Memberships\Work.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Memberships\BidProject.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

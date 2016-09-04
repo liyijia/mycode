@@ -76,17 +76,7 @@ namespace LY.EMIS5.Admin.Controllers
                 query = query.Where(c => c.OpenDate <= DateTime.Parse(end).AddDays(1));
             }
 
-            if (iSortCol_0 == 6)
-            {
-                if (sSortDir_0 == "desc")
-                {
-                    query = query.OrderByDescending(c => c.Sort).OrderByDescending(c => c.Id);
-                }
-                else {
-                    query = query.OrderBy(c => c.Sort).OrderByDescending(c => c.Id);
-                }
-            }
-            else if (iSortCol_0 == 3)
+           if (iSortCol_0 == 3)
             {
                 if (sSortDir_0 == "desc")
                 {
@@ -191,9 +181,25 @@ namespace LY.EMIS5.Admin.Controllers
         }
 
         [HttpPost, Authorize]
-        public string AuditList(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", int state = 0, string sEcho = "", int iSortCol_0 = 7, string sSortDir_0 = "desc")
+        public string AuditList(int iDisplayStart = 0, int iDisplayLength = 15, int index = 0, string name = "", int state = 0, string sEcho = "", int iSortCol_0 = 7, string sSortDir_0 = "desc")
         {
-            IQueryable<Project> query = DbHelper.Query<Project>(c => c.Sale.Id == ManagerImp.Current.Id || c.Current.Manager.Id==ManagerImp.Current.Id && !c.Current.Done);
+            IQueryable<Project> query = null;
+            var time = DateTime.Now.Date;
+            if (index == 0)
+            {
+                query = DbHelper.Query<Project>(c => (c.OpenDate>= time || c.ProjectProgress!= ProjectProgresses.NotOnline) && c.Current.Manager.Id == ManagerImp.Current.Id && !c.Current.Done);
+            }
+            else if (index == 2)
+            {
+                query = DbHelper.Query<Project>(c => c.Opinions.Any(n => n.Manager.Id == ManagerImp.Current.Id && n.Done) && c.OpenDate <= time);
+            }
+            else if (index == 1)
+            {
+                query = DbHelper.Query<Project>(c => c.Opinions.Any(n => n.Manager.Id == ManagerImp.Current.Id &&n.Done) && c.OpenDate > time);
+            }
+            else {
+                query = DbHelper.Query<Project>(c => c.OpenDate < DateTime.Now.Date && c.Current.Manager.Id == ManagerImp.Current.Id && !c.Current.Done && c.ProjectProgress == ProjectProgresses.NotOnline);
+            }
             if (!string.IsNullOrWhiteSpace(name))
             {
                 query = query.Where(c => c.ProjectName.Contains(name));
@@ -202,17 +208,7 @@ namespace LY.EMIS5.Admin.Controllers
             {
                 query = query.Where(c => c.ProjectProgress ==  (ProjectProgresses)state);
             }
-            if (iSortCol_0 == 6)
-            {
-                if (sSortDir_0 == "desc")
-                {
-                    query = query.OrderByDescending(c => c.Sort).OrderByDescending(c => c.Id);
-                }
-                else {
-                    query = query.OrderBy(c => c.Sort).OrderByDescending(c => c.Id);
-                }
-            }
-            else if (iSortCol_0 == 3)
+            if (iSortCol_0 == 3)
             {
                 if (sSortDir_0 == "desc")
                 {
@@ -318,7 +314,7 @@ namespace LY.EMIS5.Admin.Controllers
         }
 
         [HttpPost, Authorize]
-        public string HtList(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", int state = 0, string sEcho = "", int iSortCol_0 = 7, string sSortDir_0 = "desc")
+        public string HList(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", int state = 0, string sEcho = "", int iSortCol_0 = 7, string sSortDir_0 = "desc")
         {
             IQueryable<Project> query = DbHelper.Query<Project>(c => c.Opinions.Any(n=>n.Manager.Id==ManagerImp.Current.Id));
             if (!string.IsNullOrWhiteSpace(name))
@@ -329,17 +325,7 @@ namespace LY.EMIS5.Admin.Controllers
             {
                 query = query.Where(c => c.ProjectProgress == (ProjectProgresses)state);
             }
-            if (iSortCol_0 == 6)
-            {
-                if (sSortDir_0 == "desc")
-                {
-                    query = query.OrderByDescending(c => c.Sort).OrderByDescending(c => c.Id);
-                }
-                else {
-                    query = query.OrderBy(c => c.Sort).OrderByDescending(c => c.Id);
-                }
-            }
-            else if (iSortCol_0 == 3)
+            if (iSortCol_0 == 3)
             {
                 if (sSortDir_0 == "desc")
                 {
@@ -479,7 +465,7 @@ namespace LY.EMIS5.Admin.Controllers
                 entity.Link = model.Link;
                 entity.MaterialFee = model.MaterialFee;
                 entity.Money = model.Money;
-                entity.OpenDate = model.OpenDate;
+                entity.OpenDate = model.OpenDate.Year<2000?DateTime.MaxValue: model.OpenDate;
                 entity.Owner = model.Owner;
                 entity.ProjectName = model.ProjectName;
                 entity.Scale = model.Scale;
@@ -577,8 +563,9 @@ namespace LY.EMIS5.Admin.Controllers
                     entity.Source = model.Source;
                     entity.ReplaceMoney = model.ReplaceMoney;
                     entity.Remark = model.Remark;
-                    entity.OpenDate = model.OpenDate;
-                    entity.EndDate = model.EndDate;            
+                    entity.OpenDate = model.OpenDate.Year < 2000 ? DateTime.MaxValue : model.OpenDate;
+                entity.EndDate = model.EndDate;
+                entity.MoneySituation = model.MoneySituation;
                 entity.Update();
                 
                 ts.Complete();
@@ -613,7 +600,7 @@ namespace LY.EMIS5.Admin.Controllers
                 ts.Complete();
             }
 
-            return this.RedirectToAction(100, "操作成功", "设置开标人成功", "Project", "AuditList");
+            return this.RedirectToAction(100, "操作成功", "设置开标人成功", "Project", "HList");
         }
 
         [HttpGet, Authorize]

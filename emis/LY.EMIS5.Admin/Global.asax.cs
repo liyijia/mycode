@@ -52,6 +52,7 @@ namespace LY.EMIS5.Admin
                 var flow = JsonConvert.DeserializeObject<Flow>(json);
                 flow.setDic();
                 HttpRuntime.Cache.Insert("flow", flow);
+
             }
 
         }

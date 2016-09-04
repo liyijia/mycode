@@ -65,17 +65,18 @@
                 "fnServerParams": function (aoData) {
                     aoData.push({ "name": "name", "value": $("[name=\"name\"]").val() });
                     aoData.push({ "name": "state", "value": $("[name=\"state\"]").val() });
+                    aoData.push({ "name": "index", "value": $('#index').val() });
                 },
                 "aoColumns": [
                 { "mData": "Id" },
                       { "mData": "ProjectName", "bSortable": false },
                       { "mData": "Name", "bSortable": false }, { "mData": "Scale" }, { "mData": "Money", "bSortable": false }, { "mData": "Source", "bSortable": false }, { "mData": "ProjectProgress" }, { "mData": "OpenDate" }, { "mData": "EndDate" }, { "mData": "CompanyName" }, { "mData": "CreateDate" },
                       { "mData": "Id", "bSortable": false }
-                ], "bFilter": false, "aaSorting": [[7, "desc"]],
+                ], "bFilter": false, "aaSorting": [[7, "asc"]],
                 "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                    if (aData.Prompt) {
-                        $(nRow).css('color', 'red');
-                    }
+                    //if (aData.Prompt) {
+                    //    $(nRow).css('color', 'red');
+                    //}
                     $('td:eq(1)', nRow).addClass('text-left').width(100);
                     $('td:eq(11)', nRow).html('');
                     if (aData.Edit) {
@@ -87,7 +88,7 @@
                         $('td:eq(11)', nRow).append('<a href="/Project/View/' + aData.Id + '">查看</a>');
                     }
                     if (aData.Revoke) {
-                        $('td:eq(11)', nRow).append(' <a href="/Project/Cancel/' + aData.Id + '">删除</a>');
+                        $('td:eq(11)', nRow).append(' <a href="#"  onclick="Delete('+aData.Id+')">删除</a>');
                     }
                     if (aData.Audit) {
                         $('td:eq(11)', nRow).append(' <a href="/Project/Audit/' + aData.Id + '">审核</a>');
@@ -98,9 +99,15 @@
             $('.search').click(function () {
                 oTable.fnAdjustColumnSizing();
             });
+
+            $('.nav a').click(function () {
+                $('#index').val($(this).parent().index());
+                oTable.fnSettings()._iDisplayStart = 0;
+                oTable.fnAdjustColumnSizing();
+            })
         });
 
-
+        
         function Delete(id){
             $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
                 dialog.modal('hide');
@@ -118,6 +125,7 @@
                 <header class="panel-heading">
                     我的项目
                     <span class="tools pull-right form-inline">
+                        <input type="hidden" id="index" value="0" />
                             <input type="text" class="form-control hidden-phone" name="name" placeholder="请输入项目名称" />
                         
                         @Html.DropDownList("state",ViewBag.ProjectProgresses as SelectList,"全部进度",new { @class="form-control hidden-phone"})
@@ -128,10 +136,16 @@
                 <div class="panel-body">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="/Project/AuditList">我的项目</a>
+                            <a href="#" data-toggle="tab">登记项目</a>
                         </li>
-                        <li class="">
-                            <a href="/Project/HList">历史项目</a>
+                        <li>
+                            <a href="#" data-toggle="tab">待开标项目</a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="tab">已开标项目</a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="tab">过期项目</a>
                         </li>
                     </ul>
                     <div class="adv-table">

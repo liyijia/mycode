@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "项目列表";
+}
+@using LY.EMIS5.BLL;
+@section Script{
+<style type="text/css">
+    @@media only screen and (max-width: 800px) {
+        table td:nth-child(1),
+        table th:nth-child(1),
+        table td:nth-child(3),
+        table th:nth-child(3),
+        table td:nth-child(4),
+        table th:nth-child(4),
+        table td:nth-child(5),
+        table th:nth-child(5),
+        table td:nth-child(6),
+        table th:nth-child(6),
+        table td:nth-child(7),
+        table th:nth-child(7),
+        table td:nth-child(8),
+        table th:nth-child(8),
+        table td:nth-child(9),
+        table th:nth-child(9),
+        table td:nth-child(10),
+        table th:nth-child(10) {
+            display: none;
+        }
+
+        table td:nth-child(2), table th:nth-child(2) {
+            width: 65%;
+            overflow: hidden;
+            text-overflow: ellipsis; /*以省略号替代截除部分*/
+            white-space: nowrap;
+        }
+    }
+</style>
+    <script type="text/javascript">
+        var table = null;
+        $(function () {
+            table = $('#dynamic-table').dataTable({
+                "bServerSide": true,
+                "bLengthChange": false,
+                "sAjaxSource": "/BidProject/Index",
+                "fnServerParams": function (aoData) {
+                    aoData.push({ "name": "company", "value": $("[name=\"company\"]").val() });
+                    aoData.push({ "name": "state", "value": $("[name=\"state\"]").val() });
+                }, "aoColumns": [{ "mData": "Id" },
+                      { "mData": "ProjectName" },
+                      { "mData": "ProjectType" },
+                      { "mData": "Scale" },
+                      { "mData": "Money" },
+                      { "mData": "BidDate" },
+                      { "mData": "Address" }, { "mData": "UserName" }, { "mData": "TeletePhone" }, { "mData": "ProjectManager" }, { "mData": "ProjectProgress" },
+                      { "mData": "Company" },
+                      { "mData": "Edit" }
+                ], "bFilter": false, "bSort": false,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    $('td:eq(1)', nRow).addClass('text-left');
+                    $('td:eq(12)', nRow).html("<a href=\"/BidProject/View/" + aData.Id + "\">查看</a>");
+                    if (aData.Edit) {
+                        $('td:eq(12)', nRow).append(' <a href="/BidProject/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');
+                    }
+
+
+                }
+            });
+            //搜索
+            $(".sreach").click(function () {
+                table.dataTable().fnAdjustColumnSizing();
+            });
+
+            $('.create').click(function(){
+                location.href = "/BidProject/Create";
+            });
+
+
+        });
+        function Delete(id) {
+            $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
+                dialog.modal('hide');
+                location.href = "/BidProject/Delete/" + id;
+            })
+        }
+    </script>
+}
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    项目列表
+                    <span class="tools pull-right form-inline">
+                       @Html.DropDownList("state", ViewBag.ProjectProgresses as SelectList, "项目进度选择", new { @class = "form-control" })
+                        @Html.DropDownList("company", ViewBag.Companys as List<SelectListItem>, "公司选择", new { @class = "form-control" })
+                        <input type="button" class="btn btn-default sreach" value="搜索" />
+                        
+                            <input type="button" class="btn btn-default create" value="添加" />
+                        
+                    </span>
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        <table class="display table table-bordered table-striped" id="dynamic-table">
+                            <thead>
+                                <tr>
+                                    <th>编号</th>
+                                    <th>项目名称</th>
+                                    <th>项目类型</th>
+                                    <th>规模</th>
+                                    <th>中标价格(万元)</th>
+                                    <th>中标时间</th>
+                                    <th>项目所在地</th>
+                                    <th>项目实施人</th>
+                                    <th>联系电话</th>
+                                    <th>项目经理</th>
+                                    <th>项目进度</th>
+                                    <th>公司</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+   
+</div>
+<!--body wrapper end-->

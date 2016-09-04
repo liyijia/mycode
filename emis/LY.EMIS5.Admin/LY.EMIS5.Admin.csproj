@@ -211,6 +211,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ViewEngineConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BidProjectController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AptitudeController.cs" />
@@ -410,6 +411,9 @@
     <Content Include="Views\Project\SetOpen.cshtml" />
     <Content Include="Views\Project\SaleIndex.cshtml" />
     <Content Include="Views\Project\HList.cshtml" />
+    <Content Include="Views\BidProject\Create.cshtml" />
+    <Content Include="Views\BidProject\Index.cshtml" />
+    <Content Include="Views\BidProject\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\" />

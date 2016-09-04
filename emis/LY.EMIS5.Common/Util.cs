@@ -111,10 +111,26 @@ namespace LY.EMIS5.Common
 
         public static string ToChineseDateString(this DateTime datetime)
         {
+            if (datetime.Year < 1990)
+            {
+                return "";
+            }
+            if (datetime.Year > 2050)
+            {
+                return "";
+            }
             return datetime.ToString("yyyy-MM-dd HH:mm");
         }
         public static string ToYearMonthDayString(this DateTime datetime)
         {
+            if (datetime.Year<1990)
+            {
+                return "";
+            }
+            if (datetime.Year > 2050)
+            {
+                return "";
+            }
             return datetime.ToString("yyyy-MM-dd");
         }
 

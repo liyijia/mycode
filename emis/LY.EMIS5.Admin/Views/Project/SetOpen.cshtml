@@ -56,13 +56,10 @@
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">保证金来源</label>
                         <div class="col-sm-10">
-                            <select name="Source" class="form-control">
-                                <option>自打</option>
-                                <option>代打</option>
-                            </select>
+                            <label class="control-label">@Model.Source</label>
                         </div>
                     </div>
-                    <div id="replace" class="form-group none">
+                    <div id="replace" class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">代打金额</label>
                         <div class="col-sm-10 input-group">
                             <label class="control-label">@(Model.ReplaceMoney)万元</label>

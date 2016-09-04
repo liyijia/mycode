@@ -28,4 +28,12 @@ namespace LY.EMIS5.Const
         [Description("不能投标")]
         Cancel = 9
     }
+
+    public enum BidProjectProgresses
+    {
+        [Description("中标公示")]
+        Public = 1,
+        [Description("进场")]
+        In = 2
+    }
 }
