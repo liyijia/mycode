@@ -11,6 +11,7 @@ using System.Data;
 using NHibernate.Extensions;
 using LY.EMIS5.Common.Extensions;
 using LY.EMIS5.Common.Mvc.Extensions;
+using LY.EMIS5.Const;
 
 namespace LY.EMIS5.Admin.Controllers
 {
@@ -20,9 +21,9 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpGet, Authorize]
         public ActionResult Index()
         {
-            ViewBag.Open = DbHelper.Query<Project>(c => !c.IsOpen && c.OpenManager.Id == ManagerImp.Current.Id).OrderByDescending(c => c.OpenDate).ToList() ;
+            ViewBag.Open = DbHelper.Query<Project>(c => !c.IsOpen && c.OpenManager.Id == ManagerImp.Current.Id).OrderBy(c => c.OpenDate).ToList() ;
             ViewBag.News = DbHelper.Query<News>(c => c.Type == "公司通知").OrderByDescending(c => c.Id).Take(10).ToList();
-            ViewBag.Projects=DbHelper.Query<Project>(c => c.Current.Manager.Id == ManagerImp.Current.Id).OrderByDescending(c=>c.Id).ToList();
+            ViewBag.Projects=DbHelper.Query<Project>(c => (c.OpenDate >= DateTime.Now.Date || c.ProjectProgress != ProjectProgresses.NotOnline) && c.Current.Manager.Id == ManagerImp.Current.Id && !c.Current.Done).OrderBy(c=>c.OpenDate).ToList();
             ViewBag.List = DbHelper.Query<Manager>(c => c.Kind != "管理员").AsSelectItemList(c => c.Id, c => c.Name);
             return View();
         }

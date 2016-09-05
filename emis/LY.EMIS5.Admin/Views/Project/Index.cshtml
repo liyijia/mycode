@@ -67,18 +67,17 @@
                     aoData.push({ "name": "begin", "value": $("[name=\"begin\"]").val() });
                     aoData.push({ "name": "end", "value": $("[name=\"end\"]").val() });
                     aoData.push({ "name": "company", "value": $("[name=\"company\"]").val() });
+                    aoData.push({ "name": "index", "value": $('#index').val() });
                 },
                 "aoColumns": [
                     { "mData": "Id" },
                       { "mData": "ProjectName", "bSortable": false },
                       { "mData": "Name", "bSortable": false }, { "mData": "Scale" }, { "mData": "Money", "bSortable": false }, { "mData": "Source", "bSortable": false }, { "mData": "ProjectProgress" }, { "mData": "OpenDate" }, { "mData": "EndDate" }, { "mData": "CompanyName" }, { "mData": "CreateDate" },
                       { "mData": "Id", "bSortable": false }
-                ],"aaSorting": [[ 7, "desc" ]],
+                ],"aaSorting": [[ 7, "asc" ]],
                 "bFilter": false,
                 "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                    if (aData.Prompt) {
-                        $(nRow).css('color', 'red');
-                    }
+                   
                     $('td:eq(1)', nRow).addClass('text-left');
                     if ('@ManagerImp.Current.Kind' != '业务员') {
                         $('td:eq(11)', nRow).html('<a href="/Project/View/' + aData.Id + '">查看</a>');
@@ -93,8 +92,15 @@
             });
 
             $('.search').click(function () {
+                oTable.fnSettings()._iDisplayStart = 0;
                 oTable.fnAdjustColumnSizing();
             });
+
+            $('.nav a').click(function () {
+                $('#index').val($(this).parent().index());
+                oTable.fnSettings()._iDisplayStart = 0;
+                oTable.fnAdjustColumnSizing();
+            })
 
             $('.export').click(function () {
                 location.href = "Export";
@@ -118,7 +124,7 @@
             <section class="panel">
                 <header class="panel-heading">
                     项目列表
-                    <span class="tools pull-right form-inline hidden-phone">
+                    <span class="tools pull-right form-inline hidden-phone"><input type="hidden" id="index" value="0" />
                             <input type="text" class="form-control" name="name" placeholder="请输入项目名称" />
                         <input type="text" class="form-control default-date-picker" name="begin" placeholder="开始时间" />
                         <input type="text" class="form-control default-date-picker" name="end" placeholder="结束时间" />
@@ -129,6 +135,20 @@
                     </span>
                 </header>
                 <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#" data-toggle="tab">登记项目</a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="tab">待开标项目</a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="tab">已开标项目</a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="tab">过期项目</a>
+                        </li>
+                    </ul>
                     <div class="adv-table">
                         <table class="display table table-bordered table-striped" id="table-form-list" cellpadding="0" cellspacing="1">
                             <thead>

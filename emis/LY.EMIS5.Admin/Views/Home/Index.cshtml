@@ -4,7 +4,11 @@
 @{
 
 }
-
+<style>
+    .fc-today {
+        background:#fcf8e3
+     }
+</style>
 <!--body wrapper start-->
 <div class="wrapper">
     <!-- page start-->
@@ -194,7 +198,7 @@
 
         $.get('/Home/Date', function (data) {
             $('#calendar').fullCalendar({
-                events: data,
+                events: data,editable: true,
                 dayClick: function (date, jsEvent, view) {
                     $('#date').val(date.Format("yyyy-MM-dd"));
                     $('#myModal').modal('show');

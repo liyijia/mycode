@@ -49,9 +49,25 @@ namespace LY.EMIS5.Admin.Controllers
         }
 
         [HttpPost, Authorize]
-        public string Index(int iDisplayStart = 0, int iDisplayLength = 15, string name = "", string company="", string begin="", string end = "", int sale = 0, int iSortCol_0=6,string sSortDir_0 = "desc",  int state =0, string sEcho = "")
+        public string Index(int iDisplayStart = 0, int iDisplayLength = 15, int index = 0, string name = "", string company="", string begin="", string end = "", int sale = 0, int iSortCol_0=6,string sSortDir_0 = "desc",  int state =0, string sEcho = "")
         {
-            IQueryable<Project> query = DbHelper.Query<Project>();
+            IQueryable<Project> query = null;
+            var time = DateTime.Now.Date;
+            if (index == 0)
+            {
+                query = DbHelper.Query<Project>(c => c.OpenDate >= time && c.ProjectProgress == ProjectProgresses.NotOnline);
+            }
+            else if (index == 2)
+            {
+                query = DbHelper.Query<Project>(c =>  c.OpenDate <= time && c.ProjectProgress != ProjectProgresses.NotOnline);
+            }
+            else if (index == 1)
+            {
+                query = DbHelper.Query<Project>(c =>  c.OpenDate > time && c.ProjectProgress != ProjectProgresses.NotOnline);
+            }
+            else {
+                query = DbHelper.Query<Project>(c => c.OpenDate < DateTime.Now.Date && c.ProjectProgress == ProjectProgresses.NotOnline);
+            }
             if (!string.IsNullOrWhiteSpace(name))
             {
                 query = query.Where(c => c.ProjectName.Contains(name));
