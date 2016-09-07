@@ -64,8 +64,12 @@
 
                 }
             });
+            if ('@(ManagerImp.Current.Kind=="工程部资料员" || ManagerImp.Current.Kind == "管理员")' == 'True') {
+                $('.create').show();
+            }
             //搜索
             $(".sreach").click(function () {
+                oTable.fnSettings()._iDisplayStart = 0;
                 table.dataTable().fnAdjustColumnSizing();
             });
 
@@ -96,7 +100,7 @@
                         @Html.DropDownList("company", ViewBag.Companys as List<SelectListItem>, "公司选择", new { @class = "form-control" })
                         <input type="button" class="btn btn-default sreach" value="搜索" />
                         
-                            <input type="button" class="btn btn-default create" value="添加" />
+                            <input type="button" class="btn btn-default create none" value="添加" />
                         
                     </span>
                 </header>

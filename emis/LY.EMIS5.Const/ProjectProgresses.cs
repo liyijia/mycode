@@ -33,7 +33,13 @@ namespace LY.EMIS5.Const
     {
         [Description("中标公示")]
         Public = 1,
-        [Description("进场")]
-        In = 2
+        [Description("合同准备")]
+        Ready = 2,
+        [Description("进场施工")]
+        In = 3,
+            [Description("项目完工")]
+        Over = 4,
+        [Description("质量保证金退回")]
+        Retreat = 5
     }
 }

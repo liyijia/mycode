@@ -203,15 +203,15 @@ namespace LY.EMIS5.Admin.Controllers
             var time = DateTime.Now.Date;
             if (index == 0)
             {
-                query = DbHelper.Query<Project>(c => (c.OpenDate>= time || c.ProjectProgress!= ProjectProgresses.NotOnline) && c.Current.Manager.Id == ManagerImp.Current.Id && !c.Current.Done);
+                query = DbHelper.Query<Project>(c => c.OpenDate>= time && c.ProjectProgress== ProjectProgresses.NotOnline && c.Current.Manager.Id == ManagerImp.Current.Id && !c.Current.Done);
             }
             else if (index == 2)
             {
-                query = DbHelper.Query<Project>(c => c.Opinions.Any(n => n.Manager.Id == ManagerImp.Current.Id && n.Done) && c.OpenDate <= time);
+                query = DbHelper.Query<Project>(c => c.Opinions.Any(n => n.Manager.Id == ManagerImp.Current.Id && n.Done) && c.OpenDate <= time && c.ProjectProgress != ProjectProgresses.NotOnline);
             }
             else if (index == 1)
             {
-                query = DbHelper.Query<Project>(c => c.Opinions.Any(n => n.Manager.Id == ManagerImp.Current.Id &&n.Done) && c.OpenDate > time);
+                query = DbHelper.Query<Project>(c => c.Opinions.Any(n => n.Manager.Id == ManagerImp.Current.Id &&n.Done) && c.OpenDate > time && c.ProjectProgress != ProjectProgresses.NotOnline);
             }
             else {
                 query = DbHelper.Query<Project>(c => c.OpenDate < DateTime.Now.Date && c.Current.Manager.Id == ManagerImp.Current.Id && !c.Current.Done && c.ProjectProgress == ProjectProgresses.NotOnline);
@@ -313,11 +313,12 @@ namespace LY.EMIS5.Admin.Controllers
                     OpenDate = c.OpenDate.Year < 1000 ? "" : c.OpenDate.ToChineseDateString(),
                     EndDate = c.EndDate.Year < 1000 ? "" : c.EndDate.ToChineseDateString(),
                     c.CompanyName,
+                    OpenManager = c.OpenManager != null ? c.OpenManager.Name : "",
                     CreateDate = c.CreateDate.ToYearMonthDayString(),
                     Edit = ManagerImp.Current.Id == c.Sale.Id && c.ProjectProgress != ProjectProgresses.Success && c.ProjectProgress != ProjectProgresses.Cancel,
                     Open=c.ProjectProgress==ProjectProgresses.Arrange,
                     Revoke = c.ProjectProgress == ProjectProgresses.NotOnline && ManagerImp.Current.Id == c.Sale.Id,
-                    Audit = c.ProjectProgress != ProjectProgresses.NotOnline && c.Opinions.Any(m => m.Manager.Id == ManagerImp.Current.Id && !m.Done),
+                    Audit = c.ProjectProgress != ProjectProgresses.NotOnline && c.Current.Manager.Id == ManagerImp.Current.Id && !c.Current.Done,
                     Prompt = c.ProjectProgress != ProjectProgresses.NotOnline
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
         }
@@ -575,6 +576,10 @@ namespace LY.EMIS5.Admin.Controllers
             using (var ts = TransactionScopes.Default)
             {
                     var entity = DbHelper.Get<Project>(model.Id);
+                entity.Type = model.Type;
+                entity.UserName = model.UserName;
+                entity.Account = model.Account;
+                entity.Bank = model.Bank;
                     entity.MaterialFee = model.MaterialFee;
                     entity.Source = model.Source;
                     entity.ReplaceMoney = model.ReplaceMoney;

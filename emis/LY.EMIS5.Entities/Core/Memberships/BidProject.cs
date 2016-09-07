@@ -125,6 +125,6 @@ namespace LY.EMIS5.Entities.Core.Memberships
         /// </summary>
         public virtual Manager CreateManager { get; set; }
 
-
+        public virtual IList<Log> Logs { get; set; }
     }
 }

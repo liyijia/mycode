@@ -27,5 +27,9 @@
     <property name="CreateDate" />
     <property name="ProjectData" />
     <many-to-one name="CreateManager" class="Manager" lazy="false" column="Manager_Id"/>
+    <bag name="Logs" lazy="extra">
+      <key column="BidProjectId" />
+      <one-to-many class="Log" />
+    </bag>
   </class>
 </hibernate-mapping>

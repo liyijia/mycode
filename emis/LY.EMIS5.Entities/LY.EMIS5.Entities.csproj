@@ -72,12 +72,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Memberships\Achievement.cs" />
     <Compile Include="Core\Memberships\BidProject.cs" />
     <Compile Include="Core\Memberships\Work.cs" />
     <Compile Include="Core\Memberships\Company.cs" />
     <Compile Include="Core\Memberships\News.cs" />
     <Compile Include="Core\Memberships\Opinion.cs" />
-    <Compile Include="Core\Memberships\Achievement.cs" />
+    <Compile Include="Core\Memberships\Log.cs" />
     <Compile Include="Core\Memberships\Certificate.cs" />
     <Compile Include="Core\Memberships\Aptitude.cs" />
     <Compile Include="Core\Memberships\Records.cs" />
@@ -154,6 +155,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Core\Memberships\BidProject.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Memberships\Log.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

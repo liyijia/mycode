@@ -137,9 +137,20 @@
                                     {
                                         <li><a href="/Project/Report">项目报表</a></li>
                                     }
-                                    <li><a href="/BidProject">中标项目</a></li>
                                 </ul>
                             </li>
+                        }
+                        if (ManagerImp.Current.Kind == "工程部资料员" || ManagerImp.Current.Kind == "工程部经理" || ManagerImp.Current.Kind == "会计" || ManagerImp.Current.Kind == "财务" || ManagerImp.Current.Kind == "总经理" || ManagerImp.Current.Kind == "管理员")
+                        {
+                        <li class="menu-list">
+                            <a href="#"><i class="fa fa-th-list"></i> <span>中标项目</span></a>
+                            <ul class="sub-menu-list">
+                               
+                               
+                                    <li><a href="/BidProject">中标项目</a></li>
+                                
+                            </ul>
+                        </li>
                         }
                     }
                     <li class="menu-list">

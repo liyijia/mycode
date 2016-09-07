@@ -414,6 +414,7 @@
     <Content Include="Views\BidProject\Create.cshtml" />
     <Content Include="Views\BidProject\Index.cshtml" />
     <Content Include="Views\BidProject\View.cshtml" />
+    <Content Include="Views\BidProject\Log.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\" />

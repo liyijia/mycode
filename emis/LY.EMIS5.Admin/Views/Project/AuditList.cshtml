@@ -93,6 +93,9 @@
                     if (aData.Audit) {
                         $('td:eq(11)', nRow).append(' <a href="/Project/Audit/' + aData.Id + '">审核</a>');
                     }
+                    if (aData.OpenManager == '' && '@(ManagerImp.Current.Kind)' == '资料员') {
+                        $('td:eq(11)', nRow).append(' <a href="/Project/SetOpen/' + aData.Id + '">设置开标人</a>');
+                    }
                 }
             });
 

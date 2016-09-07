@@ -88,7 +88,7 @@ namespace LY.EMIS5.Admin.Controllers
                     c.ProjectManager,
                     ProjectProgress=c.ProjectProgress.GetDescription(),
                     c.Company,
-                    Edit = c.CreateManager.Id==ManagerImp.Current.Id || ManagerImp.Current.Kind == "管理员"
+                    Edit = "工程部资料员" == ManagerImp.Current.Kind || ManagerImp.Current.Kind == "管理员"
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
         }
 
@@ -118,6 +118,21 @@ namespace LY.EMIS5.Admin.Controllers
                 entity.Save(true);
             }
             return this.RedirectToAction(100, "操作成功", "编辑中标项目成功!", "BidProject", "Index");
+        }
+        [HttpGet, Authorize]
+        public ActionResult Log(int id = 0)
+        {
+            return View(new Log() {  BidProjectId=id});
+        }
+
+        [HttpPost, Authorize]
+        public ActionResult Log(Log entity)
+        {
+           
+                entity.CreateDate = DateTime.Now;
+                entity.Manager = ManagerImp.Current;
+                entity.Save(true);
+            return this.RedirectToAction(100, "操作成功", "编辑记录成功!", "BidProject", "Create/"+ entity.BidProjectId);
         }
 
         [HttpGet, Authorize]
