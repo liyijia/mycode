@@ -1,0 +1,59 @@
+﻿@using LY.EMIS5.Entities.Core.Memberships;
+@using LY.EMIS5.Const;
+@using LY.EMIS5.Common.Extensions;
+@using LY.EMIS5.Common.Const;
+@using LY.EMIS5.Common;
+@model Log
+@{
+    ViewBag.Title = "添加记录";
+}@section Script
+{
+   
+}
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                记录类型信息
+            </header>
+            <div class="panel-body">
+                <form class="form-horizontal adminex-form" method="post">
+                    <div class="form-group">
+                        @Html.HiddenFor(c=>c.BidProjectId)
+                        <label class="col-sm-2 col-sm-2 control-label">记录时间</label>
+                        <div class="col-sm-10">
+                            @Html.TextBox("LogDate", "", new { @class = "required form-control default-date-picker" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">记录类型</label>
+                        <div class="col-sm-10">
+                            <select name="Type" class="form-control">
+                                <option>中标通知书领取</option>
+                                <option>主合同签订</option>
+                                <option>内部承包协议签订</option>
+                                <option>履约保证金缴纳</option>
+                                <option>进度款拨付额度</option>
+                                <option>履约保证金退还</option>
+                                <option>竣工验收</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">备注</label>
+                        <div class="col-sm-10">
+                            @Html.TextArea("Content", "", new { @class = "required form-control" })
+                        </div>
+                    </div>
+                   
+
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button class="btn btn-primary" type="submit">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>

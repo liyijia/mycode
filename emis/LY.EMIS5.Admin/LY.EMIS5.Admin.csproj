@@ -351,6 +351,10 @@
     <Content Include="Scripts\tagsinput-init.js" />
     <Content Include="Scripts\tree-init.js" />
     <Content Include="Scripts\validation-init.js" />
+    <Content Include="Views\BidProject\Log.cshtml" />
+    <Content Include="Views\Manager\EditPassword.cshtml" />
+    <Content Include="Views\News\Create.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -382,8 +386,6 @@
     <Content Include="Views\Project\Cancel.cshtml" />
     <Content Include="Views\Project\Audit.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
-    <Content Include="Views\News\Index.cshtml" />
-    <Content Include="Views\News\Create.cshtml" />
     <Content Include="Views\News\View.cshtml" />
     <Content Include="Views\Achievement\Create.cshtml" />
     <Content Include="Views\Achievement\Index.cshtml" />
@@ -401,7 +403,6 @@
     <Content Include="Views\Company\Create.cshtml" />
     <Content Include="Views\Company\Index.cshtml" />
     <Content Include="Scripts\bootstrap-datetimepicker\less\datetimepicker.less" />
-    <Content Include="Views\Manager\EditPassword.cshtml" />
     <Content Include="Views\Manager\Edit.cshtml" />
     <Content Include="Scripts\dropzone\css\stylus\basic.styl" />
     <Content Include="Scripts\dropzone\css\stylus\dropzone.styl" />
@@ -414,7 +415,6 @@
     <Content Include="Views\BidProject\Create.cshtml" />
     <Content Include="Views\BidProject\Index.cshtml" />
     <Content Include="Views\BidProject\View.cshtml" />
-    <Content Include="Views\BidProject\Log.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\fonts\" />

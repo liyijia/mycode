@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "公告列表";
+}
+@using LY.EMIS5.BLL;
+@section Script{
+<style type="text/css">
+    @@media only screen and (max-width: 800px) {
+        table td:nth-child(1),
+        table th:nth-child(1),
+        table td:nth-child(3),
+        table th:nth-child(3),
+        table td:nth-child(4),
+        table th:nth-child(4) {
+            display: none;
+        }
+
+        table td:nth-child(2), table th:nth-child(2) {
+            width: 65%;
+            overflow: hidden;
+            text-overflow: ellipsis; /*以省略号替代截除部分*/
+            white-space: nowrap;
+        }
+    }
+</style>
+    <script type="text/javascript">
+        var table = null;
+        $(function () {
+            table = $('#dynamic-table').dataTable({
+                "bServerSide": true,
+                "bLengthChange": false,
+                "sAjaxSource": "/News/Index",
+                "fnServerParams": function (aoData) {
+                    aoData.push({ "name": "txt", "value": $("#txt").val() });
+                    aoData.push({ "name": "t", "value": '@Request["t"]' });
+                }, "aoColumns": [
+                    { "mData": "Id" },
+                      { "mData": "Title" },
+                      { "mData": "UserName" },
+                      { "mData": "CreateDate" },
+                      { "mData": "Id" }
+                ], "bFilter": false, "bSort": false,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    $('td:eq(1)', nRow).addClass('text-left');
+                    $('td:eq(4)', nRow).html("<a href=\"/News/View/" + aData.Id + "\">查看</a>");
+                    if (aData.Edit) {
+                            $('td:eq(4)', nRow).append(' <a href="/News/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');
+                    }
+                     
+                   
+                }
+            });
+            //搜索
+            $(".sreach").click(function () {
+                table.dataTable().fnAdjustColumnSizing();
+            });
+
+            $('.create').click(function(){
+                location.href = "/News/Create?t=@Request["t"]" ;
+            });
+           
+            
+        });
+
+        function Delete(id) {
+            $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
+                dialog.modal('hide');
+                location.href = "/News/Delete/" + id;
+            })
+        }
+    </script>
+}
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    @Request["t"]列表
+                    <span class="tools pull-right form-inline">
+                        <input type="text" id="txt" value="@Request["txt"]" class="form-control hidden-phone" placeholder="搜索标题" />
+                        <input type="button" class="btn btn-default sreach hidden-phone" value="搜索" />
+                        <input type="button" class="btn btn-default create" value="添加" />
+                    </span>
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        <table class="display table table-bordered table-striped" id="dynamic-table">
+                            <thead>
+                                <tr>
+                                    <th>编号</th>
+                                    <th>标题</th>
+                                    <th>发布人</th>
+                                    <th>发布时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+   
+</div>
+<!--body wrapper end-->

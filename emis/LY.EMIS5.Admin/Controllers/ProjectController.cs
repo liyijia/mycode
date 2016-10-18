@@ -207,11 +207,11 @@ namespace LY.EMIS5.Admin.Controllers
             }
             else if (index == 2)
             {
-                query = DbHelper.Query<Project>(c => c.Opinions.Any(n => n.Manager.Id == ManagerImp.Current.Id && n.Done) && c.OpenDate <= time && c.ProjectProgress != ProjectProgresses.NotOnline);
+                query = DbHelper.Query<Project>(c => c.Opinions.Any(n => n.Manager.Id == ManagerImp.Current.Id ) && c.OpenDate <= time && c.ProjectProgress != ProjectProgresses.NotOnline);
             }
             else if (index == 1)
             {
-                query = DbHelper.Query<Project>(c => c.Opinions.Any(n => n.Manager.Id == ManagerImp.Current.Id &&n.Done) && c.OpenDate > time && c.ProjectProgress != ProjectProgresses.NotOnline);
+                query = DbHelper.Query<Project>(c => c.Opinions.Any(n => n.Manager.Id == ManagerImp.Current.Id) && c.OpenDate > time && c.ProjectProgress != ProjectProgresses.NotOnline);
             }
             else {
                 query = DbHelper.Query<Project>(c => c.OpenDate < DateTime.Now.Date && c.Current.Manager.Id == ManagerImp.Current.Id && !c.Current.Done && c.ProjectProgress == ProjectProgresses.NotOnline);
@@ -318,7 +318,7 @@ namespace LY.EMIS5.Admin.Controllers
                     Edit = ManagerImp.Current.Id == c.Sale.Id && c.ProjectProgress != ProjectProgresses.Success && c.ProjectProgress != ProjectProgresses.Cancel,
                     Open=c.ProjectProgress==ProjectProgresses.Arrange,
                     Revoke = c.ProjectProgress == ProjectProgresses.NotOnline && ManagerImp.Current.Id == c.Sale.Id,
-                    Audit = c.ProjectProgress != ProjectProgresses.NotOnline && c.Current.Manager.Id == ManagerImp.Current.Id && !c.Current.Done,
+                    Audit = c.ProjectProgress != ProjectProgresses.NotOnline && c.Current!=null && c.Current.Manager.Id == ManagerImp.Current.Id && !c.Current.Done,
                     Prompt = c.ProjectProgress != ProjectProgresses.NotOnline
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
         }

@@ -74,12 +74,12 @@
   <ItemGroup>
     <Compile Include="Core\Memberships\Achievement.cs" />
     <Compile Include="Core\Memberships\BidProject.cs" />
+    <Compile Include="Core\Memberships\Certificate.cs" />
+    <Compile Include="Core\Memberships\News.cs" />
     <Compile Include="Core\Memberships\Work.cs" />
     <Compile Include="Core\Memberships\Company.cs" />
-    <Compile Include="Core\Memberships\News.cs" />
     <Compile Include="Core\Memberships\Opinion.cs" />
     <Compile Include="Core\Memberships\Log.cs" />
-    <Compile Include="Core\Memberships\Certificate.cs" />
     <Compile Include="Core\Memberships\Aptitude.cs" />
     <Compile Include="Core\Memberships\Records.cs" />
     <Compile Include="Core\Memberships\Project.cs" />
