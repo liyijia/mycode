@@ -191,6 +191,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">开标地点</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.OpenAddress, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">资料费</label>
                             <div class="col-sm-10 input-group">
                                 @Html.TextBox("MaterialFee", Model.MaterialFee.ToString(), new { @class = "form-control number form-control-addon" })<span class="input-group-addon">元</span>

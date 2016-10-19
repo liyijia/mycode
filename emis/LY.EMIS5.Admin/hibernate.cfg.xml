@@ -4,7 +4,7 @@
     <property name="connection.provider">NHibernate.Extensions.Connection.CachedDriverConnectionProvider, NHibernate.Extensions</property>
     <property name="connection.driver_class">NHibernate.Driver.SQLiteDriver</property>
     <property name="connection.connection_string">
-      Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\mycode\emis\LY.EMIS5.Admin\App_Data\db.db
+      Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\liyijia\Source\Repos\mycode\emis\LY.EMIS5.Admin\App_Data\db.db
     </property>
     <property name="dialect">NHibernate.Dialect.MsSql2008Dialect</property>
     <property name="show_sql">true</property>

@@ -20,6 +20,7 @@
     <property name="Account" />
     <property name="Bank" />
     <property name="OpenDate" />
+    <property name="OpenAddress" />
     <many-to-one name="OpenManager" class="Manager" lazy="false" column="Open_Id"/>
     <many-to-one name="Sale" class="Manager" lazy="false" column="Sale_Id"/>
     <many-to-one name="Current" class="Opinion" lazy="false" column="Current_Id"/>

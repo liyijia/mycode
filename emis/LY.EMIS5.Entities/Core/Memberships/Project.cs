@@ -89,6 +89,11 @@ namespace LY.EMIS5.Entities.Core.Memberships
         public virtual DateTime OpenDate { get; set; }
 
         /// <summary>
+        /// 开标地点
+        /// </summary>
+        public virtual string OpenAddress { get; set; }
+
+        /// <summary>
         /// 开标人
         /// </summary>
         public virtual Manager OpenManager { get; set; }

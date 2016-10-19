@@ -55,13 +55,17 @@ namespace LY.EMIS5.Admin.Controllers
             var time = DateTime.Now.Date;
             if (index == 0)
             {
+                query = DbHelper.Query<Project>();
+            }
+            else if (index == 1)
+            {
                 query = DbHelper.Query<Project>(c => c.OpenDate >= time && c.ProjectProgress == ProjectProgresses.NotOnline);
             }
-            else if (index == 2)
+            else if (index == 3)
             {
                 query = DbHelper.Query<Project>(c =>  c.OpenDate <= time && c.ProjectProgress != ProjectProgresses.NotOnline);
             }
-            else if (index == 1)
+            else if (index == 2)
             {
                 query = DbHelper.Query<Project>(c =>  c.OpenDate > time && c.ProjectProgress != ProjectProgresses.NotOnline);
             }
@@ -183,7 +187,7 @@ namespace LY.EMIS5.Admin.Controllers
                     CreateDate = c.CreateDate.ToYearMonthDayString(),
                     c.CompanyName,
                     Edit=ManagerImp.Current.Kind=="管理员"|| ManagerImp.Current.Kind=="总经理",
-                    Prompt = c.ProjectProgress != ProjectProgresses.NotOnline
+                    Prompt = (DateTime.Today - c.OpenDate).Hours<24
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
         }
 
@@ -319,7 +323,7 @@ namespace LY.EMIS5.Admin.Controllers
                     Open=c.ProjectProgress==ProjectProgresses.Arrange,
                     Revoke = c.ProjectProgress == ProjectProgresses.NotOnline && ManagerImp.Current.Id == c.Sale.Id,
                     Audit = c.ProjectProgress != ProjectProgresses.NotOnline && c.Current!=null && c.Current.Manager.Id == ManagerImp.Current.Id && !c.Current.Done,
-                    Prompt = c.ProjectProgress != ProjectProgresses.NotOnline
+                    Prompt = (DateTime.Today - c.OpenDate).Hours < 24
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
         }
 
@@ -501,7 +505,7 @@ namespace LY.EMIS5.Admin.Controllers
                 entity.Sale = model.Sale;
                 entity.Proxy = model.Proxy;
                 entity.Requirement = model.Requirement;
-              
+                entity.OpenAddress = model.OpenAddress;
                 Flow flow;
                 if (model.Id > 0)
                 {
@@ -587,6 +591,7 @@ namespace LY.EMIS5.Admin.Controllers
                     entity.OpenDate = model.OpenDate.Year < 2000 ? DateTime.MaxValue : model.OpenDate;
                 entity.EndDate = model.EndDate;
                 entity.MoneySituation = model.MoneySituation;
+                entity.OpenAddress = model.OpenAddress;
                 entity.Update();
                 
                 ts.Complete();
@@ -615,6 +620,9 @@ namespace LY.EMIS5.Admin.Controllers
             using (var ts = TransactionScopes.Default)
             {
                 var entity = DbHelper.Get<Project>(model.Id);
+                entity.EndDate = model.EndDate;
+                entity.OpenDate = model.OpenDate;
+                entity.OpenAddress = model.OpenAddress;
                 entity.OpenManager = DbHelper.Get<Manager>(openId);
                 entity.Update();
 

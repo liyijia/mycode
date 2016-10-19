@@ -74,9 +74,9 @@
                       { "mData": "Id", "bSortable": false }
                 ], "bFilter": false, "aaSorting": [[7, "asc"]],
                 "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                    //if (aData.Prompt) {
-                    //    $(nRow).css('color', 'red');
-                    //}
+                    if (aData.Prompt) {
+                        $(nRow).css('color', 'red');
+                    }
                     $('td:eq(1)', nRow).addClass('text-left').width(100);
                     $('td:eq(11)', nRow).html('');
                     if (aData.Edit) {

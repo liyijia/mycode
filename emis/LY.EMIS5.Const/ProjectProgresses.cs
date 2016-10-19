@@ -23,10 +23,13 @@ namespace LY.EMIS5.Const
         RetreatDeposit = 6,
         [Description("经理审核")]
         ManagerAudit = 7,
+        [Description("财务审核")]
+        FinanceAudit = 10,
         [Description("项目结束")]
         Success = 8,
         [Description("不能投标")]
         Cancel = 9
+        
     }
 
     public enum BidProjectProgresses

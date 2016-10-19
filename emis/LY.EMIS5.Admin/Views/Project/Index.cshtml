@@ -74,10 +74,12 @@
                       { "mData": "ProjectName", "bSortable": false },
                       { "mData": "Name", "bSortable": false }, { "mData": "Scale" }, { "mData": "Money", "bSortable": false }, { "mData": "Source", "bSortable": false }, { "mData": "ProjectProgress" }, { "mData": "OpenDate" }, { "mData": "EndDate" }, { "mData": "CompanyName" }, { "mData": "CreateDate" },
                       { "mData": "Id", "bSortable": false }
-                ],"aaSorting": [[ 7, "asc" ]],
+                ], "aaSorting": [[10, "desc"]],
                 "bFilter": false,
                 "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                   
+                    if (aData.Prompt) {
+                        $(nRow).css('color', 'red');
+                    }
                     $('td:eq(1)', nRow).addClass('text-left');
                     if ('@ManagerImp.Current.Kind' != '业务员') {
                         $('td:eq(11)', nRow).html('<a href="/Project/View/' + aData.Id + '">查看</a>');
@@ -97,6 +99,11 @@
             });
 
             $('.nav a').click(function () {
+                if ($(this).parent().index() == 0) {
+                    oTable.fnSettings().aaSorting = [[10, "desc"]];
+                } else {
+                    oTable.fnSettings().aaSorting = [[7, "asc"]];
+                }
                 $('#index').val($(this).parent().index());
                 oTable.fnSettings()._iDisplayStart = 0;
                 oTable.fnAdjustColumnSizing();
@@ -137,6 +144,9 @@
                 <div class="panel-body">
                     <ul class="nav nav-tabs">
                         <li class="active">
+                            <a href="#" data-toggle="tab">全部项目</a>
+                        </li>
+                        <li >
                             <a href="#" data-toggle="tab">登记项目</a>
                         </li>
                         <li>
@@ -148,6 +158,7 @@
                         <li>
                             <a href="#" data-toggle="tab">过期项目</a>
                         </li>
+                        
                     </ul>
                     <div class="adv-table">
                         <table class="display table table-bordered table-striped" id="table-form-list" cellpadding="0" cellspacing="1">
