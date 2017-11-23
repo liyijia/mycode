@@ -21,6 +21,8 @@ namespace LY.EMIS5.Admin.Controllers
         [HttpGet, Authorize]
         public ActionResult Index()
         {
+            
+
             ViewBag.Open = DbHelper.Query<Project>(c => !c.IsOpen && c.OpenManager.Id == ManagerImp.Current.Id).OrderBy(c => c.OpenDate).ToList() ;
             ViewBag.News = DbHelper.Query<News>(c => c.Type == "公司通知").OrderByDescending(c => c.Id).Take(10).ToList();
             ViewBag.Projects=DbHelper.Query<Project>(c => (c.OpenDate >= DateTime.Now.Date || c.ProjectProgress != ProjectProgresses.NotOnline) && c.Current.Manager.Id == ManagerImp.Current.Id && !c.Current.Done).OrderBy(c=>c.OpenDate).ToList();

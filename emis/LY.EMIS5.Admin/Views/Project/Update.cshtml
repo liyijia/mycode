@@ -1,0 +1,231 @@
+﻿@using LY.EMIS5.Common;
+@using LY.EMIS5.Const;
+@using LY.EMIS5.Entities.Core.Memberships
+@using LY.EMIS5.BLL;
+@model Project
+@{
+    ViewBag.Title = "编辑项目";
+}
+@section Script{
+    <script>
+        $(function () {
+            $("#ProjectName").autocomplete({
+                source: "/Project/SearchProject",
+                minLength: 2,
+            });
+            
+
+            $('[name="Type"]').change(function () {
+                if ($(this).val() == '转账' || $(this).val() == '网银支付') {
+                    $('#bankinfo').show();
+                } else {
+                    $('#bankinfo').hide();
+                }
+            });
+
+            $('[name="Source"]').change(function () {
+                if ($('[name="Source"]').val() == '代打') {
+                    $('#replace').show();
+                } else {
+                    $('#replace').hide();
+                }
+            });
+            if ('@Model.Type' != '') {
+                $('[name="Type"]').val('@Model.Type');
+            }
+            if ('@Model.Source' != '') {
+                $('[name="Source"]').val('@Model.Source');
+            }
+
+           
+        });
+
+        function submitForm(progress) {
+           
+            $('form').submit();
+        }
+    </script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                项目资料
+            </header>
+            <div class="panel-body">
+                <form class="form-horizontal adminex-form" action="/Project/Update" method="post">
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">项目名称</label>
+                        <div class="col-sm-10">
+                            @Html.HiddenFor(c=>c.ProjectProgress)
+                            @Html.HiddenFor(c => c.Id)
+                            @Html.TextBoxFor(c => c.ProjectName, new { @class = "form-control required" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">登记人</label>
+                        <div class="col-sm-10">
+                            @Html.TextAreaFor(c => c.Remark, new { @class = "form-control", placeholder = "该选项只有自己才能看见，此信息为私密信息" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">资质要求</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(c => c.Aptitude, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">人员要求</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(c => c.Requirement, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">业务员</label>
+                        <div class="col-sm-10">
+                            @Model.Sale.Name
+                        </div>
+                    </div>
+                    <div id="content">
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">下载链接</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.Link, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">规模</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.Scale, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">业主</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.Owner, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">代理公司</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.Proxy, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">保证金来源</label>
+                            <div class="col-sm-10">
+                                <select name="Source" class="form-control">
+                                    <option>自打</option>
+                                    <option>代打</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="replace" class="form-group none">
+                            <label class="col-sm-2 col-sm-2 control-label">代打金额</label>
+                            <div class="col-sm-10 input-group">
+                                @Html.TextBox("ReplaceMoney",  Model.ReplaceMoney.ToString(), new { @class = "form-control number form-control-addon" })<span class="input-group-addon">万元</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">保证金金额</label>
+                            <div class="col-sm-10 input-group">
+                                @Html.TextBox("Money", Model.Money.ToString(), new { @class = "form-control number form-control-addon" })<span class="input-group-addon">万元</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">保证金截至时间</label>
+                            <div class="col-sm-10">
+                                @Html.TextBox("EndDate", Model.EndDate.Year<1000 ? "" : Model.EndDate.ToChineseDateString(), new { @class = "form-control form_datetime" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">保证金打款方式</label>
+                            <div class="col-sm-10">
+                                <select name="Type" class="form-control required">
+                                    <option>网银支付</option>
+                                    <option>转账</option>
+                                    <option>现场刷卡</option>
+                                    <option>其他方式</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="bankinfo">
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">保证金账户名</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(c => c.UserName, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">保证金账号</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(c => c.Account, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">保证金开户行</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(c => c.Bank, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">开标时间</label>
+                            <div class="col-sm-10">
+                                @Html.TextBox("OpenDate", Model.OpenDate.Year < 1000 ? "" : Model.OpenDate.ToChineseDateString(), new { @class = "form-control form_datetime" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">开标地点</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(c => c.OpenAddress, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">资料费</label>
+                            <div class="col-sm-10 input-group">
+                                @Html.TextBox("MaterialFee", Model.MaterialFee.ToString(), new { @class = "form-control number form-control-addon" })<span class="input-group-addon">元</span>
+                            </div>
+                        </div>
+                        
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">公司名称</label>
+                                <div class="col-sm-10">
+                                    @Model.CompanyName
+                                </div>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">收费情况</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(c => c.MoneySituation, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        
+                        
+                        
+                       
+                           
+                       
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">意见</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(c => c.SalesOpinion, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    
+                        
+                    </div>
+                    <div class="form-group"></div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button class="btn btn-primary" type="submit">保存数据</button>
+                            </div>
+                        </div>
+</form>
+            </div>
+        </section>
+    </div>
+</div>

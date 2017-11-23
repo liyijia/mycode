@@ -1,5 +1,6 @@
 ﻿@using LY.EMIS5.Common;
 @using LY.EMIS5.Const;
+@using LY.EMIS5.Common.Extensions;
 @model LY.EMIS5.Entities.Core.Memberships.Project
 @{
     ViewBag.Title = "项目审核";
@@ -23,16 +24,15 @@
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">状态</label>
                         <div class="col-sm-10">
-                            <label class="control-label">@Model.ProjectProgress</label>
+                            <label class="control-label">@Model.ProjectProgress.GetDescription()</label>
                         </div>
                     </div>
                     @{
-                        if (Model.ProjectProgress != "未上网")
-                        {
+                       
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-2 control-label">下载链接</label>
                                 <div class="col-sm-10">
-                                    <label class="control-label">@Model.Link</label>
+                                    <label class="control-label"><a href="@Model.Link" title="_black">@Model.Link</a></label>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -47,6 +47,13 @@
                                     <label class="control-label">@Model.Owner</label>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">代理公司</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.Proxy</label>
+                                </div>
+                            </div>
+                            
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-2 control-label">保证金来源</label>
                                 <div class="col-sm-10">
@@ -110,6 +117,18 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">开标地点</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@Model.OpenAddress</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-2 control-label">开标人</label>
+                                <div class="col-sm-10">
+                                    <label class="control-label">@(Model.OpenManager != null ? Model.OpenManager.Name : "")</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-2 col-sm-2 control-label">资料费</label>
                                 <div class="col-sm-10 input-group">
                                     <label class="control-label">@(Model.MaterialFee)元</label>
@@ -128,36 +147,48 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-2 col-sm-2 control-label">费用收费情况</label>
+                                <label class="col-sm-2 col-sm-2 control-label">收费情况</label>
                                 <div class="col-sm-10">
                                     <label class="control-label">@Model.MoneySituation</label>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-2 col-sm-2 control-label">@Model.Sale.Name</label>
+                                <label class="col-sm-2 col-sm-2 control-label">人员要求</label>
                                 <div class="col-sm-10">
-                                    <label class="control-label">@Model.SalesOpinion</label>
+                                    <label class="control-label">@Model.Requirement</label>
                                 </div>
                             </div>
-                        }
+
                     }
                     @foreach (var item in Model.Opinions.Where(c => c.Done).OrderBy(c => c.Id))
                     {
                         <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">@item.ProjectProgress</label>
+                            <label class="col-sm-2 col-sm-2 control-label">@(item.Manager.Name+item.ProjectProgress)意见</label>
                             <div class="col-sm-10">
-                                <label class="control-label">@item.Content</label>
+                                <label class="control-label">@item.Content</label><br />
+                                <label class="control-label"> @item.DoneDate.ToChineseDateString()</label>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">@item.Manager.Name</label>
-                            <div class="col-sm-10">
-                                <label class="control-label">@item.DoneDate.ToChineseDateString()</label>
-                            </div>
-                        </div>
+                   
 
                     }
-                    @foreach (var item in Model.Opinions.Where(c => !c.Done).OrderBy(c => c.Id))
+                    @if (ViewBag.Flow.dest.role != null)
+                    {
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">@ViewBag.Flow.dest.role</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownList("managerId", ViewBag.List as IList<SelectListItem>, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        
+                    }
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">意见</label>
+                        <div class="col-sm-10">
+                            @Html.TextArea("Content", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    @*@foreach (var item in Model.Opinions.Where(c => !c.Done).OrderBy(c => c.Id))
                     {
                         if (item.Kind != "")
                         {
@@ -206,11 +237,12 @@
                             </div>
                         </div>
 
-                    }
+                    }*@
                     
                     <div class="form-group">
                         <div class="col-lg-offset-2 col-lg-10">
-                            <button class="btn btn-primary" type="submit">提交</button>
+                           
+                            <button class="btn btn-warning" type="submit" onclick="submitForm(@((int)EnumHelper<ProjectProgresses>.EnumFromString(ViewBag.Flow.dest.name)))">@("提交" + ViewBag.Flow.dest.role + ViewBag.Flow.dest.name)</button>
                         </div>
                     </div>
                 </form>

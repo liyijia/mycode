@@ -52,7 +52,7 @@
                 oTable.fnAdjustColumnSizing();
             }
         };
-       
+
         $(function () {
             $('.create').click(function () {
                 location.href = "/Project/Create";
@@ -79,10 +79,12 @@
                     }
                     $('td:eq(1)', nRow).addClass('text-left').width(100);
                     $('td:eq(11)', nRow).html('');
-                    if (aData.Edit) {
-                        if (aData.ProjectProgress == '登记项目')
+                    if (aData.Edit || '@(ManagerImp.Current.Kind)' == '资料员') {
+                        if (aData.ProjectProgress == '登记项目' )
                             $('td:eq(11)', nRow).append('<a href="/Project/Create/' + aData.Id + '">编辑</a>');
-                        else 
+                        else if( '@(ManagerImp.Current.Kind)' == '资料员')
+                            $('td:eq(11)', nRow).append('<a href="/Project/Update/' + aData.Id + '">编辑</a>');
+                        else
                             $('td:eq(11)', nRow).append('<a href="/Project/Edit/' + aData.Id + '">编辑</a>');
                     } else {
                         $('td:eq(11)', nRow).append('<a href="/Project/View/' + aData.Id + '">查看</a>');
@@ -111,7 +113,7 @@
             })
         });
 
-        
+
         function Delete(id){
             $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
                 dialog.modal('hide');

@@ -11,17 +11,17 @@
         $(function () {
 
             $('[name="Type"]').change(function () {
-                if ($(this).val() == '转账') {
+                if ($(this).val() == '转账' || $(this).val() == '网银支付') {
                     $('#bankinfo').show();
                 } else {
-                    $('#bankinfo').hide().find('form-control').removeClass('required');
+                    $('#bankinfo').hide().find('form-control');
                 }
             });
             $('[name="Source"]').change(function () {
                 if ($('[name="Source"]').val() == '代打') {
-                    $('#replace').show().find('input.form-control').addClass('required');
+                    $('#replace').show().find('input.form-control');
                 } else {
-                    $('#replace').hide().find('input.form-control').removeClass('required');
+                    $('#replace').hide().find('input.form-control');
                 }
             });
             if ('@Model.Type' != '') {

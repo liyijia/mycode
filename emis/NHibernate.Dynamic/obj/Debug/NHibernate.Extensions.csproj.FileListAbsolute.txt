@@ -47,7 +47,6 @@ D:\mycode\emis\NHibernate.Dynamic\obj\Debug\NHibernate.Extensions.dll
 D:\mycode\emis\NHibernate.Dynamic\obj\Debug\NHibernate.Extensions.pdb
 F:\mycode\emis\NHibernate.Dynamic\bin\Debug\ICSharpCode.SharpZipLib.dll
 F:\mycode\emis\NHibernate.Dynamic\obj\Debug\NHibernate.Extensions.csprojResolveAssemblyReference.cache
-D:\mycode\emis\NHibernate.Dynamic\obj\Debug\NHibernate.Extensions.csprojResolveAssemblyReference.cache
 C:\Users\liyijia\Source\Repos\mycode\emis\NHibernate.Dynamic\bin\Debug\NHibernate.Extensions.dll
 C:\Users\liyijia\Source\Repos\mycode\emis\NHibernate.Dynamic\bin\Debug\NHibernate.Extensions.pdb
 C:\Users\liyijia\Source\Repos\mycode\emis\NHibernate.Dynamic\bin\Debug\ICSharpCode.SharpZipLib.dll

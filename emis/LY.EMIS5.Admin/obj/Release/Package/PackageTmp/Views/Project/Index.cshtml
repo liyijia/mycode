@@ -4,7 +4,43 @@
 @using LY.EMIS5.BLL;
 
 @section Script
-{
+{<style type="text/css">
+    @@media only screen and (max-width: 800px) {
+        .table td:nth-child(1),
+        .table th:nth-child(1),
+        .table td:nth-child(3),
+        .table th:nth-child(3),
+        .table td:nth-child(4),
+        .table th:nth-child(4),
+        .table td:nth-child(5),
+        .table th:nth-child(5),
+        .table td:nth-child(6),
+        .table th:nth-child(6),
+        .table td:nth-child(7),
+        .table th:nth-child(7),
+        .table td:nth-child(8),
+        .table th:nth-child(8),
+        .table td:nth-child(9),
+        .table th:nth-child(9),
+        .table td:nth-child(10),
+        .table th:nth-child(10),
+        .table td:nth-child(11),
+        .table th:nth-child(11) {
+            display: none;
+        }
+
+        .table td:nth-child(2),.table th:nth-child(2) {
+            width: 65%;
+            overflow: hidden;
+            text-overflow: ellipsis; /*以省略号替代截除部分*/
+            white-space: nowrap;
+        }
+    }
+    .table td:nth-child(2), .table th:nth-child(2) {
+            width: 35%;
+           
+        }
+</style>
     <script type="text/javascript">
         var oTable;
         var options = {
@@ -28,28 +64,62 @@
                     aoData.push({ "name": "name", "value": $("[name=\"name\"]").val() });
                     aoData.push({ "name": "sale", "value": $("[name=\"sale\"]").val() });
                     aoData.push({ "name": "state", "value": $("[name=\"state\"]").val() });
+                    aoData.push({ "name": "begin", "value": $("[name=\"begin\"]").val() });
+                    aoData.push({ "name": "end", "value": $("[name=\"end\"]").val() });
+                    aoData.push({ "name": "company", "value": $("[name=\"company\"]").val() });
+                    aoData.push({ "name": "index", "value": $('#index').val() });
                 },
                 "aoColumns": [
                     { "mData": "Id" },
-                      { "mData": "ProjectName" },
-                      { "mData": "Name" }, { "mData": "Scale" }, { "mData": "Money" }, { "mData": "Source" }, { "mData": "ProjectProgress" }, { "mData": "OpenDate" }, { "mData": "EndDate" }, { "mData": "CompanyName" },
-                      { "mData": "Id" }
-                ], "bSort": false, "bFilter": false,
+                      { "mData": "ProjectName", "bSortable": false },
+                      { "mData": "Name", "bSortable": false }, { "mData": "Scale" }, { "mData": "Money", "bSortable": false }, { "mData": "Source", "bSortable": false }, { "mData": "ProjectProgress" }, { "mData": "OpenDate" }, { "mData": "EndDate" }, { "mData": "CompanyName" }, { "mData": "CreateDate" },
+                      { "mData": "Id", "bSortable": false }
+                ], "aaSorting": [[10, "desc"]],
+                "bFilter": false,
                 "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                     if (aData.Prompt) {
                         $(nRow).css('color', 'red');
                     }
-                    $('td:eq(10)', nRow).html('<a href="/Project/View/' + aData.Id +'">查看</a>');
+                    $('td:eq(1)', nRow).addClass('text-left');
+                    if ('@ManagerImp.Current.Kind' != '业务员') {
+                        $('td:eq(11)', nRow).html('<a href="/Project/View/' + aData.Id + '">查看</a>');
+                    } else {
+                        $('td:eq(11)', nRow).html('');
+                    }
+                    
                     if (aData.Edit) { 
-                        $('td:eq(10)', nRow).append(' <a href="/Project/Cancel/' + aData.Id + '">作废</a>');
+                        $('td:eq(11)', nRow).append(' <a href="#"  onclick="Delete(' + aData.Id + ')">删除</a>');
                     }
                 }
             });
 
             $('.search').click(function () {
+                oTable.fnSettings()._iDisplayStart = 0;
                 oTable.fnAdjustColumnSizing();
             });
+
+            $('.nav a').click(function () {
+                if ($(this).parent().index() == 0) {
+                    oTable.fnSettings().aaSorting = [[10, "desc"]];
+                } else {
+                    oTable.fnSettings().aaSorting = [[7, "asc"]];
+                }
+                $('#index').val($(this).parent().index());
+                oTable.fnSettings()._iDisplayStart = 0;
+                oTable.fnAdjustColumnSizing();
+            })
+
+            $('.export').click(function () {
+                location.href = "Export";
+            });
         });
+
+        function Delete(id) {
+            $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
+                dialog.modal('hide');
+                location.href = "/Project/Delete/" + id;
+            })
+        }
 
 
     </script>
@@ -61,39 +131,51 @@
             <section class="panel">
                 <header class="panel-heading">
                     项目列表
-                    <span class="tools pull-right form-inline">
+                    <span class="tools pull-right form-inline hidden-phone"><input type="hidden" id="index" value="0" />
                             <input type="text" class="form-control" name="name" placeholder="请输入项目名称" />
-                            <select name="state" class="form-control">
-                                <option value="">项目进度</option>
-                                <option>未上网</option>
-                                <option>已上网</option>
-                                <option>做资料</option>
-                                <option>打保证金</option>
-                                <option>统一开标</option>
-                                <option>开标结束</option>
-                                <option>保证金已退</option>
-                                <option>不能投标</option>
-                            </select>
+                        <input type="text" class="form-control default-date-picker" name="begin" placeholder="开始时间" />
+                        <input type="text" class="form-control default-date-picker" name="end" placeholder="结束时间" />
+                        @Html.DropDownList("company", ViewBag.Company as List<SelectListItem>,"公司选择", new { @class = "form-control" })
                         @Html.DropDownList("sale", ViewBag.Sales as List<SelectListItem>, new { @class = "form-control" })
                         <input type="button" class="btn btn-default search" value="搜索" />
+                        <input type="button" class="btn btn-default export" value="导出" />
                     </span>
                 </header>
                 <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#" data-toggle="tab">全部项目</a>
+                        </li>
+                        <li >
+                            <a href="#" data-toggle="tab">登记项目</a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="tab">待开标项目</a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="tab">已开标项目</a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="tab">过期项目</a>
+                        </li>
+                        
+                    </ul>
                     <div class="adv-table">
                         <table class="display table table-bordered table-striped" id="table-form-list" cellpadding="0" cellspacing="1">
                             <thead>
                                 <tr class="tab_top table-top">
-                                    <td>编号</td>
-                                    <td>项目名称</td>
-                                    <td>业务员</td>
-                                    <td>项目规模</td>
-                                    <td>保证金金额</td>
-                                    <td>保证金来源</td>
-                                    <td>项目进度</td>
-                                    <td>开标时间</td>
-                                    <td>保证金截止时间</td>
-                                    <td>公司</td>
-                                    <td>操作</td>
+                                    <th>编号</th>
+                                    <th>项目名称</th>
+                                    <th>业务员</th>
+                                    <th>项目规模</th>
+                                    <th>保证金金额</th>
+                                    <th>保证金来源</th>
+                                    <th>项目进度</th>
+                                    <th>开标时间</th>
+                                    <th>保证金截止时间</th>
+                                    <th>公司</th>
+                                    <th>登记时间</th>
+                                    <th>操作</th>
                                 </tr>
                             </thead>
                         </table>

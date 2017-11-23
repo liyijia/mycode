@@ -84,6 +84,15 @@
     <Compile Include="Core\Memberships\Records.cs" />
     <Compile Include="Core\Memberships\Project.cs" />
     <Compile Include="Core\Memberships\Manager.cs" />
+    <Compile Include="Core\Stock\ReturnGoods.cs" />
+    <Compile Include="Core\Stock\Placing.cs" />
+    <Compile Include="Core\Stock\Goods.cs" />
+    <Compile Include="Core\Stock\ReturnDetail.cs" />
+    <Compile Include="Core\Stock\PlacingDetail.cs" />
+    <Compile Include="Core\Stock\StorageDetail.cs" />
+    <Compile Include="Core\Stock\Storage.cs" />
+    <Compile Include="Core\Stock\Supplier.cs" />
+    <Compile Include="Core\Stock\Material.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +169,51 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Core\Memberships\Log.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Stock\Supplier.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Stock\Material.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Stock\Storage.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Stock\StorageDetail.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Stock\Placing.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Stock\Goods.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Stock\PlacingDetail.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Stock\ReturnGoods.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Stock\ReturnDetail.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

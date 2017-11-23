@@ -171,6 +171,7 @@ namespace LY.EMIS5.Admin.Controllers
             else {
                 query = query.OrderByDescending(c => c.Id);
             }
+           
             return new PagedQueryResult<object>(iDisplayLength, iDisplayStart,
                 query.Count(),
                 query.Skip(iDisplayStart).Take(iDisplayLength).ToList().Select(c => new
@@ -187,7 +188,7 @@ namespace LY.EMIS5.Admin.Controllers
                     CreateDate = c.CreateDate.ToYearMonthDayString(),
                     c.CompanyName,
                     Edit=ManagerImp.Current.Kind=="管理员"|| ManagerImp.Current.Kind=="总经理",
-                    Prompt = (DateTime.Today - c.OpenDate).Hours<24
+                    Prompt = (DateTime.Today - c.OpenDate).Hours<24 && (DateTime.Today - c.OpenDate).Hours >0
                 }).ToList<object>()) { }.ToDataTablesResult(sEcho);
         }
 
@@ -557,6 +558,53 @@ namespace LY.EMIS5.Admin.Controllers
                 ts.Complete();
             }
            
+            return this.RedirectToAction(100, "操作成功", "保存项目成功", "Project", "AuditList");
+        }
+
+        [HttpGet, Authorize]
+        public ActionResult Update(int id = 0)
+        {
+            return View(DbHelper.Get<Project>(id));
+        }
+
+        [HttpPost, Authorize]
+        public ActionResult Update(Project model)
+        {
+            var entity = new Project();
+            using (var ts = TransactionScopes.Default)
+            {
+                if (model.Id > 0)
+                {
+                    entity = DbHelper.Get<Project>(model.Id);
+                }
+
+                entity.EndDate = model.EndDate;
+                entity.Link = model.Link;
+                entity.MaterialFee = model.MaterialFee;
+                entity.Money = model.Money;
+                entity.OpenDate = model.OpenDate.Year < 2000 ? DateTime.MaxValue : model.OpenDate;
+                entity.Owner = model.Owner;
+                entity.ProjectName = model.ProjectName;
+                entity.Scale = model.Scale;
+                entity.Source = model.Source;
+                entity.Type = model.Type;
+                entity.UserName = model.UserName;
+                entity.SalesOpinion = model.SalesOpinion;
+                entity.ProjectProgress = model.ProjectProgress;
+                entity.Account = model.Account;
+                entity.Bank = model.Bank;
+                entity.ReplaceMoney = model.ReplaceMoney;
+                entity.Aptitude = model.Aptitude;
+                entity.Remark = model.Remark;
+                entity.MoneySituation = model.MoneySituation;
+                entity.Proxy = model.Proxy;
+                entity.Requirement = model.Requirement;
+                entity.OpenAddress = model.OpenAddress;
+                entity.Update();
+               
+                ts.Complete();
+            }
+
             return this.RedirectToAction(100, "操作成功", "保存项目成功", "Project", "AuditList");
         }
 

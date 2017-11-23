@@ -16,18 +16,18 @@
             
 
             $('[name="Type"]').change(function () {
-                if ($(this).val() == '转账') {
+                if ($(this).val() == '转账' || $(this).val() == '网银支付') {
                     $('#bankinfo').show();
                 } else {
-                    $('#bankinfo').hide().find('form-control').removeClass('required');
+                    $('#bankinfo').hide();
                 }
             });
 
             $('[name="Source"]').change(function () {
                 if ($('[name="Source"]').val() == '代打') {
-                    $('#replace').show().find('input.form-control').addClass('required');
+                    $('#replace').show();
                 } else {
-                    $('#replace').hide().find('input.form-control').removeClass('required');
+                    $('#replace').hide();
                 }
             });
             if ('@Model.Type' != '') {
@@ -43,10 +43,8 @@
         function submitForm(progress) {
             $('#ProjectProgress').val(progress);
             if (progress == 1) {
-                $('#content').find('.form-control').removeClass('required');
-                $('[type="checkbox"]').prop('checked', false).removeClass('required');
+                $('[type="checkbox"]').removeClass('required');
             } else {
-                $('#content').find('.form-control').addClass('required');
                 $('[type="checkbox"]').addClass('required');
                
             }
