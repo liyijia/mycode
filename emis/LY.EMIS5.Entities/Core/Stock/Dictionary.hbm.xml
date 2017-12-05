@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+  namespace="LY.EMIS5.Entities.Core.Stock" assembly="LY.EMIS5.Entities">
+  <class name="Dictionary" table="S_Dictionary" >
+    <cache usage="read-write" />
+    <id name="Id">
+      <column name="Id" sql-type="int" not-null="true"/>
+      <generator class="native"/>
+    </id>
+    <property name="Name" />
+    <many-to-one name="Manager" class="LY.EMIS5.Entities.Core.Memberships.Manager" lazy="false" column="Manager_Id"/>
+  </class>
+</hibernate-mapping>

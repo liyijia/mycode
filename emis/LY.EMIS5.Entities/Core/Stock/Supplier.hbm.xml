@@ -14,6 +14,6 @@
     <property name="Bank" />
     <property name="IsInvoice" />
     <property name="Grade" />
-    <property name="Rmark"  length="2000" />
+    <property name="Remark"  length="2000" />
   </class>
 </hibernate-mapping>

@@ -8,18 +8,12 @@
       <generator class="native"/>
     </id>
     <property name="No" />
-    <property name="Type" />
-    <property name="Kind" />
     <property name="Total" precision="20" scale="2"/>
-    <property name="Payment" precision="20" scale="2"/>
-    <property name="Debt" precision="20" scale="2"/>
-    <many-to-one name="Creator" class="LY.EMIS5.Entities.Core.Memberships.Manager" lazy="false" column="Creator_Id"/>
     <property name="CreateDate" />
     <many-to-one name="Buyer" class="LY.EMIS5.Entities.Core.Memberships.Manager" lazy="false" column="Buyer_Id"/>
-    <property name="IsInvoice" />
-    <many-to-one name="Supplier" class="Supplier" lazy="false" column="Supplier_Id"/>
-    <many-to-one name="Auditor" class="LY.EMIS5.Entities.Core.Memberships.Manager" lazy="false" column="Auditor_Id"/>
-    <property name="AuditDate" />
-    <property name="Status" />
+    <bag name="Suppliers" lazy="extra">
+      <key column="StorageId" />
+      <one-to-many class="StorageSupplier" />
+    </bag>
   </class>
 </hibernate-mapping>

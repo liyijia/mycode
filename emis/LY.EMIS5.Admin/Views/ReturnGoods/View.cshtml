@@ -1,0 +1,93 @@
+﻿@using LY.EMIS5.Entities.Core.Stock;
+@using LY.EMIS5.Common;
+
+@model Placing
+@{
+    ViewBag.Title = "采购单审批";
+}@section Script
+{
+
+}
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                出库单信息
+            </header>
+            <div class="panel-body">
+                <form class="form-horizontal adminex-form" method="post">
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">项目名称</label>
+                        <div class="col-sm-10">
+                            @Model.Dictionary.Name
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">领取人</label>
+                        <div class="col-sm-10">
+                            @Model.Receiptor.Name
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">提交人</label>
+                        <div class="col-sm-10">
+                            @Model.Creator.Name
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">提交时间</label>
+                        <div class="col-sm-10">
+                            @Model.CreateDate.ToChineseDateString()
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">备注</label>
+                        <div class="col-sm-10">
+                            @Model.Remark
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">出库内容</label>
+                        <div class="col-sm-10">
+                            <table class="display table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>材料</th>
+                                        <th>申请数量</th>
+                                        <th>库存</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (var i = 0; i < Model.Details.Count; i++)
+                                    {
+                                        var c = Model.Details[i];
+                                        @Html.Raw("<tr><td>" + c.Material.Type + "/" + c.Material.Name + "/" + c.Material.Spec + "</td><td>" + c.Number + "</td><td>" + c.Material.Stock + "</td></tr>");
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">项目经理</label>
+                        <div class="col-sm-10">
+                            @Model.Auditor.Name
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">审批时间</label>
+                        <div class="col-sm-10">
+                            @Model.AuditDate.ToChineseDateString()
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">审批意见</label>
+                        <div class="col-sm-10">
+                            @Model.AuditContent
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>

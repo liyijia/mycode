@@ -1,6 +1,7 @@
 ﻿using System;
 using NHibernate.Extensions;
 using LY.EMIS5.Entities.Core.Memberships;
+using System.Collections.Generic;
 
 namespace LY.EMIS5.Entities.Core.Stock
 {
@@ -35,9 +36,9 @@ namespace LY.EMIS5.Entities.Core.Stock
         public virtual Manager Receiptor { get; set; }
 
         /// <summary>
-        /// 班组
+        /// 项目
         /// </summary>
-        public virtual string Group { get; set; }
+        public virtual Dictionary Dictionary { get; set; }
 
         /// <summary>
         /// 审批人
@@ -50,9 +51,23 @@ namespace LY.EMIS5.Entities.Core.Stock
         public virtual DateTime AuditDate { get; set; }
 
         /// <summary>
+        /// 审批时间
+        /// </summary>
+        public virtual string AuditContent { get; set; }
+
+        /// <summary>
         /// 状态  0审批中 1已通过  2未通过
         /// </summary>
         public virtual int Status { get; set; }
+
+        /// <summary>
+        /// 出库明细
+        /// </summary>
+        public virtual IList<PlacingDetail> Details { get; set; }
+
+
+        public virtual string Remark { get; set; }
+
 
     }
 }

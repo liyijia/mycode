@@ -84,11 +84,15 @@
     <Compile Include="Core\Memberships\Records.cs" />
     <Compile Include="Core\Memberships\Project.cs" />
     <Compile Include="Core\Memberships\Manager.cs" />
+    <Compile Include="Core\Stock\Dictionary.cs" />
+    <Compile Include="Core\Stock\PurchaseMaterial.cs" />
+    <Compile Include="Core\Stock\Purchase.cs" />
     <Compile Include="Core\Stock\ReturnGoods.cs" />
     <Compile Include="Core\Stock\Placing.cs" />
     <Compile Include="Core\Stock\Goods.cs" />
     <Compile Include="Core\Stock\ReturnDetail.cs" />
     <Compile Include="Core\Stock\PlacingDetail.cs" />
+    <Compile Include="Core\Stock\StorageSupplier.cs" />
     <Compile Include="Core\Stock\StorageDetail.cs" />
     <Compile Include="Core\Stock\Storage.cs" />
     <Compile Include="Core\Stock\Supplier.cs" />
@@ -214,6 +218,26 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Core\Stock\ReturnDetail.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Stock\Dictionary.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Stock\Purchase.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Stock\PurchaseMaterial.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Stock\StorageSupplier.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

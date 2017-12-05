@@ -60,3 +60,4 @@ C:\Users\liyijia\Source\Repos\mycode\emis\NHibernate.Dynamic\bin\Debug\NHibernat
 C:\Users\liyijia\Source\Repos\mycode\emis\NHibernate.Dynamic\obj\Debug\NHibernate.Extensions.csprojResolveAssemblyReference.cache
 C:\Users\liyijia\Source\Repos\mycode\emis\NHibernate.Dynamic\obj\Debug\NHibernate.Extensions.dll
 C:\Users\liyijia\Source\Repos\mycode\emis\NHibernate.Dynamic\obj\Debug\NHibernate.Extensions.pdb
+D:\mycode\emis\NHibernate.Dynamic\obj\Debug\NHibernate.Extensions.csprojResolveAssemblyReference.cache

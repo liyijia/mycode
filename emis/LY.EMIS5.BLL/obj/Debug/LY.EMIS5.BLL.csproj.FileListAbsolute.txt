@@ -470,3 +470,5 @@ C:\Users\liyijia\Source\Repos\mycode\emis\LY.EMIS5.BLL\bin\Debug\zh-Hans\System.
 C:\Users\liyijia\Source\Repos\mycode\emis\LY.EMIS5.BLL\obj\Debug\LY.EMIS5.BLL.csprojResolveAssemblyReference.cache
 C:\Users\liyijia\Source\Repos\mycode\emis\LY.EMIS5.BLL\obj\Debug\LY.EMIS5.BLL.dll
 C:\Users\liyijia\Source\Repos\mycode\emis\LY.EMIS5.BLL\obj\Debug\LY.EMIS5.BLL.pdb
+D:\mycode\emis\LY.EMIS5.BLL\bin\Debug\LY.EMIS5.Common.dll.config
+D:\mycode\emis\LY.EMIS5.BLL\bin\Debug\LY.EMIS5.Entities.dll.config

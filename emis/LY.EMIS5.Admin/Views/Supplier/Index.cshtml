@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "供应商列表";
+}
+@using LY.EMIS5.BLL;
+@section Script{
+<style type="text/css">
+    @@media only screen and (max-width: 800px) {
+        table td:nth-child(1), table th:nth-child(1) {
+            width: 65%;
+            overflow: hidden;
+            text-overflow: ellipsis; /*以省略号替代截除部分*/
+            white-space: nowrap;
+        }
+    }
+</style>
+    <script type="text/javascript">
+        var table = null;
+        $(function () {
+            table = $('#dynamic-table').dataTable({
+                "bServerSide": true,
+                "bLengthChange": false,
+                "sAjaxSource": "/Supplier/Index",
+                "fnServerParams": function (aoData) {
+                    aoData.push({ "name": "name", "value": $("[name=\"name\"]").val() });
+                }, "aoColumns": [{ "mData": "Id" },
+                    { "mData": "Name" },
+                    { "mData": "Pnone" },
+                    { "mData": "Account" },
+                    { "mData": "AccountNumber" },
+                    { "mData": "Bank" },
+                    { "mData": "Grade" },
+                      { "mData": "Id" }
+                ], "bFilter": false, "bSort": false,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    if (aData.Grade == 3) {
+                        $('td:eq(6)', nRow).html("高")
+                    } else if (aData.Grade == 2) {
+                        $('td:eq(6)', nRow).html("中")
+                    } else if (aData.Grade == 1) {
+                        $('td:eq(6)', nRow).html("低")
+                    }
+                    $('td:eq(7)', nRow).html(' <a href="/Supplier/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');                  
+                }
+            });
+            //搜索
+            $(".sreach").click(function () {
+                table.dataTable().fnAdjustColumnSizing();
+            });
+
+            $('.create').click(function(){
+                location.href = "/Supplier/Create";
+            });
+           
+        });
+        function Delete(id) {
+            $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
+                dialog.modal('hide');
+                location.href = "/Supplier/Delete/" + id;
+            })
+        }
+    </script>
+}
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    供应商列表
+                    <span class="tools pull-right form-inline">
+                        <input type="text" class="form-control" name="name" placeholder="请输入名称" />
+                        <input type="button" class="btn btn-default sreach" value="搜索" />
+                        <input type="button" class="btn btn-default create" value="添加" />
+                    </span>
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        <table class="display table table-bordered table-striped" id="dynamic-table">
+                            <thead>
+                                <tr><th>编号</th>
+                                    <th>名称</th>
+                                    <th>电话</th>
+                                    <th>收款账户名</th>
+                                    <th>账号</th>
+                                    <th>开户银行</th>
+                                    <th>优先级</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+   
+</div>
+<!--body wrapper end-->

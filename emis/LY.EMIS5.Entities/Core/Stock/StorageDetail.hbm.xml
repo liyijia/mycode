@@ -10,6 +10,6 @@
     <property name="Number" />
     <property name="Price" precision="20" scale="2"/>
     <many-to-one name="Material" class="Material" lazy="false" column="Material_Id"/>
-    <property name="StorageId" />
+    <many-to-one name="StorageSupplier" class="StorageSupplier" lazy="false" column="StorageSupplier_Id"/>
   </class>
 </hibernate-mapping>

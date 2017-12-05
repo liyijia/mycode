@@ -316,3 +316,4 @@ C:\Users\liyijia\Source\Repos\mycode\emis\LY.EMIS5.Entities\bin\Debug\zh-Hans\Sy
 C:\Users\liyijia\Source\Repos\mycode\emis\LY.EMIS5.Entities\obj\Debug\LY.EMIS5.Entities.csprojResolveAssemblyReference.cache
 C:\Users\liyijia\Source\Repos\mycode\emis\LY.EMIS5.Entities\obj\Debug\LY.EMIS5.Entities.dll
 C:\Users\liyijia\Source\Repos\mycode\emis\LY.EMIS5.Entities\obj\Debug\LY.EMIS5.Entities.pdb
+D:\mycode\emis\LY.EMIS5.Entities\bin\Debug\LY.EMIS5.Common.dll.config

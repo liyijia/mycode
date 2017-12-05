@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "材料列表";
+}
+@using LY.EMIS5.BLL;
+@section Script{
+<style type="text/css">
+    @@media only screen and (max-width: 800px) {
+        table td:nth-child(1), table th:nth-child(1) {
+            width: 65%;
+            overflow: hidden;
+            text-overflow: ellipsis; /*以省略号替代截除部分*/
+            white-space: nowrap;
+        }
+    }
+</style>
+    <script type="text/javascript">
+        var table = null;
+        $(function () {
+            table = $('#dynamic-table').dataTable({
+                "bServerSide": true,
+                "bLengthChange": false,
+                "sAjaxSource": "/Material/Index",
+                "fnServerParams": function (aoData) {
+                    aoData.push({ "name": "name", "value": $("[name=\"name\"]").val() });
+                    aoData.push({ "name": "type", "value": $("[name=\"type\"]").val() });
+                }, "aoColumns": [{ "mData": "Id" },
+                    { "mData": "Name" },
+                    { "mData": "Type" },
+                    { "mData": "Spec" },
+                    { "mData": "Brand" },
+                    { "mData": "Stock" },
+                    { "mData": "InDate" },
+                      { "mData": "Id" }
+                ], "bFilter": false, "bSort": false,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    $('td:eq(7)', nRow).html(' <a href="/Material/Create/' + aData.Id + '">编辑</a> <a onclick="Delete(' + aData.Id + ')" href="javascript:;">删除</a>');                  
+                }
+            });
+            //搜索
+            $(".sreach").click(function () {
+                table.dataTable().fnAdjustColumnSizing();
+            });
+
+            $('.create').click(function(){
+                location.href = "/Material/Create";
+            });
+           
+        });
+        function Delete(id) {
+            $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
+                dialog.modal('hide');
+                location.href = "/Material/Delete/" + id;
+            })
+        }
+    </script>
+}
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    材料列表
+                    <span class="tools pull-right form-inline">
+                        <input type="text" class="form-control" name="name" placeholder="请输入材料名称" />
+                        <select name="type" class="form-control"><option value="">全部类型</option><option>主材</option><option>辅材</option></select>
+                        <input type="button" class="btn btn-default sreach" value="搜索" />
+                        <input type="button" class="btn btn-default create" value="添加" />
+                    </span>
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        <table class="display table table-bordered table-striped" id="dynamic-table">
+                            <thead>
+                                <tr><th>编号</th>
+                                    <th>材料名称</th>
+                                    <th>类型</th>
+                                    <th>规格/型号</th>
+                                    <th>品牌</th>
+                                    <th>库存数量</th>
+                                    <th>最新入库时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+   
+</div>
+<!--body wrapper end-->

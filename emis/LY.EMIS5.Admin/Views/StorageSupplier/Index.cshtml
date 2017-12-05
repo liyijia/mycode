@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "货款列表";
+}
+@using LY.EMIS5.BLL;
+@section Script{
+<style type="text/css">
+    @@media only screen and (max-width: 800px) {
+        table td:nth-child(1),
+        table th:nth-child(1),
+        table td:nth-child(2),
+        table th:nth-child(2),
+        table td:nth-child(3),
+        table th:nth-child(3),
+        table td:nth-child(5),
+        table th:nth-child(5),
+        table td:nth-child(6),
+        table th:nth-child(6),
+        table td:nth-child(7),
+        table th:nth-child(7),
+        table td:nth-child(8),
+        table th:nth-child(8),
+        table td:nth-child(9),
+        table th:nth-child(9),
+        table td:nth-child(10),
+        table th:nth-child(10) {
+            display: none;
+        }
+
+        table td:nth-child(4), table th:nth-child(4) {
+            width: 65%;
+            overflow: hidden;
+            text-overflow: ellipsis; /*以省略号替代截除部分*/
+            white-space: nowrap;
+        }
+    }
+</style>
+    <script type="text/javascript">
+        var table = null;
+        $(function () {
+            table = $('#dynamic-table').dataTable({
+                "bServerSide": true,
+                "bLengthChange": false,
+                "sAjaxSource": "/StorageSupplier/Index",
+                "fnServerParams": function (aoData) {
+                    aoData.push({ "name": "begin", "value": $("[name=\"begin\"]").val() });
+                    aoData.push({ "name": "end", "value": $("[name=\"end\"]").val() });
+                }, "aoColumns": [{ "mData": "Id" },
+                      { "mData": "No" },
+                      { "mData": "Name" },
+                      { "mData": "Total" },
+                      { "mData": "Payment" },
+                      { "mData": "Debt" },
+                      { "mData": "IsInvoice" },
+                      { "mData": "Id" }
+                ], "bFilter": false, "bSort": false,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    $('td:eq(6)', nRow).html(aData.IsInvoice?"已开":"未开");
+                    $('td:eq(7)', nRow).html(' <a href="/StorageSupplier/Create/' + aData.Id + '">编辑</a>');
+                }
+            }).on('xhr.dt', function (e, settings, json, xhr) {
+                $('#total').text(json.total);
+                $('#payment').text(json.payment);
+                $('#debt').text(json.debt);
+            });
+            //搜索
+            $(".sreach").click(function () {
+                table.dataTable().fnAdjustColumnSizing();
+            });
+
+            $('.create').click(function(){
+                location.href = "/StorageSupplier/Create";
+            });
+           
+           
+        });
+        function Delete(id) {
+            $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
+                dialog.modal('hide');
+                location.href = "/StorageSupplier/Delete/" + id;
+            })
+        }
+    </script>
+}
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    货款列表
+                    <span class="tools pull-right form-inline">
+                        总计：<span id="total"></span>元 已付：<span id="payment"></span>元 欠款：<span id="debt"></span>元 
+                        <input type="text" class="form-control default-date-picker" name="begin" placeholder="开始时间" />
+                        <input type="text" class="form-control default-date-picker" name="end" placeholder="结束时间" />
+                        <input type="button" class="btn btn-default sreach" value="搜索" />
+                        <input type="button" class="btn btn-default create" value="添加" />
+                    </span>
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        <table class="display table table-bordered table-striped" id="dynamic-table">
+                            <thead>
+                                <tr><th>编号</th>
+                                    <th>入库单号</th>
+                                    <th>供应商</th>
+                                    <th>总价</th>
+                                    <th>已付</th>
+                                    <th>欠款</th>
+                                    <th>发票</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+   
+</div>
+<!--body wrapper end-->

@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "入库单";
+}
+@using LY.EMIS5.BLL;
+@section Script{
+<style type="text/css">
+    @@media only screen and (max-width: 800px) {
+        table td:nth-child(1), table th:nth-child(1) {
+            width: 65%;
+            overflow: hidden;
+            text-overflow: ellipsis; /*以省略号替代截除部分*/
+            white-space: nowrap;
+        }
+    }
+</style>
+    <script type="text/javascript">
+        var table = null;
+        $(function () {
+            table = $('#dynamic-table').dataTable({
+                "bServerSide": true,
+                "bLengthChange": false,
+                "sAjaxSource": "/Storage/Index",
+                "fnServerParams": function (aoData) {
+                   
+                }, "aoColumns": [{ "mData": "Id" },
+                    { "mData": "No" },
+                    { "mData": "Name" },
+                    { "mData": "Total" },
+                    { "mData": "CreateDate" }
+                ], "bFilter": false, "bSort": false,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    $('td:eq(1)', nRow).html('<a href="View?id=' + aData.Id + '">' + aData.No+'</a>')
+                }
+            });
+            //搜索
+            $(".sreach").click(function () {
+                table.dataTable().fnAdjustColumnSizing();
+            });
+
+            $('.create').click(function(){
+                location.href = "/Storage/Create";
+            });
+           
+        });
+        function Delete(id) {
+            $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
+                dialog.modal('hide');
+                location.href = "/Storage/Delete/" + id;
+            })
+        }
+    </script>
+}
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    入库单
+                    <span class="tools pull-right form-inline">
+                        <input type="button" class="btn btn-default create" value="添加" />
+                    </span>
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        <table class="display table table-bordered table-striped" id="dynamic-table">
+                            <thead>
+                                <tr><th>编号</th>
+                                    <th>单号</th>
+                                    <th>采购员</th>
+                                    <th>总价</th>
+                                    <th>创建时间</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+   
+</div>
+<!--body wrapper end-->

@@ -1,0 +1,108 @@
+﻿@using LY.EMIS5.Entities.Core.Stock;
+@using LY.EMIS5.Common;
+@using System.Web.Script.Serialization;
+@model Storage
+@{
+    ViewBag.Title = "入库单";
+}@section Script
+{
+    <script>
+        $(function () {
+
+
+            $('#Materials').select2().on('select2:select', function (e) {
+                var option = $('#Materials [value="' + e.params.data.id + '"]');
+                addTr({ Material: { Id: e.params.data.id, Name: option.data('name'), Type: option.data('type'), Spec: option.data('spec') },Nymber:0 })
+            }).on("select2:unselect", function (e) {
+                $('#tr_' + e.params.data.id).remove()
+            });
+            var data =@Html.Raw(ViewBag.PurchaseMaterials);
+            if (data) {
+                var arr = [];
+                $.each(data, function () {
+                    addTr(this);
+                    arr.push(this.Material.Id)
+                })
+                $('#Materials').val(arr);
+                $('#Materials').trigger('change');
+            }
+
+            $('#save').click(function () {
+                $('.table-bordered tbody tr').each(function (i) {
+                    $(this).find('[name="id"]').attr('name', 'StorageDetail['+i+'].Material.id');
+                    $(this).find('[name="name"]').attr('name', 'StorageDetail[' + i +'].Material.Name');
+                    $(this).find('[name="spec"]').attr('name', 'StorageDetail[' + i +'].Material.Spec');
+                    $(this).find('[name="type"]').attr('name', 'StorageDetail[' + i +'].Material.Type');
+                    $(this).find('.number').attr('name', 'StorageDetail[' + i +'].Number');
+                    $(this).find('.price').attr('name', 'StorageDetail[' + i +'].Price');
+                    $(this).find('.select2').attr('name', 'StorageDetail[' + i +'].StorageSupplier.Supplier.Id');
+                    $(this).find('[name="supplier"]').val($(this).find('.select2 option:selected').text()).attr('name', 'StorageDetail[' + i +'].StorageSupplier.Supplier.Name');
+                });
+                $('form').submit();
+            });
+        });
+        var suppliers = @Html.Raw(ViewBag.Suppliers);
+        function addTr(json) {
+            var tr = $('<tr id="tr_' + json.Material.Id + '"><td>' + json.Material.Name + '</td><td>' + json.Material.Type + '</td><td>' + json.Material.Spec + '</td><td><input type="hidden" name="id" value="' + json.Material.Id + '"><input type="hidden" name="spec" value="' + json.Material.Spec + '"><input type="hidden" name="type" value="' + json.Material.Type + '"><input type="hidden" name="name" value="' + json.Material.Name + '"><input type="hidden" name="supplier" ><input class="form-control digits required number" name="' + json.Material.Id + 'number" value="' + (json.Number > 0 ? json.Number : '') + '" type="text"></td><td><input class="form-control number required price" name="' + json.Material.Id + 'price" type="text"></td><td><select name="' + json.Material.Id + 'supplier" class="form-control required select2"><option value="">请选择供应商</option></select></td></tr>');
+            $('.table-bordered tbody').append(tr);
+            $.each(suppliers, function () {
+                console.log(this);
+                tr.find('select').append('<option value="' + this.Value + '">' + this.Text + '</option>');
+            })
+            tr.find('select').select2();
+        }
+    </script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                入库单
+            </header>
+            <div class="panel-body">
+                <form class="form-horizontal adminex-form" action="Confirm" method="post">
+                    @Html.HiddenFor(m => m.Id)
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">采购材料</label>
+                        <div class="col-sm-10">
+                            <select id="Materials" name="Material" class="form-control required select2" multiple>
+                                @{
+                                    var list = (List<Material>)ViewBag.Materials;
+                                    for (var i = 0; i < list.Count; i++)
+                                    {
+                                        @Html.Raw("<option value=\"" + list[i].Id + "\" data-name=\"" + list[i].Name + "\" data-type=\"" + list[i].Type + "\" data-spec=\"" + list[i].Spec + "\">" + list[i].Type + "/" + list[i].Name + "/" + list[i].Spec + "</option>");
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">入库材料</label>
+                        <div class="col-sm-10">
+                            <table class="display table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>材料</th>
+                                        <th>类型</th>
+                                        <th>规格</th>
+                                        <th>数量</th>
+                                        <th>单价(元)</th>
+                                        <th>供应商</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button class="btn btn-primary" type="button" id="save">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>

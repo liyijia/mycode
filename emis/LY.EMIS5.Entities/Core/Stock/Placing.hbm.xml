@@ -11,10 +11,15 @@
     <many-to-one name="Creator" class="LY.EMIS5.Entities.Core.Memberships.Manager" lazy="false" column="Creator_Id"/>
     <property name="CreateDate" />
     <many-to-one name="Receiptor" class="LY.EMIS5.Entities.Core.Memberships.Manager" lazy="false" column="Receiptor_Id"/>
-    <property name="Group" />
-    <many-to-one name="Supplier" class="Supplier" lazy="false" column="Supplier_Id"/>
+    <many-to-one name="Dictionary" class="Dictionary" lazy="false" column="Dictionary_Id"/>
     <many-to-one name="Auditor" class="LY.EMIS5.Entities.Core.Memberships.Manager" lazy="false" column="Auditor_Id"/>
     <property name="AuditDate" />
+    <property name="AuditContent" length="2000"/>
     <property name="Status" />
+    <property name="Remark" length="2000"/>
+    <bag name="Details" lazy="extra">
+      <key column="PlacingId" />
+      <one-to-many class="PlacingDetail" />
+    </bag>
   </class>
 </hibernate-mapping>

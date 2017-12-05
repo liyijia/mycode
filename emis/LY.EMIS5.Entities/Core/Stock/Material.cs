@@ -48,7 +48,7 @@ namespace LY.EMIS5.Entities.Core.Stock
         /// <summary>
         /// 备注
         /// </summary>
-        public virtual string Rmark { get; set; }
+        public virtual string Remark { get; set; }
 
         /// <summary>
         /// 库存数量

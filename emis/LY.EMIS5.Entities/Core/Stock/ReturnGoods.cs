@@ -1,6 +1,7 @@
 ﻿using System;
 using NHibernate.Extensions;
 using LY.EMIS5.Entities.Core.Memberships;
+using System.Collections.Generic;
 
 namespace LY.EMIS5.Entities.Core.Stock
 {
@@ -48,6 +49,22 @@ namespace LY.EMIS5.Entities.Core.Stock
         /// 状态  0审批中 1已通过  2未通过
         /// </summary>
         public virtual int Status { get; set; }
+
+        /// <summary>
+        /// 项目
+        /// </summary>
+        public virtual Dictionary Dictionary { get; set; }
+
+        /// <summary>
+        /// 出库明细
+        /// </summary>
+        public virtual IList<ReturnDetail> Details { get; set; }
+        public virtual string Remark { get; set; }
+
+        /// <summary>
+        /// 审批时间
+        /// </summary>
+        public virtual string AuditContent { get; set; }
 
     }
 }

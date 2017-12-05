@@ -14,5 +14,12 @@
     <many-to-one name="Auditor" class="LY.EMIS5.Entities.Core.Memberships.Manager" lazy="false" column="Auditor_Id"/>
     <property name="AuditDate" />
     <property name="Status" />
+    <property name="Remark" length="2000"/>
+    <property name="AuditContent" length="2000"/>
+    <many-to-one name="Dictionary" class="Dictionary" lazy="false" column="Dictionary_Id"/>
+    <bag name="Details" lazy="extra">
+      <key column="ReturnGoodsId" />
+      <one-to-many class="ReturnDetail" />
+    </bag>
   </class>
 </hibernate-mapping>

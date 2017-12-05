@@ -96,3 +96,4 @@ C:\Users\liyijia\Source\Repos\mycode\emis\LY.EMIS5.Const\bin\Debug\zh-Hans\Syste
 C:\Users\liyijia\Source\Repos\mycode\emis\LY.EMIS5.Const\obj\Debug\LY.EMIS5.Const.csprojResolveAssemblyReference.cache
 C:\Users\liyijia\Source\Repos\mycode\emis\LY.EMIS5.Const\obj\Debug\LY.EMIS5.Const.dll
 C:\Users\liyijia\Source\Repos\mycode\emis\LY.EMIS5.Const\obj\Debug\LY.EMIS5.Const.pdb
+D:\mycode\emis\LY.EMIS5.Const\obj\Debug\LY.EMIS5.Const.csprojResolveAssemblyReference.cache

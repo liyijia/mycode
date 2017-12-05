@@ -26,7 +26,7 @@ namespace LY.EMIS5.Entities.Core.Stock
         /// <summary>
         /// 出库单
         /// </summary>
-        public virtual String PlacingId { get; set; }
+        public virtual int PlacingId { get; set; }
 
     }
 }

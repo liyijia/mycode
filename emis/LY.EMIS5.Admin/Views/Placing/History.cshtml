@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "出库申请记录";
+}
+@section Script{
+    <script type="text/javascript">
+        var table = null;
+        $(function () {
+            table = $('#dynamic-table').dataTable({
+                "bServerSide": true,
+                "bLengthChange": false,
+                "sAjaxSource": "/Placing/History",
+                "fnServerParams": function (aoData) {
+
+                }, "aoColumns": [{ "mData": "Id" },
+                { "mData": "Name" },
+                { "mData": "Creator" }, { "mData": "CreateDate" }, { "mData": "Status" }
+                ], "bFilter": false, "bSort": false,
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    $('td:eq(1)', nRow).html('<a href="/Placing/View/' + aData.Id + '">' + aData.Name + '</a>');
+                    var status = '审批中';
+                    if (aData.Status == 1) {
+                        status = "已通过";
+                    } else if (aData.Status == 2) {
+                        status = "未通过";
+                    }
+                    $('td:eq(4)', nRow).html(status);
+                }
+            });
+            //搜索
+            $(".sreach").click(function () {
+                table.dataTable().fnAdjustColumnSizing();
+            });
+
+            $('.create').click(function () {
+                location.href = "/Placing/Create";
+            });
+
+
+        });
+        function Delete(id) {
+            $.myDialog('confirm', '确认要该数据吗？', 'confirm', function (dialog) {
+                dialog.modal('hide');
+                location.href = "/Placing/Delete/" + id;
+            })
+        }
+    </script>
+}
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    出库申请
+                    <span class="tools pull-right form-inline">
+                        <input type="button" class="btn btn-default create" value="添加" />
+                    </span>
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        <table class="display table table-bordered table-striped" id="dynamic-table">
+                            <thead>
+                                <tr>
+                                    <th>编号</th>
+                                    <th>项目名称</th>
+                                    <th>创建人</th>
+                                    <th>创建时间</th>
+                                    <th>状态</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>
+<!--body wrapper end-->

@@ -26,7 +26,7 @@ namespace LY.EMIS5.Entities.Core.Stock
         /// <summary>
         /// 退货单
         /// </summary>
-        public virtual string ReturnGoodsId { get; set; }
+        public virtual int ReturnGoodsId { get; set; }
 
     }
 }

@@ -603,3 +603,6 @@ D:\mycode\emis\LY.EMIS5.Admin\bin\zh-Hans\System.Web.WebPages.Razor.resources.dl
 D:\mycode\emis\LY.EMIS5.Admin\obj\Debug\LY.EMIS5.Admin.csprojResolveAssemblyReference.cache
 D:\mycode\emis\LY.EMIS5.Admin\obj\Debug\LY.EMIS5.Admin.dll
 D:\mycode\emis\LY.EMIS5.Admin\obj\Debug\LY.EMIS5.Admin.pdb
+D:\mycode\emis\LY.EMIS5.Admin\bin\LY.EMIS5.BLL.dll.config
+D:\mycode\emis\LY.EMIS5.Admin\bin\LY.EMIS5.Common.dll.config
+D:\mycode\emis\LY.EMIS5.Admin\bin\LY.EMIS5.Entities.dll.config

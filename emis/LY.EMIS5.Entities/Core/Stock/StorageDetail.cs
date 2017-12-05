@@ -32,7 +32,7 @@ namespace LY.EMIS5.Entities.Core.Stock
         /// <summary>
         /// 入库单
         /// </summary>
-        public virtual string StorageId { get; set; }
+        public virtual StorageSupplier StorageSupplier { get; set; }
 
         /// <summary>
         /// 数量
@@ -43,6 +43,9 @@ namespace LY.EMIS5.Entities.Core.Stock
         /// 单价
         /// </summary>
         public virtual Decimal Price { get; set; }
+
+       
+
 
     }
 }

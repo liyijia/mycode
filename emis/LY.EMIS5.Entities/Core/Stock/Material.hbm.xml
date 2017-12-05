@@ -12,7 +12,7 @@
     <property name="Spec" />
     <property name="Brand" />
     <property name="Manufactor" />
-    <property name="Rmark"  length="2000" />
+    <property name="Remark"  length="2000" />
     <property name="Stock" />
     <property name="InDate" />
   </class>

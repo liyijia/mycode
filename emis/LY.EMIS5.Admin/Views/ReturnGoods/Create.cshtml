@@ -1,0 +1,95 @@
+﻿@using LY.EMIS5.Entities.Core.Stock;
+@using LY.EMIS5.Common;
+
+@model ReturnGoods
+@{
+    ViewBag.Title = "新增退货单";
+}@section Script
+{
+    <script>
+        $(function () {
+            $('#Materials').select2().on('select2:select', function (e) {
+                var option = $('#Materials [value="' + e.params.data.id + '"]');
+                $('.table-bordered tbody').append('<tr id="tr_' + e.params.data.id + '"><td>' + option.data('name') + '</td><td>' + option.data('type') + '</td><td>' + option.data('spec') + '</td><td>' + option.data('stock') + '</td><td><input type="hidden" value="' + e.params.data.id+'"><input class="form-control digits required" name="' + e.params.data.id+'" type="text"></td></tr>')
+            }).on("select2:unselect", function (e) {
+                $('#tr_' + e.params.data.id).remove()
+            });
+            $('#save').click(function () {
+                $('.table-bordered tbody tr').each(function (i) {
+                    $(this).find('input[type="hidden"]').attr('name', 'Details['+i+'].Material.Id');
+                    $(this).find('input[type="text"]').attr('name', 'Details[' + i +'].Number');
+                });
+                $('form').submit();
+            });
+        });
+    </script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                出库单信息
+            </header>
+            <div class="panel-body">
+                <form class="form-horizontal adminex-form" method="post">
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">使用项目</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(m => m.Dictionary.Id, ViewBag.List as IList<SelectListItem>, new { @class = "form-control required" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">退货人</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(m => m.ReturnParty.Id, ViewBag.Managers as IList<SelectListItem>, new { @class = "form-control required" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">退货材料</label>
+                        <div class="col-sm-10">
+                            <select id="Materials" name="Material" class="form-control required select2" multiple>
+                                @{
+                                    var list = (List<Material>)ViewBag.Materials;
+                                    for (var i = 0; i < list.Count; i++)
+                                    {
+                                        @Html.Raw("<option value=\"" + list[i].Id + "\" data-name=\""+ list[i].Name + "\" data-stock=\""+list[i].Stock+"\" data-type=\"" + list[i].Type + "\" data-spec=\"" + list[i].Spec + "\">" + list[i].Type+"/"+ list[i].Name+"/" + list[i].Spec + "</option>");
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">退货内容</label>
+                        <div class="col-sm-10">
+                            <table class="display table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>材料</th>
+                                        <th>类型</th>
+                                        <th>规格</th>
+                                        <th>库存</th>
+                                        <th>数量</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">备注</label>
+                        <div class="col-sm-10">
+                            @Html.TextAreaFor(c => c.Remark, new { @class = "form-control required" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button class="btn btn-primary" type="button" id="save">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>

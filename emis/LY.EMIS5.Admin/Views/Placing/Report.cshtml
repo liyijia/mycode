@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "材料报表";
+}
+@model IEnumerable<Tuple<string, string,int,decimal>>
+@section Script{
+    <script type="text/javascript">
+        $(function () {
+
+            $('.sreach').click(function () {
+                location.href = '/Placing/Report?begin=' + $('[name="begin"]').val() + '&end='+$('[name="end"]').val()
+            });
+        });
+       
+    </script>
+}
+
+<!--body wrapper start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    材料报表
+                    <span class="tools pull-right form-inline">
+                        <input type="text" class="form-control default-date-picker" name="begin" placeholder="开始时间" />
+                        <input type="text" class="form-control default-date-picker" name="end" placeholder="结束时间" />
+                        <input type="button" class="btn btn-default sreach" value="搜索" />
+                    </span>
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        <table class="display table table-bordered table-striped" id="dynamic-table">
+                            <thead>
+                                <tr>
+                                    <th>项目名称</th>
+                                    <th>材料名称</th>
+                                    <th>使用数量</th>
+                                    <th>总价(元)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+
+                                {
+
+                                    <tr>
+                                        <td>@item.Item1</td>
+                                        <td>@item.Item2</td>
+                                        <td>@item.Item3</td>
+                                        <td>@item.Item4</td>
+                                    </tr>
+
+                                }
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+   
+</div>
+<!--body wrapper end-->
